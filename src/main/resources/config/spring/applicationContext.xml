@@ -19,8 +19,6 @@
 	<context:property-placeholder location="classpath*:*.properties" />
 
 	<context:component-scan base-package="studio.baxia">
-		<context:include-filter expression="org.springframework.stereotype.Service"
-			type="annotation" />
 		<!-- 将Controller的注解排除掉，在spring-mvc.xml单独扫描Controller注解 -->
 		<context:exclude-filter expression="org.springframework.stereotype.Controller"
 			type="annotation" />
@@ -33,11 +31,27 @@
 
 
 	<!-- ==================================MyBatis star================================== -->
-	<!-- 事务管理器，也可以把这个事物管理器注释掉，MyBatis也可以使用上面的JPA事物管理器， -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+    <!-- mybatis 集成配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:config/mybatis/**/*SqlMap.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 该方式用来注入dao或者mapper接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="studio.baxia.fo.dao" />
+    </bean>
+    <!-- 该方式用来注入dao 实现类 -->
+   <!-- <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>-->
 	<!-- ==================================MyBatis end================================== -->
 
 	<!-- data source -->

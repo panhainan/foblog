@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="studio.baxia.fo.dao.impl.AuthorsDaoImpl">
+<mapper namespace="studio.baxia.fo.dao.IAuthorsDao">
 
-
-    <resultMap id="" type="studio.baxia.fo.pojo.Authors">
-        <result property="" column=""/>
+    <resultMap id="AuthorsMap" type="studio.baxia.fo.pojo.Authors">
+        <result property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="penName" column="pen_name"/>
+        <result property="email" column="email"/>
+        <result property="profile" column="profile"/>
+        <result property="otherInfo" column="other_info"/>
+        <result property="verificationCode" column="verification_code"/>
+        <result property="verifCodeDeadline" column="verif_code_deadline"/>
+        <result property="securityQuestionId" column="security_question_id"/>
     </resultMap>
 
+    <select id="list" resultMap="AuthorsMap" useCache="true">
+        SELECT
+        *
+        FROM t_authors
+        <if test="pageIndex != null">
+            limit #{pageIndex,jdbcType=INTEGER},
+        </if>
+        <if test="pageSize != null">
+            #{pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectById" resultMap="AuthorsMap" useCache="true">
+        SELECT *
+        FROM t_authors
+        WHERE
+        id=#{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteById">
+        delete from t_authors
+        WHERE id=#{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_authors
+        (
+        account,password
+        )
+        VALUES
+        (
+        #{account,jdbcType=VARCHAR}
+        ,
+        #{password,jdbcType=VARCHAR}
+        )
+    </insert>
 
 </mapper>

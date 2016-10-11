@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2016-10-11 14:49:08
+Date: 2016-10-11 17:28:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -62,8 +62,8 @@ CREATE TABLE `t_authors` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `account` varchar(20) NOT NULL COMMENT '账户名',
   `password` varchar(32) NOT NULL COMMENT '账户密码',
-  `pen_name` varchar(20) NOT NULL COMMENT '笔名',
-  `email` varchar(30) NOT NULL COMMENT '常用邮箱',
+  `pen_name` varchar(20) DEFAULT NULL COMMENT '笔名',
+  `email` varchar(30) DEFAULT NULL COMMENT '常用邮箱',
   `profile` text COMMENT '个人介绍',
   `verification_code` varchar(32) DEFAULT NULL COMMENT '验证码',
   `varif_code_deadline` datetime DEFAULT NULL COMMENT '验证码截止时间',

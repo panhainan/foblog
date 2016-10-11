@@ -18,6 +18,14 @@ public class Authors {
     private Date verifCodeDeadline;//验证码截止时间
     private String securityQuestionId;//密保问题id
 
+    public Authors() {
+    }
+
+    public Authors(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Authors{" +

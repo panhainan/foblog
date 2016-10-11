@@ -8,7 +8,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:conf/**/*Context*.xml<!-- 包含了*Context-mybatis.xml等类似 -->
+            classpath*:config/**/*Context*.xml<!-- 包含了*Context-mybatis.xml等类似 -->
         </param-value>
     </context-param>
     <listener>
@@ -21,7 +21,7 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>
-                classpath*:conf/spring/spring-mvc*.xml
+                classpath*:config/spring/spring-mvc*.xml
             </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
