@@ -6,6 +6,7 @@
         <result property="id" column="id"/>
         <result property="account" column="account"/>
         <result property="password" column="password"/>
+        <result property="userStatus" column="user_status"/>
         <result property="penName" column="pen_name"/>
         <result property="email" column="email"/>
         <result property="profile" column="profile"/>
@@ -34,6 +35,20 @@
         id=#{id,jdbcType=INTEGER}
     </select>
 
+    <select id="selectByAccount" resultMap="AuthorsMap" useCache="true">
+        SELECT *
+        FROM t_authors
+        WHERE
+        account=#{account,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByEmail" resultMap="AuthorsMap" useCache="true">
+        SELECT *
+        FROM t_authors
+        WHERE
+        email=#{email,jdbcType=INTEGER}
+    </select>
+
     <delete id="deleteById">
         delete from t_authors
         WHERE id=#{id,jdbcType=INTEGER}
@@ -42,14 +57,22 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_authors
         (
-        account,password
+        account,password,user_status
         )
         VALUES
         (
         #{account,jdbcType=VARCHAR}
         ,
         #{password,jdbcType=VARCHAR}
+        ,
+        #{userStatus,jdbcType=INTEGER}
         )
     </insert>
+
+    <update id="updateAuthorsStatus">
+        update t_authors
+        set user_status = #{userStatus,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
 </mapper>

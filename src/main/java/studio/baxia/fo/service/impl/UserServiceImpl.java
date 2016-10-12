@@ -16,14 +16,66 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IAuthorsDao iAuthorsDao;
+
+
     /**
      * 添加作者
      *
-     * @param authors
-     * @return id
+     * @param authors 作者信息(account,password,userStatus)
+     * @return id 作者id
      */
     @Override
     public Integer addAuthors(Authors authors) {
         return iAuthorsDao.insert(authors);
     }
+
+    /**
+     * 启用或者禁用作者账户
+     *
+     * @param authorsId  作者id
+     * @param userStatus 作者账户状态
+     * @return Boolean 操作结果
+     */
+    @Override
+    public Boolean editAuthorsStatus(Integer authorsId, Integer userStatus) {
+        iAuthorsDao.updateAuthorsStatus(authorsId, userStatus);
+        return true;
+    }
+
+
+    /**
+     * 通过作者id获取作者信息
+     *
+     * @param authorsId 作者id
+     * @return Authors 作者信息
+     */
+    @Override
+    public Authors getAuthorsById(Integer authorsId) {
+        return iAuthorsDao.selectById(authorsId);
+    }
+
+
+    /**
+     * 通过作者账户名获取作者信息
+     *
+     * @param authorsAccount 作者账号
+     * @return Authors 作者信息
+     */
+    @Override
+    public Authors getAuthorsByAccount(String authorsAccount) {
+        return iAuthorsDao.selectByAccount(authorsAccount);
+    }
+
+    /**
+     * 通过作者邮箱获取作者信息
+     *
+     * @param authorsEmail 作者邮箱
+     * @return Authors 作者信息
+     */
+    @Override
+    public Authors getAuthorsByEmail(String authorsEmail) {
+        return iAuthorsDao.selectByEmail(authorsEmail);
+    }
+
+
 }

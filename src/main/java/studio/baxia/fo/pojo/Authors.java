@@ -10,6 +10,7 @@ public class Authors {
     private Integer id;
     private String account;//账户名
     private String password;//账户密码
+    private Integer userStatus;//用户状态:0禁用，1启用
     private String penName;//笔名
     private String email;//常用邮箱
     private String profile;//个人介绍
@@ -18,12 +19,14 @@ public class Authors {
     private Date verifCodeDeadline;//验证码截止时间
     private String securityQuestionId;//密保问题id
 
+
     public Authors() {
     }
 
-    public Authors(String account, String password) {
+    public Authors(String account, String password, Integer userStatus) {
         this.account = account;
         this.password = password;
+        this.userStatus = userStatus;
     }
 
     @Override
@@ -32,6 +35,7 @@ public class Authors {
                 "id=" + id +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
+                ", userStatus=" + userStatus +
                 ", penName='" + penName + '\'' +
                 ", email='" + email + '\'' +
                 ", profile='" + profile + '\'' +
@@ -64,6 +68,14 @@ public class Authors {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
     }
 
     public String getPenName() {

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2016-10-11 17:28:56
+Date: 2016-10-12 12:18:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,13 +68,17 @@ CREATE TABLE `t_authors` (
   `verification_code` varchar(32) DEFAULT NULL COMMENT '验证码',
   `varif_code_deadline` datetime DEFAULT NULL COMMENT '验证码截止时间',
   `security_question_id` int(10) DEFAULT NULL COMMENT '密保问题id',
+  `user_status` int(1) DEFAULT NULL COMMENT '用户状态:0禁用，1启用',
   `other_info` varchar(500) DEFAULT NULL COMMENT '其他信息',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_authors
 -- ----------------------------
+INSERT INTO `t_authors` VALUES ('1', 'panhainan', '123123', null, 'panhainan@yeah.net', null, null, null, null, '0', null);
+INSERT INTO `t_authors` VALUES ('2', 'panhainan12', '123123', null, null, null, null, null, null, '1', null);
+INSERT INTO `t_authors` VALUES ('3', 'panhainan32', '123123', null, null, null, null, null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for `t_category`
