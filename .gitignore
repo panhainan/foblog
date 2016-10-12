@@ -10,3 +10,42 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Android generated
+bin/
+gen/
+classes/
+gen-external-apklibs/
+
+# Ant
+local.properties
+
+# Maven
+**/target
+target/
+target/**
+release.properties
+
+# Eclipse
+.classpath
+.project
+.externalToolBuilders/
+.metadata
+*.prefs
+**/.settings
+.settings/**
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+**/.idea
+.idea/
+.idea/**
+out/
+
+
+# Mac
+.DS_Store
+
+# gitignore    .gitignore
