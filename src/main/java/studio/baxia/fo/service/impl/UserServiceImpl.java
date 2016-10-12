@@ -25,7 +25,7 @@ public class UserServiceImpl implements IUserService {
      * @return id 作者id
      */
     @Override
-    public Integer addAuthors(Authors authors) {
+    public Integer authorsAdd(Authors authors) {
         return iAuthorsDao.insert(authors);
     }
 
@@ -37,7 +37,7 @@ public class UserServiceImpl implements IUserService {
      * @return Boolean 操作结果
      */
     @Override
-    public Boolean editAuthorsStatus(Integer authorsId, Integer userStatus) {
+    public Boolean authorsEditStatus(Integer authorsId, Integer userStatus) {
         iAuthorsDao.updateAuthorsStatus(authorsId, userStatus);
         return true;
     }
@@ -50,7 +50,7 @@ public class UserServiceImpl implements IUserService {
      * @return Authors 作者信息
      */
     @Override
-    public Authors getAuthorsById(Integer authorsId) {
+    public Authors authorsGetById(Integer authorsId) {
         return iAuthorsDao.selectById(authorsId);
     }
 
@@ -62,7 +62,7 @@ public class UserServiceImpl implements IUserService {
      * @return Authors 作者信息
      */
     @Override
-    public Authors getAuthorsByAccount(String authorsAccount) {
+    public Authors authorsGetByAccount(String authorsAccount) {
         return iAuthorsDao.selectByAccount(authorsAccount);
     }
 
@@ -73,7 +73,7 @@ public class UserServiceImpl implements IUserService {
      * @return Authors 作者信息
      */
     @Override
-    public Authors getAuthorsByEmail(String authorsEmail) {
+    public Authors authorsGetByEmail(String authorsEmail) {
         return iAuthorsDao.selectByEmail(authorsEmail);
     }
 

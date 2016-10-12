@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import studio.baxia.fo.BaseTest;
 import studio.baxia.fo.pojo.Authors;
 
-import java.util.Date;
-
 /**
  * Created by FirePan on 2016/10/11.
  */
@@ -19,34 +17,34 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testAddAuthors() {
-        Integer result = userService.addAuthors(new Authors("panhainan","123123",1));
+        Integer result = userService.authorsAdd(new Authors("panhainan","123123",1));
         methodName=new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null,result);
     }
     @Test
     public void testEditAuthorsStatus(){
-        Boolean result = userService.editAuthorsStatus(1,0);
+        Boolean result = userService.authorsEditStatus(1, 0);
         methodName=new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null,result);
     }
 
     @Test
     public void testGetAuthorsById() throws Exception {
-        Authors result = userService.getAuthorsById(1);
+        Authors result = userService.authorsGetById(1);
         methodName=new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null,result);
     }
 
     @Test
     public void testGetAuthorsByAccount() throws Exception {
-        Authors result = userService.getAuthorsByAccount("panhainan");
+        Authors result = userService.authorsGetByAccount("panhainan");
         methodName=new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null,result);
     }
 
     @Test
     public void testGetAuthorsByEmail() throws Exception {
-        Authors result = userService.getAuthorsByEmail("panhainan@yeah.net");
+        Authors result = userService.authorsGetByEmail("panhainan@yeah.net");
         methodName=new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null,result);
     }
