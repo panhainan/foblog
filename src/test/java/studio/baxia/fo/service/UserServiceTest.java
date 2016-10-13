@@ -11,7 +11,7 @@ import studio.baxia.fo.pojo.Authors;
 public class UserServiceTest extends BaseTest {
     @Autowired
     private IUserService userService;
-    String methodName ;
+
     // 获取当前方法名
     // new Throwable().getStackTrace()[0].getMethodName();
 

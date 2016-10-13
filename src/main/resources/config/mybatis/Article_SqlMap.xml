@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studio.baxia.fo.dao.IArticleDao">
+
+    <resultMap id="ArticleMap" type="studio.baxia.fo.pojo.Article">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="content" column="content"/>
+        <result property="categoryIds" column="category_ids"/>
+        <result property="tagIds" column="tag_ids"/>
+        <result property="authorId" column="author_id"/>
+        <result property="status" column="status"/>
+        <result property="writeTime" column="write_time"/>
+        <result property="pubTime" column="pub_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_article(title,summary,content,category_ids,tag_ids,author_id,status,write_time,pub_time)
+        VALUES
+        (#{title,jdbcType=VARCHAR},
+         #{summary,jdbcType=VARCHAR},
+         #{content,jdbcType=VARCHAR},
+         #{categoryIds,jdbcType=VARCHAR},
+         #{tagIds,jdbcType=VARCHAR},
+         #{authorId,jdbcType=INTEGER},
+         #{status,jdbcType=INTEGER},
+         #{writeTime,jdbcType=TIMESTAMP},
+         #{writeTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="selectById" resultMap="ArticleMap">
+        SELECT *
+        FROM t_article
+        WHERE
+        id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectBy" resultMap="ArticleMap">
+        SELECT *
+        FROM t_article
+        <where>
+            <if test="article.title!=null">
+                AND title like CONCAT(CONCAT('%', #{article.title,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="article.authorId!=null">
+                AND author_id = #{article.authorId,jdbcType=INTEGER}
+            </if>
+            <if test="article.categoryIds!=null">
+                AND category_ids like CONCAT(CONCAT('%', #{article.categoryIds,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="article.tagIds!=null">
+                AND tag_ids like CONCAT(CONCAT('%', #{article.tagIds,jdbcType=VARCHAR}), '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

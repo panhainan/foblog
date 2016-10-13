@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:config/**/applicationContext.xml"})
 public class BaseTest {
+    public String methodName ;
 	public String printResultStr(String methodName, String resultExplain,Object resultData) {
         String resultStr ;
 		if (null != resultExplain) {

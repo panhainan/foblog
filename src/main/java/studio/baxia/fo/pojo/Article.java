@@ -20,7 +20,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article{" +
+        return "\nArticle{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
@@ -31,7 +31,7 @@ public class Article {
                 ", status=" + status +
                 ", writeTime=" + writeTime +
                 ", pubTime=" + pubTime +
-                '}';
+                "}";
     }
 
     public Integer getId() {

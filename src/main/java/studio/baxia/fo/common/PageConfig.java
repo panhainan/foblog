@@ -8,6 +8,14 @@ public class PageConfig {
     private Integer pageSize;
     private Integer allCount;
 
+    public PageConfig() {
+    }
+
+    public PageConfig(Integer pageIndex, Integer pageSize) {
+        this.pageIndex = pageIndex;
+        this.pageSize = pageSize;
+    }
+
     public Integer getPageIndex() {
         return pageIndex;
     }
