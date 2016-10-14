@@ -26,8 +26,28 @@
          #{authorId,jdbcType=INTEGER},
          #{status,jdbcType=INTEGER},
          #{writeTime,jdbcType=TIMESTAMP},
-         #{writeTime,jdbcType=TIMESTAMP})
+         #{pubTime,jdbcType=TIMESTAMP})
     </insert>
+
+    <delete id="delete">
+        DELETE FROM t_article
+        WHERE
+        id=#{id,jdbcType=INTEGER}
+    </delete>
+
+    <update id="update">
+        UPDATE t_article
+        SET
+        <if test="title!=null">title=#{title,jdbcType=VARCHAR},</if>
+        <if test="summary!=null">summary=#{summary,jdbcType=VARCHAR},</if>
+        <if test="content!=null">content=#{content,jdbcType=VARCHAR},</if>
+        <if test="categoryIds!=null">category_ids=#{categoryIds,jdbcType=VARCHAR},</if>
+        <if test="tagIds!=null">tag_ids=#{tagIds,jdbcType=VARCHAR},</if>
+        <if test="status!=null">status=#{status,jdbcType=INTEGER},</if>
+        <if test="writeTime!=null">write_time=#{writeTime,jdbcType=TIMESTAMP},</if>
+        <if test="pubTime!=null">pub_time=#{pubTime,jdbcType=TIMESTAMP}</if>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 
     <select id="selectById" resultMap="ArticleMap">
         SELECT *
@@ -53,6 +73,25 @@
                 AND tag_ids like CONCAT(CONCAT('%', #{article.tagIds,jdbcType=VARCHAR}), '%')
             </if>
         </where>
+        ORDER BY write_time DESC
+        LIMIT #{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
     </select>
-
+    <select id="selectCountBy" resultType="Integer">
+        SELECT COUNT(*)
+        FROM t_article
+        <where>
+            <if test="article.title!=null">
+                AND title like CONCAT(CONCAT('%', #{article.title,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="article.authorId!=null">
+                AND author_id = #{article.authorId,jdbcType=INTEGER}
+            </if>
+            <if test="article.categoryIds!=null">
+                AND category_ids like CONCAT(CONCAT('%', #{article.categoryIds,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="article.tagIds!=null">
+                AND tag_ids like CONCAT(CONCAT('%', #{article.tagIds,jdbcType=VARCHAR}), '%')
+            </if>
+        </where>
+    </select>
 </mapper>

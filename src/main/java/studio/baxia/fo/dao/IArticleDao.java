@@ -15,10 +15,24 @@ public interface IArticleDao {
 
     /**
      * 插入文章信息（待编写sql实现）
-     * @param article 文章信息（）
+     * @param article 文章信息（title,summary,content,categoryIds,tagIds,authorId,status,writeTime,writeTime）
      * @return id
      */
     Integer insert(Article article);
+
+    /**
+     * 根据id删除文章
+     * @param articleId 文章id
+     * @return 受影响的行数
+     */
+    Integer delete(@Param("id")Integer articleId);
+
+    /**
+     * 更新文章
+     * @param article 文章信息（id,[title,summary,content,categoryIds,tagIds,status,writeTime,writeTime](可为空，为空表示该字段不修改)）
+     * @return 受影响的行数
+     */
+    Integer update(Article article);
 
     /**
      * 通过id查找（待编写sql实现）
@@ -26,14 +40,6 @@ public interface IArticleDao {
      * @return Article
      */
     Article selectById(@Param("id") Integer articleId);
-
-    List<Article> selectByTitle(@Param("title") String articleTitle, @Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
-
-    List<Article> selectByAuthorsId(@Param("authorsId") Integer articleAuthorsId, @Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
-
-    List<Article> selectByCategoryId(@Param("categoryId")String articleCategoryId, @Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
-
-    List<Article> selectByTagIds(@Param("tagId")String articleTagId, @Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
 
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找
@@ -50,6 +56,6 @@ public interface IArticleDao {
      * @param article 文章信息（此处可选包括：title、authorId、categoryIds、tagIds）
      * @return
      */
-    Integer selectCountBy(Article article);
+    Integer selectCountBy(@Param("article") Article article);
 
 }
