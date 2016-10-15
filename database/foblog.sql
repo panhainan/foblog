@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2016-10-12 12:18:05
+Date: 2016-10-16 02:36:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,11 +48,12 @@ CREATE TABLE `t_article` (
   `write_time` datetime DEFAULT NULL COMMENT '撰写时间',
   `pub_time` datetime DEFAULT NULL COMMENT '发布时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_article
 -- ----------------------------
+
 
 -- ----------------------------
 -- Table structure for `t_authors`
@@ -76,9 +77,6 @@ CREATE TABLE `t_authors` (
 -- ----------------------------
 -- Records of t_authors
 -- ----------------------------
-INSERT INTO `t_authors` VALUES ('1', 'panhainan', '123123', null, 'panhainan@yeah.net', null, null, null, null, '0', null);
-INSERT INTO `t_authors` VALUES ('2', 'panhainan12', '123123', null, null, null, null, null, null, '1', null);
-INSERT INTO `t_authors` VALUES ('3', 'panhainan32', '123123', null, null, null, null, null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for `t_category`
@@ -122,12 +120,16 @@ CREATE TABLE `t_message` (
   `content` varchar(600) NOT NULL COMMENT '内容',
   `user_type` int(1) NOT NULL COMMENT '留言作者类别（author作者，guest访客）',
   `author_id` int(10) NOT NULL COMMENT '作者id',
+  `article_id` int(10) NOT NULL COMMENT '所属文章id',
+  `pub_time` datetime DEFAULT NULL COMMENT '发表时间',
+  `block_id` int(10) DEFAULT NULL COMMENT '所在文章的评论区域属于第几块',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_message
 -- ----------------------------
+
 
 -- ----------------------------
 -- Table structure for `t_security_question`
