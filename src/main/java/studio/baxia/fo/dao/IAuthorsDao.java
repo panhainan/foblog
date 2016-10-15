@@ -30,7 +30,14 @@ public interface IAuthorsDao {
      * @return Authors 作者信息
      */
     Authors selectByEmail(@Param("email")String authorsEmail);
-    void deleteById(Integer id);
+
+    Integer deleteById(Integer id);
+
+    /**
+     * 添加作者账号
+     * @param authors 作者信息(account,password,userStatus)
+     * @return 受影响的行数
+     */
     Integer insert(Authors authors);
 
     /**

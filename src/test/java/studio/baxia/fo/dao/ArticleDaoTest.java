@@ -37,6 +37,7 @@ public class ArticleDaoTest extends BaseTest {
         Integer result = iArticleDao.insert(article);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
+        System.out.println(article);
     }
 
     @Test
@@ -73,21 +74,6 @@ public class ArticleDaoTest extends BaseTest {
     }
 
     @Test
-    public void testSelectBy() {
-        Article article = new Article();
-        article.setTitle("博客初建");
-        article.setAuthorId(1);
-        article.setCategoryIds("5/");
-        article.setTagIds("1/");
-        PageConfig pageConfig =  new PageConfig(1, 2);
-        List<Article> result = iArticleDao.selectBy(article,pageConfig);
-        Integer resultCount = iArticleDao.selectCountBy(article);
-        PageInfoResult pageInfoResult = new PageInfoResult(result,pageConfig,resultCount);
-        methodName = new Throwable().getStackTrace()[0].getMethodName();
-        printResultStr(methodName, null, pageInfoResult);
-    }
-
-    @Test
     public void testSelectCountBy() {
         Article article = new Article();
         article.setTitle("博客初建");
@@ -97,6 +83,22 @@ public class ArticleDaoTest extends BaseTest {
         Integer result = iArticleDao.selectCountBy(article);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
+    }
+
+    @Test
+    public void testSelectBy() {
+        Article article = new Article();
+        article.setTitle("博客初建");
+        article.setAuthorId(1);
+        article.setCategoryIds("5/");
+        article.setTagIds("1/");
+        article.setStatus(Constant.ACTICLE_STATUS_BLOG);
+        PageConfig pageConfig = new PageConfig(1, 2);
+        List<Article> result = iArticleDao.selectBy(article, pageConfig);
+        Integer resultCount = iArticleDao.selectCountBy(article);
+        PageInfoResult<Article> pageInfoResult = new PageInfoResult(result, pageConfig, resultCount);
+        methodName = new Throwable().getStackTrace()[0].getMethodName();
+        printResultStr(methodName, null, pageInfoResult);
     }
 
 

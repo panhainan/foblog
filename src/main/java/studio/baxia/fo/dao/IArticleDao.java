@@ -16,7 +16,7 @@ public interface IArticleDao {
     /**
      * 插入文章信息（待编写sql实现）
      * @param article 文章信息（title,summary,content,categoryIds,tagIds,authorId,status,writeTime,writeTime）
-     * @return id
+     * @return 受影响的行数
      */
     Integer insert(Article article);
 
@@ -44,7 +44,7 @@ public interface IArticleDao {
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找
      * 注意：categoryId和tagId的值用"id/"表示，比如"1/"，因为规定数据库中存储的格式为id1/id2/id3/方式存储
-     * @param article 文章信息（此处可选包括：title、authorId、categoryIds、tagIds）
+     * @param article 文章信息（此处可选包括：title、authorId、categoryIds、tagIds、status）
      * @param pageConfig 分页信息（此处可选包括：pageIndex、pageSize）
      * @return
      */

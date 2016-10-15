@@ -72,6 +72,9 @@
             <if test="article.tagIds!=null">
                 AND tag_ids like CONCAT(CONCAT('%', #{article.tagIds,jdbcType=VARCHAR}), '%')
             </if>
+            <if test="article.status!=null">
+                AND status =#{article.status,jdbcType=VARCHAR}
+            </if>
         </where>
         ORDER BY write_time DESC
         LIMIT #{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
@@ -91,6 +94,9 @@
             </if>
             <if test="article.tagIds!=null">
                 AND tag_ids like CONCAT(CONCAT('%', #{article.tagIds,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="article.status!=null">
+                AND status =#{article.status,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
