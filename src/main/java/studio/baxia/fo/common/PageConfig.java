@@ -14,7 +14,7 @@ public class PageConfig {
     }
 
     /**
-     * 唯一构造器
+     * 唯一公有构造器
      *
      * @param pageNumber 当前页码:默认值为1
      * @param pageSize   每页显示记录数:默认值为10
