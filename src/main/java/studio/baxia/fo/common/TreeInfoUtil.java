@@ -65,4 +65,19 @@ public class TreeInfoUtil {
             }
         }
     }
+
+    public static void traverseTreeChildGetIds(TreeInfoResult treeNode, List<Integer> ids) {
+        if (treeNode != null) {
+            List<TreeInfoResult> list = treeNode.getChildrens();
+            if(list!=null){
+                for (int i = 0; i < list.size(); i++) {
+                    TreeInfoResult node = list.get(i);
+                    traverseTreeChildGetIds(node, ids);
+                }
+                if(treeNode.getData()!=null){
+                    ids.add(treeNode.getData().getId());
+                }
+            }
+        }
+    }
 }

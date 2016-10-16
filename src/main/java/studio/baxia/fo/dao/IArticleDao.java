@@ -15,7 +15,7 @@ public interface IArticleDao {
 
     /**
      * 插入文章信息（待编写sql实现）
-     * @param article 文章信息（title,summary,content,categoryIds,tagIds,authorId,status,writeTime,writeTime）
+     * @param article 文章信息（title,summary,content,categoryIds,tagIds,authorId,status,writeTime,pubTime）
      * @return 受影响的行数
      */
     Integer insert(Article article);
@@ -29,7 +29,7 @@ public interface IArticleDao {
 
     /**
      * 更新文章
-     * @param article 文章信息（id,[title,summary,content,categoryIds,tagIds,status,writeTime,writeTime](可为空，为空表示该字段不修改)）
+     * @param article 文章信息（id,authorId,[title,summary,content,categoryIds,tagIds,status,writeTime,pubTime](可为空，为空表示该字段不修改)）
      * @return 受影响的行数
      */
     Integer update(Article article);

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studio.baxia.fo.dao.ICategoryDao">
+
+    <resultMap id="CategoryMap" type="studio.baxia.fo.pojo.Category">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="name" column="name"/>
+        <result property="authorId" column="author_id"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_category(parent_id,name,author_id)
+        VALUES (#{parentId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM t_category
+        <if test="ids!=null">
+            <if test="ids.size()==0">
+                WHERE id = 0
+            </if>
+            <if test="ids.size()!=0">
+                WHERE id IN
+                <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
+            </if>
+        </if>
+    </delete>
+
+    <delete id="deleteBy">
+        DELETE FROM t_category
+        WHERE author_id = #{authorId,jdbcType=INTEGER}
+        AND parent_id = #{parentId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteById">
+        DELETE FROM t_category
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <update id="update">
+        UPDATE t_category
+        SET parent_id = #{parentId,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+        AND author_id = #{authorId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectById" resultMap="CategoryMap">
+        SELECT * FROM t_category
+        WHERE id=#{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectBy" resultMap="CategoryMap">
+        SELECT * FROM t_category
+        WHERE author_id = #{authorId,jdbcType=INTEGER}
+        <if test="parentId!=null">
+            and parent_id = #{parentId,jdbcType=INTEGER}
+        </if>
+        ORDER BY  id
+    </select>
+
+
+</mapper>

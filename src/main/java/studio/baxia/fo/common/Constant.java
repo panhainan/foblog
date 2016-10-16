@@ -16,4 +16,6 @@ public class Constant {
     public static final int MESSAGE_DEFAULT_PARENT_ID = 0;
     public static final Integer  MESSAGE_NULL_PARENT_ID=null;
 
+    public static final int CATEGORY_DEFAULT_PARENT_ID = 0;
+
 }

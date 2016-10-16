@@ -8,7 +8,7 @@ import studio.baxia.fo.pojo.Authors;
 /**
  * Created by FirePan on 2016/10/11.
  */
-public class UserServiceTest extends BaseTest {
+public class IUserServiceTest extends BaseTest {
     @Autowired
     private IUserService userService;
 

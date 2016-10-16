@@ -47,6 +47,7 @@
         <if test="writeTime!=null">write_time=#{writeTime,jdbcType=TIMESTAMP},</if>
         <if test="pubTime!=null">pub_time=#{pubTime,jdbcType=TIMESTAMP}</if>
         WHERE id = #{id,jdbcType=INTEGER}
+        AND author_id = #{authorId,jdbcType=INTEGER}
     </update>
 
     <select id="selectById" resultMap="ArticleMap">

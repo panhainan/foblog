@@ -7,12 +7,14 @@ package studio.baxia.fo.pojo;
 public class Tag {
     private Integer id;
     private String name; //标签名称
+    private Integer authorId;//作者id
 
     @Override
     public String toString() {
         return "Tag{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", authorId=" + authorId +
                 '}';
     }
 
@@ -30,5 +32,13 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
     }
 }

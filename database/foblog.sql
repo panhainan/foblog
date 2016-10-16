@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2016-10-16 02:36:58
+Date: 2016-10-16 22:15:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,7 +54,6 @@ CREATE TABLE `t_article` (
 -- Records of t_article
 -- ----------------------------
 
-
 -- ----------------------------
 -- Table structure for `t_authors`
 -- ----------------------------
@@ -86,8 +85,9 @@ CREATE TABLE `t_category` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL COMMENT '父类别id',
   `name` varchar(30) NOT NULL COMMENT '名称',
+  `author_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_category
@@ -124,12 +124,11 @@ CREATE TABLE `t_message` (
   `pub_time` datetime DEFAULT NULL COMMENT '发表时间',
   `block_id` int(10) DEFAULT NULL COMMENT '所在文章的评论区域属于第几块',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_message
 -- ----------------------------
-
 
 -- ----------------------------
 -- Table structure for `t_security_question`
@@ -158,8 +157,9 @@ DROP TABLE IF EXISTS `t_tag`;
 CREATE TABLE `t_tag` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '标签名称',
+  `author_id` int(10) DEFAULT NULL COMMENT '作者id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_tag

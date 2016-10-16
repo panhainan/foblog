@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Pan on 2016/10/13.
  */
-public class ArticleDaoTest extends BaseTest {
+public class IArticleDaoTest extends BaseTest {
 
     @Autowired
     private IArticleDao iArticleDao;

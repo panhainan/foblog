@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Pan on 2016/10/15.
  */
-public class MessageDaoTest extends BaseTest {
+public class IMessageDaoTest extends BaseTest {
 
     @Autowired
     private IMessageDao iMessageDao;
@@ -25,7 +25,7 @@ public class MessageDaoTest extends BaseTest {
     private IArticleDao iArticleDao;
 
 
-        @Rollback(false)
+    @Rollback(false)
     @Test
     public void testInsert() {
         int articleId = 1;
@@ -115,7 +115,7 @@ public class MessageDaoTest extends BaseTest {
         Article article = iArticleDao.selectById(articleId);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
-            List<Message> result = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, null, null, Constant.REVERSE_ORDER);
+            List<Message> result = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, null, Constant.REVERSE_ORDER);
             printResultStr(methodName, null, result);
 
             TreeInfoResult treeInfo = TreeInfoUtil.convertToTreeInfoResult(result, null);
@@ -134,17 +134,17 @@ public class MessageDaoTest extends BaseTest {
         Article article = iArticleDao.selectById(deleteMessageArticleId);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
-            List<Message> listMsg = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, deleteMessageBlockId, null, Constant.CORRECT_ORDER);
+            List<Message> listMsg = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, deleteMessageBlockId, Constant.CORRECT_ORDER);
             if (listMsg != null && listMsg.size() > 0) {
                 TreeInfoResult treeInfo = TreeInfoUtil.convertToTreeInfoResult(listMsg, listMsg.get(0));
                 if (treeInfo.getData().getId() == deleteMessageId) {
-                    traverseTreeChildGetIds(treeInfo, ids);
+                    TreeInfoUtil.traverseTreeChildGetIds(treeInfo, ids);
                 } else {
                     List<TreeInfoResult> list = treeInfo.getChildrens();
                     for (int i = 0; i < list.size(); i++) {
                         TreeInfoResult treeNode = list.get(i);
-                        if (treeNode.getData().getId()==deleteMessageId){
-                            traverseTreeChildGetIds(treeNode,ids);
+                        if (treeNode.getData().getId() == deleteMessageId) {
+                            TreeInfoUtil.traverseTreeChildGetIds(treeNode, ids);
                             break;
                         }
                     }
@@ -159,15 +159,15 @@ public class MessageDaoTest extends BaseTest {
 
     }
 
-    private void traverseTreeChildGetIds(TreeInfoResult treeNode,List<Integer> ids) {
-        if(treeNode!=null){
-            List<TreeInfoResult> list = treeNode.getChildrens();
-            for (int i = 0; i < list.size(); i++) {
-                TreeInfoResult node = list.get(i);
-                traverseTreeChildGetIds(node, ids);
-            }
-            ids.add(treeNode.getData().getId());
-//            System.out.println(ids);
+
+    @Test
+    public void testSelectCountByArticleId() {
+        int articleId = 1;
+        Article article = iArticleDao.selectById(articleId);
+        methodName = new Throwable().getStackTrace()[0].getMethodName();
+        if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
+            Integer result = iMessageDao.selectCountByArticleId(articleId);
+            printResultStr(methodName, null, result);
         }
     }
 }
