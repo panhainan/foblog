@@ -29,7 +29,7 @@ public class TagDaoTest extends BaseTest {
 
     @Test
     public void testDelete() {
-        Integer result = iTagDao.delete(1);
+        Integer result = iTagDao.delete(1,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }
@@ -41,7 +41,7 @@ public class TagDaoTest extends BaseTest {
     }
     @Test
     public void testSelectById(){
-        Tag result = iTagDao.selectById(1);
+        Tag result = iTagDao.selectById(1,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }

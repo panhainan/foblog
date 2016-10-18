@@ -33,6 +33,8 @@
         DELETE FROM t_article
         WHERE
         id=#{id,jdbcType=INTEGER}
+        AND
+        author_id = #{authorId,jdbcType=INTEGER}
     </delete>
 
     <update id="update">
@@ -55,6 +57,17 @@
         FROM t_article
         WHERE
         id = #{id,jdbcType=INTEGER}
+        AND
+        author_id = #{authorId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByTitle" resultMap="ArticleMap">
+        SELECT *
+        FROM t_article
+        WHERE
+        title = #{title,jdbcType=VARCHAR}
+        AND
+        author_id = #{authorId,jdbcType=INTEGER}
     </select>
 
     <select id="selectBy" resultMap="ArticleMap">

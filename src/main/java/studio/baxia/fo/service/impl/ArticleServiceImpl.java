@@ -206,14 +206,14 @@ public class ArticleServiceImpl implements IArticleService {
      */
     @Override
     public Boolean articleDeleteById(int articleId,int articleAuthorId) {
-        Article article = iArticleDao.selectById(articleId);
-        if(article!=null && article.getAuthorId()==articleAuthorId){
+        Article article = iArticleDao.selectById(articleId,articleAuthorId);
+        if(article!=null){
             //获取该文章id对应的所有评论记录总数
             Integer counts = iMessageDao.selectCountByArticleId(articleId);
             //返回删除所有评论的文章为id的受影响行数
             Integer results = iMessageDao.deleteByArticleId(articleId);
             if(results == counts){
-                Integer result = iArticleDao.delete(articleId);
+                Integer result = iArticleDao.delete(articleId,articleAuthorId);
                 return returnResult(result);
             }
         }
@@ -224,12 +224,26 @@ public class ArticleServiceImpl implements IArticleService {
      * 通过文章id获取文章
      *
      * @param articleId 文章id
+     * @param articleAuthorId 文章作者id
      * @return
      */
     @Override
-    public Article articleGetById(int articleId) {
-        Article result = iArticleDao.selectById(articleId);
+    public Article articleGetById(int articleId,int articleAuthorId) {
+        Article result = iArticleDao.selectById(articleId,articleAuthorId);
         return result;
+    }
+
+    /**
+     * 通过标题取得文章
+     *
+     * @param articleTitle    文章标题
+     * @param articleAuthorId 文章作者id
+     * @return
+     */
+    @Override
+    public Article articleGetByTitle(String articleTitle, Integer articleAuthorId) {
+        Article article = iArticleDao.selectByTitle(articleTitle, articleAuthorId);
+        return article;
     }
 
     /**
@@ -276,8 +290,8 @@ public class ArticleServiceImpl implements IArticleService {
         Message message = iMessageDao.selectById(messageId);
         Integer result = 0;
         if(message!=null){
-            Article article = iArticleDao.selectById(message.getArticleId());
-            if(article!=null && article.getAuthorId()==authorId){
+            Article article = iArticleDao.selectById(message.getArticleId(),authorId);
+            if(article!=null){
                 if(message.getParentId()!=Constant.MESSAGE_DEFAULT_PARENT_ID){
                     Integer counts = iMessageDao.selectCountBy(messageId,message.getBlockId());
                     result = iMessageDao.deleteBy(messageId,message.getBlockId());

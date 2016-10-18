@@ -23,9 +23,10 @@ public interface IArticleDao {
     /**
      * 根据id删除文章
      * @param articleId 文章id
+     * @param articleAuthorId 文章作者id
      * @return 受影响的行数
      */
-    Integer delete(@Param("id")Integer articleId);
+    Integer delete(@Param("id")Integer articleId,@Param("authorId")Integer articleAuthorId);
 
     /**
      * 更新文章
@@ -35,11 +36,12 @@ public interface IArticleDao {
     Integer update(Article article);
 
     /**
-     * 通过id查找（待编写sql实现）
+     * 通过id查找
      * @param articleId 文章id
+     * @param articleAuthorId 文章作者id
      * @return Article
      */
-    Article selectById(@Param("id") Integer articleId);
+    Article selectById(@Param("id") Integer articleId,@Param("authorId")Integer articleAuthorId);
 
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找
@@ -58,4 +60,11 @@ public interface IArticleDao {
      */
     Integer selectCountBy(@Param("article") Article article);
 
+    /**
+     * 通过标题，作者id精确取得文章
+     * @param articleTitle
+     * @param articleAuthorId
+     * @return
+     */
+    Article selectByTitle(@Param("title")String articleTitle, @Param("authorId")Integer articleAuthorId);
 }

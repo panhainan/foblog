@@ -42,7 +42,7 @@ public class IArticleDaoTest extends BaseTest {
 
     @Test
     public void testDelete() {
-        Integer result = iArticleDao.delete(1);
+        Integer result = iArticleDao.delete(1,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }
@@ -50,7 +50,7 @@ public class IArticleDaoTest extends BaseTest {
     @Test
     @Rollback(false)
     public void testUpdate() {
-        Article article = iArticleDao.selectById(1);
+        Article article = iArticleDao.selectById(1,1);
         if (article != null) {
             article.setSummary("修改：本人博客开篇，网站初建，欢迎大家关注，多交流。");
             article.setContent("修改：hello，大家好，欢迎来到我的博客网站，希望大家多沟通交流。谢谢大家。" + Math.random());
@@ -68,7 +68,7 @@ public class IArticleDaoTest extends BaseTest {
 
     @Test
     public void testSelectById() {
-        Article result = iArticleDao.selectById(1);
+        Article result = iArticleDao.selectById(1,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }

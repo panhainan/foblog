@@ -18,4 +18,9 @@ public class Constant {
 
     public static final int CATEGORY_DEFAULT_PARENT_ID = 0;
 
+    public static final int SUCCESS_CODE = 1;
+    public static final int FAIL_CODE=0;
+
+    public static final String USER_IS_NO_EXIST = "用户不存在！";
+
 }

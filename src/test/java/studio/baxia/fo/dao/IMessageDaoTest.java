@@ -29,7 +29,7 @@ public class IMessageDaoTest extends BaseTest {
     @Test
     public void testInsert() {
         int articleId = 1;
-        Article article = iArticleDao.selectById(articleId);
+        Article article = iArticleDao.selectById(articleId,1);
         Message message = new Message();
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
@@ -112,7 +112,7 @@ public class IMessageDaoTest extends BaseTest {
     @Test
     public void testSelectByArticleId() {
         int articleId = 1;
-        Article article = iArticleDao.selectById(articleId);
+        Article article = iArticleDao.selectById(articleId,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
             List<Message> result = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, null, Constant.REVERSE_ORDER);
@@ -131,7 +131,7 @@ public class IMessageDaoTest extends BaseTest {
         int deleteMessageId = 25;
         int deleteMessageBlockId = 1;
         List<Integer> ids = new ArrayList<>();
-        Article article = iArticleDao.selectById(deleteMessageArticleId);
+        Article article = iArticleDao.selectById(deleteMessageArticleId,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
             List<Message> listMsg = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, deleteMessageBlockId, Constant.CORRECT_ORDER);
@@ -163,7 +163,7 @@ public class IMessageDaoTest extends BaseTest {
     @Test
     public void testSelectCountByArticleId() {
         int articleId = 1;
-        Article article = iArticleDao.selectById(articleId);
+        Article article = iArticleDao.selectById(articleId,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
             Integer result = iMessageDao.selectCountByArticleId(articleId);
