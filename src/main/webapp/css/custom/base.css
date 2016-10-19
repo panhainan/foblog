@@ -1,0 +1,228 @@
+html, body {
+    font: 14px/1.5 "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+}
+
+.customContainer {
+    border: 1px solid #E6E6E6;
+    padding: 40px;
+    margin: 0;
+    margin-right: 160px;
+    background-color: #F1F1F1;
+}
+
+.content {
+    padding: 20px 50px;
+    background-color: #fff;
+    min-height: 600px;
+    height: auto;
+    border: 1px solid #E6E6E6;
+}
+
+.content_body {
+    font-size: 15px;
+}
+
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+#catalog {
+    font: 14px/1.5 "楷体", "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 160px;
+    height: 100%;
+    overflow: auto;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+.catalog_header {
+    font: 15px/1.5 "楷体", "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.catalog_body {
+
+}
+.catalog_footer{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+a {
+    cursor: pointer;
+    color: #000;
+}
+
+.img-circle {
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.tableTrBottomBorder table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.modalDiv .row div {
+    margin: 3px 0;
+}
+
+.modalDiv .row div label {
+    padding: 0;
+}
+
+.panel {
+    margin-bottom: 5px;
+}
+
+.panel-heading h3 {
+    line-height: 200%;
+}
+
+.panel-footer {
+    padding: 0;
+}
+
+.panel-footer ul {
+    margin: 5px 0 0 0;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.border_bottom {
+    border-bottom: 1px #EBEBEB solid;
+}
+
+.padding_none {
+    padding: 0;
+}
+
+.padding_left_20 {
+    padding: 0 0 0 20px;
+}
+
+.ul_style_nonde {
+    list-style: none
+}
+
+.menu_li {
+    padding-left: 0px;
+    height: 30px;
+    width: 100%;
+    text-indent: 15px;
+}
+
+.menu_li a {
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    padding-left: 8px;
+    height: 30px;
+    line-height: 28px;
+    width: 100%;
+    float: left;
+    color: #8D8D8D;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.menu_li a:hover {
+    color: #000;
+    background-color: #EBEBEB;
+    text-decoration: none;
+}
+
+.navbar-vertical-left {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    overflow: auto;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    /*z-index: 999;*/
+}
+
+@media (max-width: 768px) {
+    .navbar-vertical-left {
+        position: fixed;
+        top: 0;
+        bottom: auto;
+        height: auto;
+        width: 100%;
+    }
+
+    .navbar-vertical-left,
+    .navbar-vertical-left ul.navbar-nav {
+        -webkit-transition: none;
+        -moz-transition: none;
+        transition: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        transform: none;
+    }
+
+    .navbar-vertical-left ul.navbar-nav > li {
+        display: table-cell;
+    }
+
+    .navbar-vertical-left ul.navbar-nav > li > a {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        height: 50px;
+        line-height: 30px;
+    }
+
+    .navbar-vertical-left ul.navbar-nav > li > a > i.fa {
+        margin: 0;
+    }
+
+    .navbar-vertical-left ul.navbar-nav > li > a > span {
+        display: none;
+    }
+}
+
+.sidebar-nav {
+    font: 17px/1.0 "楷体", "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+    background-color: #FFFFFF;
+    text-align: center;
+    height: 100%;
+    padding: 0;
+}
+
+/* make sidebar nav vertical */
+@media (min-width: 768px) {
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+
+    .sidebar-nav .navbar ul {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+}

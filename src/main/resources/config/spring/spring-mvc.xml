@@ -1,78 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
-http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 http://www.springframework.org/schema/mvc 
-http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
-       default-lazy-init="true">
-    <!-- 静态页面文件 -->
-    <!--<mvc:resources mapping="/resources/**" location="/resources/" />-->
-    <mvc:default-servlet-handler/>
-    <!-- 使Spring支持自动检测组件，如注解的Controller -->
-    <context:component-scan base-package="studio.baxia"
-                            use-default-filters="false">
-        <context:include-filter expression="org.springframework.stereotype.Controller"
-                                type="annotation"/>
-        <!-- 在springMVC配置文件中将Service注解给去掉,而由applicationContext.xml父容器进行初始化以保证service的事务的增强处理 -->
-        <context:exclude-filter expression="org.springframework.stereotype.Service"
-                                type="annotation"/>
-    </context:component-scan>
+http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
+	default-lazy-init="true">
+	<!-- 静态页面文件 -->
+	<!--<mvc:resources mapping="/resources/**" location="/resources/" /> -->
+	<mvc:default-servlet-handler />
+	<!-- 使Spring支持自动检测组件，如注解的Controller -->
+	<context:component-scan base-package="studio.baxia"
+		use-default-filters="false">
+		<context:include-filter expression="org.springframework.stereotype.Controller"
+			type="annotation" />
+		<!-- 在springMVC配置文件中将Service注解给去掉,而由applicationContext.xml父容器进行初始化以保证service的事务的增强处理 -->
+		<context:exclude-filter expression="org.springframework.stereotype.Service"
+			type="annotation" />
+	</context:component-scan>
 
-    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射,解决@ResponseBody乱码问题, 需要在annotation-driven和component-scan之前,否则乱码问题同样无法解决 -->
-    <!-- Spring3.1推荐使用RequestMappingHandlerAdapter -->
-    <bean
-            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="stringHttpMessageConverter"/>
-                <ref bean="mappingJacksonHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射,解决@ResponseBody乱码问题, 需要在annotation-driven和component-scan之前,否则乱码问题同样无法解决 -->
+	<!-- Spring3.1推荐使用RequestMappingHandlerAdapter -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringHttpMessageConverter" />
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
 
-    <mvc:annotation-driven/>
+	<mvc:annotation-driven />
 
-    <!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
-    <!-- <mvc:default-servlet-handler /> -->
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<!-- <mvc:default-servlet-handler /> -->
 
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/plugins/" p:suffix=".jsp"/>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/plugins/" p:suffix=".jsp" />
 
-    <bean
-            class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
-    <!-- 处理JSON数据转换，为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
-    <bean id="mappingJacksonHttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>application/json;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
-    <bean id="stringHttpMessageConverter"
-          class="org.springframework.http.converter.StringHttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/html;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
+	<!-- 处理JSON数据转换，为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
 
-    <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-          p:defaultEncoding="UTF-8"
-          p:maxUploadSize="5400000"
-          p:uploadTempDir="file/upload"
-            >
-    </bean>
-    <!-- 配置拦截器 -->
-    <!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean
-        class ="com.eshore.onlinecount.interceptor.CountInterceptor"/> </mvc:interceptor>
-        </mvc:interceptors> -->
+	<!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="UTF-8" p:maxUploadSize="5400000" p:uploadTempDir="file/upload">
+	</bean>
+	<!-- 配置拦截器 -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class ="com.eshore.onlinecount.interceptor.CountInterceptor"/> </mvc:interceptor> 
+		</mvc:interceptors> -->
 </beans>
