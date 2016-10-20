@@ -10,6 +10,9 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/index", {
         templateUrl: "modules/index/index.view.html",
         controller: 'IndexController'
+    }).when("/signin", {
+        templateUrl: "modules/sign/signin.view.html",
+        controller: 'SignController'
     });
 
     $routeProvider.otherwise({

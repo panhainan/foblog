@@ -10,12 +10,16 @@
 <head lang="zh">
 <base href="<%=basePath%>">
 <meta charset="UTF-8">
-<title>霸下工作室</title>
+<title></title>
+<!-- 霸下工作室 -->
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 <link rel="stylesheet" href="css/lib/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom/base.css" />
+
+<link rel="stylesheet" href="css/custom/index.view.css" />
+
 
 <script src="scripts/lib/jquery-1.11.3.min.js"></script>
 <script src="scripts/lib/bootstrap.min.js"></script>
@@ -33,15 +37,17 @@
 <script src="scripts/custom/http.interceptor.js"></script>
 <script src="scripts/custom/request.service.js"></script>
 
+<script src="modules/sign/sign.controller.js"></script>
+
 
 
 
 </head>
-<body>
-	<ng-include src="'modules/common/left-nav.html'"></ng-include>
+<body ng-controller="webAppCtrl">
+	<!-- <ng-include src="'modules/common/left-nav.html'"></ng-include> -->
 	<div class="hidden-xs" style="margin-left: 260px;" ng-view></div>
 	<div class="visible-xs" style="margin-top: 50px;" ng-view></div>
-	<ng-include src="'modules/common/right-nav.html'"></ng-include>
+	<!-- <ng-include src="'modules/common/right-nav.html'"></ng-include> -->
 
 </body>
 <style type="text/css">

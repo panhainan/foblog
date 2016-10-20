@@ -1,0 +1,53 @@
+<div class="customContainer">
+	<form class="form-horizontal" action="javascript:void(0)">
+		<div class="panel panel-default">
+			<div class="panel-heading">登录</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="email">账户:</label>
+					<div class="col-sm-10 col-md-10 col-lg-6">
+						<input type="email" class="form-control" id="email"
+							placeholder="Enter email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2 " for="pwd">密码:</label>
+					<div class="col-sm-10 col-md-10 col-lg-6">
+						<input type="password" class="form-control" id="pwd"
+							placeholder="Enter password">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">登录</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<h2>创建模态框（Modal）</h2>
+	<!-- 按钮触发模态框 -->
+	<button class="btn btn-primary btn-lg" data-toggle="modal"
+		data-target="#myModal">开始演示模态框</button>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+				</div>
+				<div class="modal-body">在这里添加一些文本</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">提交更改</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>

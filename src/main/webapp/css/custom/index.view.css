@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.content {
+	padding: 20px 50px;
+	background-color: #fff;
+	min-height: 600px;
+	height: auto;
+	border: 1px solid #E6E6E6;
+}
+
+.content_body {
+	font-size: 15px;
+}

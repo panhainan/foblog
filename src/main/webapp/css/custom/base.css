@@ -2,25 +2,17 @@ html, body {
 	font: 14px/1.5 "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB",
 		"STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
 }
-
+.no_border_radius{
+	-webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
 .customContainer {
 	border: 1px solid #E6E6E6;
 	padding: 40px;
 	margin: 0;
 	margin-right: 160px;
 	background-color: #F1F1F1;
-}
-
-.content {
-	padding: 20px 50px;
-	background-color: #fff;
-	min-height: 600px;
-	height: auto;
-	border: 1px solid #E6E6E6;
-}
-
-.content_body {
-	font-size: 15px;
 }
 
 .row {
