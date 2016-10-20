@@ -1,0 +1,52 @@
+<div class="content-top">
+	<ul class="list-inline">
+		<li style="line-height:30px;text-indent: 10px;">立业、成家、。。</li>
+		<li class="pull-right"><button type="button"  ng-click="signin()" 
+				class="btn-sm btn btn-link" data-toggle="modal"
+				data-target="#signInModal">登录</button></li>
+		<li class="pull-right" style="padding: 0"><button type="button"
+				class="btn-sm btn btn-link">搜索</button></li>
+	</ul>
+</div>
+
+<!-- 登录模态框（Modal） -->
+<div class="modal fade" id="signInModal" ng-controller="SignController"  data-backdrop="static"
+	tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<form class="form-horizontal" action="javascript:void(0)" ng-submit="signin()">
+			<div class="modal-content">
+				<div class="modal-header" style="text-align: center;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="signInModalLabel">登 录</h4>
+				</div>
+				<div class="modal-body">
+					<br />
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">账户:</label>
+						<div class="col-sm-10 col-md-9">
+							<input type="email" class="form-control" id="email"
+								placeholder="请输入账户名">
+						</div>
+					</div>
+					<br />
+					<div class="form-group">
+						<label class="control-label col-sm-2 " for="pwd">密码:</label>
+						<div class="col-sm-10 col-md-9">
+							<input type="password" class="form-control" id="pwd"
+								placeholder="请输入账户密码">
+						</div>
+					</div>
+					<br />
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">登 录</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</form>
+	</div>
+	<!-- /.modal -->
+</div>

@@ -14,7 +14,27 @@
 <!-- 霸下工作室 -->
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<style type="text/css">
+@import "plugins/thinker-md/stylesheets/vendor/font.css";
 
+@import "plugins/thinker-md/stylesheets/vendor/markdown.css";
+
+@import "plugins/thinker-md/stylesheets/emoji/nature.css";
+
+@import "plugins/thinker-md/stylesheets/emoji/object.css";
+
+@import "plugins/thinker-md/stylesheets/emoji/people.css";
+
+@import "plugins/thinker-md/stylesheets/emoji/place.css";
+
+@import "plugins/thinker-md/stylesheets/emoji/Sysmbols.css";
+
+@import "plugins/thinker-md/stylesheets/emoji/twemoji.css";
+
+@import "plugins/thinker-md/stylesheets/vendor/font-awesome.css";
+
+@import "plugins/thinker-md/stylesheets/vendor/sunburst.css";
+</style>
 <link rel="stylesheet" href="css/lib/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom/base.css" />
 
@@ -37,40 +57,19 @@
 <script src="scripts/custom/http.interceptor.js"></script>
 <script src="scripts/custom/request.service.js"></script>
 
-<script src="modules/sign/sign.controller.js"></script>
+<script src="modules/common/sign.controller.js"></script>
 
 
 
 
 </head>
 <body ng-controller="webAppCtrl">
-	<!-- <ng-include src="'modules/common/left-nav.html'"></ng-include> -->
-	<div class="hidden-xs" style="margin-left: 260px;" ng-view></div>
-	<div class="visible-xs" style="margin-top: 50px;" ng-view></div>
-	<!-- <ng-include src="'modules/common/right-nav.html'"></ng-include> -->
-
+	<ng-include src="'modules/common/left-nav.html'"></ng-include>
+	<div class="hidden-xs" style="margin-left: 260px;margin-right: 160px" ng-view></div>
+	<div class="visible-xs"  ng-view></div>
+	<div class="hidden-xs"><ng-include src="'modules/common/right-nav.html'"></ng-include></div>
 </body>
-<style type="text/css">
-@import "plugins/thinker-md/stylesheets/vendor/font.css";
 
-@import "plugins/thinker-md/stylesheets/vendor/markdown.css";
-
-@import "plugins/thinker-md/stylesheets/emoji/nature.css";
-
-@import "plugins/thinker-md/stylesheets/emoji/object.css";
-
-@import "plugins/thinker-md/stylesheets/emoji/people.css";
-
-@import "plugins/thinker-md/stylesheets/emoji/place.css";
-
-@import "plugins/thinker-md/stylesheets/emoji/Sysmbols.css";
-
-@import "plugins/thinker-md/stylesheets/emoji/twemoji.css";
-
-@import "plugins/thinker-md/stylesheets/vendor/font-awesome.css";
-
-@import "plugins/thinker-md/stylesheets/vendor/sunburst.css";
-</style>
 <script type="text/javascript" charset="utf-8"
 	src="plugins/thinker-md/javascripts/vendor/underscore/underscore-min.js"></script>
 <script type="text/javascript" charset="utf-8"

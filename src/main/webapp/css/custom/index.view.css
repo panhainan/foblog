@@ -1,10 +1,24 @@
 @CHARSET "UTF-8";
+
+.content-top {
+	height: 45px;
+	width: 100%;
+	margin: 0;
+	padding: 10px 0;
+	/* background-color: #FFF;
+	border: 1px solid #E6E6E6; */
+}
+
 .content {
-	padding: 20px 50px;
+	padding: 10px 20px 20px 20px;
 	background-color: #fff;
 	min-height: 600px;
 	height: auto;
 	border: 1px solid #E6E6E6;
+}
+
+.content_header {
+	
 }
 
 .content_body {

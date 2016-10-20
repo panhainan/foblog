@@ -23,8 +23,7 @@ app.run(function ($rootScope, $location, $window) {
     //$rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
     //});
 });
-app.controller("webAppCtrl", function ($scope, $rootScope, $window) {
-
+app.controller("webAppCtrl", function ($scope, $rootScope, $window,$uibModal) {
 });
 
 

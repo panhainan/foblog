@@ -1,70 +1,85 @@
-<div class="customContainer"><!--container-fluid-->
-    <div class="content">
-        <div class="content_header">
-            <h3>[翻译]Dropbox Web 服务启用 HTTP/2：经验和观察</h3>
-            <hr/>
-        </div>
-        <div class="content_body">
-            <p>&emsp;&emsp;最近，为了启用 HTTP/2，我们 Dropbox 的流量团队升级了前端的 Nginx 服务器。本文将分享我们迁移到 HTTP/2
-                的过程中的体验和新发现。整个过程较为顺利，但还是有发现一些坑，也许对大家有帮助。</p>
+<!--container-fluid-->
+<div class="customContainer">
+	
+	<ng-include src="'modules/common/top-nav.html'"></ng-include>
+	<div class="content">
+		<div class="content_header">
+			<h3>[翻译]Dropbox Web 服务启用 HTTP/2：经验和观察</h3>
+			<hr />
+		</div>
+		<div class="content_body">
+			<p>&emsp;&emsp;最近，为了启用 HTTP/2，我们 Dropbox 的流量团队升级了前端的 Nginx
+				服务器。本文将分享我们迁移到 HTTP/2 的过程中的体验和新发现。整个过程较为顺利，但还是有发现一些坑，也许对大家有帮助。</p>
+			<textarea name="content02" data-provide="markdown"
+				id="markdown_textarea" rows="10" placeholder="这里输入内容,支持Markdown语法."></textarea>
+			<p>
+				<b>背景：HTTP/2 与 Dropbox Web 服务架构</b>
+			</p>
 
-            <p><b>背景：HTTP/2 与 Dropbox Web 服务架构</b></p>
+			<p>&emsp;&emsp;HTTP/2 (RFC 7540) 是 HTTP 协议的新的大版本。它基于 SPDY
+				协议，而且相比于 HTTP/1.1 提供了好多性能优化。这些优化包括：更高效的报头压缩、Server
+				Push、多路复用等等。至今，过半浏览器已经支持HTTP/2。</p>
 
-            <p>&emsp;&emsp;HTTP/2 (RFC 7540) 是 HTTP 协议的新的大版本。它基于 SPDY 协议，而且相比于 HTTP/1.1 提供了好多性能优化。这些优化包括：更高效的报头压缩、Server
-                Push、多路复用等等。至今，过半浏览器已经支持HTTP/2。</p>
+			<p>&emsp;&emsp;Dropbox 使用开源的 Nginx 做 SSL
+				终结前端和为流量提供七层负载均衡。升级前，我们的前端服务器跑的是基于 Nginx 1.7 的软件，并且支持
+				SPDY。另一个升级的动力来自，虽然 Chrome 目前既支持 SPDY 也支持 HTTP/2 ，但他们很快会在5月15日
+				放弃SPDY支持。如果那时不支持 HTTP/2 ，我们的 Chrome 用户就会从 SPDY 降级到使用 HTTP/1.1。</p>
 
-            <p> &emsp;&emsp;Dropbox 使用开源的 Nginx 做 SSL 终结前端和为流量提供七层负载均衡。升级前，我们的前端服务器跑的是基于 Nginx 1.7 的软件，并且支持
-                SPDY。另一个升级的动力来自，虽然
-                Chrome 目前既支持 SPDY 也支持 HTTP/2 ，但他们很快会在5月15日 放弃SPDY支持。如果那时不支持 HTTP/2 ，我们的 Chrome 用户就会从 SPDY 降级到使用
-                HTTP/1.1。</p>
+			<p>
+				<b>HTTP/2 升级步骤</b>
+			</p>
 
-            <p><b>HTTP/2 升级步骤</b></p>
+			<p>&emsp;&emsp;升级 HTTP/2 对我们来说是个直截、而且平滑的切换。Nginx 1.9.5 增加了 HTTP/2
+				模块（也由 Dropbox 共同协助），并默认弃用了 SPDY 支持。我们当时就决定升级到 Nginx
+				1.9.15，即那时的最新稳定版。</p>
 
-            <p>&emsp;&emsp;升级 HTTP/2 对我们来说是个直截、而且平滑的切换。Nginx 1.9.5 增加了 HTTP/2 模块（也由 Dropbox 共同协助），并默认弃用了 SPDY
-                支持。我们当时就决定升级到 Nginx
-                1.9.15，即那时的最新稳定版。</p>
+			<p>&emsp;&emsp;用 Nginx 升级 HTTP/2 只需对配置文件做小小的改动。只需将 http2 关键字增加到
+				listen 指令后面。因为我们之前启用了 SPDY，所以只需将 spdy 替换成 http2。</p>
 
-            <p>&emsp;&emsp;用 Nginx 升级 HTTP/2 只需对配置文件做小小的改动。只需将 http2 关键字增加到 listen 指令后面。因为我们之前启用了 SPDY，所以只需将 spdy 替换成
-                http2。</p>
+			<p>&emsp;&emsp;升级前 (SPDY): listen A.B.C.D:443 ssl spdy;</p>
 
-            <p>&emsp;&emsp;升级前 (SPDY): listen A.B.C.D:443 ssl spdy;</p>
+			<p>&emsp;&emsp;升级后 (HTTP/2): listen A.B.C.D:443 ssl http2;</p>
 
-            <p>&emsp;&emsp;升级后 (HTTP/2): listen A.B.C.D:443 ssl http2;</p>
+			<p>当然，您或许会需要浏览完整的 Nginx HTTP/2 配置选项，好针对某些特定的场景做优化。</p>
 
-            <p>当然，您或许会需要浏览完整的 Nginx HTTP/2 配置选项，好针对某些特定的场景做优化。</p>
+			<p>&emsp;&emsp;部署方面，我们首先在小流量机器上启用 HTTP/2 了一个星期，同时线上依然使用
+				SPDY。在确定了正确性，并且评估了性能之后，HTTP/2 才全量启用。</p>
 
-            <p>&emsp;&emsp;部署方面，我们首先在小流量机器上启用 HTTP/2 了一个星期，同时线上依然使用 SPDY。在确定了正确性，并且评估了性能之后，HTTP/2 才全量启用。</p>
+			<p>
+				<b>http2 transition</b>
+			</p>
 
-            <p><b>http2 transition</b></p>
+			<p>&emsp;&emsp;从 SPDY 到 HTTP/2 的平滑切换 (60 分钟的流量数据)</p>
 
-            <p>&emsp;&emsp;从 SPDY 到 HTTP/2 的平滑切换 (60 分钟的流量数据)</p>
+			<p>&emsp;&emsp;上图展示了从 SPDY 到 HTTP/2 的平滑切换。余留的 HTTP/1.1
+				连接在图中没有显示。我们分别在大约第 23 、第36 和第 50 分钟，逐步将所有前端 Web 服务器启用了
+				HTTP/2。在此之前，在线连接既有小流量机器的 HTTP/2 流量，也有线上机器的 SPDY 流量。如您所见，基本上所有 SPDY
+				连接着的客户端最终都转移到了 HTTP/2 上。</p>
 
-            <p>&emsp;&emsp;上图展示了从 SPDY 到 HTTP/2 的平滑切换。余留的 HTTP/1.1 连接在图中没有显示。我们分别在大约第 23 、第36 和第 50 分钟，逐步将所有前端 Web
-                服务器启用了
-                HTTP/2。在此之前，在线连接既有小流量机器的 HTTP/2 流量，也有线上机器的 SPDY 流量。如您所见，基本上所有 SPDY 连接着的客户端最终都转移到了 HTTP/2 上。</p>
+			<p>
+				<b>观测</b>
+			</p>
 
-            <p><b>观测</b></p>
+			<p>&emsp;&emsp;在小流量机器上启用了 HTTP/2 后，我们紧密地监测着性能。观察得到的既有代表 HTTP/2
+				的高效性能的数据，也有一些由于 HTTP/2 的实现还较新而产生的坑。</p>
 
-            <p>&emsp;&emsp;在小流量机器上启用了 HTTP/2 后，我们紧密地监测着性能。观察得到的既有代表 HTTP/2 的高效性能的数据，也有一些由于 HTTP/2 的实现还较新而产生的坑。</p>
 
-            <textarea name="content02" data-provide="markdown" id="markdown_textarea" rows="10" placeholder="这里输入内容,支持Markdown语法."></textarea>
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 
 
 <script>
-    $(function() {
-        $("#markdown_textarea").markdown({
-            language: 'zh',
-            fullscreen: {
-                enable: true
-            },
-            resize: 'vertical',
-            localStorage: 'md',
-            imgurl: '/c/imgUpload',
-            base64url: '/c/imgUpload'
-        });
-    });
-
+	$(function() {
+		$("#markdown_textarea").markdown({
+			language : 'zh',
+			fullscreen : {
+				enable : true
+			},
+			resize : 'vertical',
+			localStorage : 'md',
+			imgurl : '/c/imgUpload',
+			base64url : '/c/imgUpload'
+		});
+	});
 </script>
