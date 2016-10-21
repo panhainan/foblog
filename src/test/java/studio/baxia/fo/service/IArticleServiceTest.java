@@ -3,7 +3,7 @@ package studio.baxia.fo.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import studio.baxia.fo.BaseTest;
-import studio.baxia.fo.common.Constant;
+import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.TreeInfoResult;
 
 /**
@@ -14,7 +14,7 @@ public class IArticleServiceTest extends BaseTest {
     private IArticleService iArticleService;
     @Test
     public void testMessageGetAllBy() throws Exception {
-        TreeInfoResult tree = iArticleService.messageGetAllBy(1, Constant.CORRECT_ORDER);
+        TreeInfoResult tree = iArticleService.messageGetAllBy(1, CommonConstant.CORRECT_ORDER);
         System.out.println(tree);
     }
 }

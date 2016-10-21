@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import studio.baxia.fo.common.CommonResult;
-import studio.baxia.fo.common.Constant;
+import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Authors;
 import studio.baxia.fo.service.IArticleService;
@@ -31,21 +31,21 @@ public class ArticleController {
     public CommonResult get(@PathVariable("username")String username,@PathVariable("id")Integer articleId){
         Authors authors = iUserService.authorsGetByAccount(username);
         if(authors==null){
-            return new CommonResult(Constant.FAIL_CODE,Constant.USER_IS_NO_EXIST);
+            return new CommonResult(CommonConstant.FAIL_CODE,CommonConstant.USER_IS_NO_EXIST);
         }
         Article article = iArticleService.articleGetById(articleId,authors.getId());
         String msg = "hello, "+username+",operate success.";
-        return new CommonResult(Constant.SUCCESS_CODE,msg,article);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
     }
     @ResponseBody
     @RequestMapping(value = "/{title}",method = RequestMethod.GET)
     public CommonResult getByTitle(@PathVariable("username")String username,@PathVariable("title")String articleTitle){
         Authors authors = iUserService.authorsGetByAccount(username);
         if(authors==null){
-            return new CommonResult(Constant.FAIL_CODE,Constant.USER_IS_NO_EXIST);
+            return new CommonResult(CommonConstant.FAIL_CODE,CommonConstant.USER_IS_NO_EXIST);
         }
         Article article = iArticleService.articleGetByTitle(articleTitle, authors.getId());
         String msg = "hello, "+username+",operate success.";
-        return new CommonResult(Constant.SUCCESS_CODE,msg,article);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
     }
 }

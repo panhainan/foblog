@@ -10,7 +10,7 @@ http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
 	default-lazy-init="true">
 	<!-- 静态页面文件 -->
-	<!--<mvc:resources mapping="/resources/**" location="/resources/" /> -->
+	<!-- <mvc:resources mapping="/**" location="/" />  -->
 	<mvc:default-servlet-handler />
 	<!-- 使Spring支持自动检测组件，如注解的Controller -->
 	<context:component-scan base-package="studio.baxia"
@@ -41,7 +41,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/plugins/" p:suffix=".jsp" />
+		p:prefix="/" p:suffix=".jsp" />
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />

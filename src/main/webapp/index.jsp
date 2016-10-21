@@ -64,10 +64,10 @@
 
 </head>
 <body ng-controller="webAppCtrl">
-	<ng-include src="'modules/common/left-nav.html'"></ng-include>
+	<ng-include src="'modules/common/left-nav.html'"></ng-include> 
 	<div class="hidden-xs" style="margin-left: 260px;margin-right: 160px" ng-view></div>
 	<div class="visible-xs"  ng-view></div>
-	<div class="hidden-xs"><ng-include src="'modules/common/right-nav.html'"></ng-include></div>
+	<!-- <div class="hidden-xs"><ng-include src="'modules/common/right-nav.html'"></ng-include></div> -->
 </body>
 
 <script type="text/javascript" charset="utf-8"

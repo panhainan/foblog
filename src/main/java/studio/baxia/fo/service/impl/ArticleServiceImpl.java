@@ -174,7 +174,7 @@ public class ArticleServiceImpl implements IArticleService {
      */
     @Override
     public Boolean articleAdd(Article article) {
-        if(article.getStatus() == Constant.ACTICLE_STATUS_BLOG){
+        if(article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG){
             article.setPubTime(new Date());
         }
         article.setWriteTime(new Date());
@@ -190,7 +190,7 @@ public class ArticleServiceImpl implements IArticleService {
      */
     @Override
     public Boolean articleEdit(Article article) {
-        if(article.getStatus() == Constant.ACTICLE_STATUS_BLOG){
+        if(article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG){
             article.setPubTime(new Date());
         }
         Integer result = iArticleDao.update(article);
@@ -292,7 +292,7 @@ public class ArticleServiceImpl implements IArticleService {
         if(message!=null){
             Article article = iArticleDao.selectById(message.getArticleId(),authorId);
             if(article!=null){
-                if(message.getParentId()!=Constant.MESSAGE_DEFAULT_PARENT_ID){
+                if(message.getParentId()!=CommonConstant.MESSAGE_DEFAULT_PARENT_ID){
                     Integer counts = iMessageDao.selectCountBy(messageId,message.getBlockId());
                     result = iMessageDao.deleteBy(messageId,message.getBlockId());
                     if(result==counts){
@@ -330,7 +330,7 @@ public class ArticleServiceImpl implements IArticleService {
      */
     @Override
     public TreeInfoResult messageGetAllBy(int messageArticleId, int reverseOrder) {
-        List<Message> list = iMessageDao.selectByArticleId(messageArticleId,Constant.MESSAGE_NULL_PARENT_ID, null, reverseOrder);
+        List<Message> list = iMessageDao.selectByArticleId(messageArticleId,CommonConstant.MESSAGE_NULL_PARENT_ID, null, reverseOrder);
         TreeInfoResult treeInfo = TreeInfoUtil.convertToTreeInfoResult(list, null);
         return treeInfo;
     }
