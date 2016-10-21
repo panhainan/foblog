@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import studio.baxia.fo.BaseTest;
-import studio.baxia.fo.common.Constant;
+import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.pojo.Article;
@@ -31,7 +31,7 @@ public class IArticleDaoTest extends BaseTest {
         article.setAuthorId(1);
         article.setCategoryIds("1/5/6/");
         article.setTagIds("1/");
-        article.setStatus(Constant.ACTICLE_STATUS_DRAFT);
+        article.setStatus(CommonConstant.ACTICLE_STATUS_DRAFT);
         article.setWriteTime(new Date());
 //        article.setPubTime(new Date());
         Integer result = iArticleDao.insert(article);
@@ -57,7 +57,7 @@ public class IArticleDaoTest extends BaseTest {
             article.setAuthorId(1);
             article.setCategoryIds("1/5/6/8/");
             article.setTagIds("1/6/7/");
-            article.setStatus(Constant.ACTICLE_STATUS_BLOG);
+            article.setStatus(CommonConstant.ACTICLE_STATUS_BLOG);
             article.setPubTime(new Date());
             Integer result = iArticleDao.update(article);
             methodName = new Throwable().getStackTrace()[0].getMethodName();
@@ -92,7 +92,7 @@ public class IArticleDaoTest extends BaseTest {
         article.setAuthorId(1);
         article.setCategoryIds("5/");
         article.setTagIds("1/");
-        article.setStatus(Constant.ACTICLE_STATUS_BLOG);
+        article.setStatus(CommonConstant.ACTICLE_STATUS_BLOG);
         PageConfig pageConfig = new PageConfig(1, 2);
         List<Article> result = iArticleDao.selectBy(article, pageConfig);
         Integer resultCount = iArticleDao.selectCountBy(article);

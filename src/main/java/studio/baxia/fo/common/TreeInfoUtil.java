@@ -21,7 +21,7 @@ public class TreeInfoUtil {
         if(rootTreeInfo==null){
             for (int i = 0; i < treeInfos.size(); i++) {
                 TreeInfo treeInfo = treeInfos.get(i);
-                if (treeInfo.getParentId() == Constant.MESSAGE_DEFAULT_PARENT_ID) {
+                if (treeInfo.getParentId() == CommonConstant.MESSAGE_DEFAULT_PARENT_ID) {
                     treeRootInfoResultChildrens.add(new TreeInfoResult(treeInfo));
                 } else {
                     restTreeInfos.add(treeInfo);

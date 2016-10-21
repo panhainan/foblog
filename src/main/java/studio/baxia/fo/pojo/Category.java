@@ -1,6 +1,6 @@
 package studio.baxia.fo.pojo;
 
-import studio.baxia.fo.common.Constant;
+import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.TreeInfo;
 
 /**
@@ -10,7 +10,7 @@ import studio.baxia.fo.common.TreeInfo;
  */
 public class Category extends TreeInfo {
     private Integer id;
-    private Integer parentId = Constant.CATEGORY_DEFAULT_PARENT_ID;//父类别id
+    private Integer parentId = CommonConstant.CATEGORY_DEFAULT_PARENT_ID;//父类别id
     private String name;//名称
     private Integer authorId; //作者id
 

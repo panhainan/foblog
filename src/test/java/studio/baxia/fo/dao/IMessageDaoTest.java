@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import studio.baxia.fo.BaseTest;
-import studio.baxia.fo.common.Constant;
+import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.TreeInfoResult;
 import studio.baxia.fo.common.TreeInfoUtil;
 import studio.baxia.fo.pojo.Article;
@@ -32,13 +32,13 @@ public class IMessageDaoTest extends BaseTest {
         Article article = iArticleDao.selectById(articleId,1);
         Message message = new Message();
         methodName = new Throwable().getStackTrace()[0].getMethodName();
-        if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
+        if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             int guestBId = 1;//B
             int authorAId = article.getAuthorId();
             message.setArticleId(article.getId());
             message.setBlockId(1);
             message.setContent("B对A的文章进行了评论");
-            message.setUserType(Constant.USER_TYPE_GUEST);
+            message.setUserType(CommonConstant.USER_TYPE_GUEST);
             message.setAuthorId(guestBId);
             Integer result = iMessageDao.insert(message);
             printResultStr(methodName, null, result);
@@ -50,7 +50,7 @@ public class IMessageDaoTest extends BaseTest {
             message1.setBlockId(1);
             message1.setParentId(message.getId());
             message1.setContent("C对B的评论进行了评论");
-            message1.setUserType(Constant.USER_TYPE_GUEST);
+            message1.setUserType(CommonConstant.USER_TYPE_GUEST);
             message1.setAuthorId(guestCId);
             Integer result1 = iMessageDao.insert(message1);
             printResultStr(methodName, null, result1);
@@ -61,7 +61,7 @@ public class IMessageDaoTest extends BaseTest {
             message2.setBlockId(1);
             message2.setParentId(message.getId());
             message2.setContent("D对B的评论进行了评论");
-            message2.setUserType(Constant.USER_TYPE_GUEST);
+            message2.setUserType(CommonConstant.USER_TYPE_GUEST);
             message2.setAuthorId(guestDId);
             Integer result2 = iMessageDao.insert(message2);
             printResultStr(methodName, null, result2);
@@ -71,7 +71,7 @@ public class IMessageDaoTest extends BaseTest {
             message3.setArticleId(article.getId());
             message3.setBlockId(2);
             message3.setContent("E对A的文章进行了评论");
-            message3.setUserType(Constant.USER_TYPE_GUEST);
+            message3.setUserType(CommonConstant.USER_TYPE_GUEST);
             message3.setAuthorId(guestEId);
             Integer result3 = iMessageDao.insert(message3);
             printResultStr(methodName, null, result3);
@@ -81,7 +81,7 @@ public class IMessageDaoTest extends BaseTest {
             message4.setArticleId(article.getId());
             message4.setBlockId(3);
             message4.setContent("F对A的文章进行了评论");
-            message4.setUserType(Constant.USER_TYPE_GUEST);
+            message4.setUserType(CommonConstant.USER_TYPE_GUEST);
             message4.setAuthorId(guestFId);
             Integer result4 = iMessageDao.insert(message4);
             printResultStr(methodName, null, result4);
@@ -91,7 +91,7 @@ public class IMessageDaoTest extends BaseTest {
             message5.setBlockId(1);
             message5.setParentId(message1.getId());
             message5.setContent("B对C的评论进行了评论");
-            message5.setUserType(Constant.USER_TYPE_GUEST);
+            message5.setUserType(CommonConstant.USER_TYPE_GUEST);
             message5.setAuthorId(guestBId);
             Integer result5 = iMessageDao.insert(message5);
             printResultStr(methodName, null, result5);
@@ -101,7 +101,7 @@ public class IMessageDaoTest extends BaseTest {
             message6.setBlockId(1);
             message6.setParentId(message2.getId());
             message6.setContent("A对D的评论进行了评论");
-            message6.setUserType(Constant.USER_TYPE_AUTHOR);
+            message6.setUserType(CommonConstant.USER_TYPE_AUTHOR);
             message6.setAuthorId(authorAId);
             Integer result6 = iMessageDao.insert(message6);
             printResultStr(methodName, null, result6);
@@ -114,8 +114,8 @@ public class IMessageDaoTest extends BaseTest {
         int articleId = 1;
         Article article = iArticleDao.selectById(articleId,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
-        if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
-            List<Message> result = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, null, Constant.REVERSE_ORDER);
+        if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
+            List<Message> result = iMessageDao.selectByArticleId(article.getId(), CommonConstant.MESSAGE_NULL_PARENT_ID, null, CommonConstant.REVERSE_ORDER);
             printResultStr(methodName, null, result);
 
             TreeInfoResult treeInfo = TreeInfoUtil.convertToTreeInfoResult(result, null);
@@ -133,8 +133,8 @@ public class IMessageDaoTest extends BaseTest {
         List<Integer> ids = new ArrayList<>();
         Article article = iArticleDao.selectById(deleteMessageArticleId,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
-        if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
-            List<Message> listMsg = iMessageDao.selectByArticleId(article.getId(), Constant.MESSAGE_NULL_PARENT_ID, deleteMessageBlockId, Constant.CORRECT_ORDER);
+        if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
+            List<Message> listMsg = iMessageDao.selectByArticleId(article.getId(), CommonConstant.MESSAGE_NULL_PARENT_ID, deleteMessageBlockId, CommonConstant.CORRECT_ORDER);
             if (listMsg != null && listMsg.size() > 0) {
                 TreeInfoResult treeInfo = TreeInfoUtil.convertToTreeInfoResult(listMsg, listMsg.get(0));
                 if (treeInfo.getData().getId() == deleteMessageId) {
@@ -165,7 +165,7 @@ public class IMessageDaoTest extends BaseTest {
         int articleId = 1;
         Article article = iArticleDao.selectById(articleId,1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
-        if (article != null && article.getStatus() == Constant.ACTICLE_STATUS_BLOG) {
+        if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             Integer result = iMessageDao.selectCountByArticleId(articleId);
             printResultStr(methodName, null, result);
         }
