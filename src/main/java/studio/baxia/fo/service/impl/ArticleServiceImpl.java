@@ -255,7 +255,7 @@ public class ArticleServiceImpl implements IArticleService {
      * @return
      */
     @Override
-    public PageInfoResult<Article> articleGetAllBy(int articleAuthorId, int articleStatus, PageConfig pageConfig) {
+    public PageInfoResult<Article> articleGetAllBy(int articleAuthorId, Integer articleStatus, PageConfig pageConfig) {
         Article article = new Article();
         article.setAuthorId(articleAuthorId);
         article.setStatus(articleStatus);

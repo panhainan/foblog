@@ -3,6 +3,7 @@
  */
 
 app.controller("IndexController", function (IndexService, $scope,$uibModal) {
+	console.log("IndexController")
 	$scope.test = function(){
 		console.log("test");
 	}

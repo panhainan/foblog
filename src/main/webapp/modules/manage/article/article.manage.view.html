@@ -1,0 +1,86 @@
+<div class="customManageContainer">
+	<div class="panel panel-default">
+		<!--style="margin-bottom: 5px;"-->
+		<div class="panel-heading" style="padding-bottom:0">
+			<!--style="margin: 10px;margin-bottom: 0;height: 45px"-->
+			<h3 class="panel-title font_kaiti_20">
+				<!--style="line-height: 40px;"-->
+				文章管理<span style="font-size: 12px">(共{{totalItems}}条记录)</span>
+				<button type="button" ng-click="openForm('md')"
+					class="btn btn-sm btn-primary" style="float: right">新 建</button>
+			</h3>
+		</div>
+		<div class="panel-body " style="min-height: 440px">
+			<div class="table-responsive tableTrBottomBorder">
+				<table class="table  table-hover">
+					<thead>
+						<tr class="border_bottom">
+							<td>#</td>
+							<td>标题</td>
+							<td class="visible-lg">类别</td>
+							<td class="visible-lg">标签</td>
+							<td>状态</td>
+							<td class="visible-lg">撰写时间</td>
+							<!-- <td>发布时间</td> -->
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="article in articles">
+							<td>{{totalItems-$index}}</td>
+							<td><a ng-if="article.status==1"
+								href="#/manage/article/{{article.title}}" title="点击查看">{{article.title}}</a>
+								<span ng-if="article.status==0">{{article.title}}</span>
+							</td>
+							<td class="visible-lg">{{article.categoryName}}</td>
+							<td class="visible-lg">{{article.tagName}}</td>
+							<td>{{article.statusName}}</td>
+							<td class="visible-lg">{{article.writeTime | date :'yyyy-MM-dd HH:ss'}}</td>
+							<!-- <td>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</td> -->
+							<td>
+								<ul class="list-unstyled">
+									<li style="float:left"><a
+										href="#/manage/article/edit/{{article.id}}">编辑</a> | </li>
+									<li style="float:left"><a data-toggle="modal"
+										ng-click="setDeleteId(article)" data-target="#myModal">删除</a></li>
+									<!--ng-click="delete(tbean.id,$index)"-->
+								</ul>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel-footer text-right">
+			<!--style="padding: 0;"-->
+			<!--style="margin: 5px 0 0 0;"-->
+			<ul uib-pagination total-items="totalItems" max-size="5"
+				boundary-link-numbers="true" items-per-page="pageSize"
+				ng-model="currentPage" ng-change="pageChanged()"
+				class="pagination_border_radius_0"></ul>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">警告</h4>
+					</div>
+					<div class="modal-body">确认删除编号为#{{deleteId}}的记录吗？</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" ng-click="delete(deleteId)"
+							data-dismiss="modal" class="btn btn-primary">确认</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</div>

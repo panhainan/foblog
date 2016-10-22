@@ -18,9 +18,14 @@
 }
 
 .content_header {
-	
+	padding-top:10px;
+	height: 60px;
 }
 
 .content_body {
 	font-size: 15px;
+}
+.content_footer {
+	margin-top:20px;
+	height: 40px;
 }

@@ -1,0 +1,105 @@
+<!--container-fluid-->
+<div class="customManageContainer" style="padding-top:20px">
+	<form class="form-horizontal" action="javascript:void(0)" novalidate
+		ng-submit="form.$valid && addOrUpdate()">
+		<div class="content">
+			<div class="content_header">
+				<div class="form-group">
+					<div class="col-sm-12" style="">
+						<input type="text" class="form-control"
+							style="height: 40px;font-size: 16px;" placeholder="请输入文章标题"
+							name="title" ng-model="article.title" required />
+					</div>
+				</div>
+			</div>
+			<div class="content_body">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<textarea name="content" ng-model="article.content" required
+							data-provide="markdown" id="markdown_textarea" rows="10"
+							placeholder="这里输入内容,支持Markdown语法."></textarea>
+						<p style="text-align:right;color: #8D8D8D;font-size:12px">已输入500字符</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2"
+						style="text-align: center;padding-right: 0">类型</label>
+					<div class="col-sm-7">
+						<select class="form-control" required>
+							<option>原创</option>
+							<option>翻译</option>
+							<option>转载</option>
+							<option>总结</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2"
+						style="text-align: center;padding-right: 0">类别</label>
+					<div class="col-sm-7">
+						<select class="form-control" required>
+							<option>计算机</option>
+							<option>医学</option>
+							<option>生活</option>
+							<option>处世</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2"
+						style="text-align: center;padding-right: 0">标签</label>
+					<div class="col-sm-8">
+						<textarea class="form-control" name="" rows="2"
+							style="resize:none" required
+							placeholder="多个标签之间用英文分号“;”隔开；点击选择可以选择已经存在的标签"></textarea>
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-default">选择</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2"
+						style="text-align: center;padding-right: 0">摘要</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" required ng-model="article.summary" name=""
+							rows="6" style="resize:none" placeholder="请简述文章的摘要（限300字符以内）"></textarea>
+						<p style="text-align:right;color: #8D8D8D;font-size:12px">已输入100字符</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2"
+						style="text-align: center;padding-right: 0">更多</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name=""
+							placeholder="请输入同类文章的url，输入后点击添加按钮">
+
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-default">添加</button>
+					</div>
+				</div>
+			</div>
+			<div class="content_footer">
+				<button type="submit" ng-disabled="form.$valid" class="btn btn-primary pull-right col-sm-4">发
+					布 文 章</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<script>
+	$(function() {
+		$("#markdown_textarea").markdown({
+			language : 'zh',
+			fullscreen : {
+				enable : true
+			},
+			height : 500,
+			resize : 'none',
+			localStorage : 'md',
+			imgurl : '/c/imgUpload',
+			base64url : '/c/imgUpload'
+		});
+	});
+</script>

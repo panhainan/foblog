@@ -15,13 +15,35 @@ body {
 
 .customContainer {
 	/* 	border: 1px solid #E6E6E6;*/
-	padding: 0 20px 60px 20px;
+	padding: 0 20px 55px 20px;
 	margin: 0;
-	/* margin-right: 160px; */
+	margin-left: 260px;
+	margin-right:160px;
 	/* min-height:650px; */
 	height: 100%;
 	background-color: #F1F1F1;
 }
+.customManageContainer{
+	padding: 20px 20px 55px 20px;
+	margin: 0;
+	margin-left: 260px;
+	margin-right:160px;
+	height: 100%;
+	background-color: #F1F1F1;
+}
+.pagination_border_radius_0{
+	border-radius:0;
+}
+.font_kaiti_20{
+	font: 20px/1.2 "楷体", "Arial", sans-serif;
+}
+.font_kaiti_18{
+	font: 18px/1.2 "楷体", "Arial", sans-serif;
+}
+.font_kaiti_16{
+	font: 16px/1.0 "楷体", "Arial",sans-serif;
+}
+
 
 .row {
 	padding: 0;
@@ -179,6 +201,10 @@ a {
 }
 
 @media ( max-width : 768px) {
+	.customContainer,.customManageContainer{
+		margin-left: 0px;
+		margin-right:0px;
+	}
 	.navbar-vertical-left {
 		position: fixed;
 		bottom: 0;

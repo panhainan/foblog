@@ -123,7 +123,7 @@ public interface IArticleService {
      * @param pageConfig 分页信息
      * @return
      */
-    PageInfoResult<Article> articleGetAllBy(int articleAuthorId,int articleStatus,PageConfig pageConfig);
+    PageInfoResult<Article> articleGetAllBy(int articleAuthorId,Integer articleStatus,PageConfig pageConfig);
 
     /**
      * 添加评论
