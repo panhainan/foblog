@@ -1,0 +1,19 @@
+<!--container-fluid-->
+<div class="customManageContainer" style="padding-top:20px">
+	<div class="content">
+		<div class="content_header" style="border-bottom: 4px solid silver ;">
+			<h2>{{article.title}}</h2>
+		</div>
+		<div class="content_body">
+			<div class="col-sm-12"
+				style="border-bottom: 1px solid silver;margin-bottom: 10px;">
+				<p>摘要：</p>
+				<p style="text-indent: 30px">{{article.summary}}</p>
+			</div>
+			<div ng-bind-html="article.content | trusted"></div>
+
+		</div>
+	</div>
+</div>
+
+

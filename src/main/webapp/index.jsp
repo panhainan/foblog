@@ -35,7 +35,7 @@
 
 @import "<%=basePath%>plugins/thinker-md/stylesheets/vendor/sunburst.css";
 </style>
-<link rel="stylesheet" href="<%=basePath%>plugins/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 
 <link rel="stylesheet" href="<%=basePath%>css/base.css" />
 <link rel="stylesheet" href="<%=basePath%>css/index.view.css" />
@@ -66,6 +66,7 @@
 <script src="modules/manage/article/article.manage.service.js"></script>
 <script src="modules/manage/article/article.manage.controller.js"></script>
 <script src="modules/manage/article/article.form.manage.controller.js"></script>
+<script src="modules/manage/article/article.detail.manage.controller.js"></script>
 
 
 

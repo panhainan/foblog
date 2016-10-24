@@ -2,6 +2,7 @@ package studio.baxia.fo.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 import studio.baxia.fo.pojo.Tag;
 
 import java.util.List;
@@ -39,4 +40,11 @@ public interface ITagDao {
      * @return Tag
      */
     Tag selectById(@Param("id")Integer tagId,@Param("authorId")Integer tagAuthorId);
+    /**
+     * 通过name查找标签
+     * @param tagName 标签名
+     * @param tagAuthorId 标签作者id
+     * @return Tag
+     */
+	Tag selectByName(@Param("name")String tagName, @Param("authorId")Integer tagAuthorId);
 }

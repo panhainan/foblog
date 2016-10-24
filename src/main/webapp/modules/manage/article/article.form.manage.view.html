@@ -1,11 +1,10 @@
 <!--container-fluid-->
 <div class="customManageContainer" style="padding-top:20px">
-	<form class="form-horizontal" action="javascript:void(0)" novalidate
-		ng-submit="form.$valid && addOrUpdate()">
+	<form class="form-horizontal" action="javascript:void(0)" novalidate>
 		<div class="content">
-			<div class="content_header">
+			<div class="content_header" style="height: 60px;">
 				<div class="form-group">
-					<div class="col-sm-12" style="">
+					<div class="col-sm-12">
 						<input type="text" class="form-control"
 							style="height: 40px;font-size: 16px;" placeholder="请输入文章标题"
 							name="title" ng-model="article.title" required />
@@ -21,52 +20,84 @@
 						<p style="text-align:right;color: #8D8D8D;font-size:12px">已输入500字符</p>
 					</div>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="control-label col-sm-2"
 						style="text-align: center;padding-right: 0">类型</label>
 					<div class="col-sm-7">
-						<select class="form-control" required>
+						<select class="form-control">
 							<option>原创</option>
 							<option>翻译</option>
 							<option>转载</option>
 							<option>总结</option>
 						</select>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label class="control-label col-sm-2"
 						style="text-align: center;padding-right: 0">类别</label>
 					<div class="col-sm-7">
-						<select class="form-control" required>
-							<option>计算机</option>
-							<option>医学</option>
-							<option>生活</option>
-							<option>处世</option>
+						<select class="form-control" ng-model="article.categoryIds"
+							ng-options="cate.id as cate.name for cate in categorys" required>
+							<option value="">请选择类别</option>
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="margin-bottom:0">
 					<label class="control-label col-sm-2"
 						style="text-align: center;padding-right: 0">标签</label>
-					<div class="col-sm-8">
-						<textarea class="form-control" name="" rows="2"
-							style="resize:none" required
-							placeholder="多个标签之间用英文分号“;”隔开；点击选择可以选择已经存在的标签"></textarea>
+					<div class="col-sm-10">
+						<span ng-repeat="tName in selectedTagNames"><span
+							style="background-color: #EEEEEE;font-size:14px;padding:5px;padding-bottom:2px;margin: 2px;"><span
+								style="margin-right:5px;">{{tName}}</span><a title="删除标签"
+								href="javascript:void(0)" ng-click="deleteTagName(tName)"><span
+									class="glyphicon glyphicon-remove"></span></a></span></span>
+
 					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-default">选择</button>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-10">
+						<div class="col-sm-8" style="padding:0">
+							<input type="text" class="form-control" ng-model="tagName"
+								maxlength="7" placeholder="请输入标签，限6个字符，加;号结束"> <input
+								type="text" class="form-control" ng-model="article.tagNames"
+								style="display: none">
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-default" ng-click="selectExists()">选择</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" ng-if="isSelectExists">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-10">
+						<div class="row" style="border:1px solid #EBEBEB;padding:10px">
+							<div class="col-sm-10 tagsCheckbox">
+								<p style="margin-bottom:0;font-size:12px;">选择以下已经存在的标签，勾选后点击确认按钮</p>
+								<label class="checkbox-inline" ng-if="!tag.isCheck"
+									ng-repeat="tag in tags"> <input type="checkbox"
+									ng-click="changeChecked(tag)" title="{{tag.name}}"
+									value="{{tag.id}}">{{tag.name}}
+								</label>
+							</div>
+							<div class="col-sm-2">
+								<button class="btn btn-xs btn-primary pull-right"
+									ng-click="confirmSelectExists()">确定</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2"
 						style="text-align: center;padding-right: 0">摘要</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" required ng-model="article.summary" name=""
-							rows="6" style="resize:none" placeholder="请简述文章的摘要（限300字符以内）"></textarea>
+						<textarea class="form-control" required ng-model="article.summary"
+							name="" rows="6" style="resize:none"
+							placeholder="请简述文章的摘要（限300字符以内）"></textarea>
 						<p style="text-align:right;color: #8D8D8D;font-size:12px">已输入100字符</p>
 					</div>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="control-label col-sm-2"
 						style="text-align: center;padding-right: 0">更多</label>
 					<div class="col-sm-8">
@@ -77,29 +108,31 @@
 					<div class="col-sm-2">
 						<button class="btn btn-default">添加</button>
 					</div>
-				</div>
+				</div> -->
 			</div>
-			<div class="content_footer">
-				<button type="submit" ng-disabled="form.$valid" class="btn btn-primary pull-right col-sm-4">发
-					布 文 章</button>
+			<div class="content_footer ">
+				<input type="text" class="form-control" ng-model="article.status"
+					style="display: none">
+				<button onclick="javascript:history.back()"
+					class="btn btn-default pull-right col-sm-2">取 消</button>
+				<button type="button" ng-click="saveOrUpdate(0)"
+					class="btn btn-default pull-right col-sm-3">存 为 草 稿</button>
+				<button type="button" ng-click="saveOrUpdate(1)"
+					class="btn btn-primary pull-right col-sm-3">发 布 博 文</button>
 			</div>
 		</div>
 	</form>
 </div>
-
-
 <script>
-	$(function() {
-		$("#markdown_textarea").markdown({
-			language : 'zh',
-			fullscreen : {
-				enable : true
-			},
-			height : 500,
-			resize : 'none',
-			localStorage : 'md',
-			imgurl : '/c/imgUpload',
-			base64url : '/c/imgUpload'
-		});
+	$("#markdown_textarea").markdown({
+		language : 'zh',
+		fullscreen : {
+			enable : true
+		},
+		height : 480,
+		resize : 'none',
+		localStorage : 'md',
+		imgurl : '/c/imgUpload',
+		base64url : '/c/imgUpload'
 	});
 </script>

@@ -40,16 +40,16 @@
     <update id="update">
         UPDATE t_article
         SET
-        <if test="title!=null">title=#{title,jdbcType=VARCHAR},</if>
-        <if test="summary!=null">summary=#{summary,jdbcType=VARCHAR},</if>
-        <if test="content!=null">content=#{content,jdbcType=VARCHAR},</if>
-        <if test="categoryIds!=null">category_ids=#{categoryIds,jdbcType=VARCHAR},</if>
-        <if test="tagIds!=null">tag_ids=#{tagIds,jdbcType=VARCHAR},</if>
-        <if test="status!=null">status=#{status,jdbcType=INTEGER},</if>
-        <if test="writeTime!=null">write_time=#{writeTime,jdbcType=TIMESTAMP},</if>
-        <if test="pubTime!=null">pub_time=#{pubTime,jdbcType=TIMESTAMP}</if>
+	        title=#{title,jdbcType=VARCHAR},
+	        summary=#{summary,jdbcType=VARCHAR},
+	        content=#{content,jdbcType=VARCHAR},
+	        category_ids=#{categoryIds,jdbcType=VARCHAR},
+	        tag_ids=#{tagIds,jdbcType=VARCHAR},
+	        status=#{status,jdbcType=INTEGER},
+	        write_time=#{writeTime,jdbcType=TIMESTAMP},
+	        pub_time=#{pubTime,jdbcType=TIMESTAMP}
         WHERE id = #{id,jdbcType=INTEGER}
-        AND author_id = #{authorId,jdbcType=INTEGER}
+        	AND author_id = #{authorId,jdbcType=INTEGER}
     </update>
 
     <select id="selectById" resultMap="ArticleMap">

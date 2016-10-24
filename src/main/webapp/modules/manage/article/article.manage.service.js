@@ -6,15 +6,20 @@ app.service("ArticleManageService", function(RequestService) {
         	"articleStatus":articleStatus
         	}), cfg_form);
     };
-    this.look = function (id) {
+    this.get = function (id) {
         return RequestService.getRequest('/manage/article/' + id, cfg_form);
     };
-    this.save = function (tbean) {
-        if (tbean.id) {
-            return RequestService.putRequest('/testbean/', tbean, cfg_json);
-        } else {
-            return RequestService.postRequest('/testbean/', tbean, cfg_json);
-        }
+    this.put = function(article){
+    	return RequestService.putRequest('/manage/article/save' ,article, cfg_json);
+    }
+    this.post = function(article){
+    	return RequestService.postRequest('/manage/article/save' ,article, cfg_json);
+    }
+    this.getCategorys = function () {
+    	return RequestService.getRequest('/manage/article/category', cfg_form);
+    };
+    this.getTags = function () {
+    	return RequestService.getRequest('/manage/article/tag', cfg_form);
     };
     /*
 	 * this.delete = function (id) { return

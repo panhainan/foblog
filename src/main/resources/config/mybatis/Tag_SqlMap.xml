@@ -30,6 +30,11 @@
         WHERE author_id = #{authorId,jdbcType=INTEGER}
         ORDER BY id
     </select>
-
+	<select id="selectByName" resultMap="TagMap">
+        SELECT * FROM t_tag
+        WHERE 
+        name = #{name,jdbcType=VARCHAR}
+        and author_id = #{authorId,jdbcType=INTEGER}
+    </select>
 
 </mapper>

@@ -28,9 +28,8 @@
 					<tbody>
 						<tr ng-repeat="article in articles">
 							<td>{{totalItems-$index}}</td>
-							<td><a ng-if="article.status==1"
-								href="#/manage/article/{{article.title}}" title="点击查看">{{article.title}}</a>
-								<span ng-if="article.status==0">{{article.title}}</span>
+							<td><a 
+								href="#/manage/article/preview/{{article.id}}" title="点击查看">{{article.title}}</a>
 							</td>
 							<td class="visible-lg">{{article.categoryName}}</td>
 							<td class="visible-lg">{{article.tagName}}</td>

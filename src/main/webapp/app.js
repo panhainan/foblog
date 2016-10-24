@@ -21,6 +21,9 @@ app.config(function ($routeProvider) {
     }).when("/manage/article/edit/:articleId",{
     	templateUrl:"modules/manage/article/article.form.manage.view.html",
     	controller: 'ArticleFormManageController'
+    }).when("/manage/article/preview/:articleId",{
+    	templateUrl:"modules/manage/article/article.detail.manage.view.html",
+    	controller: 'ArticleDetailManageController'
     });
 
     $routeProvider.otherwise({
@@ -31,5 +34,12 @@ app.run(function ($rootScope, $location, $window) {
     //$rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
     //});
 });
+app.filter("trusted", ["$sce", function ($sce) {
+    return function (html) {
+        if (typeof html== 'string')   //判断类型为字符串
+            return $sce.trustAsHtml(html);  
+        return html;
+    }
+}]);
 
 

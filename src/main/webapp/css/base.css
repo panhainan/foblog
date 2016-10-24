@@ -28,6 +28,7 @@ body {
 	margin: 0;
 	margin-left: 260px;
 	margin-right:160px;
+	min-height:600px;
 	height: 100%;
 	background-color: #F1F1F1;
 }

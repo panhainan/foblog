@@ -1,6 +1,6 @@
 package studio.baxia.fo.controller;
 
-import com.sun.tools.internal.jxc.apt.Const;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.CommonConstant;
+import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Authors;
+import studio.baxia.fo.pojo.Category;
+import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.service.IUserService;
+import studio.baxia.fo.vo.ArticleVo;
 
 /**
  * Created by FirePan on 2016/10/18.
  */
-@RequestMapping(value = "/manage/article",method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+@RequestMapping(value = "/manage/article")
 @Controller("articleManageController")
 public class ArticleManageController {
 
@@ -48,5 +51,29 @@ public class ArticleManageController {
     public CommonResult get(@PathVariable("id")Integer articleId){
         Article article = iArticleService.articleGetById(articleId,1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/category",method = RequestMethod.GET)
+    public CommonResult listCategorys(){
+    	List<Category> listCategorys = iArticleService.categoryGetAllBy(1);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag",method = RequestMethod.GET)
+    public CommonResult listTags(){
+    	List<Tag> listCategorys = iArticleService.tagGetAllBy(1);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/save",method = RequestMethod.PUT)
+    public CommonResult update(@RequestBody ArticleVo article){
+    	Integer flagId = iArticleService.articleEdit(article);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",flagId);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public CommonResult add(ArticleVo article){
+    	Integer flagId = iArticleService.articleAdd(article);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",flagId);
     }
 }

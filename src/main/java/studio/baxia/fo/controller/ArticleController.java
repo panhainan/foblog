@@ -1,18 +1,19 @@
 package studio.baxia.fo.controller;
 
-import com.sun.tools.internal.jxc.apt.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import studio.baxia.fo.common.CommonResult;
+
 import studio.baxia.fo.common.CommonConstant;
+import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Authors;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.service.IUserService;
+import studio.baxia.fo.vo.ArticleVo;
 
 /**
  * Created by FirePan on 2016/10/18.

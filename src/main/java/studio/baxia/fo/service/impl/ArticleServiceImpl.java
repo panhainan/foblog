@@ -2,6 +2,7 @@ package studio.baxia.fo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import studio.baxia.fo.common.*;
 import studio.baxia.fo.dao.IArticleDao;
 import studio.baxia.fo.dao.ICategoryDao;
@@ -12,6 +13,7 @@ import studio.baxia.fo.pojo.Category;
 import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IArticleService;
+import studio.baxia.fo.vo.ArticleVo;
 
 import java.util.Date;
 import java.util.List;
@@ -173,13 +175,18 @@ public class ArticleServiceImpl implements IArticleService {
      * @return
      */
     @Override
-    public Boolean articleAdd(Article article) {
+    public Integer articleAdd(ArticleVo article) {
         if(article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG){
             article.setPubTime(new Date());
         }
         article.setWriteTime(new Date());
         Integer result = iArticleDao.insert(article);
-        return returnResult(result);
+        if(returnResult(result)){
+        	return article.getId();
+        }else{
+        	return 0;
+        }
+        
     }
 
     /**
@@ -189,12 +196,33 @@ public class ArticleServiceImpl implements IArticleService {
      * @return
      */
     @Override
-    public Boolean articleEdit(Article article) {
+    public Integer articleEdit(ArticleVo article) {
         if(article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG){
             article.setPubTime(new Date());
         }
+        String[] tagNames = article.getTagNames();
+        StringBuilder strBuilderTagIds= new StringBuilder();
+        if(tagNames!=null){
+             for (int i = 0; i < tagNames.length; i++) {
+     			Tag t = iTagDao.selectByName(tagNames[i],1);
+     			if(t!=null){
+     				strBuilderTagIds.append(t.getId()+",");
+     			}else{
+     				Tag newTag = new Tag(tagNames[i],1);
+     				Integer r = iTagDao.insert(newTag);
+     				if(r>0){
+     					strBuilderTagIds.append(newTag.getId()+",");
+     				}
+     			}
+     		}
+        }
+        article.setTagIds(strBuilderTagIds.toString());
         Integer result = iArticleDao.update(article);
-        return returnResult(result);
+        if(returnResult(result)){
+        	return article.getId();
+        }else{
+        	return 0;
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Category;
 import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
+import studio.baxia.fo.vo.ArticleVo;
 
 import java.util.List;
 
@@ -85,14 +86,14 @@ public interface IArticleService {
      * @param article 文章信息（title,summary,content,categoryIds,tagIds,authorId,status）
      * @return
      */
-    Boolean articleAdd(Article article);
+    Integer articleAdd(ArticleVo article);
 
     /**
      * 编辑文章
      * @param article 文章信息（id,authorId,[title,summary,content,categoryIds,tagIds,status,writeTime,pubTime](可为空，为空表示该字段不修改)）
      * @return
      */
-    Boolean articleEdit(Article article);
+    Integer articleEdit(ArticleVo article);
 
     /**
      * 通过文章id删除文章
