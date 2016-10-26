@@ -11,8 +11,8 @@ public class Article {
     private String title;//标题
     private String summary;//概要
     private String content;//内容
-    private String categoryIds;//类别id,多个,用/分开
-    private String tagIds;//标签id,多个,用/分开
+    private Integer categoryIds;//类别id
+    private String tagIds;//标签id,多个,用,分开
     private Integer authorId;//作者id
     private Integer status;//文章状态：0-草稿，1-博文
     private Date writeTime;//撰写时间
@@ -66,15 +66,17 @@ public class Article {
         this.content = content;
     }
 
-    public String getCategoryIds() {
-        return categoryIds;
-    }
 
-    public void setCategoryIds(String categoryIds) {
-        this.categoryIds = categoryIds;
-    }
 
-    public String getTagIds() {
+    public Integer getCategoryIds() {
+		return categoryIds;
+	}
+
+	public void setCategoryIds(Integer categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+
+	public String getTagIds() {
         return tagIds;
     }
 

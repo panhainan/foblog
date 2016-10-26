@@ -6,6 +6,9 @@ package studio.baxia.fo.common;
 public class CommonConstant {
     public static final int ACTICLE_STATUS_DRAFT = 0;
     public static final int ACTICLE_STATUS_BLOG = 1;
+    
+    public static final String ACTICLE_STATUS_DRAFT_NAME = "草稿";
+    public static final String ACTICLE_STATUS_BLOG_NAME = "博客";
 
     public static final int USER_TYPE_GUEST = 0;
     public static final int USER_TYPE_AUTHOR = 1;

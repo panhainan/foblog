@@ -29,7 +29,7 @@ public class IArticleDaoTest extends BaseTest {
         article.setSummary("本人博客开篇，网站初建，欢迎大家关注，多交流。" + Math.random());
         article.setContent("hello，大家好，欢迎来到我的博客网站，希望大家多沟通交流。谢谢大家。" + Math.random());
         article.setAuthorId(1);
-        article.setCategoryIds("1/5/6/");
+        article.setCategoryIds(1);
         article.setTagIds("1/");
         article.setStatus(CommonConstant.ACTICLE_STATUS_DRAFT);
         article.setWriteTime(new Date());
@@ -55,7 +55,7 @@ public class IArticleDaoTest extends BaseTest {
             article.setSummary("修改：本人博客开篇，网站初建，欢迎大家关注，多交流。");
             article.setContent("修改：hello，大家好，欢迎来到我的博客网站，希望大家多沟通交流。谢谢大家。" + Math.random());
             article.setAuthorId(1);
-            article.setCategoryIds("1/5/6/8/");
+            article.setCategoryIds(5);
             article.setTagIds("1/6/7/");
             article.setStatus(CommonConstant.ACTICLE_STATUS_BLOG);
             article.setPubTime(new Date());
@@ -78,7 +78,7 @@ public class IArticleDaoTest extends BaseTest {
         Article article = new Article();
         article.setTitle("博客初建");
         article.setAuthorId(1);
-        article.setCategoryIds("5/");
+        article.setCategoryIds(1);
         article.setTagIds("1/");
         Integer result = iArticleDao.selectCountBy(article);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
@@ -90,7 +90,7 @@ public class IArticleDaoTest extends BaseTest {
         Article article = new Article();
         article.setTitle("博客初建");
         article.setAuthorId(1);
-        article.setCategoryIds("5/");
+        article.setCategoryIds(1);
         article.setTagIds("1/");
         article.setStatus(CommonConstant.ACTICLE_STATUS_BLOG);
         PageConfig pageConfig = new PageConfig(1, 2);

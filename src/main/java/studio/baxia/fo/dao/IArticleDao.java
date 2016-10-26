@@ -2,8 +2,10 @@ package studio.baxia.fo.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.pojo.Article;
+import studio.baxia.fo.vo.ArticleVo;
 
 import java.util.List;
 
@@ -41,8 +43,8 @@ public interface IArticleDao {
      * @param articleAuthorId 文章作者id
      * @return Article
      */
+    ArticleVo selectVoById(@Param("id") Integer articleId,@Param("authorId")Integer articleAuthorId);
     Article selectById(@Param("id") Integer articleId,@Param("authorId")Integer articleAuthorId);
-
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找
      * 注意：categoryId和tagId的值用"id/"表示，比如"1/"，因为规定数据库中存储的格式为id1/id2/id3/方式存储
@@ -51,6 +53,15 @@ public interface IArticleDao {
      * @return
      */
     List<Article> selectBy(@Param("article") Article article, @Param("pageConfig") PageConfig pageConfig);
+    
+    /**
+     * 通过标题、作者id、类别id、标签id进行模糊查找
+     * 注意：categoryId和tagId的值用"id/"表示，比如"1/"，因为规定数据库中存储的格式为id1/id2/id3/方式存储
+     * @param article 文章信息（此处可选包括：title、authorId、categoryIds、tagIds、status）
+     * @param pageConfig 分页信息（此处可选包括：pageIndex、pageSize）
+     * @return
+     */
+    List<ArticleVo> selectVoBy(@Param("article") Article article, @Param("pageConfig") PageConfig pageConfig);
 
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找取得所有记录数量。
@@ -66,5 +77,7 @@ public interface IArticleDao {
      * @param articleAuthorId
      * @return
      */
-    Article selectByTitle(@Param("title")String articleTitle, @Param("authorId")Integer articleAuthorId);
+    ArticleVo selectVoByTitle(@Param("title")String articleTitle, @Param("authorId")Integer articleAuthorId);
+
+	
 }

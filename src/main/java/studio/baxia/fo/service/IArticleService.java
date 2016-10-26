@@ -108,7 +108,7 @@ public interface IArticleService {
      * @param articleId 文章id
      * @return
      */
-    Article articleGetById(int articleId,int articleAuthorId);
+    ArticleVo articleVoGetById(int articleId,int articleAuthorId);
 
     /**
      * 通过标题取得文章
@@ -116,7 +116,7 @@ public interface IArticleService {
      * @param articleAuthorId 文章作者id
      * @return
      */
-    Article articleGetByTitle(String articleTitle, Integer articleAuthorId);
+    ArticleVo articleVoGetByTitle(String articleTitle, Integer articleAuthorId);
     /**
      * 通过作者id、文章状态、分页信息获取分页后的文章列表信息
      * @param articleAuthorId 作者id
@@ -155,6 +155,10 @@ public interface IArticleService {
      * @return
      */
     TreeInfoResult messageGetAllBy(int messageArticleId,int reverseOrder);
+
+	PageInfoResult<ArticleVo> articleGetAllManageBy(int articleAuthorId,
+			Integer articleStatus, PageConfig pageConfig);
+
 
 
 }

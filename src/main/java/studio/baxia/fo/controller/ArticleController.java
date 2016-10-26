@@ -34,7 +34,7 @@ public class ArticleController {
         if(authors==null){
             return new CommonResult(CommonConstant.FAIL_CODE,CommonConstant.USER_IS_NO_EXIST);
         }
-        Article article = iArticleService.articleGetById(articleId,authors.getId());
+        ArticleVo article = iArticleService.articleVoGetById(articleId,authors.getId());
         String msg = "hello, "+username+",operate success.";
         return new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
     }
@@ -45,7 +45,7 @@ public class ArticleController {
         if(authors==null){
             return new CommonResult(CommonConstant.FAIL_CODE,CommonConstant.USER_IS_NO_EXIST);
         }
-        Article article = iArticleService.articleGetByTitle(articleTitle, authors.getId());
+        ArticleVo article = iArticleService.articleVoGetByTitle(articleTitle, authors.getId());
         String msg = "hello, "+username+",operate success.";
         return new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
     }

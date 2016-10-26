@@ -42,14 +42,14 @@ public class ArticleManageController {
     @RequestMapping(value = "",method = RequestMethod.POST)
     public CommonResult list(PageConfig pageConfig,@RequestParam(required=false) Integer articleStatus){
     	logger.info("参数->pageConfig:"+pageConfig+",articleStatus:"+articleStatus);
-        PageInfoResult<Article> articlesWithPages = iArticleService.articleGetAllBy(1, articleStatus, pageConfig);
+        PageInfoResult<ArticleVo> articlesWithPages = iArticleService.articleGetAllManageBy(1, articleStatus, pageConfig);
         return new CommonResult(CommonConstant.SUCCESS_CODE,null,articlesWithPages);
     }
     
     @ResponseBody
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public CommonResult get(@PathVariable("id")Integer articleId){
-        Article article = iArticleService.articleGetById(articleId,1);
+        ArticleVo article = iArticleService.articleVoGetById(articleId,1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
