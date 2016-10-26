@@ -5,6 +5,7 @@ app.controller("ArticleDetailManageController", function($scope, $routeParams,
 		ArticleManageService.get(articleId).then(function(data) {
 			console.log(data);
 			$scope.article = data.resultData;
+			$scope.article.content=marked($scope.article.content)
 			$scope.selectTagIds = $scope.article.tagIds;
 		});
 		// $scope.getTypes();

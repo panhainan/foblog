@@ -61,7 +61,7 @@
 							<input type="text" class="form-control" ng-model="tagName"
 								maxlength="7" placeholder="请输入标签，限6个字符，加;号结束"> <input
 								type="text" class="form-control" ng-model="article.tagNames"
-								style="display: none">
+								style="display: none;">
 						</div>
 						<div class="col-sm-2">
 							<button class="btn btn-default" ng-click="selectExists()">选择</button>
@@ -71,8 +71,8 @@
 				<div class="form-group" ng-if="isSelectExists">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-10">
-						<div class="row" style="border:1px solid #EBEBEB;padding:10px">
-							<div class="col-sm-10 tagsCheckbox">
+						<div class="row" style="border:1px solid #EBEBEB;padding:10px;background-color: #EBEBEB">
+							<div class="col-sm-8 tagsCheckbox">
 								<p style="margin-bottom:0;font-size:12px;">选择以下已经存在的标签，勾选后点击确认按钮</p>
 								<label class="checkbox-inline" ng-if="!tag.isCheck"
 									ng-repeat="tag in tags"> <input type="checkbox"
@@ -80,9 +80,11 @@
 									value="{{tag.id}}">{{tag.name}}
 								</label>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-4">
 								<button class="btn btn-xs btn-primary pull-right"
-									ng-click="confirmSelectExists()">确定</button>
+									ng-click="confirmSelectExists(0)">确定</button>
+								<button class="btn btn-xs btn-default pull-right"
+									ng-click="confirmSelectExists(1)">取消</button>
 							</div>
 						</div>
 					</div>

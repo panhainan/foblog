@@ -18,6 +18,9 @@ app.config(function ($routeProvider) {
     }).when("/manage/article", {
         templateUrl: "modules/manage/article/article.manage.view.html",
         controller: 'ArticleManageController'
+    }).when("/manage/article/new",{
+    	templateUrl:"modules/manage/article/article.form.manage.view.html",
+    	controller: 'ArticleFormManageController'
     }).when("/manage/article/edit/:articleId",{
     	templateUrl:"modules/manage/article/article.form.manage.view.html",
     	controller: 'ArticleFormManageController'
@@ -30,10 +33,6 @@ app.config(function ($routeProvider) {
     	redirectTo: '/'
     });
 });
-app.run(function ($rootScope, $location, $window) {
-    //$rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
-    //});
-});
 app.filter("trusted", ["$sce", function ($sce) {
     return function (html) {
         if (typeof html== 'string')   //判断类型为字符串
@@ -41,5 +40,10 @@ app.filter("trusted", ["$sce", function ($sce) {
         return html;
     }
 }]);
+app.run(function ($rootScope, $location, $window) {
+    //$rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
+    //});
+});
+
 
 

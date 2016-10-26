@@ -179,6 +179,23 @@ public class ArticleServiceImpl implements IArticleService {
         if(article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG){
             article.setPubTime(new Date());
         }
+        String[] tagNames = article.getTagNames();
+        StringBuilder strBuilderTagIds= new StringBuilder();
+        if(tagNames!=null){
+             for (int i = 0; i < tagNames.length; i++) {
+     			Tag t = iTagDao.selectByName(tagNames[i],1);
+     			if(t!=null){
+     				strBuilderTagIds.append(t.getId()+",");
+     			}else{
+     				Tag newTag = new Tag(tagNames[i],1);
+     				Integer r = iTagDao.insert(newTag);
+     				if(r>0){
+     					strBuilderTagIds.append(newTag.getId()+",");
+     				}
+     			}
+     		}
+        }
+        article.setTagIds(strBuilderTagIds.toString());
         article.setWriteTime(new Date());
         Integer result = iArticleDao.insert(article);
         if(returnResult(result)){

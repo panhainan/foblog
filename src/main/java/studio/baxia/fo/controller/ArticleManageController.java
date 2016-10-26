@@ -72,7 +72,7 @@ public class ArticleManageController {
     }
     @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public CommonResult add(ArticleVo article){
+    public CommonResult add(@RequestBody ArticleVo article){
     	Integer flagId = iArticleService.articleAdd(article);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",flagId);
     }
