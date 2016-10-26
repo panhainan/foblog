@@ -7,6 +7,7 @@ public class ArticleVo extends Article {
 	private String categoryName;
 	private String statusName;
 	private String[] tagNames;
+	private Boolean onlyChangeStatus=false;
 	
 	public String getCategoryName() {
 		return categoryName;
@@ -34,6 +35,14 @@ public class ArticleVo extends Article {
 
 	public void setTagNames(String[] tagNames) {
 		this.tagNames = tagNames;
+	}
+
+	public Boolean getOnlyChangeStatus() {
+		return onlyChangeStatus;
+	}
+
+	public void setOnlyChangeStatus(Boolean onlyChangeStatus) {
+		this.onlyChangeStatus = onlyChangeStatus;
 	}
 	
 }

@@ -36,6 +36,8 @@ public interface IArticleDao {
      * @return 受影响的行数
      */
     Integer update(Article article);
+    
+    Integer updateStatus(Article article);
 
     /**
      * 通过id查找

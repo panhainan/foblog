@@ -253,11 +253,17 @@ public class ArticleServiceImpl implements IArticleService {
 	 */
 	@Override
 	public Integer articleEdit(ArticleVo article) {
-		if (article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
-			article.setPubTime(new Date());
+		Integer result = 0;
+		if(article.getOnlyChangeStatus()!=null &&article.getOnlyChangeStatus()==true){
+			article.setAuthorId(1);
+			result = iArticleDao.updateStatus(article);
+		}else{
+			if (article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
+				article.setPubTime(new Date());
+			}
+			article.setTagIds(tagGetIdsBy(article.getTagNames()));
+			result = iArticleDao.update(article);
 		}
-		article.setTagIds(tagGetIdsBy(article.getTagNames()));
-		Integer result = iArticleDao.update(article);
 		if (returnResult(result)) {
 			return article.getId();
 		} else {

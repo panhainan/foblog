@@ -41,8 +41,8 @@
 									<ul class="list-unstyled">
 										<li style="float:left"><a
 											href="#/manage/article/edit/{{article.id}}">编辑</a> |</li>
-										<li style="float:left"><a data-toggle="modal"
-											ng-click="setDeleteId(article)" data-target="#myModal">删除</a></li>
+										<li style="float:left"><a
+											ng-click="setDeleteArticle(article)">删除</a></li>
 										<!--ng-click="delete(tbean.id,$index)"-->
 									</ul>
 
@@ -60,28 +60,24 @@
 					ng-model="currentPage" ng-change="pageChanged()"
 					class="pagination_border_radius_0"></ul>
 			</div>
-			<!-- 模态框（Modal） -->
+			<!-- 模态框（Modal）
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
+			 -->
+			<script type="text/ng-template" id="deleteArticle.html">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">警告</h4>
+							<h4 class="modal-title" id="modal-title">警告</h4>
 						</div>
-						<div class="modal-body">确认删除编号为#{{deleteId}}的记录吗？</div>
+						<div class="modal-body" id="modal-body">
+							确认删除博客{{deleteArticle.title}}吗？
+						</div>		
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">取消</button>
-							<button type="button" ng-click="delete(deleteId)"
-								data-dismiss="modal" class="btn btn-primary">确认</button>
+							<button type="button" class="btn btn-default" ng-click="cancelDeleteArticle()"
+								>取消</button>
+							<button type="button" ng-click="deleteArticle(deleteArticle.id)"
+								 class="btn btn-primary">确认</button>
 						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal -->
-			</div>
+			</script>
 		</div>
 	</div>
 </div>
