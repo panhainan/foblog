@@ -29,6 +29,7 @@
 			</div>
 			<div ng-bind-html="article.content | trusted"></div>
 			<div  style="border-top: 1px solid silver;padding-top: 10px;text-align: right;height: 40px">
+				<a href="#/manage/article/" class="btn btn-default">返回列表</a>
 				<a href="#/manage/article/edit/{{article.id}}" class="btn btn-default">编辑</a>
 				<button ng-if="article.status==0" ng-click="changeToBlog(article.id)"  class="btn btn-success">转为博客</button>
 			</div>
