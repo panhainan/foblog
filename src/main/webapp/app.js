@@ -11,10 +11,10 @@ app.config(function ($routeProvider) {
         templateUrl: "modules/index/index.view.html",
         controller: 'IndexController'
     }).when("/blog", {
-        templateUrl: "modules/article/article.view.html",
+        templateUrl: "modules/blog/article/article.view.html",
         controller: 'ArticleController'
     }).when("/blog/article/:articleTitle",{
-    	templateUrl:"modules/article/article.detail.view.html",
+    	templateUrl:"modules/blog/article/article.detail.view.html",
     	controller: 'ArticleDetailController'
     });
 //    管理
