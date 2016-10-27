@@ -1,9 +1,17 @@
 package studio.baxia.fo.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import studio.baxia.fo.common.*;
+import studio.baxia.fo.common.CommonConstant;
+import studio.baxia.fo.common.PageConfig;
+import studio.baxia.fo.common.PageInfoResult;
+import studio.baxia.fo.common.TreeInfoResult;
+import studio.baxia.fo.common.TreeInfoUtil;
 import studio.baxia.fo.dao.IArticleDao;
 import studio.baxia.fo.dao.ICategoryDao;
 import studio.baxia.fo.dao.IMessageDao;
@@ -14,10 +22,8 @@ import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.vo.ArticleVo;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.List;
+import studio.baxia.fo.vo.CategoryVo;
+import studio.baxia.fo.vo.TagVo;
 
 /**
  * Created by Pan on 2016/10/16.
@@ -113,7 +119,11 @@ public class ArticleServiceImpl implements IArticleService {
 		List<Category> result = iCategoryDao.selectBy(authorId, null);
 		return result;
 	}
-
+	@Override
+	public List<CategoryVo> categoryGetAllVoBy(int authorId,Integer articleStatus) {
+		List<CategoryVo> result = iCategoryDao.selectVoBy(authorId,articleStatus, null);
+		return result;
+	}
 	/**
 	 * 通过类别id获取类别
 	 *
@@ -182,7 +192,12 @@ public class ArticleServiceImpl implements IArticleService {
 		List<Tag> result = iTagDao.selectBy(authorId);
 		return result;
 	}
-	
+
+	@Override
+	public List<TagVo> tagGetAllVoBy(int authorId) {
+		List<TagVo> result = iTagDao.selectVoBy(authorId);
+		return result;
+	}
 	private String[] tagGetAllNamesBy(String tagIds,Integer articleAuthorId){
 		String[] tagIdsArr = tagIds.split(",");
 		if (tagIdsArr != null) {
@@ -330,14 +345,7 @@ public class ArticleServiceImpl implements IArticleService {
 	public ArticleVo articleVoGetByTitle(String articleTitle,
 			Integer articleAuthorId) {
 		
-		String s = null;
-		try {
-			s  = new String(articleTitle.getBytes("ISO-8859-1"),"UTF-8");
-			System.out.println(s);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			s = articleTitle;
-		}
+		String s = urlStrParamTranscoding(articleTitle);
 		ArticleVo article = iArticleDao.selectVoByTitle(s,
 				articleAuthorId);
 		if(article==null){
@@ -345,6 +353,18 @@ public class ArticleServiceImpl implements IArticleService {
 		}
 		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),articleAuthorId));
 		return article;
+	}
+
+	private String urlStrParamTranscoding(String param) {
+		String s = null;
+		try {
+			s  = new String(param.getBytes("ISO-8859-1"),"UTF-8");
+			System.out.println(s);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			s = param;
+		}
+		return s;
 	}
 
 	/**
@@ -393,6 +413,17 @@ public class ArticleServiceImpl implements IArticleService {
 		PageInfoResult<ArticleVo> pageInfoResult = new PageInfoResult(result,
 				pageConfig, resultCount);
 		return pageInfoResult;
+	}
+	@Override
+	public List<ArticleVo> articleGetAllByCategoryName(int authorId,String categoryName){
+		String s = urlStrParamTranscoding(categoryName);
+		List<Category> list = iCategoryDao.selectByName(1, s);
+		if(list!=null && list.size()>0){
+			Category category = list.get(0);
+			List<ArticleVo> result = iArticleDao.selectVoBy(new Article().setAuthorId(1).setStatus(CommonConstant.ACTICLE_STATUS_BLOG).setCategoryIds(category.getId()), null);
+			return result;
+		}
+		return null;
 	}
 
 	/**
@@ -475,4 +506,5 @@ public class ArticleServiceImpl implements IArticleService {
 				null);
 		return treeInfo;
 	}
+
 }

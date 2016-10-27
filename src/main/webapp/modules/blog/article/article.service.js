@@ -9,12 +9,7 @@ app.service("ArticleService", function(RequestService) {
     this.get = function (title) {
         return RequestService.getRequest('/blog/article/' + title, cfg_form);
     };
-    this.getCategorys = function () {
-    	return RequestService.getRequest('/blog/article/category', cfg_form);
-    };
-    this.getTags = function () {
-    	return RequestService.getRequest('/blog/article/tag', cfg_form);
-    };
+
     
 	
 	 

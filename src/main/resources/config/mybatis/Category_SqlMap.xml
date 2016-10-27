@@ -8,6 +8,13 @@
         <result property="name" column="name"/>
         <result property="authorId" column="author_id"/>
     </resultMap>
+    <resultMap id="CategoryVoMap" type="studio.baxia.fo.vo.CategoryVo">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="name" column="name"/>
+        <result property="authorId" column="author_id"/>
+        <result property="counts" column="article_counts" />
+    </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_category(parent_id,name,author_id)
@@ -59,6 +66,28 @@
             and parent_id = #{parentId,jdbcType=INTEGER}
         </if>
         ORDER BY  id
+    </select>
+    
+    <select id="selectByName" resultMap="CategoryMap">
+    	SELECT * FROM t_category
+        WHERE author_id = #{authorId,jdbcType=INTEGER}
+            and name = #{name,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectVoBy" resultMap="CategoryVoMap">
+	    SELECT t1.*,count(*) as article_counts
+	    	FROM t_category t1
+	    	left join t_article t2
+	    	on t1.id = t2.category_ids
+	    	<if test="articleStatus!=null">
+	    		and t2.status = #{articleStatus,jdbcType=INTEGER}
+	    	</if>
+	        WHERE t1.author_id = #{authorId,jdbcType=INTEGER}
+	        <if test="parentId!=null">
+	            and t1.parent_id = #{parentId,jdbcType=INTEGER}
+	        </if>
+	        group by t1.id
+	        ORDER BY article_counts desc
     </select>
 
 

@@ -14,14 +14,18 @@ import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.pojo.Article;
+import studio.baxia.fo.pojo.Category;
+import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.vo.ArticleVo;
+import studio.baxia.fo.vo.CategoryVo;
+import studio.baxia.fo.vo.TagVo;
 
 /**
  * Created by FirePan on 2016/10/18.
  */
-@RequestMapping(value = "/blog/article")
+@RequestMapping(value = "/blog")
 @Controller("articleController")
 public class ArticleController {
 
@@ -31,22 +35,40 @@ public class ArticleController {
     private IUserService iUserService;
 
     @ResponseBody
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "/article",method = RequestMethod.POST)
     public CommonResult list(PageConfig pageConfig){
         PageInfoResult<Article> list = iArticleService.articleGetAllBy(1, CommonConstant.ACTICLE_STATUS_BLOG, pageConfig);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
     }
     
     @ResponseBody
-    @RequestMapping(value = "/id/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/article/id/{id}",method = RequestMethod.GET)
     public CommonResult get(@PathVariable("id")Integer articleId){
         ArticleVo article = iArticleService.articleVoGetById(articleId,1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
-    @RequestMapping(value = "/{title}",method = RequestMethod.GET)
+    @RequestMapping(value = "/article/{title}",method = RequestMethod.GET)
     public CommonResult getByTitle(@PathVariable("title")String articleTitle){
         ArticleVo article = iArticleService.articleVoGetByTitle(articleTitle, 1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/category/{name}",method = RequestMethod.GET)
+    public CommonResult listArticle(@PathVariable("name")String name){
+    	List<ArticleVo> listArticles = iArticleService.articleGetAllByCategoryName(1,name);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listArticles);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/category",method = RequestMethod.GET)
+    public CommonResult listCategorys(){
+    	List<CategoryVo> listCategorys = iArticleService.categoryGetAllVoBy(1,CommonConstant.ACTICLE_STATUS_BLOG);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag",method = RequestMethod.GET)
+    public CommonResult listTags(){
+    	List<TagVo> listCategorys = iArticleService.tagGetAllVoBy(1);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
     }
 }

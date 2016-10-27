@@ -8,6 +8,8 @@ import studio.baxia.fo.pojo.Category;
 import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.vo.ArticleVo;
+import studio.baxia.fo.vo.CategoryVo;
+import studio.baxia.fo.vo.TagVo;
 
 import java.util.List;
 
@@ -80,6 +82,8 @@ public interface IArticleService {
      * @return
      */
     List<Tag> tagGetAllBy(int authorId);
+    
+    List<TagVo> tagGetAllVoBy(int authorId);
 
     /**
      * 添加文章
@@ -158,6 +162,10 @@ public interface IArticleService {
 
 	PageInfoResult<ArticleVo> articleGetAllManageBy(int articleAuthorId,
 			Integer articleStatus, PageConfig pageConfig);
+
+	List<CategoryVo> categoryGetAllVoBy(int authorId,Integer articleStatus);
+
+	List<ArticleVo> articleGetAllByCategoryName(int i, String name);
 
 
 

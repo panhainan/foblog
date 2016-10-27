@@ -1,5 +1,5 @@
-<div id="catalog">
-<!-- 	<div class="catalog_header border_bottom">— 文章导航 —</div>
+<div id="catalog" ng-controller="RightNavController">
+	<!-- 	<div class="catalog_header border_bottom">— 文章导航 —</div>
 	<div class="catalog_body">
 		<ul class="padding_none ul_style_none">
 			<li class="menu_li"><a href="">背景：HTTP/2 与 Dropbox Web 服务架构</a></li>
@@ -15,20 +15,34 @@
 			<li class="menu_li"><a href="">观测</a></li>
 		</ul>
 	</div> -->
-	<div class="catalog_header border_bottom">— 管理导航 —</div>
-	<div class="catalog_body">
-		<ul class="padding_none ul_style_none">
-			<li class="menu_li"><a href="#/manage/article">文章管理</a></li>
-			<li class="menu_li"><a href="#/manage/message">评论管理</a></li>
-			<li class="menu_li"><a href="#/manage/category">类别管理</a></li>
-			<li class="menu_li"><a href="#/manage/tag">标签管理</a></li>
-			<li class="menu_li"><a href="#/manage/discuss">讨论管理</a></li>
-			<li class="menu_li"><a href="#/manage/aboutme">关于管理</a></li>
-			<li class="menu_li"><a href="#/manage/friendlink">友链管理</a></li>
-		</ul>
+	
+	<div>
+		<div class="catalog_header border_bottom">— {{navDatas.typeName}}导航  —</div>
+		<div class="catalog_body">
+			<ul class="padding_none ul_style_none">
+				<li class="menu_li" ng-repeat="navData in navDatas.data">
+					<a href="#/blog/{{navDatas.typeCode}}/{{navData.name}}">{{navData.name}}<span style="color:blue">({{navData.counts}})</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div ng-if="navIs=='nav_manage'">
+		<div class="catalog_header border_bottom">— 管理导航 —</div>
+		<div class="catalog_body">
+			<ul class="padding_none ul_style_none">
+				<li class="menu_li"><a href="#/manage/article">文章管理</a></li>
+				<li class="menu_li"><a href="#/manage/message">评论管理</a></li>
+				<li class="menu_li"><a href="#/manage/category">类别管理</a></li>
+				<li class="menu_li"><a href="#/manage/tag">标签管理</a></li>
+				<li class="menu_li"><a href="#/manage/discuss">讨论管理</a></li>
+				<li class="menu_li"><a href="#/manage/aboutme">关于管理</a></li>
+				<li class="menu_li"><a href="#/manage/friendlink">友链管理</a></li>
+			</ul>
+		</div>
 	</div>
 	<div class="catalog_footer">
-		<div style="border-top:1px solid #EBEBEB;padding-top:10px;float: left;">
+		<div
+			style="border-top:1px solid #EBEBEB;padding-top:10px;float: left;">
 			<p>©2015-2020 霸下工作室</p>
 		</div>
 	</div>

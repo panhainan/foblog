@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import studio.baxia.fo.pojo.Tag;
+import studio.baxia.fo.vo.TagVo;
 
 import java.util.List;
 
@@ -47,4 +48,6 @@ public interface ITagDao {
      * @return Tag
      */
 	Tag selectByName(@Param("name")String tagName, @Param("authorId")Integer tagAuthorId);
+
+	List<TagVo> selectVoBy(@Param("authorId")Integer tagAuthorId);
 }

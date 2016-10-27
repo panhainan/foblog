@@ -72,8 +72,9 @@ public class Article {
 		return categoryIds;
 	}
 
-	public void setCategoryIds(Integer categoryIds) {
+	public Article setCategoryIds(Integer categoryIds) {
 		this.categoryIds = categoryIds;
+		return this;
 	}
 
 	public String getTagIds() {
@@ -88,16 +89,18 @@ public class Article {
         return authorId;
     }
 
-    public void setAuthorId(Integer authorId) {
+    public Article setAuthorId(Integer authorId) {
         this.authorId = authorId;
+        return this;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public Article setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public Date getWriteTime() {

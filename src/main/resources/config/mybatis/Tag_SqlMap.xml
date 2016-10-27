@@ -2,39 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="studio.baxia.fo.dao.ITagDao">
 
-    <resultMap id="TagMap" type="studio.baxia.fo.pojo.Tag">
-        <result property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="authorId" column="author_id"/>
-    </resultMap>
+	<resultMap id="TagMap" type="studio.baxia.fo.pojo.Tag">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="authorId" column="author_id" />
+	</resultMap>
+	<resultMap id="TagVoMap" type="studio.baxia.fo.vo.TagVo">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="authorId" column="author_id" />
+		<result property="counts" column="article_counts" />
+	</resultMap>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_tag(name,author_id)
+		VALUES (#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
+	</insert>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_tag(name,author_id)
-        VALUES (#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
-    </insert>
+	<delete id="delete">
+		DELETE FROM t_tag
+		WHERE id = #{id,jdbcType=INTEGER}
+		AND author_id = #{authorId,jdbcType=INTEGER}
+	</delete>
 
-    <delete id="delete">
-        DELETE FROM t_tag
-        WHERE id = #{id,jdbcType=INTEGER}
-        AND author_id = #{authorId,jdbcType=INTEGER}
-    </delete>
+	<select id="selectById" resultMap="TagMap">
+		SELECT * FROM t_tag
+		WHERE id=#{id,jdbcType=INTEGER}
+		AND author_id = #{authorId,jdbcType=INTEGER}
+	</select>
 
-    <select id="selectById" resultMap="TagMap">
-        SELECT * FROM t_tag
-        WHERE id=#{id,jdbcType=INTEGER}
-        AND author_id = #{authorId,jdbcType=INTEGER}
-    </select>
+	<select id="selectBy" resultMap="TagMap">
+		SELECT * FROM t_tag
+		WHERE author_id = #{authorId,jdbcType=INTEGER}
+		ORDER BY id
+	</select>
+	<select id="selectVoBy" resultMap="TagVoMap">
+		SELECT t1.*,count(*) as article_counts
+			FROM t_tag t1
+			left join t_article t2
+			on t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
+			WHERE t1.author_id = #{authorId,jdbcType=INTEGER}
+			group by t1.id
+			ORDER BY article_counts desc
+	</select>
 
-    <select id="selectBy" resultMap="TagMap">
-        SELECT * FROM t_tag
-        WHERE author_id = #{authorId,jdbcType=INTEGER}
-        ORDER BY id
-    </select>
 	<select id="selectByName" resultMap="TagMap">
-        SELECT * FROM t_tag
-        WHERE 
-        name = #{name,jdbcType=VARCHAR}
-        and author_id = #{authorId,jdbcType=INTEGER}
-    </select>
+		SELECT * FROM t_tag
+		WHERE
+		name = #{name,jdbcType=VARCHAR}
+		and author_id = #{authorId,jdbcType=INTEGER}
+	</select>
 
 </mapper>

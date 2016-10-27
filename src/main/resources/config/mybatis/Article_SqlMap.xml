@@ -135,8 +135,10 @@
 			</if>
 		</where>
 		ORDER BY write_time DESC
-		LIMIT
-		#{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
+		<if test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
+			LIMIT
+			#{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
+		</if>
 	</select>
 	<select id="selectCountBy" resultType="Integer">
 		SELECT COUNT(*)
@@ -191,7 +193,9 @@
 			</if>
 		</where>
 		ORDER BY t1.write_time DESC
-		LIMIT
-		#{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
+		<if test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
+			LIMIT
+			#{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
+		</if>
 	</select>
 </mapper>
