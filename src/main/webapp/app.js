@@ -7,9 +7,15 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('HttpInterceptor');
 });
 app.config(function ($routeProvider) {
-    $routeProvider.when("/", {
+    $routeProvider.when("/index", {
         templateUrl: "modules/index/index.view.html",
         controller: 'IndexController'
+    }).when("/blog", {
+        templateUrl: "modules/article/article.view.html",
+        controller: 'ArticleController'
+    }).when("/blog/article/:articleTitle",{
+    	templateUrl:"modules/article/article.detail.view.html",
+    	controller: 'ArticleDetailController'
     });
 //    管理
     $routeProvider.when("/manage", {
@@ -30,7 +36,7 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.otherwise({
-    	redirectTo: '/'
+    	redirectTo: '/blog'
     });
 });
 app.filter("trusted", ["$sce", function ($sce) {

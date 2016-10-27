@@ -15,6 +15,7 @@ import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.vo.ArticleVo;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
@@ -234,6 +235,7 @@ public class ArticleServiceImpl implements IArticleService {
 		}
 		article.setTagIds(tagGetIdsBy(article.getTagNames()));
 		article.setWriteTime(new Date());
+		article.setAuthorId(1);
 		Integer result = iArticleDao.insert(article);
 		if (returnResult(result)) {
 			return article.getId();
@@ -308,6 +310,9 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public ArticleVo articleVoGetById(int articleId, int articleAuthorId) {
 		ArticleVo article = iArticleDao.selectVoById(articleId, articleAuthorId);
+		if(article==null){
+			return null;
+		}
 		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),articleAuthorId));
 		return article;
 	}
@@ -324,8 +329,20 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public ArticleVo articleVoGetByTitle(String articleTitle,
 			Integer articleAuthorId) {
-		ArticleVo article = iArticleDao.selectVoByTitle(articleTitle,
+		
+		String s = null;
+		try {
+			s  = new String(articleTitle.getBytes("ISO-8859-1"),"UTF-8");
+			System.out.println(s);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			s = articleTitle;
+		}
+		ArticleVo article = iArticleDao.selectVoByTitle(s,
 				articleAuthorId);
+		if(article==null){
+			return null;
+		}
 		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),articleAuthorId));
 		return article;
 	}

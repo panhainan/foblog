@@ -1,18 +1,14 @@
 <!--container-fluid-->
-<div class="customManageContainer" style="padding-top:20px">
+<div class="customContainer">
+	<ng-include src="'modules/common/top-nav.html'"></ng-include>
 	<div class="content">
-		<div class="content_header" style="border-bottom: 4px solid silver ;">
-			<h2>{{article.title}}</h2>
+		<div class="content_header row" style="border-bottom: 4px solid silver ;">
+			<div class="col-sm-12" style="padding:0;"><h2>{{article.title}}</h2></div>
 		</div>
 		<div class="content_body">
 			<div class="row">
 				<div class="col-sm-12" style="padding:0;">
 					<div class="row">
-						<div class="col-sm-12" style="padding:0;">
-							<span style="font-family: '楷体'">状态：</span> <span
-								ng-if="article.status==1">博客</span><span
-								ng-if="article.status==0" style="color:red">草稿</span>
-						</div>
 						<div class="col-sm-12" style="padding:0;">
 							<span style="font-family: '楷体'">类别：</span> <span>{{article.categoryName}}</span>
 						</div>
@@ -24,7 +20,7 @@
 							</span>
 						</div>
 						<div class="col-sm-12"
-							style="border-bottom: 1px solid silver;margin-bottom: 10px;padding:0;">
+							style="margin-bottom: 0px;padding:0;">
 							<p style="font-family: '楷体';margin-bottom: 0px">摘要：</p>
 							<p style="text-indent: 30px;margin-bottom: 0px">{{article.summary}}</p>
 							<p style="text-align:right;font-family: '楷体';margin-bottom: 0px">发表于
@@ -32,17 +28,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12"  style="padding:0;">
+				<div class="col-sm-12"  style="padding:10px;border:1px solid #EBEBEB;">
 					<div ng-bind-html="article.content | trusted"></div>
 				</div>
 				<div class="col-sm-12"  style="padding:0;">
 					<div
-						style="border-top: 1px solid silver;padding-top: 10px;text-align: right;height: 40px">
-						<a href="#/manage/article/" class="btn btn-default">返回列表</a> <a
-							href="#/manage/article/edit/{{article.id}}"
-							class="btn btn-default">编辑</a>
-						<button ng-if="article.status==0" ng-click="changeToBlog(1)"
-							class="btn btn-success">转为博客</button>
+						style="padding-top: 10px;text-align: right;height: 40px">
+						<a href="#/blog" class="btn btn-default">返回列表</a>
 					</div>
 				</div>
 			</div>

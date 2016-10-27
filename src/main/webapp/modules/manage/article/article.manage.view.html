@@ -28,7 +28,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="article in articles">
-								<td>{{totalItems-$index}}</td>
+								<td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
 								<td><a href="#/manage/article/preview/{{article.id}}"
 									title="点击查看">{{article.title}}</a></td>
 								<td class="visible-lg">{{article.categoryName}}</td>
@@ -60,21 +60,17 @@
 					ng-model="currentPage" ng-change="pageChanged()"
 					class="pagination_border_radius_0"></ul>
 			</div>
-			<!-- 模态框（Modal）
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-			 -->
 			<script type="text/ng-template" id="deleteArticle.html">
 						<div class="modal-header">
 							<h4 class="modal-title" id="modal-title">警告</h4>
 						</div>
 						<div class="modal-body" id="modal-body">
-							确认删除博客{{deleteArticle.title}}吗？
+							确认删除博客<span style="font-size:16px;font-weight:bolder;"> {{theDeleteArticle.title}} </span>吗？
 						</div>		
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" ng-click="cancelDeleteArticle()"
 								>取消</button>
-							<button type="button" ng-click="deleteArticle(deleteArticle.id)"
+							<button type="button" ng-click="deleteArticle(theDeleteArticle.id)"
 								 class="btn btn-primary">确认</button>
 						</div>
 			</script>

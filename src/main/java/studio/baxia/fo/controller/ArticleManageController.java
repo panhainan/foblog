@@ -53,6 +53,12 @@ public class ArticleManageController {
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public CommonResult delete(@PathVariable("id")Integer articleId){
+        Boolean result = iArticleService.articleDeleteById(articleId,1);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
+    }
+    @ResponseBody
     @RequestMapping(value = "/category",method = RequestMethod.GET)
     public CommonResult listCategorys(){
     	List<Category> listCategorys = iArticleService.categoryGetAllBy(1);// new ArrayList<Category>();

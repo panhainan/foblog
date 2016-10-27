@@ -1,8 +1,16 @@
 app.controller("ArticleManageController", function($uibModal,$scope,ArticleManageService) {
-	console.log("ArticleManageController")
-	$scope.list = function(){
-		ArticleManageService.list(1,10,null).then(function(data){
-			console.log(data)
+//	console.log("ArticleManageController")
+    $scope.currentPage = 1;
+    $scope.pageSize = 3;
+
+    $scope.pageChanged = function() {
+        //console.log('Page changed to: ' + $scope.currentPage);
+        $scope.list($scope.currentPage, $scope.pageSize);
+    };
+
+	$scope.list = function(currentPage,pageSize){
+		ArticleManageService.list(currentPage,pageSize,null).then(function(data){
+//			console.log(data)
 			$scope.articles = data.resultData.list;
 			$scope.totalItems = data.resultData.pageConfig.allCount;
 		});
@@ -20,20 +28,25 @@ app.controller("ArticleManageController", function($uibModal,$scope,ArticleManag
 		      }
 		    });
 
-		    modalInstance.result.then(function (data) {
-		    	
+		    modalInstance.result.then(function (articleId) {
+//		    	console.log(articleId);
+		    	ArticleManageService.deletee(articleId).then(function(data){
+		    		console.log(data);
+		    		$scope.list($scope.currentPage, $scope.pageSize);
+		    	});
 		    });
 	}
-	$scope.list();
-}).controller("deleteArticleCtrl", function($uibModalInstance,$scope, deleteArticle) {
-	console.log(deleteArticle)
-	$scope.deleteArticle = deleteArticle; 
-	console.log($scope.deleteArticle)
+	$scope.list($scope.currentPage, $scope.pageSize);
+});
+app.controller("deleteArticleCtrl", function($uibModalInstance,$scope, deleteArticle) {
+//	console.log(deleteArticle)
+	$scope.theDeleteArticle = deleteArticle; 
+//	console.log($scope.theDeleteArticle)
 	$scope.cancelDeleteArticle = function(){
-		$uibModalInstance.close();
+		$uibModalInstance.dismiss('cancel');
 	}
 	$scope.deleteArticle = function(articleId){
-		console.log(articleId)
-		$uibModalInstance.close();
+//		console.log(articleId)
+		$uibModalInstance.close(articleId);
 	}
 });

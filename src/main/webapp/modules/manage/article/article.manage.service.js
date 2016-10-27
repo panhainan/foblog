@@ -15,14 +15,16 @@ app.service("ArticleManageService", function(RequestService) {
     this.post = function(article){
     	return RequestService.postRequest('/manage/article/save' ,article, cfg_json);
     }
+    this.deletee = function (id) { 
+		return RequestService.deleteRequest('/manage/article/' + id, cfg_form); 
+	};
     this.getCategorys = function () {
     	return RequestService.getRequest('/manage/article/category', cfg_form);
     };
     this.getTags = function () {
     	return RequestService.getRequest('/manage/article/tag', cfg_form);
     };
-    /*
-	 * this.delete = function (id) { return
-	 * RequestService.deleteRequest('/testbean/' + id, cfg_form); };
-	 */
+    
+	
+	 
 })

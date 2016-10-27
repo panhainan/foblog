@@ -18,13 +18,16 @@
 }
 
 .content_header {
-	padding-top:10px;
-	height: 90px;
+	/* padding-top:10px; */
+	/* height: 90px; */
 }
 
 .content_body {
 	padding-top:10px;
 	font-size: 15px;
+}
+.content_body img{
+	display:block;max-width:100%;height:auto
 }
 .content_footer {
 	margin-top:20px;

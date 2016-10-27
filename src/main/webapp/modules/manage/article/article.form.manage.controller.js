@@ -9,9 +9,6 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 			console.log($scope.article.content)
 			$scope.selectTagIds = $scope.article.tagIds;
 		});
-		// $scope.getTypes();
-		$scope.getCategorys();
-		$scope.getTags();
 	}
 	$scope.getTypes = function() {
 		ArticleManageService.getTypes().then(function(data) {
@@ -169,7 +166,12 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 		
 	}
 	
-	// 获取文章信息
-	$scope.get($routeParams.articleId);
+	if($routeParams.articleId!=undefined){
+		// 获取文章信息
+		$scope.get($routeParams.articleId);
+	}
+	// $scope.getTypes();
+	$scope.getCategorys();
+	$scope.getTags();
 	
 });

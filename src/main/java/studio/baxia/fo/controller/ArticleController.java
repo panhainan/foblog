@@ -1,5 +1,7 @@
 package studio.baxia.fo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.CommonResult;
+import studio.baxia.fo.common.PageConfig;
+import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.pojo.Article;
-import studio.baxia.fo.pojo.Authors;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.vo.ArticleVo;
@@ -18,7 +21,7 @@ import studio.baxia.fo.vo.ArticleVo;
 /**
  * Created by FirePan on 2016/10/18.
  */
-@RequestMapping(value = "/{username}/article",method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+@RequestMapping(value = "/blog/article")
 @Controller("articleController")
 public class ArticleController {
 
@@ -28,25 +31,22 @@ public class ArticleController {
     private IUserService iUserService;
 
     @ResponseBody
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    public CommonResult list(PageConfig pageConfig){
+        PageInfoResult<Article> list = iArticleService.articleGetAllBy(1, CommonConstant.ACTICLE_STATUS_BLOG, pageConfig);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
+    }
+    
+    @ResponseBody
     @RequestMapping(value = "/id/{id}",method = RequestMethod.GET)
-    public CommonResult get(@PathVariable("username")String username,@PathVariable("id")Integer articleId){
-        Authors authors = iUserService.authorsGetByAccount(username);
-        if(authors==null){
-            return new CommonResult(CommonConstant.FAIL_CODE,CommonConstant.USER_IS_NO_EXIST);
-        }
-        ArticleVo article = iArticleService.articleVoGetById(articleId,authors.getId());
-        String msg = "hello, "+username+",operate success.";
-        return new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
+    public CommonResult get(@PathVariable("id")Integer articleId){
+        ArticleVo article = iArticleService.articleVoGetById(articleId,1);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
     @RequestMapping(value = "/{title}",method = RequestMethod.GET)
-    public CommonResult getByTitle(@PathVariable("username")String username,@PathVariable("title")String articleTitle){
-        Authors authors = iUserService.authorsGetByAccount(username);
-        if(authors==null){
-            return new CommonResult(CommonConstant.FAIL_CODE,CommonConstant.USER_IS_NO_EXIST);
-        }
-        ArticleVo article = iArticleService.articleVoGetByTitle(articleTitle, authors.getId());
-        String msg = "hello, "+username+",operate success.";
-        return new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
+    public CommonResult getByTitle(@PathVariable("title")String articleTitle){
+        ArticleVo article = iArticleService.articleVoGetByTitle(articleTitle, 1);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
 }

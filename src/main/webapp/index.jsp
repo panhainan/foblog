@@ -10,7 +10,7 @@
 <head lang="zh">
 <base href="<%=basePath%>">
 <meta charset="UTF-8">
-<title>潘海南的个人网站</title>
+<title>潘海南的博客-v1.0</title>
 <!-- 霸下工作室 -->
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -60,7 +60,9 @@
 <script src="<%=basePath%>modules/index/index.service.js"></script>
 <script src="<%=basePath%>modules/index/index.controller.js"></script>
 <script src="<%=basePath%>modules/common/sign.controller.js"></script>
-
+<script src="<%=basePath%>modules/article/article.service.js"></script>
+<script src="<%=basePath%>modules/article/article.controller.js"></script>
+<script src="<%=basePath%>modules/article/article.detail.controller.js"></script>
 <!-- 管理员即作者操作 -->
 <script src="<%=basePath%>modules/manage/sign/sign.manage.controller.js"></script>
 <script src="modules/manage/article/article.manage.service.js"></script>
