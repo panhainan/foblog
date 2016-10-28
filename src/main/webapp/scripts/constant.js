@@ -22,3 +22,26 @@ var nav_index = "index";
 var nav_archive = "archive";
 var nav_category = "category";
 var nav_tag = "tag";
+var setScreenAvailHeight=function(){
+	var availHeight= window.screen.availHeight-50;
+	$(".customNoMarginRightContainer").css("min-height",
+			availHeight + "px");
+	$(".customManageContainer").css("min-height",
+			availHeight + "px");
+	$(".customContainer").css("min-height",
+			availHeight + "px");
+	$("#sub-nav").css("height",availHeight+"px");
+}
+
+
+
+var setSubNavData = function(data,typeCode,typeName){
+	var subNavDatas = {
+			data:data,
+			typeCode:typeCode,
+			typeName:typeName
+	}
+	return subNavDatas;
+	
+}
+

@@ -12,14 +12,20 @@ body {
 	-moz-border-radius: 0;
 	border-radius: 0;
 }
-
+.customWithMarginRightContainer {
+	/* 	border: 1px solid #E6E6E6;*/
+	padding: 0 0px 55px 0px;
+	margin: 0;
+	margin-right:160px;
+	margin-left: 260px;
+	height: 100%;
+	background-color: #F1F1F1;
+}
 .customContainer {
 	/* 	border: 1px solid #E6E6E6;*/
-	padding: 0 10px 55px 10px;
+	padding: 0 0px 55px 0px;
 	margin: 0;
 	margin-left: 260px;
-	margin-right:160px;
-	/* min-height:650px; */
 	height: 100%;
 	background-color: #F1F1F1;
 }
@@ -28,7 +34,7 @@ body {
 	margin: 0;
 	margin-left: 260px;
 	margin-right:160px;
-	min-height:600px;
+	/* min-height:600px; */
 	height: 100%;
 	background-color: #F1F1F1;
 }
@@ -200,9 +206,18 @@ a {
 	border-right: 1px #EBEBEB solid;
 	color:#000;
 }
-
+.body-content-body {
+	padding: 0px 5px 10px 5px;
+	margin: 0 20px;
+}
 @media ( max-width : 768px) {
-	.customContainer,.customManageContainer{
+	.body-content-body{
+		margin: 0;
+	}
+	.content{
+		padding:10px;
+	}
+	.customContainer,.customManageContainer,.customNoMarginRightContainer{
 		margin-left: 0px;
 		margin-right:0px;
 	}

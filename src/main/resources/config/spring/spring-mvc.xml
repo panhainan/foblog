@@ -44,7 +44,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
 		p:prefix="/" p:suffix=".jsp" />
 
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 
 	<!-- 处理JSON数据转换，为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
 	<bean id="mappingJacksonHttpMessageConverter"

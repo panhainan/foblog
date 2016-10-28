@@ -1,11 +1,12 @@
 <div class="content-top">
-	<ul class="list-inline">
-		<li style="line-height:30px;text-indent: 10px;">立业、成家、。。</li>
-		<li class="pull-right"><button type="button"  ng-click="signin()" 
+	<ul class="list-inline row">
+		<li class="hidden-xs" style="line-height:30px;text-indent: 30px;">立业、成家、。。</li>
+		<li class="pull-right"><button type="button" ng-click="signin()"
 				class="btn-sm btn btn-link" data-toggle="modal"
 				data-target="#signInModal">游客登录</button></li>
 		<li class="pull-right" style="padding: 0"><button type="button"
 				class="btn-sm btn btn-link">搜索</button></li>
+
 	</ul>
 </div>
 
@@ -14,7 +15,8 @@
 	tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog">
-		<form class="form-horizontal" action="javascript:void(0)" ng-submit="guestSignin()">
+		<form class="form-horizontal" action="javascript:void(0)"
+			ng-submit="guestSignin()">
 			<div class="modal-content">
 				<div class="modal-header" style="text-align: center;">
 					<button type="button" class="close" data-dismiss="modal"
@@ -42,7 +44,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary">登 录</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取
+						消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

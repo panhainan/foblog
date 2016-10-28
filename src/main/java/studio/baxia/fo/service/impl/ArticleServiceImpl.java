@@ -345,8 +345,8 @@ public class ArticleServiceImpl implements IArticleService {
 	public ArticleVo articleVoGetByTitle(String articleTitle,
 			Integer articleAuthorId) {
 		
-		String s = urlStrParamTranscoding(articleTitle);
-		ArticleVo article = iArticleDao.selectVoByTitle(s,
+//		String s = urlStrParamTranscoding(articleTitle);
+		ArticleVo article = iArticleDao.selectVoByTitle(articleTitle,
 				articleAuthorId);
 		if(article==null){
 			return null;
@@ -358,6 +358,9 @@ public class ArticleServiceImpl implements IArticleService {
 	private String urlStrParamTranscoding(String param) {
 		String s = null;
 		try {
+			if (param.equals(new String(param.getBytes("UTF-8"), "UTF-8"))) {
+                s = param;
+            }
 			s  = new String(param.getBytes("ISO-8859-1"),"UTF-8");
 			System.out.println(s);
 		} catch (UnsupportedEncodingException e) {
@@ -416,8 +419,8 @@ public class ArticleServiceImpl implements IArticleService {
 	}
 	@Override
 	public List<ArticleVo> articleGetAllByCategoryName(int authorId,String categoryName){
-		String s = urlStrParamTranscoding(categoryName);
-		List<Category> list = iCategoryDao.selectByName(1, s);
+//		String s = urlStrParamTranscoding(categoryName);
+		List<Category> list = iCategoryDao.selectByName(1, categoryName);
 		if(list!=null && list.size()>0){
 			Category category = list.get(0);
 			List<ArticleVo> result = iArticleDao.selectVoBy(new Article().setAuthorId(1).setStatus(CommonConstant.ACTICLE_STATUS_BLOG).setCategoryIds(category.getId()), null);

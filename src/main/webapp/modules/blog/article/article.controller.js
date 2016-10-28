@@ -1,4 +1,5 @@
 app.controller("ArticleController", function($uibModal,$scope,ArticleService) {
+	setScreenAvailHeight();
     $scope.currentPage = 1;
     $scope.pageSize = 3;
 

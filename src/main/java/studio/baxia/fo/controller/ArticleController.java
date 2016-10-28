@@ -48,13 +48,13 @@ public class ArticleController {
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
-    @RequestMapping(value = "/article/{title}",method = RequestMethod.GET)
+    @RequestMapping(value = "/article/{title:.+}",method = RequestMethod.GET)
     public CommonResult getByTitle(@PathVariable("title")String articleTitle){
         ArticleVo article = iArticleService.articleVoGetByTitle(articleTitle, 1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
-    @RequestMapping(value = "/category/{name}",method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{name:.+}",method = RequestMethod.GET)
     public CommonResult listArticle(@PathVariable("name")String name){
     	List<ArticleVo> listArticles = iArticleService.articleGetAllByCategoryName(1,name);// new ArrayList<Category>();
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listArticles);

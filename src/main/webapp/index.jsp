@@ -17,7 +17,8 @@
 <style type="text/css">
 @import "<%=basePath%>plugins/thinker-md/stylesheets/vendor/font.css";
 
-@import "<%=basePath%>plugins/thinker-md/stylesheets/vendor/markdown.css";
+@import
+	"<%=basePath%>plugins/thinker-md/stylesheets/vendor/markdown.css";
 
 @import "<%=basePath%>plugins/thinker-md/stylesheets/emoji/nature.css";
 
@@ -27,13 +28,16 @@
 
 @import "<%=basePath%>plugins/thinker-md/stylesheets/emoji/place.css";
 
-@import "<%=basePath%>plugins/thinker-md/stylesheets/emoji/Sysmbols.css";
+@import "<%=basePath%>plugins/thinker-md/stylesheets/emoji/Sysmbols.css"
+	;
 
 @import "<%=basePath%>plugins/thinker-md/stylesheets/emoji/twemoji.css";
 
-@import "<%=basePath%>plugins/thinker-md/stylesheets/vendor/font-awesome.css";
+@import
+	"<%=basePath%>plugins/thinker-md/stylesheets/vendor/font-awesome.css";
 
-@import "<%=basePath%>plugins/thinker-md/stylesheets/vendor/sunburst.css";
+@import
+	"<%=basePath%>plugins/thinker-md/stylesheets/vendor/sunburst.css";
 </style>
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 
@@ -45,12 +49,17 @@
 <script src="<%=basePath%>plugins/bootstrap/bootstrap.min.js"></script>
 <script src="<%=basePath%>plugins/angularjs/angular-1.5.js"></script>
 <script src="<%=basePath%>plugins/angularjs-extend-lib/angular-route.js"></script>
-<script src="<%=basePath%>plugins/angularjs-extend-lib/angular-sanitize.js"></script>
-<script src="<%=basePath%>plugins/angularjs-extend-lib/angular-ui-router.js"></script> 
-<script src="<%=basePath%>plugins/angularjs-ui-bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<script
+	src="<%=basePath%>plugins/angularjs-extend-lib/angular-sanitize.js"></script>
+<script
+	src="<%=basePath%>plugins/angularjs-extend-lib/angular-ui-router.js"></script>
+<script
+	src="<%=basePath%>plugins/angularjs-ui-bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
 <script src="<%=basePath%>plugins/angularjs-pagination/tm.pagination.js"></script>
- <script src="<%=basePath%>plugins/angularjs-file-upload/ng-file-upload.js"></script>
-<script src="<%=basePath%>plugins/angularjs-file-upload/ng-file-upload-shim.js"></script> 
+<script
+	src="<%=basePath%>plugins/angularjs-file-upload/ng-file-upload.js"></script>
+<script
+	src="<%=basePath%>plugins/angularjs-file-upload/ng-file-upload-shim.js"></script>
 
 <script src="<%=basePath%>app.js"></script>
 <script src="<%=basePath%>scripts/constant.js"></script>
@@ -78,16 +87,14 @@
 <script src="modules/manage/article/article.form.manage.controller.js"></script>
 <script src="modules/manage/article/article.detail.manage.controller.js"></script>
 
-
-
 </head>
 <body>
 	<ng-include src="'<%=basePath%>modules/common/left-nav.html'"></ng-include>
 	<div ng-view></div>
-	<div class="hidden-xs"><ng-include src="'<%=basePath%>modules/common/right-nav.html'"></ng-include></div>
+	<%-- <div class="hidden-xs"><ng-include src="'<%=basePath%>modules/common/right-nav.html'"></ng-include></div> --%>
 </body>
 
- <script type="text/javascript" charset="utf-8"
+<script type="text/javascript" charset="utf-8"
 	src="<%=basePath%>plugins/thinker-md/javascripts/vendor/underscore/underscore-min.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="<%=basePath%>plugins/thinker-md/javascripts/vendor/highlight/highlight.js"></script>

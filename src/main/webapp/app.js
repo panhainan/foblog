@@ -16,7 +16,8 @@ app.filter("trusted", [ "$sce", function($sce) {
 		return html;
 	}
 } ]);
-app.config(function($routeProvider) {
+app.config(function($routeProvider,$stateProvider) {
+	  
 	$routeProvider.when("/index", {
 		templateUrl : "modules/index/index.view.html",
 		controller : 'IndexController'
