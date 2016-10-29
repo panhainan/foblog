@@ -1,13 +1,19 @@
 app.controller("ArticleFormManageController", function($scope,$location, $routeParams,
 		ArticleManageService) {
+	setScreenAvailHeight();
 	console.log($routeParams.articleId)
 	$scope.get = function(articleId) {
 		ArticleManageService.get(articleId).then(function(data) {
 			console.log(data);
 			$scope.article = data.resultData;
+			if(data.resultData.tagNames!=null){
+				$scope.selectedTagNames = data.resultData.tagNames;
+			}else{
+				$scope.selectedTagNames = new Array();
+			}
+			console.log($scope.selectedTagNames)
 			$scope.article.content=toMarkdown($scope.article.content)
-			console.log($scope.article.content)
-			$scope.selectTagIds = $scope.article.tagIds;
+//			console.log($scope.article.content)
 		});
 	}
 	$scope.getTypes = function() {
@@ -24,11 +30,10 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 		ArticleManageService.getTags().then(function(data) {
 //			console.log(data);
 			$scope.tags = data.resultData;
-			$scope.selectedTagNames = new Array();
 			var s = $scope.selectTagIds;
 //			console.log($scope.selectTagIds)
 //			console.log(s)
-			if(s!=undefined && s!="" ){
+			if(s!=undefined && s.trim()!="" ){
 				var tagIdArr = s.split(",");
 				for (var j = 0; j < tagIdArr.length; j++) {
 					for (var i = 0; i < $scope.tags.length; i++) {
@@ -89,13 +94,13 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 		
 	}
 	$scope.isSelectExists = false;
-	$scope.selectExists = function() {
-		$scope.isSelectExists = true;
-	}
-	$scope.confirmSelectExists = function(status) {
-		if(status==1){
-			$scope.isSelectExists = false;
+	$scope.selectExists = function(status) {
+		if($scope.isSelectExists){
+			$scope.isSelectExists=false;
 		}else{
+			$scope.isSelectExists = true;
+		}
+		if(status==1){
 			var selectedTags = new Array();
 			$(".tagsCheckbox input[type='checkbox']:checked").each(function() {
 				for (var i = 0; i < $scope.tags.length; i++) {
@@ -118,19 +123,17 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 					$scope.selectedTagNames.push(selectedTags[j]);
 				}
 			}
-//			console.log($scope.selectedTagNames);
-			$scope.isSelectExists = false;
+			console.log($scope.selectedTagNames);
 		}
-		
 	}
 
 	
 	$scope.saveOrUpdate = function(status) {
 		$scope.article.status = status;
 		$scope.article.tagNames=$scope.selectedTagNames;
-		console.log($('#markdown_textarea').data('markdown').parseContent())
-		console.log(marked($('#markdown_textarea').data('markdown').getContent()));
-		console.log($('#markdown_textarea').data('markdown').getContent());
+//		console.log($('#markdown_textarea').data('markdown').parseContent())
+//		console.log(marked($('#markdown_textarea').data('markdown').getContent()));
+//		console.log($('#markdown_textarea').data('markdown').getContent());
 
 		$scope.article.content = $('#markdown_textarea').data('markdown').getContent();//$('#markdown_textarea').data('markdown').parseContent();
 		console.log($scope.article);

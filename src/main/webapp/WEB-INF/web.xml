@@ -25,7 +25,7 @@
             </param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-		<!-- 是启动顺序，让这个Servlet随Servletp容器一起启动。 -->
+		<!-- 是启动顺序，让这个Servlet随Servlet容器一起启动。 -->
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
@@ -50,58 +50,30 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- 静态资源放行 -->
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.jpg</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.jpeg</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.png</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.gif</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.js</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.css</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.scss</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.pdf</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.ttf</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.woff</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.woff2</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.map</url-pattern>
+	<!-- 静态资源放行,注意不能有和controller层的url相同的配置，因此可以配后缀 -->
+	<servlet-mapping>  
+	    <servlet-name>default</servlet-name>  
+	 	<url-pattern>/css/*</url-pattern>  
+	    <url-pattern>/fonts/*</url-pattern>  
+	    <url-pattern>/images/*</url-pattern>  
+	    <url-pattern>/json/*</url-pattern>
+	    <url-pattern>/modules/*</url-pattern> 
+	    <url-pattern>/plugins/*</url-pattern>  
+	    <url-pattern>/scripts/*</url-pattern>  
+	    <url-pattern>/app.js</url-pattern>
+<!-- 	    <url-pattern>*.html</url-pattern>
+	    <url-pattern>*.js</url-pattern>
+	    <url-pattern>*.css</url-pattern>
+	    <url-pattern>*.scss</url-pattern>
+	    <url-pattern>*.ttf</url-pattern>
+	    <url-pattern>*.woff</url-pattern>
+	    <url-pattern>*.woff2</url-pattern>
+	    <url-pattern>*.jpg</url-pattern>
+	    <url-pattern>*.jpeg</url-pattern>
+	    <url-pattern>*.gif</url-pattern>
+	    <url-pattern>*.png</url-pattern>
+	    <url-pattern>*.pdf</url-pattern>
+	    <url-pattern>*.map</url-pattern> -->
 	</servlet-mapping>
 	<!-- 跨域问题解决过滤器 -->
 	<!--<filter> <filter-name>corsFilter</filter-name> <filter-class>studio.baxia.foweb.module.filter.CorsFilter</filter-class> 

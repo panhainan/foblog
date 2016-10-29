@@ -33,12 +33,18 @@ app.config(function($routeProvider,$stateProvider) {
 	}).when("/blog/tag", {
 		templateUrl : "modules/blog/tag/tag.article.view.html",
 		controller : 'TagArticleController'
+	}).when("/blog/tag/:tagName", {
+		templateUrl : "modules/blog/tag/tag.article.view.html",
+		controller : 'TagArticleController'
 	}).when("/blog/article/:articleTitle", {
 		templateUrl : "modules/blog/article/article.detail.view.html",
 		controller : 'ArticleDetailController'
 	});
 	// 管理
 	$routeProvider.when("/manage", {
+		templateUrl : "modules/manage/manage.view.html",
+		controller : 'ManageController'
+	}).when("/manage/sign", {
 		templateUrl : "modules/manage/sign/signin.manage.view.html",
 		controller : 'SignManageController'
 	}).when("/manage/article", {
@@ -53,6 +59,18 @@ app.config(function($routeProvider,$stateProvider) {
 	}).when("/manage/article/preview/:articleId", {
 		templateUrl : "modules/manage/article/article.detail.manage.view.html",
 		controller : 'ArticleDetailManageController'
+	}).when("/manage/category", {
+		templateUrl : "modules/manage/category/category.manage.view.html",
+		controller : 'CategoryManageController'
+	}).when("/manage/tag", {
+		templateUrl : "modules/manage/tag/tag.manage.view.html",
+		controller : 'TagManageController'
+	}).when("/manage/info", {
+		templateUrl : "modules/manage/info/info.manage.view.html",
+		controller : 'InfoManageController'
+	}).when("/manage/friendlink", {
+		templateUrl : "modules/manage/friendlink/friendlink.manage.view.html",
+		controller : 'FriendlinkManageController'
 	});
 
 	$routeProvider.otherwise({

@@ -83,7 +83,7 @@ public interface ICategoryDao {
 	List<Category> selectBy(@Param("authorId") Integer categoryAuthorId,
 			@Param("parentId") Integer categoryParentId);
 
-	List<Category> selectByName(@Param("authorId") Integer categoryAuthorId,
+	Category selectByName(@Param("authorId") Integer categoryAuthorId,
 			@Param("name") String categoryName);
 
 	List<CategoryVo> selectVoBy(@Param("authorId") Integer categoryAuthorId,@Param("articleStatus")Integer articleStatus,

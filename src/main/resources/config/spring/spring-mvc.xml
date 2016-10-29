@@ -9,9 +9,18 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/mvc 
 http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
 	default-lazy-init="true">
-	<!-- 静态页面文件 -->
-	<!-- <mvc:resources mapping="/**" location="/" />  -->
-	<mvc:default-servlet-handler />
+	<!-- 静态资源文件 -->
+<!--<mvc:default-servlet-handler  default-servlet-name="default" /> --> 
+<!--<mvc:resources mapping="/manage/**" location="/WEB-INF/manage/" />
+ 	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />    
+	<mvc:resources mapping="/images/**" location="/images/" />    
+	<mvc:resources mapping="/json/**" location="/json/" />    
+	<mvc:resources mapping="/modules/**" location="/modules/" />    
+	<mvc:resources mapping="/plugins/**" location="/plugins/" />    
+	<mvc:resources mapping="/scripts/**" location="/scripts/" />    
+	<mvc:resources mapping="/**" location="/" />  -->
+	   
 	<!-- 使Spring支持自动检测组件，如注解的Controller -->
 	<context:component-scan base-package="studio.baxia"
 		use-default-filters="false">

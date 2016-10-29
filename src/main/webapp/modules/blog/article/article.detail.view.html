@@ -2,18 +2,17 @@
 <div class="customContainer">
 	<ng-include src="'modules/common/top-nav.html'"></ng-include>
 	<div class="body-content-body">
-		<div class="content">
+		<div class="article">
 			<div ng-if="error">文章不存在</div>
 			<div ng-if="!error">
-				<div class="content_header row"
-					style="border-bottom: 4px solid silver ;">
+				<div class="article-header row">
 					<div class="col-sm-12" style="padding:0;">
 						<h2>{{article.title}}</h2>
 					</div>
 				</div>
-				<div class="content_body">
+				<div class="article-body">
 					<div class="row">
-						<div class="col-sm-12" style="padding:0;">
+						<div class="col-sm-12 summary">
 							<div class="row">
 								<div class="col-md-6" style="padding:0;">
 									<span style="font-family: '楷体'">类别：</span> <span><a
@@ -23,7 +22,7 @@
 								<div class="col-md-6" style="padding:0;">
 									<span style="font-family: '楷体'">标签：</span> <span
 										ng-repeat="tName in article.tagNames"> <a href="#/blog/tag/{{tName}}"><span
-										style="background-color: #EEEEEE;font-size:14px;padding:2px 4px;margin:0 8px 0 0;">
+										class="tag">
 											{{tName}} </span></a>
 									</span>
 								</div>
@@ -36,11 +35,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-12"
-							style="padding:10px 0px;border-top:1px dashed #EBEBEB;border-bottom:1px dashed #EBEBEB;">
+						<div class="col-sm-12 content">
 							<div ng-bind-html="article.content | trusted"></div>
 						</div>
-						<div class="col-sm-12" style="padding:0;padding-top: 20px;">
+						<div class="col-sm-12 pre-next">
 							<div class="col-sm-12 col-md-6">
 								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span style="font-family: '楷体';">上一篇：</span>{{preArticle.title}}</a>
 								<span ng-if="!preArticle"><span style="font-family: '楷体';">上一篇：</span>没有了...</span>

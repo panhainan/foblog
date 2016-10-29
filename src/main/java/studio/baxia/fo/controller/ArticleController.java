@@ -54,7 +54,7 @@ public class ArticleController {
     }
     @ResponseBody
     @RequestMapping(value = "/category/{name:.+}",method = RequestMethod.GET)
-    public CommonResult listArticle(@PathVariable("name")String name){
+    public CommonResult listCategoryArticle(@PathVariable("name")String name){
     	List<ArticleVo> listArticles = iArticleService.articleGetAllByCategoryName(1,name);// new ArrayList<Category>();
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listArticles);
     }
@@ -67,7 +67,13 @@ public class ArticleController {
     @ResponseBody
     @RequestMapping(value = "/tag",method = RequestMethod.GET)
     public CommonResult listTags(){
-    	List<TagVo> listCategorys = iArticleService.tagGetAllVoBy(1);// new ArrayList<Category>();
+    	List<TagVo> listCategorys = iArticleService.tagGetAllVoBy(1,CommonConstant.ACTICLE_STATUS_BLOG);// new ArrayList<Category>();
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag/{name:.+}",method = RequestMethod.GET)
+    public CommonResult listTagArticle(@PathVariable("name")String name){
+    	List<ArticleVo> listArticles = iArticleService.articleGetAllByTagName(1,name);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listArticles);
     }
 }

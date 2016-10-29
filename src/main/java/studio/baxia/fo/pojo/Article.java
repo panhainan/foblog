@@ -81,8 +81,9 @@ public class Article {
         return tagIds;
     }
 
-    public void setTagIds(String tagIds) {
+    public Article setTagIds(String tagIds) {
         this.tagIds = tagIds;
+        return this;
     }
 
     public Integer getAuthorId() {

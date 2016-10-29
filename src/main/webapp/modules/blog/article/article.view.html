@@ -1,8 +1,7 @@
 <div class="customContainer">
 	<ng-include src="'modules/common/top-nav.html'"></ng-include>
-	<div style="padding: 0px 0px 10px 0px;min-height: 550px;">
-		<div ng-repeat="article in articles"
-			style="padding:10px 20px 6px 20px;background-color: #fff;margin-bottom: 15px;">
+	<div class="body-content-body">
+		<div class="card" ng-repeat="article in articles">
 			<div>
 				<h3>
 					<a href="#/blog/article/{{article.title}}" title="{{article.title}}">{{article.title}}</a>

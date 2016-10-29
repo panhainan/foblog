@@ -3,16 +3,15 @@
 		<div id="sub-nav">
 			<ng-include src="'modules/common/left-sub-nav.html'"></ng-include>
 		</div>
-		<div class="margin_left_160" id="body-content">
-			<div style="position: fixed;top: 3px;z-index: 100px;">
-				<a class="btn btn-primary btn-md toggle-sidebar"
-					style="padding:10px 6px;border:0;margin:0;"><span
+		<div class="margin_left_sub_nav_width" id="body-content">
+			<div class="toggle-sidebar-div">
+				<a class="btn btn-primary btn-md toggle-sidebar" ><span
 					class="glyphicon glyphicon-chevron-left" id="close-open-icon"></span></a>
 			</div>
 			<ng-include src="'modules/common/top-nav.html'"></ng-include>
 			<div class="body-content-body">
 				<div ng-repeat="article in categoryArticles"
-					style="padding:10px 20px 6px 20px;background-color: #fff;margin-bottom: 15px;">
+					class="card">
 					<div>
 						<h3>
 							<a href="#/blog/article/{{article.title}}"
@@ -32,57 +31,11 @@
 		</div>
 	</div>
 </div>
-<style>
-#sub-nav {
-	padding: 0px;
-	background-color: #fff;
-	position: fixed;
-	height: 100%;
-	top: 0;
-	width: 160px;
-	-webkit-transition: margin 0.3s ease;
-	-moz-transition: margin 0.3s ease;
-	-o-transition: margin 0.3s ease;
-	transition: margin 0.3s ease;
-}
-
-.margin_left_160 {
-	margin-left: 160px;
-}
-
-#body-content {
-	padding: 0;
-	-webkit-transition: width 0.3s ease;
-	-moz-transition: width 0.3s ease;
-	-o-transition: width 0.3s ease;
-	transition: width 0.3s ease;
-}
-
-#close-open-icon {
-	-webkit-transition: width 0.3s ease;
-	-moz-transition: width 0.3s ease;
-	-o-transition: width 0.3s ease;
-	transition: width 0.3s ease;
-}
-
-.collapsed {
-	/* hide it for small displays*/
-	display: none;
-}
-
-@media ( min-width : 992px) {
-	.collapsed {
-		display: block;
-		/* same width as sidebar */
-		margin-left: -25%;
-	}
-}
-</style>
 <script>
-	$(document).ready(function() {
+	$(function() {
 		$(".toggle-sidebar").click(function() {
 			$("#sub-nav").toggleClass("collapsed");
-			$("#body-content").toggleClass("col-sm-12  margin_left_160");
+			$("#body-content").toggleClass("col-sm-12  margin_left_sub_nav_width");
 			$("#close-open-icon").toggleClass("glyphicon-chevron-right");
 			return false;
 		});

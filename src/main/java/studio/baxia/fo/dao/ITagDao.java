@@ -49,7 +49,7 @@ public interface ITagDao {
      */
 	Tag selectByName(@Param("name")String tagName, @Param("authorId")Integer tagAuthorId);
 
-	List<TagVo> selectVoBy(@Param("authorId")Integer tagAuthorId);
+	List<TagVo> selectVoBy(@Param("authorId")Integer tagAuthorId,@Param("articleStatus")Integer articleStatus);
 
 	List<Tag> selectByIds(@Param("ids")List<Integer> tagIdList, @Param("authorId")Integer articleAuthorId);
 }

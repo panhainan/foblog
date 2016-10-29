@@ -1,20 +1,22 @@
 
 <div>
-	<div class="catalog_header">
+	<div class="sub-nav-header">
 		<span ng-if="subNavDatas.typeName">— {{subNavDatas.typeName}}导航
 			—</span>
 	</div>
-	<div class="catalog_body">
+	<div class="sub-nav-body">
 		<ul class="padding_none ul_style_none">
-			<li
-				ng-style="categoryName == subNavData.name && {'background-color':'#EEEEEE'}"
-				class="menu_li" ng-repeat="subNavData in subNavDatas.data">
+			<li ng-style="navItemName == subNavData.name && {'background-color':'#EEEEEE'}" ng-repeat="subNavData in subNavDatas.data">
 				<!-- href="#/blog/{{subNavDatas.typeCode}}/{{subNavData.name}}" -->
-
 				<a ng-if="subNavDatas.typeCode=='category'"
-				ng-click="selectCategory(subNavData.name)">{{subNavData.name}}
-					<span style="color:blue">({{subNavData.counts}})</span>
-			</a>
+				ng-click="selectCategory(subNavData.name)">{{subNavData.name}} <span
+					style="color:blue">({{subNavData.counts}})</span>
+				</a>
+				
+				<a ng-if="subNavDatas.typeCode=='tag'"
+				ng-click="selectTag(subNavData.name)">{{subNavData.name}} <span
+					style="color:blue">({{subNavData.counts}})</span>
+				</a>
 			</li>
 		</ul>
 	</div>

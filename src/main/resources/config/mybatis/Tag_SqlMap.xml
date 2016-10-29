@@ -59,11 +59,13 @@
 		ORDER BY id
 	</select>
 	<select id="selectVoBy" resultMap="TagVoMap">
-		SELECT t1.*,count(*) as
-		article_counts
+		SELECT t1.*,IF(count(*)=1,0,count(*)) as article_counts
 		FROM t_tag t1
 		left join t_article t2
 		on t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
+		<if test="articleStatus!=null">
+	    	and t2.status = #{articleStatus,jdbcType=INTEGER}
+	    </if>
 		WHERE t1.author_id = #{authorId,jdbcType=INTEGER}
 		group by t1.id
 		ORDER BY article_counts desc
@@ -75,6 +77,7 @@
 		name = #{name,jdbcType=VARCHAR}
 		and author_id =
 		#{authorId,jdbcType=INTEGER}
+		limit 1
 	</select>
 
 </mapper>

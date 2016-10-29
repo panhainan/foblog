@@ -84,7 +84,7 @@ public interface IArticleService {
      */
     List<Tag> tagGetAllBy(int authorId);
     
-    List<TagVo> tagGetAllVoBy(int authorId);
+    List<TagVo> tagGetAllVoBy(int authorId,Integer articleStatus);
 
     /**
      * 添加文章
@@ -166,7 +166,9 @@ public interface IArticleService {
 
 	List<CategoryVo> categoryGetAllVoBy(int authorId,Integer articleStatus);
 
-	List<ArticleVo> articleGetAllByCategoryName(int i, String name);
+	List<ArticleVo> articleGetAllByCategoryName(int authorId, String categoryName);
+
+	List<ArticleVo> articleGetAllByTagName(int authorId, String tagName);
 
 
 

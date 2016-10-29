@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import studio.baxia.fo.common.CommonConstant;
+import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.common.TreeInfoResult;
@@ -197,13 +198,13 @@ public class ArticleServiceImpl implements IArticleService {
 	}
 
 	@Override
-	public List<TagVo> tagGetAllVoBy(int authorId) {
-		List<TagVo> result = iTagDao.selectVoBy(authorId);
+	public List<TagVo> tagGetAllVoBy(int authorId,Integer articleStatus) {
+		List<TagVo> result = iTagDao.selectVoBy(authorId,articleStatus);
 		return result;
 	}
 	private String[] tagGetAllNamesBy(String tagIds,Integer articleAuthorId){
 		String[] tagIdsArr = tagIds.split(",");
-		if (tagIdsArr != null) {
+		if (tagIdsArr != null && tagIdsArr[0]!="") {
 			String[] tagNames = new String[tagIdsArr.length];
 			List<Integer> tagIdList = new ArrayList<Integer>(tagIdsArr.length);
 			for (int i=0;i<tagIdsArr.length;i++) {
@@ -434,10 +435,18 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public List<ArticleVo> articleGetAllByCategoryName(int authorId,String categoryName){
 //		String s = urlStrParamTranscoding(categoryName);
-		List<Category> list = iCategoryDao.selectByName(1, categoryName);
-		if(list!=null && list.size()>0){
-			Category category = list.get(0);
+		Category category = iCategoryDao.selectByName(1, categoryName);
+		if(category!=null ){
 			List<ArticleVo> result = iArticleDao.selectVoBy(new Article().setAuthorId(1).setStatus(CommonConstant.ACTICLE_STATUS_BLOG).setCategoryIds(category.getId()), null);
+			return result;
+		}
+		return null;
+	}
+	@Override
+	public List<ArticleVo> articleGetAllByTagName(int authorId, String tagName) {
+		Tag tag = iTagDao.selectByName(tagName,1);
+		if(tag!=null){
+			List<ArticleVo> result = iArticleDao.selectVoBy(new Article().setAuthorId(1).setStatus(CommonConstant.ACTICLE_STATUS_BLOG).setTagIds(tag.getId()+","), null);
 			return result;
 		}
 		return null;
@@ -523,5 +532,7 @@ public class ArticleServiceImpl implements IArticleService {
 				null);
 		return treeInfo;
 	}
+
+	
 
 }

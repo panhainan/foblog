@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+
+#manage-sub-nav {
+	border-right: 1px #EBEBEB solid;
+	padding: 0px;
+	background-color: #fff;
+	position: fixed;
+	height: 100%;
+	top: 0;
+	width: 120px;
+	-webkit-transition: margin 0.3s ease;
+	-moz-transition: margin 0.3s ease;
+	-o-transition: margin 0.3s ease;
+	transition: margin 0.3s ease;
+}
+/* 值等于sub-nav的宽度 */
+.manage-margin_left_sub_nav_width {
+	margin-left: 120px;
+}
+.manage-collapsed {
+	/* hide it for small displays*/
+	display: none;
+}
+
+@media ( min-width : 992px) {
+	.manage-collapsed {
+		display: block;
+		/* same width as sidebar */
+		margin-left: -25%;
+	}
+}
+
+.manage-toggle-sidebar-div {
+	position: fixed;
+	top: 5px;
+	z-index: 100px;
+}
+
+.manage-toggle-sidebar {
+	padding: 10px 6px;
+	border: 0;
+	margin: 0;
+}
+
+#manage-close-open-icon {
+	-webkit-transition: width 0.3s ease;
+	-moz-transition: width 0.3s ease;
+	-o-transition: width 0.3s ease;
+	transition: width 0.3s ease;
+}
+
+.manage-sub-nav-header {
+	font: 15px/1.5 "楷体", "Arial", "Helvetica Neue", Helvetica,
+		"Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei",
+		"Microsoft Yahei", sans-serif;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-bottom: 1px #EBEBEB dashed;
+}
+
+.manage-sub-nav-body ul li {
+	padding-left: 0px;
+	height: 30px;
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px #EBEBEB dashed;
+}
+
+.manage-sub-nav-body ul li a {
+	height: 30px;
+	line-height: 28px;
+	float: left;
+	color: #8D8D8D;
+	font-size: 14px;
+	text-decoration: none;
+	display: inline-block;
+	text-overflow: ellipsis; /*这就是省略号喽*/
+	overflow: hidden; /*设置超过的隐藏*/
+	white-space: nowrap; /*设置不折行*/
+	width: 100%; /*设置宽度*/
+}
+
+.manage-sub-nav-body ul li a:hover {
+	color: #000;
+	background-color: #EBEBEB;
+	text-decoration: none;
+}

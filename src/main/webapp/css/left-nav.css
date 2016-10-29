@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+.navbar-vertical-left {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 260px;
+	height: 100%;
+	overflow: auto;
+	border: none;
+	border-radius: 0;
+	margin: 0;
+	background-color: #fff;
+	z-index: 999;
+	border-right: 1px #EBEBEB solid;
+	color:#000;
+}
+@media ( max-width : 768px) {
+	.navbar-vertical-left {
+		position: fixed;
+		bottom: 0;
+		top: auto;
+		height: auto;
+		width: 100%;
+	}
+	.navbar-vertical-left, .navbar-vertical-left ul.navbar-nav {
+		-webkit-transition: none;
+		-moz-transition: none;
+		transition: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		transform: none;
+	}
+	.navbar-vertical-left ul.navbar-nav>li {
+		display: table-cell;
+	}
+	.navbar-vertical-left ul.navbar-nav>li>a {
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+		height: 50px;
+		line-height: 30px;
+	}
+	.navbar-vertical-left ul.navbar-nav>li>a>i.fa {
+		margin: 0;
+	}
+	.navbar-vertical-left ul.navbar-nav>li>a>span {
+		display: none;
+	}
+}
+
+.sidebar-nav {
+	font: 17px/1.0 "楷体", "Arial", "Helvetica Neue", Helvetica,
+		"Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei",
+		"Microsoft Yahei", sans-serif;
+	background-color: #FFFFFF;
+	text-align: center;
+	height: 100%;
+	padding: 0;
+	z-index: 10;
+}
+
+/* make sidebar nav vertical */
+@media ( min-width : 768px) {
+	.sidebar-nav .navbar .navbar-collapse {
+		padding: 0;
+		max-height: none;
+	}
+	.sidebar-nav .navbar ul {
+		float: none;
+		display: block;
+	}
+	.sidebar-nav .navbar li {
+		float: none;
+		display: block;
+	}
+	.sidebar-nav .navbar li a {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+}
+

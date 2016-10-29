@@ -42,8 +42,12 @@
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 
 <link rel="stylesheet" href="<%=basePath%>css/base.css" />
-<link rel="stylesheet" href="<%=basePath%>css/index.view.css" />
-
+<link rel="stylesheet" href="css/left-nav.css" />
+<link rel="stylesheet" href="css/top-nav.css" />
+<link rel="stylesheet" href="css/left-sub-nav.css" />
+<link rel="stylesheet" href="css/manage-left-sub-nav.css" />
+<link rel="stylesheet" href="css/modules/blog.view.css" />
+<link rel="stylesheet" href="css/modules/manage.view.css" />
 
 <script src="<%=basePath%>plugins/jquery/jquery-1.11.3.min.js"></script>
 <script src="<%=basePath%>plugins/bootstrap/bootstrap.min.js"></script>
@@ -81,11 +85,21 @@
 
 <script src="modules/common/right-nav.controller.js"></script>
 <!-- 管理员即作者操作 -->
-<script src="<%=basePath%>modules/manage/sign/sign.manage.controller.js"></script>
+<script src="modules/manage/manage.controller.js"></script>
+<script src="modules/manage/sign/sign.manage.controller.js"></script>
 <script src="modules/manage/article/article.manage.service.js"></script>
 <script src="modules/manage/article/article.manage.controller.js"></script>
 <script src="modules/manage/article/article.form.manage.controller.js"></script>
 <script src="modules/manage/article/article.detail.manage.controller.js"></script>
+
+<script src="modules/manage/category/category.manage.service.js"></script>
+<script src="modules/manage/category/category.manage.controller.js"></script>
+<script src="modules/manage/tag/tag.manage.service.js"></script>
+<script src="modules/manage/tag/tag.manage.controller.js"></script>
+<script src="modules/manage/info/info.manage.service.js"></script>
+<script src="modules/manage/info/info.manage.controller.js"></script>
+<script src="modules/manage/friendlink/friendlink.manage.service.js"></script>
+<script src="modules/manage/friendlink/friendlink.manage.controller.js"></script>
 
 </head>
 <body>
