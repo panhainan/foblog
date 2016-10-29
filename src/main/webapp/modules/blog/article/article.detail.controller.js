@@ -6,8 +6,10 @@ app.controller("ArticleDetailController", function($scope, $routeParams,
 		ArticleService.get(articleTitle).then(function(data) {
 			console.log(data);
 			if(data.resultData!=null){
-				$scope.article = data.resultData;
-				$scope.article.content=marked($scope.article.content)
+				$scope.article = data.resultData.currentArticle;
+				$scope.article.content=marked($scope.article.content);
+				$scope.preArticle = data.resultData.preArticle;
+				$scope.nextArticle = data.resultData.nextArticle;
 			}else{
 				$scope.error =true;
 			}

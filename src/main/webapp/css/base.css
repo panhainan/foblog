@@ -214,9 +214,6 @@ a {
 	.body-content-body{
 		margin: 0;
 	}
-	.content{
-		padding:10px;
-	}
 	.customContainer,.customManageContainer,.customNoMarginRightContainer{
 		margin-left: 0px;
 		margin-right:0px;

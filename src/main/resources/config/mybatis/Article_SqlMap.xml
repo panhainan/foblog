@@ -71,14 +71,16 @@
 		SET
 		status=#{status,jdbcType=INTEGER}
 		WHERE id =#{id,jdbcType=INTEGER}
-		AND author_id = #{authorId,jdbcType=INTEGER}
+		AND author_id =
+		#{authorId,jdbcType=INTEGER}
 	</update>
 	<select id="selectVoById" resultMap="ArticleVoMap">
 		SELECT t1.*,t2.name as
 		category_name
 		FROM t_article t1
 		LEFT JOIN t_category t2
-		ON t1.category_ids = t2.id
+		ON
+		t1.category_ids = t2.id
 		WHERE
 		t1.id = #{id,jdbcType=INTEGER}
 		AND
@@ -105,7 +107,10 @@
 		WHERE
 		title = #{title,jdbcType=VARCHAR}
 		AND
-		t1.author_id = #{authorId,jdbcType=INTEGER}
+		status = #{status,jdbcType=VARCHAR}
+		AND
+		t1.author_id =
+		#{authorId,jdbcType=INTEGER}
 		AND
 		t1.category_ids = t2.id
 	</select>
@@ -135,7 +140,8 @@
 			</if>
 		</where>
 		ORDER BY write_time DESC
-		<if test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
+		<if
+			test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
 			LIMIT
 			#{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
 		</if>
@@ -192,10 +198,34 @@
 				AND t1.status =#{article.status,jdbcType=VARCHAR}
 			</if>
 		</where>
-		ORDER BY t1.write_time DESC
-		<if test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
+		ORDER BY t1.pub_time DESC
+		<if
+			test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
 			LIMIT
 			#{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
 		</if>
+	</select>
+	<select id="selectNextOrPreVoBy" resultMap="ArticleMap">
+		select t1.id,t1.title
+		from t_article t1
+		<where>
+			<if test="article.authorId!=null">
+				AND t1.author_id = #{article.authorId,jdbcType=INTEGER}
+			</if>
+			<if test="article.status!=null">
+				AND t1.status =#{article.status,jdbcType=VARCHAR}
+			</if>
+			<if test="nextOrPreVo != true">
+				AND t1.pub_time > #{article.pubTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="nextOrPreVo == true">
+				AND #{article.pubTime,jdbcType=TIMESTAMP} > t1.pub_time
+			</if>
+		</where>
+		order by t1.pub_time
+		<if test="nextOrPreVo == true">
+			desc
+		</if>
+		limit 1
 	</select>
 </mapper>

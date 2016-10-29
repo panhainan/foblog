@@ -79,7 +79,8 @@ public interface IArticleDao {
      * @param articleAuthorId
      * @return
      */
-    ArticleVo selectVoByTitle(@Param("title")String articleTitle, @Param("authorId")Integer articleAuthorId);
+    ArticleVo selectVoByTitle(@Param("title")String articleTitle, @Param("authorId")Integer articleAuthorId,@Param("status")Integer articleStatus);
 
-	
+
+    Article selectNextOrPreVoBy(@Param("article")Article article, @Param("nextOrPreVo")Boolean nextOrPreVo);
 }

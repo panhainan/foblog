@@ -1,8 +1,11 @@
 package studio.baxia.fo.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -202,12 +205,18 @@ public class ArticleServiceImpl implements IArticleService {
 		String[] tagIdsArr = tagIds.split(",");
 		if (tagIdsArr != null) {
 			String[] tagNames = new String[tagIdsArr.length];
+			List<Integer> tagIdList = new ArrayList<Integer>(tagIdsArr.length);
 			for (int i=0;i<tagIdsArr.length;i++) {
 				if(tagIdsArr[i]!=""){
-					Integer tagId = Integer.parseInt(tagIdsArr[i]);
-					Tag tag = iTagDao.selectById(tagId, articleAuthorId);
-					tagNames[i]=tag.getName();
+					tagIdList.add(Integer.parseInt(tagIdsArr[i]));
+//					Integer tagId = Integer.parseInt(tagIdsArr[i]);
+//					Tag tag = iTagDao.selectById(tagId, articleAuthorId);
+//					tagNames[i]=tag.getName();
 				}
+			}
+			List<Tag> tags= iTagDao.selectByIds(tagIdList, articleAuthorId);
+			for (int i = 0; i < tags.size(); i++) {
+				tagNames[i]=tags.get(i).getName();
 			}
 			return tagNames;
 		}
@@ -342,17 +351,22 @@ public class ArticleServiceImpl implements IArticleService {
 	 * @return
 	 */
 	@Override
-	public ArticleVo articleVoGetByTitle(String articleTitle,
+	public Map<String,Object> articleVoGetByTitle(String articleTitle,
 			Integer articleAuthorId) {
-		
 //		String s = urlStrParamTranscoding(articleTitle);
 		ArticleVo article = iArticleDao.selectVoByTitle(articleTitle,
-				articleAuthorId);
+				articleAuthorId,CommonConstant.ACTICLE_STATUS_BLOG);
 		if(article==null){
 			return null;
 		}
+		Map<String,Object> map = new HashMap<String,Object>();
 		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),articleAuthorId));
-		return article;
+		Article preArticle = iArticleDao.selectNextOrPreVoBy(article, false);
+		Article nextArticle = iArticleDao.selectNextOrPreVoBy(article, true);
+		map.put("currentArticle", article);
+		map.put("preArticle", preArticle);
+		map.put("nextArticle", nextArticle);
+		return map;
 	}
 
 	private String urlStrParamTranscoding(String param) {

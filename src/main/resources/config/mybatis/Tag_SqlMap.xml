@@ -14,8 +14,10 @@
 		<result property="counts" column="article_counts" />
 	</resultMap>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO t_tag(name,author_id)
-		VALUES (#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
+		INSERT
+		INTO t_tag(name,author_id)
+		VALUES
+		(#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
 	</insert>
 
 	<delete id="delete">
@@ -26,30 +28,53 @@
 
 	<select id="selectById" resultMap="TagMap">
 		SELECT * FROM t_tag
-		WHERE id=#{id,jdbcType=INTEGER}
+		WHERE
+		id=#{id,jdbcType=INTEGER}
 		AND author_id = #{authorId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByIds" resultMap="TagMap">
+		SELECT * FROM t_tag
+		WHERE
+		author_id = #{authorId,jdbcType=INTEGER}
+		<if test="ids!=null">
+			<if test="ids.size()==0">
+				AND id = 0
+			</if>
+			<if test="ids.size()!=0">
+				AND id IN
+				<foreach collection="ids" index="index" item="item" open="("
+					separator="," close=")">
+					#{item,jdbcType=INTEGER}
+				</foreach>
+			</if>
+		</if>
+
 	</select>
 
 	<select id="selectBy" resultMap="TagMap">
 		SELECT * FROM t_tag
-		WHERE author_id = #{authorId,jdbcType=INTEGER}
+		WHERE
+		author_id = #{authorId,jdbcType=INTEGER}
 		ORDER BY id
 	</select>
 	<select id="selectVoBy" resultMap="TagVoMap">
-		SELECT t1.*,count(*) as article_counts
-			FROM t_tag t1
-			left join t_article t2
-			on t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
-			WHERE t1.author_id = #{authorId,jdbcType=INTEGER}
-			group by t1.id
-			ORDER BY article_counts desc
+		SELECT t1.*,count(*) as
+		article_counts
+		FROM t_tag t1
+		left join t_article t2
+		on t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
+		WHERE t1.author_id = #{authorId,jdbcType=INTEGER}
+		group by t1.id
+		ORDER BY article_counts desc
 	</select>
 
 	<select id="selectByName" resultMap="TagMap">
 		SELECT * FROM t_tag
 		WHERE
 		name = #{name,jdbcType=VARCHAR}
-		and author_id = #{authorId,jdbcType=INTEGER}
+		and author_id =
+		#{authorId,jdbcType=INTEGER}
 	</select>
 
 </mapper>

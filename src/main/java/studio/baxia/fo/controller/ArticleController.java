@@ -1,6 +1,7 @@
 package studio.baxia.fo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,6 @@ import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.pojo.Article;
-import studio.baxia.fo.pojo.Category;
-import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IArticleService;
 import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.vo.ArticleVo;
@@ -50,8 +49,8 @@ public class ArticleController {
     @ResponseBody
     @RequestMapping(value = "/article/{title:.+}",method = RequestMethod.GET)
     public CommonResult getByTitle(@PathVariable("title")String articleTitle){
-        ArticleVo article = iArticleService.articleVoGetByTitle(articleTitle, 1);
-        return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
+        Map<String,Object> map = iArticleService.articleVoGetByTitle(articleTitle, 1);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,"",map);
     }
     @ResponseBody
     @RequestMapping(value = "/category/{name:.+}",method = RequestMethod.GET)

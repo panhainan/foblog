@@ -22,9 +22,9 @@
 								</div>
 								<div class="col-md-6" style="padding:0;">
 									<span style="font-family: '楷体'">标签：</span> <span
-										ng-repeat="tName in article.tagNames"> <span
+										ng-repeat="tName in article.tagNames"> <a href="#/blog/tag/{{tName}}"><span
 										style="background-color: #EEEEEE;font-size:14px;padding:2px 4px;margin:0 8px 0 0;">
-											{{tName}} </span>
+											{{tName}} </span></a>
 									</span>
 								</div>
 								<div class="col-sm-12" style="margin-bottom: 0px;padding:0;">
@@ -37,12 +37,17 @@
 							</div>
 						</div>
 						<div class="col-sm-12"
-							style="padding:10px 0;border-top:1px dashed #EBEBEB;border-bottom:1px dashed #EBEBEB;">
+							style="padding:10px 0px;border-top:1px dashed #EBEBEB;border-bottom:1px dashed #EBEBEB;">
 							<div ng-bind-html="article.content | trusted"></div>
 						</div>
-						<div class="col-sm-12" style="padding:0;">
-							<div style="padding-top: 10px;text-align: right;height: 40px">
-								<a href="#/blog" class="btn btn-default">返回列表</a>
+						<div class="col-sm-12" style="padding:0;padding-top: 20px;">
+							<div class="col-sm-12 col-md-6">
+								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span style="font-family: '楷体';">上一篇：</span>{{preArticle.title}}</a>
+								<span ng-if="!preArticle"><span style="font-family: '楷体';">上一篇：</span>没有了...</span>
+							</div>
+							<div class="col-sm-12 col-md-6" style="text-align: right">
+								<a ng-if="nextArticle" href="#/blog/article/{{nextArticle.title}}"><span style="font-family: '楷体';">下一篇：</span>{{nextArticle.title}}</a>
+								<span ng-if="!nextArticle"><span style="font-family: '楷体';">下一篇：</span>没有了...</span>
 							</div>
 						</div>
 					</div>

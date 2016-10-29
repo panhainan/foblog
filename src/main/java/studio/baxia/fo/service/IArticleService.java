@@ -12,6 +12,7 @@ import studio.baxia.fo.vo.CategoryVo;
 import studio.baxia.fo.vo.TagVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Pan on 2016/10/16.
@@ -120,7 +121,7 @@ public interface IArticleService {
      * @param articleAuthorId 文章作者id
      * @return
      */
-    ArticleVo articleVoGetByTitle(String articleTitle, Integer articleAuthorId);
+    Map<String, Object> articleVoGetByTitle(String articleTitle, Integer articleAuthorId);
     /**
      * 通过作者id、文章状态、分页信息获取分页后的文章列表信息
      * @param articleAuthorId 作者id
