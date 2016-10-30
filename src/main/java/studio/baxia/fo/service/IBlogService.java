@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by Pan on 2016/10/16.
  */
-public interface IArticleService {
+public interface IBlogService {
     /**
      * 添加类别
      * @param category 类别（parent_id,name,author_id）
@@ -60,7 +60,9 @@ public interface IArticleService {
      * @return
      */
     Boolean tagAdd(Tag tag);
-
+    
+    
+	Boolean tagEdit(Tag tag);
     /**
      * 通过标签id删除标签
      * @param tagId 标签id
@@ -170,6 +172,7 @@ public interface IArticleService {
 
 	List<ArticleVo> articleGetAllByTagName(int authorId, String tagName);
 
+	List<Article> articleGetAllByCategoryId(int authorId, int id, Integer articleStatus);
 
 
 }

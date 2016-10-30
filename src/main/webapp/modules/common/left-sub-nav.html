@@ -1,8 +1,7 @@
 
 <div>
 	<div class="sub-nav-header">
-		<span ng-if="subNavDatas.typeName">— {{subNavDatas.typeName}}导航
-			—</span>
+		<span ng-if="subNavDatas.typeName">{{subNavDatas.typeName}}导航</span>
 	</div>
 	<div class="sub-nav-body">
 		<ul class="padding_none ul_style_none">
@@ -10,12 +9,12 @@
 				<!-- href="#/blog/{{subNavDatas.typeCode}}/{{subNavData.name}}" -->
 				<a ng-if="subNavDatas.typeCode=='category'"
 				ng-click="selectCategory(subNavData.name)">{{subNavData.name}} <span
-					style="color:blue">({{subNavData.counts}})</span>
+					style="color:#337AB7;">({{subNavData.counts}})</span>
 				</a>
 				
 				<a ng-if="subNavDatas.typeCode=='tag'"
 				ng-click="selectTag(subNavData.name)">{{subNavData.name}} <span
-					style="color:blue">({{subNavData.counts}})</span>
+					style="color:#337AB7;">({{subNavData.counts}})</span>
 				</a>
 			</li>
 		</ul>

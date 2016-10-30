@@ -5,8 +5,10 @@ app.controller("ArticleDetailManageController", function($scope, $routeParams,
 	$scope.get = function(articleId) {
 		ArticleManageService.get(articleId).then(function(data) {
 			console.log(data);
-			$scope.article = data.resultData;
-			$scope.article.content=marked($scope.article.content)
+			if(data.resultData!=null){
+				data.resultData.content = marked(data.resultData.content)
+				$scope.article = data.resultData;
+			}
 		});
 	}
 	$scope.changeToBlog= function(statusValue){

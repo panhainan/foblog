@@ -5,13 +5,13 @@ app.controller("ArticleDetailController", function($scope, $routeParams,
 	$scope.get = function(articleTitle) {
 		ArticleService.get(articleTitle).then(function(data) {
 			console.log(data);
-			if(data.resultData!=null){
+			if (data.resultData != null) {
+				data.resultData.currentArticle.content = marked(data.resultData.currentArticle.content)
 				$scope.article = data.resultData.currentArticle;
-				$scope.article.content=marked($scope.article.content);
 				$scope.preArticle = data.resultData.preArticle;
 				$scope.nextArticle = data.resultData.nextArticle;
-			}else{
-				$scope.error =true;
+			} else {
+				$scope.error = true;
 			}
 		});
 	}

@@ -16,6 +16,7 @@
 .margin_left_sub_nav_width {
 	margin-left: 160px;
 }
+
 .collapsed {
 	/* hide it for small displays*/
 	display: none;
@@ -30,13 +31,28 @@
 }
 
 .toggle-sidebar-div {
+	background-color: #E5E5E5;
 	position: fixed;
-	top: 5px;
-	z-index: 100px;
+	top: 45%;
+	z-index: 100;
+	width:20px;
+	height:100px;
 }
-
+.toggle-sidebar-div a{
+	text-decoration:none;
+	background-color: #E5E5E5;
+	display: block;
+	padding:0;
+}
+.toggle-sidebar-div a span{
+	color:#337AB7;
+	padding-top:40px;
+	padding-left:2px;
+	width:30px;
+	height:100px;
+	display: block;
+}
 .toggle-sidebar {
-	padding: 10px 6px;
 	border: 0;
 	margin: 0;
 }
@@ -60,7 +76,7 @@
 
 .sub-nav-body ul li {
 	padding-left: 0px;
-	height: 30px;
+	height: 40px;
 	width: 100%;
 	text-indent: 10px;
 	border-bottom: 1px #EBEBEB dashed;
@@ -68,8 +84,8 @@
 
 .sub-nav-body ul li a {
 	padding-left: 8px;
-	height: 30px;
-	line-height: 28px;
+	height: 40px;
+	line-height: 42px;
 	float: left;
 	color: #8D8D8D;
 	font-size: 14px;
@@ -85,4 +101,24 @@
 	color: #000;
 	background-color: #EBEBEB;
 	text-decoration: none;
+}
+
+@media ( max-width : 768px) {
+	.margin_left_sub_nav_width{
+		margin-left: 100px;
+	}
+	#sub-nav{
+		width:100px;
+	}
+	#sub-nav{
+		position: fixed;
+		top:55px;
+	}
+	.toggle-sidebar-div {
+		position: fixed;
+		top:45%;
+	}
+	.sub-nav-body ul li{
+		text-indent: 0px;
+	}
 }

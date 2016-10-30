@@ -39,7 +39,7 @@
 											title="点击查看">{{article.title}}</a></td>
 										<td class="visible-lg">{{article.categoryName}}</td>
 										<td><span ng-if="article.status==1">博客</span><span
-											ng-if="article.status==0">草稿</span></td>
+											ng-if="article.status==0" style="color:red">草稿</span></td>
 										<td class="visible-lg">{{article.writeTime | date
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<!-- <td>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</td> -->

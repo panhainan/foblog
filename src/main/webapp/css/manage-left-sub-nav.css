@@ -61,15 +61,15 @@
 
 .manage-sub-nav-body ul li {
 	padding-left: 0px;
-	height: 30px;
+	height: 40px;
 	width: 100%;
 	text-align: center;
 	border-bottom: 1px #EBEBEB dashed;
 }
 
 .manage-sub-nav-body ul li a {
-	height: 30px;
-	line-height: 28px;
+	height: 40px;
+	line-height:42px;
 	float: left;
 	color: #8D8D8D;
 	font-size: 14px;
@@ -85,4 +85,23 @@
 	color: #000;
 	background-color: #EBEBEB;
 	text-decoration: none;
+}
+@media ( max-width : 768px) {
+	.manage-margin_left_sub_nav_width{
+		margin-left: 100px;
+	}
+	#manage-sub-nav{
+		width:100px;
+	}
+	#manage-sub-nav {
+		position: fixed;
+		top: 55px;
+	}
+	.manage-toggle-sidebar-div{
+		position: fixed;
+		top: 60px;
+	}
+	.manage-sub-nav-body ul li{
+		text-indent: 0px;
+	}
 }

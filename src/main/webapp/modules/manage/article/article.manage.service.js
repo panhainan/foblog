@@ -19,10 +19,10 @@ app.service("ArticleManageService", function(RequestService) {
 		return RequestService.deleteRequest('/manage/article/' + id, cfg_form); 
 	};
     this.getCategorys = function () {
-    	return RequestService.getRequest('/manage/article/category', cfg_form);
+    	return RequestService.getRequest('/manage/category', cfg_form);
     };
     this.getTags = function () {
-    	return RequestService.getRequest('/manage/article/tag', cfg_form);
+    	return RequestService.getRequest('/manage/tag', cfg_form);
     };
     
 	

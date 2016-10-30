@@ -24,7 +24,7 @@ import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Category;
 import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
-import studio.baxia.fo.service.IArticleService;
+import studio.baxia.fo.service.IBlogService;
 import studio.baxia.fo.vo.ArticleVo;
 import studio.baxia.fo.vo.CategoryVo;
 import studio.baxia.fo.vo.TagVo;
@@ -33,7 +33,7 @@ import studio.baxia.fo.vo.TagVo;
  * Created by Pan on 2016/10/16.
  */
 @Service("articleService")
-public class ArticleServiceImpl implements IArticleService {
+public class BlogServiceImpl implements IBlogService {
 
 	@Autowired
 	private ICategoryDao iCategoryDao;
@@ -123,11 +123,15 @@ public class ArticleServiceImpl implements IArticleService {
 		List<Category> result = iCategoryDao.selectBy(authorId, null);
 		return result;
 	}
+
 	@Override
-	public List<CategoryVo> categoryGetAllVoBy(int authorId,Integer articleStatus) {
-		List<CategoryVo> result = iCategoryDao.selectVoBy(authorId,articleStatus, null);
+	public List<CategoryVo> categoryGetAllVoBy(int authorId,
+			Integer articleStatus) {
+		List<CategoryVo> result = iCategoryDao.selectVoBy(authorId,
+				articleStatus, null);
 		return result;
 	}
+
 	/**
 	 * 通过类别id获取类别
 	 *
@@ -153,7 +157,11 @@ public class ArticleServiceImpl implements IArticleService {
 		Integer result = iTagDao.insert(tag);
 		return returnResult(result);
 	}
-
+	@Override
+	public Boolean tagEdit(Tag tag) {
+		Integer result = iTagDao.update(tag);
+		return returnResult(result);
+	}
 	/**
 	 * 通过标签id删除标签
 	 *
@@ -198,37 +206,38 @@ public class ArticleServiceImpl implements IArticleService {
 	}
 
 	@Override
-	public List<TagVo> tagGetAllVoBy(int authorId,Integer articleStatus) {
-		List<TagVo> result = iTagDao.selectVoBy(authorId,articleStatus);
+	public List<TagVo> tagGetAllVoBy(int authorId, Integer articleStatus) {
+		List<TagVo> result = iTagDao.selectVoBy(authorId, articleStatus);
 		return result;
 	}
-	private String[] tagGetAllNamesBy(String tagIds,Integer articleAuthorId){
+
+	private String[] tagGetAllNamesBy(String tagIds, Integer articleAuthorId) {
 		String[] tagIdsArr = tagIds.split(",");
-		if (tagIdsArr != null && tagIdsArr[0]!="") {
+		if (tagIdsArr != null && tagIdsArr[0] != "") {
 			String[] tagNames = new String[tagIdsArr.length];
 			List<Integer> tagIdList = new ArrayList<Integer>(tagIdsArr.length);
-			for (int i=0;i<tagIdsArr.length;i++) {
-				if(tagIdsArr[i]!=""){
+			for (int i = 0; i < tagIdsArr.length; i++) {
+				if (tagIdsArr[i] != "") {
 					tagIdList.add(Integer.parseInt(tagIdsArr[i]));
-//					Integer tagId = Integer.parseInt(tagIdsArr[i]);
-//					Tag tag = iTagDao.selectById(tagId, articleAuthorId);
-//					tagNames[i]=tag.getName();
+					// Integer tagId = Integer.parseInt(tagIdsArr[i]);
+					// Tag tag = iTagDao.selectById(tagId, articleAuthorId);
+					// tagNames[i]=tag.getName();
 				}
 			}
-			List<Tag> tags= iTagDao.selectByIds(tagIdList, articleAuthorId);
+			List<Tag> tags = iTagDao.selectByIds(tagIdList, articleAuthorId);
 			for (int i = 0; i < tags.size(); i++) {
-				tagNames[i]=tags.get(i).getName();
+				tagNames[i] = tags.get(i).getName();
 			}
 			return tagNames;
 		}
 		return null;
 	}
-	
-	private String tagGetIdsBy(String[] tagNames){
+
+	private String tagGetIdsBy(String[] tagNames) {
 		if (tagNames != null) {
 			StringBuilder strBuilderTagIds = new StringBuilder();
 			for (int i = 0; i < tagNames.length; i++) {
-				if(tagNames[i]!=null && tagNames[i].trim()!=""){
+				if (tagNames[i] != null && tagNames[i].trim() != "") {
 					Tag t = iTagDao.selectByName(tagNames[i], 1);
 					if (t != null) {
 						strBuilderTagIds.append(t.getId() + ",");
@@ -281,10 +290,11 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public Integer articleEdit(ArticleVo article) {
 		Integer result = 0;
-		if(article.getOnlyChangeStatus()!=null &&article.getOnlyChangeStatus()==true){
+		if (article.getOnlyChangeStatus() != null
+				&& article.getOnlyChangeStatus() == true) {
 			article.setAuthorId(1);
 			result = iArticleDao.updateStatus(article);
-		}else{
+		} else {
 			if (article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
 				article.setPubTime(new Date());
 			}
@@ -334,11 +344,13 @@ public class ArticleServiceImpl implements IArticleService {
 	 */
 	@Override
 	public ArticleVo articleVoGetById(int articleId, int articleAuthorId) {
-		ArticleVo article = iArticleDao.selectVoById(articleId, articleAuthorId);
-		if(article==null){
+		ArticleVo article = iArticleDao
+				.selectVoById(articleId, articleAuthorId);
+		if (article == null) {
 			return null;
 		}
-		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),articleAuthorId));
+		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),
+				articleAuthorId));
 		return article;
 	}
 
@@ -352,16 +364,17 @@ public class ArticleServiceImpl implements IArticleService {
 	 * @return
 	 */
 	@Override
-	public Map<String,Object> articleVoGetByTitle(String articleTitle,
+	public Map<String, Object> articleVoGetByTitle(String articleTitle,
 			Integer articleAuthorId) {
-//		String s = urlStrParamTranscoding(articleTitle);
+		// String s = urlStrParamTranscoding(articleTitle);
 		ArticleVo article = iArticleDao.selectVoByTitle(articleTitle,
-				articleAuthorId,CommonConstant.ACTICLE_STATUS_BLOG);
-		if(article==null){
+				articleAuthorId, CommonConstant.ACTICLE_STATUS_BLOG);
+		if (article == null) {
 			return null;
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
-		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),articleAuthorId));
+		Map<String, Object> map = new HashMap<String, Object>();
+		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),
+				articleAuthorId));
 		Article preArticle = iArticleDao.selectNextOrPreVoBy(article, false);
 		Article nextArticle = iArticleDao.selectNextOrPreVoBy(article, true);
 		map.put("currentArticle", article);
@@ -374,9 +387,9 @@ public class ArticleServiceImpl implements IArticleService {
 		String s = null;
 		try {
 			if (param.equals(new String(param.getBytes("UTF-8"), "UTF-8"))) {
-                s = param;
-            }
-			s  = new String(param.getBytes("ISO-8859-1"),"UTF-8");
+				s = param;
+			}
+			s = new String(param.getBytes("ISO-8859-1"), "UTF-8");
 			System.out.println(s);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -432,21 +445,38 @@ public class ArticleServiceImpl implements IArticleService {
 				pageConfig, resultCount);
 		return pageInfoResult;
 	}
+
 	@Override
-	public List<ArticleVo> articleGetAllByCategoryName(int authorId,String categoryName){
-//		String s = urlStrParamTranscoding(categoryName);
+	public List<ArticleVo> articleGetAllByCategoryName(int authorId,
+			String categoryName) {
+		// String s = urlStrParamTranscoding(categoryName);
 		Category category = iCategoryDao.selectByName(1, categoryName);
-		if(category!=null ){
-			List<ArticleVo> result = iArticleDao.selectVoBy(new Article().setAuthorId(1).setStatus(CommonConstant.ACTICLE_STATUS_BLOG).setCategoryIds(category.getId()), null);
+		if (category != null) {
+			List<ArticleVo> result = iArticleDao.selectVoBy(
+					new Article().setAuthorId(1)
+							.setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
+							.setCategoryIds(category.getId()), null);
 			return result;
 		}
 		return null;
 	}
+
+	@Override
+	public List<Article> articleGetAllByCategoryId(int authorId,
+			int categoryId, Integer articleStatus) {
+		List<Article> list =iArticleDao.selectBy(new Article().setAuthorId(authorId)
+				.setCategoryIds(categoryId).setStatus(articleStatus), null);
+		return list;
+	}
+
 	@Override
 	public List<ArticleVo> articleGetAllByTagName(int authorId, String tagName) {
-		Tag tag = iTagDao.selectByName(tagName,1);
-		if(tag!=null){
-			List<ArticleVo> result = iArticleDao.selectVoBy(new Article().setAuthorId(1).setStatus(CommonConstant.ACTICLE_STATUS_BLOG).setTagIds(tag.getId()+","), null);
+		Tag tag = iTagDao.selectByName(tagName, 1);
+		if (tag != null) {
+			List<ArticleVo> result = iArticleDao.selectVoBy(
+					new Article().setAuthorId(1)
+							.setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
+							.setTagIds(tag.getId() + ","), null);
 			return result;
 		}
 		return null;

@@ -6,25 +6,30 @@
 		</div>
 		<div class="article-body">
 			<div class="row">
-				<div class="col-sm-12" style="padding:0;">
+				<div class="col-sm-12 summary" >
 					<div class="row">
-						<div class="col-sm-12" style="padding:0;">
+						<div class="col-md-2" style="padding:0;">
 							<span style="font-family: '楷体'">状态：</span> <span
 								ng-if="article.status==1">博客</span><span
 								ng-if="article.status==0" style="color:red">草稿</span>
 						</div>
-						<div class="col-sm-12" style="padding:0;">
-							<span style="font-family: '楷体'">类别：</span> <span>{{article.categoryName}}</span>
+						<div class="col-md-3" style="padding:0;">
+							<span style="font-family: '楷体'">类别：</span> 
+							<span class="tag">
+								{{article.categoryName}}
+							</span>
+							<!-- <span><a class="btn btn-xs btn-default" title="点击进入类别管理"
+										href="#/manage/category">管理</a></span> -->
 						</div>
-						<div class="col-sm-12" style="padding:0;">
+						<div class="col-md-7" style="padding:0;">
 							<span style="font-family: '楷体'">标签：</span> <span
 								ng-repeat="tName in article.tagNames"> <span
-								style="background-color: #EEEEEE;font-size:14px;padding:2px 4px;margin:0 8px 0 0;">
+								class="tag">
 									{{tName}} </span>
 							</span>
 						</div>
 						<div class="col-sm-12"
-							style="border-bottom: 1px solid silver;margin-bottom: 10px;padding:0;">
+							style="margin-bottom: 0px;padding:0;">
 							<p style="font-family: '楷体';margin-bottom: 0px">摘要：</p>
 							<p style="text-indent: 30px;margin-bottom: 0px">{{article.summary}}</p>
 							<p style="text-align:right;font-family: '楷体';margin-bottom: 0px">发表于
@@ -32,13 +37,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12"  style="padding:0;">
+				<div class="col-sm-12 content" >
 					<div ng-bind-html="article.content | trusted"></div>
 				</div>
-				<div class="col-sm-12"  style="padding:0;">
+				<div class="col-sm-12 pre-next"  >
 					<div
-						style="border-top: 1px solid silver;padding-top: 10px;text-align: right;height: 40px">
-						<a href="#/manage/article/" class="btn btn-default">返回列表</a> <a
+						style="text-align: right;">
+						<a onclick="javascript:history.back()" class="btn btn-default">返回</a> <a
 							href="#/manage/article/edit/{{article.id}}"
 							class="btn btn-default">编辑</a>
 						<button ng-if="article.status==0" ng-click="changeToBlog(1)"

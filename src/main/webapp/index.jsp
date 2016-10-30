@@ -130,5 +130,4 @@
 	src="<%=basePath%>plugins/thinker-md/javascripts/vendor/markdown/bootstrap-markdown.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="<%=basePath%>plugins/thinker-md/javascripts/vendor/markdown/locale/bootstrap-markdown.zh.js"></script>
-
 </html>

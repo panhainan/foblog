@@ -1,17 +1,17 @@
 app.controller("ArticleFormManageController", function($scope,$location, $routeParams,
 		ArticleManageService) {
 	setScreenAvailHeight();
-	console.log($routeParams.articleId)
+//	console.log($routeParams.articleId)
 	$scope.get = function(articleId) {
 		ArticleManageService.get(articleId).then(function(data) {
-			console.log(data);
+//			console.log(data);
 			$scope.article = data.resultData;
 			if(data.resultData.tagNames!=null){
 				$scope.selectedTagNames = data.resultData.tagNames;
 			}else{
 				$scope.selectedTagNames = new Array();
 			}
-			console.log($scope.selectedTagNames)
+//			console.log($scope.selectedTagNames)
 			$scope.article.content=toMarkdown($scope.article.content)
 //			console.log($scope.article.content)
 		});
@@ -28,23 +28,17 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 	}
 	$scope.getTags = function() {
 		ArticleManageService.getTags().then(function(data) {
-//			console.log(data);
 			$scope.tags = data.resultData;
-			var s = $scope.selectTagIds;
-//			console.log($scope.selectTagIds)
-//			console.log(s)
-			if(s!=undefined && s.trim()!="" ){
-				var tagIdArr = s.split(",");
-				for (var j = 0; j < tagIdArr.length; j++) {
+			var s = $scope.selectedTagNames;
+			if(s!=null){
+				for (var j = 0; j < s.length; j++) {
 					for (var i = 0; i < $scope.tags.length; i++) {
-						if (tagIdArr[j] == $scope.tags[i].id) {
-							$scope.selectedTagNames.push($scope.tags[i].name);
+						if (s[j] == $scope.tags[i].name) {
 							$scope.tags[i].isCheck=true;
 						}
 					}
 				}
 			}
-//			console.log($scope.selectedTagNames);
 		});
 	}
 	$scope.$watch('tagName', function(newValue, oldValue) {
@@ -98,6 +92,7 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 		if($scope.isSelectExists){
 			$scope.isSelectExists=false;
 		}else{
+			$scope.getTags();
 			$scope.isSelectExists = true;
 		}
 		if(status==1){

@@ -52,4 +52,6 @@ public interface ITagDao {
 	List<TagVo> selectVoBy(@Param("authorId")Integer tagAuthorId,@Param("articleStatus")Integer articleStatus);
 
 	List<Tag> selectByIds(@Param("ids")List<Integer> tagIdList, @Param("authorId")Integer articleAuthorId);
+
+	Integer update(Tag tag);
 }

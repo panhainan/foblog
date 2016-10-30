@@ -19,7 +19,12 @@
 		VALUES
 		(#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
 	</insert>
-
+	<insert id="update">
+		UPDATE t_tag
+		SET parent_id = #{parentId,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+        AND author_id = #{authorId,jdbcType=INTEGER}
+	</insert>
 	<delete id="delete">
 		DELETE FROM t_tag
 		WHERE id = #{id,jdbcType=INTEGER}
@@ -59,9 +64,9 @@
 		ORDER BY id
 	</select>
 	<select id="selectVoBy" resultMap="TagVoMap">
-		SELECT t1.*,IF(count(*)=1,0,count(*)) as article_counts
+		SELECT t1.*,count(*) as article_counts
 		FROM t_tag t1
-		left join t_article t2
+		join t_article t2
 		on t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
 		<if test="articleStatus!=null">
 	    	and t2.status = #{articleStatus,jdbcType=INTEGER}

@@ -76,9 +76,9 @@
     </select>
     
     <select id="selectVoBy" resultMap="CategoryVoMap">
-	    SELECT t1.*,IF(count(*)=1,0,count(*)) as article_counts
+	    SELECT t1.*,count(*) as article_counts
 	    	FROM t_category t1
-	    	left join t_article t2
+	    	join t_article t2
 	    	on t1.id = t2.category_ids
 	    	<if test="articleStatus!=null">
 	    		and t2.status = #{articleStatus,jdbcType=INTEGER}

@@ -12,7 +12,7 @@
 				<div class=" panel panel-default">
 					<div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
 						<h3 class="panel-title font_kaiti_20">
-							类别管理<span style="font-size: 12px">(共{{totalItems}}条记录)</span> <a
+							类别管理<span style="font-size: 12px">(共{{categorys.length}}条记录)</span> <a
 								type="button" href="#/manage/article/new"
 								class="btn btn-sm btn-primary" style="float: right;color: #fff">新
 								建</a>
@@ -20,36 +20,27 @@
 					</div>
 					<div class="panel-body " style="min-height: 440px">
 						<div class="table-responsive tableTrBottomBorder">
-							<table class="table  table-hover">
+							<table class="table table-hover">
 								<thead>
 									<tr class="border_bottom">
 										<td>#</td>
-										<td>标题</td>
-										<td class="visible-lg">类别</td>
-										<td>状态</td>
-										<td class="visible-lg">撰写时间</td>
-										<!-- <td>发布时间</td> -->
+										<td>名称</td>
+										<td>文章</td>
 										<td>操作</td>
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="article in articles">
-										<td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
-										<td><a href="#/manage/article/preview/{{article.id}}"
-											title="点击查看">{{article.title}}</a></td>
-										<td class="visible-lg">{{article.categoryName}}</td>
-										<td><span ng-if="article.status==1">博客</span><span
-											ng-if="article.status==0">草稿</span></td>
-										<td class="visible-lg">{{article.writeTime | date
-											:'yyyy-MM-dd HH:ss'}}</td>
-										<!-- <td>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</td> -->
+									<tr ng-repeat="category in categorys">
+										<td>{{$index+1}}</td>
+										<td>{{category.name}}</td>
+										<td>{{category.counts}} <a ng-if="category.counts!=0" ng-click="editArticle(category)"
+											title="点击查看">查看</a></td>
 										<td>
 											<ul class="list-unstyled">
+												<li style="float:left"><a ng-click="editCategory(category)"
+													>编辑</a> |</li>
 												<li style="float:left"><a
-													href="#/manage/article/edit/{{article.id}}">编辑</a> |</li>
-												<li style="float:left"><a
-													ng-click="setDeleteArticle(article)">删除</a></li>
-												<!--ng-click="delete(tbean.id,$index)"-->
+													ng-click="deleteCategory(category)">删除</a></li>
 											</ul>
 		
 										</td>
@@ -58,25 +49,72 @@
 							</table>
 						</div>
 					</div>
-					<div class="panel-footer text-right">
-						<!--style="padding: 0;"-->
-						<!--style="margin: 5px 0 0 0;"-->
-						<ul uib-pagination total-items="totalItems" max-size="5"
-							boundary-link-numbers="true" items-per-page="pageSize"
-							ng-model="currentPage" ng-change="pageChanged()"
-							class="pagination_border_radius_0"></ul>
-					</div>
-					<script type="text/ng-template" id="deleteArticle.html">
+					<script type="text/ng-template" id="editArticle.html">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-title">类别：{{category.name}}</h4>
+						</div>
+						<div class="modal-body" id="modal-body">
+							<div class="table-responsive tableTrBottomBorder">
+							<table class="table table-hover">
+								<thead>
+									<tr class="border_bottom">
+										<td>#</td>
+										<td>标题</td>
+										<td>状态</td>
+										<td class="visible-lg">撰写时间</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="article in categoryArticles">
+										<td>{{$index+1}}</td>
+										<td>{{article.title}}</td>
+										<td><span ng-if="article.status==1">博客</span><span
+											ng-if="article.status==0">草稿</span></td>
+										<td class="visible-lg">{{article.writeTime | date
+											:'yyyy-MM-dd HH:ss'}}</td>
+										<td>
+											<ul class="list-unstyled">
+												<!--<li style="float:left"><a
+													ng-click="setDeleteArticle(article)">移动</a> |  </li> -->
+												<li style="float:left"><a ng-click="goArticle(article.id)">查看</a></li>
+											</ul>
+		
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" ng-click="cancelEditArticle()"
+								>关闭</button>
+						</div>
+					</script>
+					<script type="text/ng-template" id="editCategory.html">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-title">修改</h4>
+						</div>
+						<div class="modal-body" id="modal-body">
+							名称：<input type="text" class="form-control" ng-model="editCategory.name"/>
+						</div>		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" ng-click="cancelEditCategory()"
+								>取消</button>
+							<button type="button" ng-click="confirmEditCategory(editCategory)"
+								 class="btn btn-primary">确认</button>
+						</div>
+					</script>
+					<script type="text/ng-template" id="deleteCategory.html">
 						<div class="modal-header">
 							<h4 class="modal-title" id="modal-title">警告</h4>
 						</div>
 						<div class="modal-body" id="modal-body">
-							确认删除博客<span style="font-size:16px;font-weight:bolder;"> {{theDeleteArticle.title}} </span>吗？
+							确认删除博客<span style="font-size:16px;font-weight:bolder;"> {{theDeleteCategory.title}} </span>吗？
 						</div>		
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="cancelDeleteArticle()"
+							<button type="button" class="btn btn-default" ng-click="cancelDeleteCategory()"
 								>取消</button>
-							<button type="button" ng-click="deleteArticle(theDeleteArticle.id)"
+							<button type="button" ng-click="deleteCategory(theDeleteCategory.id)"
 								 class="btn btn-primary">确认</button>
 						</div>
 					</script>

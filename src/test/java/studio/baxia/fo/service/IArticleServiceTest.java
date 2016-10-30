@@ -11,7 +11,7 @@ import studio.baxia.fo.common.TreeInfoResult;
  */
 public class IArticleServiceTest extends BaseTest {
     @Autowired
-    private IArticleService iArticleService;
+    private IBlogService iArticleService;
     @Test
     public void testMessageGetAllBy() throws Exception {
         TreeInfoResult tree = iArticleService.messageGetAllBy(1, CommonConstant.CORRECT_ORDER);

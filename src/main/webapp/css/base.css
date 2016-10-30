@@ -15,14 +15,16 @@ body {
 
 .customContainer {
 	/* 	border: 1px solid #E6E6E6;*/
-	padding: 0 0px 55px 0px;
+	padding: 5px 0px 0px 0px;
 	margin: 0;
 	margin-left: 260px;
 	height: 100%;
 	background-color: #F1F1F1;
+	overflow-x:hidden; 
 }
 @media ( max-width : 768px) {
 	.customContainer {
+		padding: 55px 0px 0px 0px;
 		margin-left: 0px;
 		margin-right: 0px;
 	}

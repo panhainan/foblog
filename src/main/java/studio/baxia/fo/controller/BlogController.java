@@ -15,7 +15,7 @@ import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.pojo.Article;
-import studio.baxia.fo.service.IArticleService;
+import studio.baxia.fo.service.IBlogService;
 import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.vo.ArticleVo;
 import studio.baxia.fo.vo.CategoryVo;
@@ -25,11 +25,11 @@ import studio.baxia.fo.vo.TagVo;
  * Created by FirePan on 2016/10/18.
  */
 @RequestMapping(value = "/blog")
-@Controller("articleController")
-public class ArticleController {
+@Controller("blogController")
+public class BlogController {
 
     @Autowired
-    private IArticleService iArticleService;
+    private IBlogService iArticleService;
     @Autowired
     private IUserService iUserService;
 
@@ -67,8 +67,8 @@ public class ArticleController {
     @ResponseBody
     @RequestMapping(value = "/tag",method = RequestMethod.GET)
     public CommonResult listTags(){
-    	List<TagVo> listCategorys = iArticleService.tagGetAllVoBy(1,CommonConstant.ACTICLE_STATUS_BLOG);// new ArrayList<Category>();
-    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
+    	List<TagVo> listTags = iArticleService.tagGetAllVoBy(1,CommonConstant.ACTICLE_STATUS_BLOG);// new ArrayList<Category>();
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listTags);
     }
     @ResponseBody
     @RequestMapping(value = "/tag/{name:.+}",method = RequestMethod.GET)
