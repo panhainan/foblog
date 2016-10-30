@@ -25,5 +25,7 @@ public class CommonConstant {
     public static final int FAIL_CODE=0;
 
     public static final String USER_IS_NO_EXIST = "用户不存在！";
+    
+    public static final String NEW_NO_NAME_CATEGORY = "新建分类";
 
 }

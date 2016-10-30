@@ -83,4 +83,6 @@ public interface IArticleDao {
 
 
     Article selectNextOrPreVoBy(@Param("article")Article article, @Param("nextOrPreVo")Boolean nextOrPreVo);
+
+	Integer updateCategoryId(@Param("oldCategoryId")Integer oldCategoryId,@Param("newCategoryId")Integer newCategoryId, @Param("authorId")Integer categoryAuthorId);
 }

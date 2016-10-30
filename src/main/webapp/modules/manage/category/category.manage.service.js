@@ -8,4 +8,7 @@ app.service("CategoryManageService", function(RequestService) {
 	this.update = function(category){
 		return RequestService.putRequest("/manage/category", category, cfg_json);
 	}
+	this.deleteById = function(categoryId){
+		return RequestService.deleteRequest("/manage/category/"+categoryId, cfg_form);
+	}
 })

@@ -75,10 +75,19 @@ public class BlogManageController {
 
     @ResponseBody
     @RequestMapping(value = "/category",method = RequestMethod.PUT)
-    public CommonResult update(@RequestBody Category category){
+    public CommonResult updateCategory(@RequestBody Category category){
     	Boolean result = iArticleService.categoryEdit(category);
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
     }
+    
+    @ResponseBody
+    @RequestMapping(value = "/category/{categoryId}",method = RequestMethod.DELETE)
+    public CommonResult deleteCategory(@PathVariable("categoryId")Integer categoryId){
+    	//这里由于service层又通过id去数据库查询了一次，要不要考虑直接通过前台传对象进来省去查的那次，但是这样又有悖springmvc的rest设计
+    	Boolean result = iArticleService.categoryDeleteById(categoryId, 1);
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
+    }
+    
     @ResponseBody
     @RequestMapping(value = "/tag",method = RequestMethod.GET)
     public CommonResult listTags(){

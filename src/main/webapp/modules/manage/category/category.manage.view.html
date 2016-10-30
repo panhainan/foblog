@@ -109,12 +109,12 @@
 							<h4 class="modal-title" id="modal-title">警告</h4>
 						</div>
 						<div class="modal-body" id="modal-body">
-							确认删除博客<span style="font-size:16px;font-weight:bolder;"> {{theDeleteCategory.title}} </span>吗？
+							确认删除类别<span style="font-size:16px;font-weight:bolder;"> {{category.name}} </span>吗？
 						</div>		
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" ng-click="cancelDeleteCategory()"
 								>取消</button>
-							<button type="button" ng-click="deleteCategory(theDeleteCategory.id)"
+							<button type="button" ng-click="deleteCategory(category.id)"
 								 class="btn btn-primary">确认</button>
 						</div>
 					</script>

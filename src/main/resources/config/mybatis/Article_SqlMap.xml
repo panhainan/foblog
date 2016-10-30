@@ -66,6 +66,14 @@
 		#{id,jdbcType=INTEGER}
 		AND author_id = #{authorId,jdbcType=INTEGER}
 	</update>
+	<update id="updateCategoryId">
+		UPDATE t_article
+		SET
+		category_ids=#{newCategoryId,jdbcType=INTEGER}
+		WHERE category_ids =#{oldCategoryId,jdbcType=INTEGER}
+		AND author_id =
+		#{authorId,jdbcType=INTEGER}
+	</update>
 	<update id="updateStatus">
 		UPDATE t_article
 		SET

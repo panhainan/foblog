@@ -46,9 +46,10 @@ public interface ICategoryDao {
 	 * 
 	 * @param categoryId
 	 *            类别id
+	 * @param categoryAuthorId 
 	 * @return 受影响的行数
 	 */
-	Integer deleteById(@Param("id") Integer categoryId);
+	Integer deleteById(@Param("id") Integer categoryId, @Param("authorId")Integer categoryAuthorId);
 
 	/**
 	 * 通过作者id和父类别id删除类别

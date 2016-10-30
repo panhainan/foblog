@@ -96,7 +96,29 @@ public class BlogServiceImpl implements IBlogService {
 	 */
 	@Override
 	public Boolean categoryDeleteById(int categoryId, int categoryAuthorId) {
-		Category c = iCategoryDao.selectById(categoryId);
+		Category cIdCategory = iCategoryDao.selectById(categoryId);
+		if(cIdCategory.getName().equals(CommonConstant.NEW_NO_NAME_CATEGORY)){
+			return false;
+		}else{
+			Category cNameCategory= iCategoryDao.selectByName(categoryAuthorId, CommonConstant.NEW_NO_NAME_CATEGORY);
+			Integer newCategoryId = null;
+			if(cNameCategory==null){
+				Category newCategory = new Category();
+				newCategory.setName(CommonConstant.NEW_NO_NAME_CATEGORY);
+				newCategory.setAuthorId(categoryAuthorId);
+				newCategory.setParentId(CommonConstant.CATEGORY_DEFAULT_PARENT_ID);
+				Integer result =  iCategoryDao.insert(newCategory);
+				newCategoryId =newCategory.getId();
+			}else{
+				newCategoryId = cNameCategory.getId();
+			}
+			Integer result1 = iArticleDao.updateCategoryId(categoryId, newCategoryId, categoryAuthorId);
+			Integer result2 = iCategoryDao.deleteById(categoryId,categoryAuthorId);
+			return returnResult(result2);
+		}
+		
+		//下面的代码是为多级目录准备的，但是此次已经舍弃多级目录
+/*		Category c = iCategoryDao.selectById(categoryId);
 		Integer result = null;
 		if (c != null && c.getAuthorId() == categoryAuthorId) {
 			if (c.getParentId() == 0) {
@@ -108,7 +130,7 @@ public class BlogServiceImpl implements IBlogService {
 		} else {
 			// categoryId不存在或者没有权限
 			return false;
-		}
+		}*/
 	}
 
 	/**

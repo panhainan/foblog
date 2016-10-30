@@ -48,7 +48,34 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 				}
 			}
 		});
-		modalInstance.result.then(function() {
+		modalInstance.result.then(function(_category) {
+			if(_category!=null){
+				CategoryManageService.update(_category).then(function(data){
+//					console.log(data);
+				})
+			}
+		});
+	}
+	
+	$scope.deleteCategory = function(category){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'deleteCategory.html',
+			controller : 'deleteCategoryCtrl',
+			backdrop : 'static',
+			size : 'md',
+			resolve : {
+				category:function(){
+					return category;
+				}
+			}
+		});
+		modalInstance.result.then(function(categoryId) {
+			if(categoryId!=null){
+				CategoryManageService.deleteById(categoryId).then(function(data){
+//					console.log(data);
+					$scope.list();
+				})
+			}
 		});
 	}
 
@@ -61,7 +88,7 @@ app.controller("editArticleCtrl", function($uibModalInstance, $scope,
 	$scope.categoryArticles = categoryArticles;
 	$scope.category = category;
 	$scope.goArticle = function(articleId){
-		console.log(articleId)
+//		console.log(articleId)
 		$uibModalInstance.close(articleId);
 	}
 	$scope.cancelEditArticle = function() {
@@ -72,19 +99,25 @@ app.controller("editArticleCtrl", function($uibModalInstance, $scope,
 app.controller("editCategoryCtrl",function($uibModalInstance, CategoryManageService,$scope,category){
 	$scope.editCategory = category;
 	$scope.confirmEditCategory = function(editCategory){
-		console.log(editCategory)
-		var category = {
+//		console.log(editCategory)
+		var _category = {
 			id:editCategory.id,
 			name:editCategory.name,
 			authorId:editCategory.authorId,
 			parentId:editCategory.parentId
 		}
-		CategoryManageService.update(category).then(function(data){
-			console.log(data);
-			$uibModalInstance.close();
-		})
+		$uibModalInstance.close(_category);
 	};
 	$scope.cancelEditCategory = function() {
 		$uibModalInstance.dismiss('cancel');
 	}
-})
+});
+app.controller("deleteCategoryCtrl",function($scope,$uibModalInstance,category,CategoryManageService){
+	$scope.category = category;
+	$scope.cancelDeleteCategory = function(){
+		$uibModalInstance.dismiss('cancel');
+	};
+	$scope.deleteCategory = function(categoryId){
+		$uibModalInstance.close(categoryId);
+	}
+});

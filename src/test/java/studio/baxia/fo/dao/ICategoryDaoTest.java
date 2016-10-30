@@ -47,7 +47,7 @@ public class ICategoryDaoTest extends BaseTest {
             //根级别目录
             result = iCategoryDao.deleteBy(1, categoryId);
         }
-        result += iCategoryDao.deleteById(categoryId);
+        result += iCategoryDao.deleteById(categoryId,1);
 
 
         methodName = new Throwable().getStackTrace()[0].getMethodName();

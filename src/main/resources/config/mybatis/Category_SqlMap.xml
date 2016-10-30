@@ -45,6 +45,7 @@
     <delete id="deleteById">
         DELETE FROM t_category
         WHERE id = #{id,jdbcType=INTEGER}
+        AND author_id = #{authorId,jdbcType=INTEGER}
     </delete>
 
     <update id="update">
