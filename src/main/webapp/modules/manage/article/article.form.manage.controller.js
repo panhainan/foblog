@@ -167,6 +167,8 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 	if($routeParams.articleId!=undefined){
 		// 获取文章信息
 		$scope.get($routeParams.articleId);
+	}else {
+		$scope.selectedTagNames = new Array();
 	}
 	// $scope.getTypes();
 	$scope.getCategorys();

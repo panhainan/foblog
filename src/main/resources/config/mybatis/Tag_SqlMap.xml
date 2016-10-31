@@ -21,7 +21,7 @@
 	</insert>
 	<insert id="update">
 		UPDATE t_tag
-		SET parent_id = #{parentId,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR}
+		SET name=#{name,jdbcType=VARCHAR}
         WHERE id = #{id,jdbcType=INTEGER}
         AND author_id = #{authorId,jdbcType=INTEGER}
 	</insert>
@@ -64,16 +64,17 @@
 		ORDER BY id
 	</select>
 	<select id="selectVoBy" resultMap="TagVoMap">
-		SELECT t1.*,count(*) as article_counts
-		FROM t_tag t1
-		join t_article t2
-		on t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
-		<if test="articleStatus!=null">
-	    	and t2.status = #{articleStatus,jdbcType=INTEGER}
-	    </if>
-		WHERE t1.author_id = #{authorId,jdbcType=INTEGER}
-		group by t1.id
-		ORDER BY article_counts desc
+	    	SELECT t1.*, ( 
+				    	select count(*) 
+				    	from  t_article t2 
+				    	where t2.tag_ids like CONCAT(CONCAT('%',CONCAT(t1.id, ',')), '%')
+					    	<if test="articleStatus!=null">
+						    		and t2.status = #{articleStatus,jdbcType=INTEGER}
+						    </if>
+				    	) as article_counts 
+			FROM t_tag t1 
+			WHERE t1.author_id = 1
+			ORDER BY article_counts desc
 	</select>
 
 	<select id="selectByName" resultMap="TagMap">

@@ -49,7 +49,7 @@ public interface IArticleDao {
     Article selectById(@Param("id") Integer articleId,@Param("authorId")Integer articleAuthorId);
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找
-     * 注意：categoryId和tagId的值用"id/"表示，比如"1/"，因为规定数据库中存储的格式为id1/id2/id3/方式存储
+     * 注意：categoryId和tagId的值用"id,"表示，比如"1,"，因为规定数据库中存储的格式为id1,id2,id3/方式存储
      * @param article 文章信息（此处可选包括：title、authorId、categoryIds、tagIds、status）
      * @param pageConfig 分页信息（此处可选包括：pageIndex、pageSize）
      * @return
@@ -58,7 +58,7 @@ public interface IArticleDao {
     
     /**
      * 通过标题、作者id、类别id、标签id进行模糊查找
-     * 注意：categoryId和tagId的值用"id/"表示，比如"1/"，因为规定数据库中存储的格式为id1/id2/id3/方式存储
+     * 注意：categoryId和tagId的值用"id,"表示，比如"1,"，因为规定数据库中存储的格式为id1,id2,id3/方式存储
      * @param article 文章信息（此处可选包括：title、authorId、categoryIds、tagIds、status）
      * @param pageConfig 分页信息（此处可选包括：pageIndex、pageSize）
      * @return

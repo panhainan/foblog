@@ -13,7 +13,7 @@
 					<div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
 						<h3 class="panel-title font_kaiti_20">
 							类别管理<span style="font-size: 12px">(共{{categorys.length}}条记录)</span> <a
-								type="button" href="#/manage/article/new"
+								type="button" ng-click="addCategory()"
 								class="btn btn-sm btn-primary" style="float: right;color: #fff">新
 								建</a>
 						</h3>
@@ -49,7 +49,7 @@
 							</table>
 						</div>
 					</div>
-					<script type="text/ng-template" id="editArticle.html">
+					<script type="text/ng-template" id="editCategoryArticle.html">
 						<div class="modal-header">
 							<h4 class="modal-title" id="modal-title">类别：{{category.name}}</h4>
 						</div>
@@ -88,6 +88,20 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" ng-click="cancelEditArticle()"
 								>关闭</button>
+						</div>
+					</script>
+					<script type="text/ng-template" id="addCategory.html">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-title">添加</h4>
+						</div>
+						<div class="modal-body" id="modal-body">
+							名称：<input type="text" class="form-control" ng-model="category.name"/>
+						</div>		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" ng-click="cancelAddCategory()"
+								>取消</button>
+							<button type="button" ng-click="confirmAddCategory(category)"
+								 class="btn btn-primary">确认</button>
 						</div>
 					</script>
 					<script type="text/ng-template" id="editCategory.html">

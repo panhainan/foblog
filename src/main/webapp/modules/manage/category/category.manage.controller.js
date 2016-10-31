@@ -14,8 +14,8 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 			// 需要判断请求是否成功，其他地方也是，暂时还没有进行处理
 			console.log(data);
 			var modalInstance = $uibModal.open({
-				templateUrl : 'editArticle.html',
-				controller : 'editArticleCtrl',
+				templateUrl : 'editCategoryArticle.html',
+				controller : 'editCategoryArticleCtrl',
 				backdrop : 'static',
 				size : 'lg',
 				resolve : {
@@ -36,6 +36,25 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 		})
 	}
 	
+	$scope.addCategory = function(){
+		
+		var modalInstance = $uibModal.open({
+			templateUrl : 'addCategory.html',
+			controller : 'addCategoryCtrl',
+			backdrop : 'static',
+			size : 'lg',
+			resolve : {
+			}
+		});
+		modalInstance.result.then(function(_category) {
+			if(_category!=null){
+				CategoryManageService.post(_category).then(function(data){
+					$scope.list();
+				})
+			}
+		});
+	} 
+	
 	$scope.editCategory = function(category){
 		var modalInstance = $uibModal.open({
 			templateUrl : 'editCategory.html',
@@ -50,7 +69,7 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 		});
 		modalInstance.result.then(function(_category) {
 			if(_category!=null){
-				CategoryManageService.update(_category).then(function(data){
+				CategoryManageService.put(_category).then(function(data){
 //					console.log(data);
 				})
 			}
@@ -83,7 +102,7 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 
 });
 
-app.controller("editArticleCtrl", function($uibModalInstance, $scope,
+app.controller("editCategoryArticleCtrl", function($uibModalInstance, $scope,
 		categoryArticles,category) {
 	$scope.categoryArticles = categoryArticles;
 	$scope.category = category;
@@ -95,6 +114,15 @@ app.controller("editArticleCtrl", function($uibModalInstance, $scope,
 		$uibModalInstance.dismiss('cancel');
 	}
 });
+
+app.controller("addCategoryCtrl",function($uibModalInstance, CategoryManageService,$scope){
+	$scope.confirmAddCategory = function(category){
+		$uibModalInstance.close(category);
+	};
+	$scope.cancelAddCategory= function() {
+		$uibModalInstance.dismiss('cancel');
+	}
+})
 
 app.controller("editCategoryCtrl",function($uibModalInstance, CategoryManageService,$scope,category){
 	$scope.editCategory = category;

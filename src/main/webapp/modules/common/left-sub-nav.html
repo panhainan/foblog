@@ -5,8 +5,7 @@
 	</div>
 	<div class="sub-nav-body">
 		<ul class="padding_none ul_style_none">
-			<li ng-style="navItemName == subNavData.name && {'background-color':'#EEEEEE'}" ng-repeat="subNavData in subNavDatas.data">
-				<!-- href="#/blog/{{subNavDatas.typeCode}}/{{subNavData.name}}" -->
+			<li ng-style="navItemName == subNavData.name && {'background-color':'#EEEEEE'}" ng-repeat="subNavData in subNavDatas.data" ng-if="subNavData.counts!=0">
 				<a ng-if="subNavDatas.typeCode=='category'"
 				ng-click="selectCategory(subNavData.name)">{{subNavData.name}} <span
 					style="color:#337AB7;">({{subNavData.counts}})</span>

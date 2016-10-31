@@ -12,10 +12,7 @@
 				<div class=" panel panel-default">
 					<div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
 						<h3 class="panel-title font_kaiti_20">
-							标签管理<span style="font-size: 12px">(共{{tags.length}}条记录)</span> <a
-								type="button" href="#/manage/article/new"
-								class="btn btn-sm btn-primary" style="float: right;color: #fff">新
-								建</a>
+							标签管理<span style="font-size: 12px">(共{{tags.length}}条记录)</span>
 						</h3>
 					</div>
 					<div class="panel-body " style="min-height: 440px">
@@ -33,14 +30,12 @@
 									<tr ng-repeat="tag in tags">
 										<td>{{$index+1}}</td>
 										<td>{{tag.name}}</td>
-										<td>{{tag.counts}} <a href="#/manage/tag/preview/{{tag.id}}"
+										<td>{{tag.counts}} <a ng-if="tag.counts!=0" ng-click="editArticle(tag)"
 											title="点击查看">查看</a></td>
 										<td>
 											<ul class="list-unstyled">
-												<li style="float:left"><a
-													href="#/manage/tag/edit/{{tag.id}}">编辑</a> |</li>
-												<li style="float:left"><a
-													ng-click="setDeleteTag(tag)">删除</a></li>
+												<li style="float:left"><a ng-click="editTag(tag)">编辑</a> |</li>
+												<li style="float:left"><a ng-click="deleteTag(tag)">删除</a></li>
 											</ul>
 		
 										</td>
@@ -49,17 +44,72 @@
 							</table>
 						</div>
 					</div>
-					<script type="text/ng-template" id="deleteArticle.html">
+					<script type="text/ng-template" id="editTag.html">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-title">修改</h4>
+						</div>
+						<div class="modal-body" id="modal-body">
+							名称：<input type="text" class="form-control" ng-model="tag.name"/>
+						</div>		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" ng-click="cancelEditTag()"
+								>取消</button>
+							<button type="button" ng-click="confirmEditTag(tag)"
+								 class="btn btn-primary">确认</button>
+						</div>
+					</script>
+					<script type="text/ng-template" id="editTagArticle.html">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-title">标签：{{tag.name}}</h4>
+						</div>
+						<div class="modal-body" id="modal-body">
+							<div class="table-responsive tableTrBottomBorder">
+							<table class="table table-hover">
+								<thead>
+									<tr class="border_bottom">
+										<td>#</td>
+										<td>标题</td>
+										<td>状态</td>
+										<td class="visible-lg">撰写时间</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="article in tagArticles">
+										<td>{{$index+1}}</td>
+										<td>{{article.title}}</td>
+										<td><span ng-if="article.status==1">博客</span><span
+											ng-if="article.status==0">草稿</span></td>
+										<td class="visible-lg">{{article.writeTime | date
+											:'yyyy-MM-dd HH:ss'}}</td>
+										<td>
+											<ul class="list-unstyled">
+												<li style="float:left"><a
+													ng-click="deleteArticle(article.id)">删除</a> |  </li> 
+												<li style="float:left"><a ng-click="goArticle(article.id)">查看</a></li>
+											</ul>
+		
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" ng-click="cancelEditArticle()"
+								>关闭</button>
+						</div>
+					</script>
+					<script type="text/ng-template" id="deleteTag.html">
 						<div class="modal-header">
 							<h4 class="modal-title" id="modal-title">警告</h4>
 						</div>
 						<div class="modal-body" id="modal-body">
-							确认删除博客<span style="font-size:16px;font-weight:bolder;"> {{theDeleteArticle.title}} </span>吗？
+							确认删除标签<span style="font-size:16px;font-weight:bolder;"> {{tag.name}} </span>吗？
 						</div>		
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="cancelDeleteArticle()"
+							<button type="button" class="btn btn-default" ng-click="cancelDeleteTag()"
 								>取消</button>
-							<button type="button" ng-click="deleteArticle(theDeleteArticle.id)"
+							<button type="button" ng-click="confirmDeleteTag(tag.id)"
 								 class="btn btn-primary">确认</button>
 						</div>
 					</script>

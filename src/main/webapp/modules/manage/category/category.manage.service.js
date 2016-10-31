@@ -5,7 +5,10 @@ app.service("CategoryManageService", function(RequestService) {
 	this.getArticles = function(categoryId){
 		return RequestService.getRequest('/manage/category/'+categoryId, cfg_form);
 	}
-	this.update = function(category){
+	this.post = function(category){
+		return RequestService.postRequest("/manage/category", category, cfg_json);
+	}
+	this.put = function(category){
 		return RequestService.putRequest("/manage/category", category, cfg_json);
 	}
 	this.deleteById = function(categoryId){

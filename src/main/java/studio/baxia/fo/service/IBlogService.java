@@ -174,5 +174,9 @@ public interface IBlogService {
 
 	List<Article> articleGetAllByCategoryId(int authorId, int id, Integer articleStatus);
 
+	Boolean articleDeleteTag(int tagId, int articleId, int authorId);
+
+	List<Article> articleGetAllByTagId(int authorId, int tagId, Integer articleStatus);
+
 
 }

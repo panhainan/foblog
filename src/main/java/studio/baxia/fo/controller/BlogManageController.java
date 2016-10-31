@@ -42,7 +42,7 @@ public class BlogManageController {
 
     @ResponseBody
     @RequestMapping(value = "/article",method = RequestMethod.POST)
-    public CommonResult list(PageConfig pageConfig,@RequestParam(required=false) Integer articleStatus){
+    public CommonResult listArticles(PageConfig pageConfig,@RequestParam(required=false) Integer articleStatus){
     	logger.info("参数->pageConfig:"+pageConfig+",articleStatus:"+articleStatus);
         PageInfoResult<ArticleVo> articlesWithPages = iArticleService.articleGetAllManageBy(1, articleStatus, pageConfig);
         return new CommonResult(CommonConstant.SUCCESS_CODE,null,articlesWithPages);
@@ -50,13 +50,13 @@ public class BlogManageController {
     
     @ResponseBody
     @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
-    public CommonResult get(@PathVariable("id")Integer articleId){
+    public CommonResult getArticle(@PathVariable("id")Integer articleId){
         ArticleVo article = iArticleService.articleVoGetById(articleId,1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
     @RequestMapping(value = "/article/{id}",method = RequestMethod.DELETE)
-    public CommonResult delete(@PathVariable("id")Integer articleId){
+    public CommonResult deleteArticle(@PathVariable("id")Integer articleId){
         Boolean result = iArticleService.articleDeleteById(articleId,1);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
     }
@@ -67,12 +67,18 @@ public class BlogManageController {
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
     }
     @ResponseBody
-    @RequestMapping(value = "/category/{id}",method = RequestMethod.GET)
-    public CommonResult listCategoryArticles(@PathVariable("id")Integer id){
-    	List<Article> listCategoryArticles = iArticleService.articleGetAllByCategoryId(1, id,null);
+    @RequestMapping(value = "/category/{categoryId}",method = RequestMethod.GET)
+    public CommonResult listCategoryArticles(@PathVariable("categoryId")Integer categoryId){
+    	List<Article> listCategoryArticles = iArticleService.articleGetAllByCategoryId(1, categoryId,null);
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategoryArticles);
     }
-
+    @ResponseBody
+    @RequestMapping(value = "/category",method = RequestMethod.POST)
+    public CommonResult addCategory(@RequestBody Category category){
+    	category.setAuthorId(1);
+    	Boolean result = iArticleService.categoryAdd(category);
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
+    }
     @ResponseBody
     @RequestMapping(value = "/category",method = RequestMethod.PUT)
     public CommonResult updateCategory(@RequestBody Category category){
@@ -96,19 +102,44 @@ public class BlogManageController {
     }
     @ResponseBody
     @RequestMapping(value = "/tag",method = RequestMethod.PUT)
-    public CommonResult update(@RequestBody Tag tag){
-    	Boolean result = iArticleService.tagEdit(tag);;
+    public CommonResult updateTag(@RequestBody Tag tag){
+    	Boolean result = iArticleService.tagEdit(tag);
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag",method = RequestMethod.POST)
+    public CommonResult saveTag(@RequestBody Tag tag){
+    	tag.setAuthorId(1);
+    	Boolean result = iArticleService.tagAdd(tag);;
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag/{tagId}",method = RequestMethod.GET)
+    public CommonResult listTagArticles(@PathVariable("tagId")Integer tagId){
+    	List<Article> listTagArticles = iArticleService.articleGetAllByTagId(1, tagId,null);
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listTagArticles);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag/{tagId}",method = RequestMethod.DELETE)
+    public CommonResult deleteTag(@PathVariable("tagId") Integer tagId){
+    	Boolean result = iArticleService.tagDeleteById(tagId, 1);
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/tag/{tagId}/{articleId}",method = RequestMethod.DELETE)
+    public CommonResult deleteTag(@PathVariable Integer tagId ,@PathVariable Integer articleId){
+    	Boolean result = iArticleService.articleDeleteTag(tagId,articleId,1);
     	return new CommonResult(CommonConstant.SUCCESS_CODE,"",result);
     }
     @ResponseBody
     @RequestMapping(value = "/article/save",method = RequestMethod.PUT)
-    public CommonResult update(@RequestBody ArticleVo article){
+    public CommonResult updateArticle(@RequestBody ArticleVo article){
     	Integer flagId = iArticleService.articleEdit(article);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",flagId);
     }
     @ResponseBody
     @RequestMapping(value = "/article/save",method = RequestMethod.POST)
-    public CommonResult add(@RequestBody ArticleVo article){
+    public CommonResult addArticle(@RequestBody ArticleVo article){
     	Integer flagId = iArticleService.articleAdd(article);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",flagId);
     }

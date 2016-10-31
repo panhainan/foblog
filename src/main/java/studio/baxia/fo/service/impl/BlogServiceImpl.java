@@ -97,40 +97,38 @@ public class BlogServiceImpl implements IBlogService {
 	@Override
 	public Boolean categoryDeleteById(int categoryId, int categoryAuthorId) {
 		Category cIdCategory = iCategoryDao.selectById(categoryId);
-		if(cIdCategory.getName().equals(CommonConstant.NEW_NO_NAME_CATEGORY)){
+		if (cIdCategory.getName().equals(CommonConstant.NEW_NO_NAME_CATEGORY)) {
 			return false;
-		}else{
-			Category cNameCategory= iCategoryDao.selectByName(categoryAuthorId, CommonConstant.NEW_NO_NAME_CATEGORY);
+		} else {
+			Category cNameCategory = iCategoryDao.selectByName(
+					categoryAuthorId, CommonConstant.NEW_NO_NAME_CATEGORY);
 			Integer newCategoryId = null;
-			if(cNameCategory==null){
+			if (cNameCategory == null) {
 				Category newCategory = new Category();
 				newCategory.setName(CommonConstant.NEW_NO_NAME_CATEGORY);
 				newCategory.setAuthorId(categoryAuthorId);
-				newCategory.setParentId(CommonConstant.CATEGORY_DEFAULT_PARENT_ID);
-				Integer result =  iCategoryDao.insert(newCategory);
-				newCategoryId =newCategory.getId();
-			}else{
+				newCategory
+						.setParentId(CommonConstant.CATEGORY_DEFAULT_PARENT_ID);
+				Integer result = iCategoryDao.insert(newCategory);
+				newCategoryId = newCategory.getId();
+			} else {
 				newCategoryId = cNameCategory.getId();
 			}
-			Integer result1 = iArticleDao.updateCategoryId(categoryId, newCategoryId, categoryAuthorId);
-			Integer result2 = iCategoryDao.deleteById(categoryId,categoryAuthorId);
+			Integer result1 = iArticleDao.updateCategoryId(categoryId,
+					newCategoryId, categoryAuthorId);
+			Integer result2 = iCategoryDao.deleteById(categoryId,
+					categoryAuthorId);
 			return returnResult(result2);
 		}
-		
-		//下面的代码是为多级目录准备的，但是此次已经舍弃多级目录
-/*		Category c = iCategoryDao.selectById(categoryId);
-		Integer result = null;
-		if (c != null && c.getAuthorId() == categoryAuthorId) {
-			if (c.getParentId() == 0) {
-				// 根级别目录
-				result = iCategoryDao.deleteBy(1, categoryId);
-			}
-			result += iCategoryDao.deleteById(categoryId);
-			return returnResult(result);
-		} else {
-			// categoryId不存在或者没有权限
-			return false;
-		}*/
+
+		// 下面的代码是为多级目录准备的，但是此次已经舍弃多级目录
+		/*
+		 * Category c = iCategoryDao.selectById(categoryId); Integer result =
+		 * null; if (c != null && c.getAuthorId() == categoryAuthorId) { if
+		 * (c.getParentId() == 0) { // 根级别目录 result = iCategoryDao.deleteBy(1,
+		 * categoryId); } result += iCategoryDao.deleteById(categoryId); return
+		 * returnResult(result); } else { // categoryId不存在或者没有权限 return false; }
+		 */
 	}
 
 	/**
@@ -179,11 +177,13 @@ public class BlogServiceImpl implements IBlogService {
 		Integer result = iTagDao.insert(tag);
 		return returnResult(result);
 	}
+
 	@Override
 	public Boolean tagEdit(Tag tag) {
 		Integer result = iTagDao.update(tag);
 		return returnResult(result);
 	}
+
 	/**
 	 * 通过标签id删除标签
 	 *
@@ -195,6 +195,25 @@ public class BlogServiceImpl implements IBlogService {
 	 */
 	@Override
 	public Boolean tagDeleteById(int tagId, int tagAuthorId) {
+		List<Article> listArticle = iArticleDao.selectBy(new Article()
+				.setAuthorId(tagAuthorId).setTagIds(tagId + ","), null);
+		if (listArticle != null) {
+			for (int i = 0; i < listArticle.size(); i++) {
+				Article article = listArticle.get(i);
+				String tagIdsStr = article.getTagIds();
+				int index = tagIdsStr.indexOf((tagId + ","));
+				if (index == -1) {
+					return false;
+				} else {
+					String str = tagIdsStr.replaceAll((tagId + ","), "");
+					article.setTagIds(str);
+					Integer result = iArticleDao.update(article);
+					if(result==0){
+						return false;
+					}
+				}
+			}
+		}
 		Integer result = iTagDao.delete(tagId, tagAuthorId);
 		return returnResult(result);
 	}
@@ -355,6 +374,24 @@ public class BlogServiceImpl implements IBlogService {
 		return false;
 	}
 
+	@Override
+	public Boolean articleDeleteTag(int tagId, int articleId, int authorId) {
+		Article article = iArticleDao.selectById(articleId, authorId);
+		if (article != null) {
+			String tagIdsStr = article.getTagIds();
+//			int index = tagIdsStr.indexOf((tagId + ","));
+//			if (index == -1) {
+//				return false;
+//			} else {
+				String str = tagIdsStr.replaceAll((tagId + ","), "");
+				article.setTagIds(str);
+				Integer result = iArticleDao.update(article);
+				return returnResult(result);
+//			}
+		}
+		return false;
+	}
+
 	/**
 	 * 通过文章id获取文章
 	 *
@@ -482,12 +519,22 @@ public class BlogServiceImpl implements IBlogService {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Article> articleGetAllByTagId(int authorId, int tagId,
+			Integer articleStatus) {
+		List<Article> list = iArticleDao.selectBy(
+				new Article().setAuthorId(authorId).setTagIds(tagId+",")
+						.setStatus(articleStatus), null);
+		return list;
+	}
 
 	@Override
 	public List<Article> articleGetAllByCategoryId(int authorId,
 			int categoryId, Integer articleStatus) {
-		List<Article> list =iArticleDao.selectBy(new Article().setAuthorId(authorId)
-				.setCategoryIds(categoryId).setStatus(articleStatus), null);
+		List<Article> list = iArticleDao.selectBy(
+				new Article().setAuthorId(authorId).setCategoryIds(categoryId)
+						.setStatus(articleStatus), null);
 		return list;
 	}
 
