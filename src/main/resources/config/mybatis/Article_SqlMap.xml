@@ -9,7 +9,6 @@
 		<result property="content" column="content" />
 		<result property="categoryIds" column="category_ids" />
 		<result property="tagIds" column="tag_ids" />
-		<result property="authorId" column="author_id" />
 		<result property="status" column="status" />
 		<result property="writeTime" column="write_time" />
 		<result property="pubTime" column="pub_time" />
@@ -22,22 +21,24 @@
 		<result property="categoryIds" column="category_ids" />
 		<result property="categoryName" column="category_name" />
 		<result property="tagIds" column="tag_ids" />
-		<result property="authorId" column="author_id" />
 		<result property="status" column="status" />
 		<result property="writeTime" column="write_time" />
 		<result property="pubTime" column="pub_time" />
 	</resultMap>
+	<resultMap type="studio.baxia.fo.vo.ArchiveVo"  id="ArchiveVoMap">
+		<result property="name" column="month_name" />
+		<result property="counts" column="article_counts" />
+	</resultMap>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO
-		t_article(title,summary,content,category_ids,tag_ids,author_id,status,write_time,pub_time)
+		t_article(title,summary,content,category_ids,tag_ids,status,write_time,pub_time)
 		VALUES
 		(#{title,jdbcType=VARCHAR},
 		#{summary,jdbcType=VARCHAR},
 		#{content,jdbcType=VARCHAR},
 		#{categoryIds,jdbcType=INTEGER},
 		#{tagIds,jdbcType=VARCHAR},
-		#{authorId,jdbcType=INTEGER},
 		#{status,jdbcType=INTEGER},
 		#{writeTime,jdbcType=TIMESTAMP},
 		#{pubTime,jdbcType=TIMESTAMP})
@@ -47,8 +48,6 @@
 		DELETE FROM t_article
 		WHERE
 		id=#{id,jdbcType=INTEGER}
-		AND
-		author_id = #{authorId,jdbcType=INTEGER}
 	</delete>
 
 	<update id="update">
@@ -64,23 +63,18 @@
 		pub_time=#{pubTime,jdbcType=TIMESTAMP}
 		WHERE id =
 		#{id,jdbcType=INTEGER}
-		AND author_id = #{authorId,jdbcType=INTEGER}
 	</update>
 	<update id="updateCategoryId">
 		UPDATE t_article
 		SET
 		category_ids=#{newCategoryId,jdbcType=INTEGER}
 		WHERE category_ids =#{oldCategoryId,jdbcType=INTEGER}
-		AND author_id =
-		#{authorId,jdbcType=INTEGER}
 	</update>
 	<update id="updateStatus">
 		UPDATE t_article
 		SET
 		status=#{status,jdbcType=INTEGER}
 		WHERE id =#{id,jdbcType=INTEGER}
-		AND author_id =
-		#{authorId,jdbcType=INTEGER}
 	</update>
 	<select id="selectVoById" resultMap="ArticleVoMap">
 		SELECT t1.*,t2.name as
@@ -92,8 +86,6 @@
 		WHERE
 		t1.id = #{id,jdbcType=INTEGER}
 		AND
-		t1.author_id = #{authorId,jdbcType=INTEGER}
-		AND
 		t1.category_ids = t2.id
 	</select>
 	<select id="selectById" resultMap="ArticleVoMap">
@@ -102,8 +94,6 @@
 		WHERE
 		id
 		= #{id,jdbcType=INTEGER}
-		AND
-		author_id = #{authorId,jdbcType=INTEGER}
 	</select>
 	<select id="selectVoByTitle" resultMap="ArticleVoMap">
 		SELECT t1.*,t2.name as
@@ -117,9 +107,6 @@
 		AND
 		status = #{status,jdbcType=VARCHAR}
 		AND
-		t1.author_id =
-		#{authorId,jdbcType=INTEGER}
-		AND
 		t1.category_ids = t2.id
 	</select>
 
@@ -131,9 +118,6 @@
 				AND title like CONCAT(CONCAT('%',
 				#{article.title,jdbcType=VARCHAR}),
 				'%')
-			</if>
-			<if test="article.authorId!=null">
-				AND author_id = #{article.authorId,jdbcType=INTEGER}
 			</if>
 			<if test="article.categoryIds!=null">
 				AND category_ids =
@@ -163,9 +147,6 @@
 				#{article.title,jdbcType=VARCHAR}),
 				'%')
 			</if>
-			<if test="article.authorId!=null">
-				AND author_id = #{article.authorId,jdbcType=INTEGER}
-			</if>
 			<if test="article.categoryIds!=null">
 				AND category_ids =
 				#{article.categoryIds,jdbcType=INTEGER}
@@ -191,9 +172,6 @@
 				AND t1.title like CONCAT(CONCAT('%',
 				#{article.title,jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="article.authorId!=null">
-				AND t1.author_id = #{article.authorId,jdbcType=INTEGER}
-			</if>
 			<if test="article.categoryIds!=null">
 				AND t1.category_ids =
 				#{article.categoryIds,jdbcType=INTEGER}
@@ -217,9 +195,6 @@
 		select t1.id,t1.title
 		from t_article t1
 		<where>
-			<if test="article.authorId!=null">
-				AND t1.author_id = #{article.authorId,jdbcType=INTEGER}
-			</if>
 			<if test="article.status!=null">
 				AND t1.status =#{article.status,jdbcType=VARCHAR}
 			</if>
@@ -235,5 +210,28 @@
 			desc
 		</if>
 		limit 1
+	</select>
+	
+	<select id="selectAllArchives" resultMap="ArchiveVoMap">
+		select count(*) as counts, DATE_FORMAT(t.pub_time, #{archive_type,jdbcType=VARCHAR}) as month_name
+			from t_article as t 
+			where 
+				t.pub_time != ''
+				<if test="status!=null">
+					and status=#{status,jdbcType=INTEGER}  
+				</if>
+			GROUP BY month_name
+			order by t.pub_time DESC;
+	</select>
+	
+	<select id="selectArchiveArticles" resultMap="ArticleMap">
+		select t.*
+			from t_article as t 
+			where 
+				DATE_FORMAT(t.pub_time,  #{archive_type,jdbcType=VARCHAR}) = #{month_name,jdbcType=VARCHAR}
+				<if test="status!=null">
+					and status=#{status,jdbcType=INTEGER}  
+				</if>
+			order by t.pub_time DESC;
 	</select>
 </mapper>

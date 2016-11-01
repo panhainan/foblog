@@ -24,6 +24,12 @@ app.config(function($routeProvider,$stateProvider) {
 	}).when("/blog", {
 		templateUrl : "modules/blog/article/article.view.html",
 		controller : 'ArticleController'
+	}).when("/blog/archive", {
+		templateUrl : "modules/blog/archive/archive.article.view.html",
+		controller : 'ArchiveArticleController'
+	}).when("/blog/archive/:archiveName", {
+		templateUrl : "modules/blog/archive/archive.article.view.html",
+		controller : 'ArchiveArticleController'
 	}).when("/blog/category", {
 		templateUrl : "modules/blog/category/category.article.view.html",
 		controller : 'CategoryArticleController'

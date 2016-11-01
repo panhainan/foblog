@@ -21,7 +21,6 @@ public class TagDaoTest extends BaseTest {
     public void testInsert() {
         Tag tag = new Tag();
         tag.setName("Java");
-        tag.setAuthorId(1);
         Integer result = iTagDao.insert(tag);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
@@ -29,19 +28,19 @@ public class TagDaoTest extends BaseTest {
 
     @Test
     public void testDelete() {
-        Integer result = iTagDao.delete(1,1);
+        Integer result = iTagDao.delete(1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }
     @Test
     public void testSelectBy(){
-        List<Tag> result = iTagDao.selectBy(1);
+        List<Tag> result = iTagDao.selectBy();
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }
     @Test
     public void testSelectById(){
-        Tag result = iTagDao.selectById(1,1);
+        Tag result = iTagDao.selectById(1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }

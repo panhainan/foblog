@@ -12,17 +12,12 @@ public class Category extends TreeInfo {
     private Integer id;
     private Integer parentId = CommonConstant.CATEGORY_DEFAULT_PARENT_ID;//父类别id
     private String name;//名称
-    private Integer authorId; //作者id
 
     @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", parentId='" + parentId + '\'' +
-                ", name='" + name + '\'' +
-                ", authorId=" + authorId +
-                '}';
-    }
+	public String toString() {
+		return "Category [id=" + id + ", parentId=" + parentId + ", name="
+				+ name + "]";
+	}
 
     public Integer getId() {
         return id;
@@ -48,11 +43,4 @@ public class Category extends TreeInfo {
         this.name = name;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
-    }
 }

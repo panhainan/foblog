@@ -6,19 +6,17 @@
         <result property="id" column="id"/>
         <result property="parentId" column="parent_id"/>
         <result property="name" column="name"/>
-        <result property="authorId" column="author_id"/>
     </resultMap>
     <resultMap id="CategoryVoMap" type="studio.baxia.fo.vo.CategoryVo">
         <result property="id" column="id"/>
         <result property="parentId" column="parent_id"/>
         <result property="name" column="name"/>
-        <result property="authorId" column="author_id"/>
         <result property="counts" column="article_counts" />
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_category(parent_id,name,author_id)
-        VALUES (#{parentId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
+        INSERT INTO t_category(parent_id,name)
+        VALUES (#{parentId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR})
     </insert>
 
     <delete id="delete">
@@ -38,21 +36,18 @@
 
     <delete id="deleteBy">
         DELETE FROM t_category
-        WHERE author_id = #{authorId,jdbcType=INTEGER}
-        AND parent_id = #{parentId,jdbcType=INTEGER}
+        WHERE  parent_id = #{parentId,jdbcType=INTEGER}
     </delete>
 
     <delete id="deleteById">
         DELETE FROM t_category
         WHERE id = #{id,jdbcType=INTEGER}
-        AND author_id = #{authorId,jdbcType=INTEGER}
     </delete>
 
     <update id="update">
         UPDATE t_category
         SET parent_id = #{parentId,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR}
         WHERE id = #{id,jdbcType=INTEGER}
-        AND author_id = #{authorId,jdbcType=INTEGER}
     </update>
 
     <select id="selectById" resultMap="CategoryMap">
@@ -62,17 +57,15 @@
 
     <select id="selectBy" resultMap="CategoryMap">
         SELECT * FROM t_category
-        WHERE author_id = #{authorId,jdbcType=INTEGER}
         <if test="parentId!=null">
-            and parent_id = #{parentId,jdbcType=INTEGER}
+           WHERE parent_id = #{parentId,jdbcType=INTEGER}
         </if>
         ORDER BY  id
     </select>
     
     <select id="selectByName" resultMap="CategoryMap">
     	SELECT * FROM t_category
-        WHERE author_id = #{authorId,jdbcType=INTEGER}
-            and name = #{name,jdbcType=INTEGER}
+        WHERE  name = #{name,jdbcType=INTEGER}
         limit 1
     </select>
     
@@ -86,9 +79,8 @@
 						    </if>
 				    	) as article_counts 
 			FROM t_category t1 
-			WHERE t1.author_id = 1
-					<if test="parentId!=null">
-	            and t1.parent_id = #{parentId,jdbcType=INTEGER}
+				<if test="parentId!=null">
+	             WHERE t1.parent_id = #{parentId,jdbcType=INTEGER}
 	        	</if>
 			ORDER BY article_counts desc
     </select>

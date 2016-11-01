@@ -29,12 +29,11 @@ public class IMessageDaoTest extends BaseTest {
     @Test
     public void testInsert() {
         int articleId = 1;
-        Article article = iArticleDao.selectById(articleId,1);
+        Article article = iArticleDao.selectById(articleId);
         Message message = new Message();
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             int guestBId = 1;//B
-            int authorAId = article.getAuthorId();
             message.setArticleId(article.getId());
             message.setBlockId(1);
             message.setContent("B对A的文章进行了评论");
@@ -102,7 +101,7 @@ public class IMessageDaoTest extends BaseTest {
             message6.setParentId(message2.getId());
             message6.setContent("A对D的评论进行了评论");
             message6.setUserType(CommonConstant.USER_TYPE_AUTHOR);
-            message6.setAuthorId(authorAId);
+            message6.setAuthorId(1);
             Integer result6 = iMessageDao.insert(message6);
             printResultStr(methodName, null, result6);
 
@@ -112,7 +111,7 @@ public class IMessageDaoTest extends BaseTest {
     @Test
     public void testSelectByArticleId() {
         int articleId = 1;
-        Article article = iArticleDao.selectById(articleId,1);
+        Article article = iArticleDao.selectById(articleId);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             List<Message> result = iMessageDao.selectByArticleId(article.getId(), CommonConstant.MESSAGE_NULL_PARENT_ID, null, CommonConstant.REVERSE_ORDER);
@@ -131,7 +130,7 @@ public class IMessageDaoTest extends BaseTest {
         int deleteMessageId = 25;
         int deleteMessageBlockId = 1;
         List<Integer> ids = new ArrayList<>();
-        Article article = iArticleDao.selectById(deleteMessageArticleId,1);
+        Article article = iArticleDao.selectById(deleteMessageArticleId);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             List<Message> listMsg = iMessageDao.selectByArticleId(article.getId(), CommonConstant.MESSAGE_NULL_PARENT_ID, deleteMessageBlockId, CommonConstant.CORRECT_ORDER);
@@ -163,7 +162,7 @@ public class IMessageDaoTest extends BaseTest {
     @Test
     public void testSelectCountByArticleId() {
         int articleId = 1;
-        Article article = iArticleDao.selectById(articleId,1);
+        Article article = iArticleDao.selectById(articleId);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         if (article != null && article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             Integer result = iMessageDao.selectCountByArticleId(articleId);

@@ -23,7 +23,7 @@ var nav_archive = "archive";
 var nav_category = "category";
 var nav_tag = "tag";
 var setScreenAvailHeight=function(){
-	var availHeight= window.screen.availHeight-50;
+	var availHeight= window.screen.availHeight-70;
 	$(".customNoMarginRightContainer").css("min-height",
 			availHeight + "px");
 	$(".customManageContainer").css("min-height",

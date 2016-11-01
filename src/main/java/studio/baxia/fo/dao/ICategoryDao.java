@@ -18,7 +18,7 @@ public interface ICategoryDao {
 	 * 插入类别
 	 * 
 	 * @param category
-	 *            类别（parent_id,name,author_id）
+	 *            类别（parent_id,name）
 	 * @return 受影响的行数
 	 */
 	Integer insert(Category category);
@@ -27,7 +27,7 @@ public interface ICategoryDao {
 	 * 更新类别
 	 * 
 	 * @param category
-	 *            类别（id,authorId,parentId,name）(前两个字段用于验证该用户具备权限，后两个字段为小更新的字段)
+	 *            类别（id,parentId,name）(前一个字段用于验证该用户具备权限，后两个字段为小更新的字段)
 	 * @return 受影响的行数
 	 */
 	Integer update(Category category);
@@ -46,22 +46,18 @@ public interface ICategoryDao {
 	 * 
 	 * @param categoryId
 	 *            类别id
-	 * @param categoryAuthorId 
 	 * @return 受影响的行数
 	 */
-	Integer deleteById(@Param("id") Integer categoryId, @Param("authorId")Integer categoryAuthorId);
+	Integer deleteById(@Param("id") Integer categoryId);
 
 	/**
 	 * 通过作者id和父类别id删除类别
 	 * 
-	 * @param categoryAuthorId
-	 *            作者id
 	 * @param categoryParentId
 	 *            父类别id
 	 * @return 受影响的行数
 	 */
-	Integer deleteBy(@Param("authorId") Integer categoryAuthorId,
-			@Param("parentId") Integer categoryParentId);
+	Integer deleteBy(@Param("parentId") Integer categoryParentId);
 
 	/**
 	 * 通过类别id查找
@@ -73,21 +69,17 @@ public interface ICategoryDao {
 	Category selectById(@Param("id") Integer categoryId);
 
 	/**
-	 * 通过作者id查找
+	 * 通过类别父id查找
 	 * 
-	 * @param categoryAuthorId
-	 *            作者id（不允许为null）
 	 * @param categoryParentId
 	 *            类别父id（null：查找作者的所有类别）
 	 * @return
 	 */
-	List<Category> selectBy(@Param("authorId") Integer categoryAuthorId,
-			@Param("parentId") Integer categoryParentId);
+	List<Category> selectBy(@Param("parentId") Integer categoryParentId);
 
-	Category selectByName(@Param("authorId") Integer categoryAuthorId,
-			@Param("name") String categoryName);
+	Category selectByName(@Param("name") String categoryName);
 
-	List<CategoryVo> selectVoBy(@Param("authorId") Integer categoryAuthorId,@Param("articleStatus")Integer articleStatus,
+	List<CategoryVo> selectVoBy(@Param("articleStatus") Integer articleStatus,
 			@Param("parentId") Integer categoryParentId);
 
 }

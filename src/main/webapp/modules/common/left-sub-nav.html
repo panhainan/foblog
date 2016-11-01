@@ -15,6 +15,11 @@
 				ng-click="selectTag(subNavData.name)">{{subNavData.name}} <span
 					style="color:#337AB7;">({{subNavData.counts}})</span>
 				</a>
+				
+				<a ng-if="subNavDatas.typeCode=='archive'"
+				ng-click="selectArchive(subNavData.name)">{{subNavData.name}} <span
+					style="color:#337AB7;">({{subNavData.counts}})</span>
+				</a>
 			</li>
 		</ul>
 	</div>

@@ -6,21 +6,18 @@ package studio.baxia.fo.pojo;
 public class Tag {
 	private Integer id;
 	private String name; // 标签名称
-	private Integer authorId;// 作者id
 
 	public Tag() {
 		super();
 	}
 
-	public Tag(String name, Integer authorId) {
+	public Tag(String name) {
 		this.name = name;
-		this.authorId = authorId;
 	}
 
 	@Override
 	public String toString() {
-		return "Tag{" + "id=" + id + ", name='" + name + '\'' + ", authorId="
-				+ authorId + '}';
+		return "Tag [id=" + id + ", name=" + name + "]";
 	}
 
 	public Integer getId() {
@@ -39,11 +36,4 @@ public class Tag {
 		this.name = name;
 	}
 
-	public Integer getAuthorId() {
-		return authorId;
-	}
-
-	public void setAuthorId(Integer authorId) {
-		this.authorId = authorId;
-	}
 }

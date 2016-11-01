@@ -52,7 +52,7 @@ app.controller("TagManageController", function($uibModal, $scope,$location,
 					modalInstance.result.then(function(articleParam) {
 						if (articleParam.status == "go") {
 							$location.path("/manage/article/preview/"
-									+ articleId);
+									+ articleParam.articleId);
 						} else if (articleParam.status == "delete") {
 							TagManageService.deleteActicleTag(tag.id,
 									articleParam.articleId).then(

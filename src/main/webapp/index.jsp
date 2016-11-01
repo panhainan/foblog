@@ -82,8 +82,10 @@
 <script src="modules/blog/category/category.article.controller.js"></script>
 <script src="modules/blog/tag/tag.article.service.js"></script>
 <script src="modules/blog/tag/tag.article.controller.js"></script>
-
+<script src="modules/blog/archive/archive.article.service.js"></script>
+<script src="modules/blog/archive/archive.article.controller.js"></script>
 <script src="modules/common/right-nav.controller.js"></script>
+
 <!-- 管理员即作者操作 -->
 <script src="modules/manage/manage.controller.js"></script>
 <script src="modules/manage/sign/sign.manage.controller.js"></script>

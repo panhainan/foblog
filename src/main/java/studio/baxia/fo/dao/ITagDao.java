@@ -15,7 +15,7 @@ import java.util.List;
 public interface ITagDao {
     /**
      * 插入标签
-     * @param tag 标签（name,authorId）
+     * @param tag 标签（name）
      * @return 受影响的行
      */
     Integer insert(Tag tag);
@@ -25,33 +25,30 @@ public interface ITagDao {
      * @param tagId 标签id
      * @return 受影响的行
      */
-    Integer delete(@Param("id")Integer tagId,@Param("authorId")Integer tagAuthorId);
+    Integer delete(@Param("id")Integer tagId);
 
     /**
-     * 查找作者的所有标签
-     * @param tagAuthorId 作者id
+     * 查找所有标签
      * @return List<Tag>
      */
-    List<Tag> selectBy(@Param("authorId")Integer tagAuthorId);
+    List<Tag> selectBy();
 
     /**
      * 通过id查找标签
      * @param tagId 标签id
-     * @param tagAuthorId 标签作者id
      * @return Tag
      */
-    Tag selectById(@Param("id")Integer tagId,@Param("authorId")Integer tagAuthorId);
+    Tag selectById(@Param("id")Integer tagId);
     /**
      * 通过name查找标签
      * @param tagName 标签名
-     * @param tagAuthorId 标签作者id
      * @return Tag
      */
-	Tag selectByName(@Param("name")String tagName, @Param("authorId")Integer tagAuthorId);
+	Tag selectByName(@Param("name")String tagName);
 
-	List<TagVo> selectVoBy(@Param("authorId")Integer tagAuthorId,@Param("articleStatus")Integer articleStatus);
+	List<TagVo> selectVoBy(@Param("articleStatus")Integer articleStatus);
 
-	List<Tag> selectByIds(@Param("ids")List<Integer> tagIdList, @Param("authorId")Integer articleAuthorId);
+	List<Tag> selectByIds(@Param("ids")List<Integer> tagIdList);
 
 	Integer update(Tag tag);
 }

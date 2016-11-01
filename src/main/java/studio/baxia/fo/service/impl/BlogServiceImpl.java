@@ -25,6 +25,7 @@ import studio.baxia.fo.pojo.Category;
 import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IBlogService;
+import studio.baxia.fo.vo.ArchiveVo;
 import studio.baxia.fo.vo.ArticleVo;
 import studio.baxia.fo.vo.CategoryVo;
 import studio.baxia.fo.vo.TagVo;
@@ -44,13 +45,6 @@ public class BlogServiceImpl implements IBlogService {
 	@Autowired
 	private IMessageDao iMessageDao;
 
-	/**
-	 * 返回结果
-	 * 
-	 * @param result
-	 *            受影响的行数（=1+：返回true，=0-：返回false）
-	 * @return
-	 */
 	private Boolean returnResult(Integer result) {
 		if (result > 0) {
 			return true;
@@ -59,54 +53,30 @@ public class BlogServiceImpl implements IBlogService {
 		}
 	}
 
-	/**
-	 * 添加类别
-	 *
-	 * @param category
-	 *            类别（parent_id,name,author_id）
-	 * @return
-	 */
 	@Override
 	public Boolean categoryAdd(Category category) {
 		Integer result = iCategoryDao.insert(category);
 		return returnResult(result);
 	}
 
-	/**
-	 * 修改类别
-	 *
-	 * @param category
-	 *            类别（id,author_id,parent_id,name）
-	 * @return
-	 */
 	@Override
 	public Boolean categoryEdit(Category category) {
 		Integer result = iCategoryDao.update(category);
 		return returnResult(result);
 	}
 
-	/**
-	 * 通过类别id删除类别
-	 *
-	 * @param categoryId
-	 *            类别id
-	 * @param categoryAuthorId
-	 *            类别作者id
-	 * @return
-	 */
 	@Override
-	public Boolean categoryDeleteById(int categoryId, int categoryAuthorId) {
+	public Boolean categoryDeleteById(int categoryId) {
 		Category cIdCategory = iCategoryDao.selectById(categoryId);
 		if (cIdCategory.getName().equals(CommonConstant.NEW_NO_NAME_CATEGORY)) {
 			return false;
 		} else {
-			Category cNameCategory = iCategoryDao.selectByName(
-					categoryAuthorId, CommonConstant.NEW_NO_NAME_CATEGORY);
+			Category cNameCategory = iCategoryDao
+					.selectByName(CommonConstant.NEW_NO_NAME_CATEGORY);
 			Integer newCategoryId = null;
 			if (cNameCategory == null) {
 				Category newCategory = new Category();
 				newCategory.setName(CommonConstant.NEW_NO_NAME_CATEGORY);
-				newCategory.setAuthorId(categoryAuthorId);
 				newCategory
 						.setParentId(CommonConstant.CATEGORY_DEFAULT_PARENT_ID);
 				Integer result = iCategoryDao.insert(newCategory);
@@ -115,9 +85,8 @@ public class BlogServiceImpl implements IBlogService {
 				newCategoryId = cNameCategory.getId();
 			}
 			Integer result1 = iArticleDao.updateCategoryId(categoryId,
-					newCategoryId, categoryAuthorId);
-			Integer result2 = iCategoryDao.deleteById(categoryId,
-					categoryAuthorId);
+					newCategoryId);
+			Integer result2 = iCategoryDao.deleteById(categoryId);
 			return returnResult(result2);
 		}
 
@@ -131,47 +100,24 @@ public class BlogServiceImpl implements IBlogService {
 		 */
 	}
 
-	/**
-	 * 通过作者id获取所有类别
-	 *
-	 * @param authorId
-	 *            作者id
-	 * @return
-	 */
 	@Override
-	public List<Category> categoryGetAllBy(int authorId) {
-		List<Category> result = iCategoryDao.selectBy(authorId, null);
+	public List<Category> categoryGetAllBy() {
+		List<Category> result = iCategoryDao.selectBy(null);
 		return result;
 	}
 
 	@Override
-	public List<CategoryVo> categoryGetAllVoBy(int authorId,
-			Integer articleStatus) {
-		List<CategoryVo> result = iCategoryDao.selectVoBy(authorId,
-				articleStatus, null);
+	public List<CategoryVo> categoryGetAllVoBy(Integer articleStatus) {
+		List<CategoryVo> result = iCategoryDao.selectVoBy(articleStatus, null);
 		return result;
 	}
 
-	/**
-	 * 通过类别id获取类别
-	 *
-	 * @param categoryId
-	 *            类别id
-	 * @return
-	 */
 	@Override
 	public Category categoryGetById(int categoryId) {
 		Category result = iCategoryDao.selectById(categoryId);
 		return result;
 	}
 
-	/**
-	 * 添加标签
-	 *
-	 * @param tag
-	 *            标签（name,authorId）
-	 * @return
-	 */
 	@Override
 	public Boolean tagAdd(Tag tag) {
 		Integer result = iTagDao.insert(tag);
@@ -184,19 +130,10 @@ public class BlogServiceImpl implements IBlogService {
 		return returnResult(result);
 	}
 
-	/**
-	 * 通过标签id删除标签
-	 *
-	 * @param tagId
-	 *            标签id
-	 * @param tagAuthorId
-	 *            标签作者id
-	 * @return
-	 */
 	@Override
-	public Boolean tagDeleteById(int tagId, int tagAuthorId) {
-		List<Article> listArticle = iArticleDao.selectBy(new Article()
-				.setAuthorId(tagAuthorId).setTagIds(tagId + ","), null);
+	public Boolean tagDeleteById(int tagId) {
+		List<Article> listArticle = iArticleDao.selectBy(
+				new Article().setTagIds(tagId + ","), null);
 		if (listArticle != null) {
 			for (int i = 0; i < listArticle.size(); i++) {
 				Article article = listArticle.get(i);
@@ -208,51 +145,35 @@ public class BlogServiceImpl implements IBlogService {
 					String str = tagIdsStr.replaceAll((tagId + ","), "");
 					article.setTagIds(str);
 					Integer result = iArticleDao.update(article);
-					if(result==0){
+					if (result == 0) {
 						return false;
 					}
 				}
 			}
 		}
-		Integer result = iTagDao.delete(tagId, tagAuthorId);
+		Integer result = iTagDao.delete(tagId);
 		return returnResult(result);
 	}
 
-	/**
-	 * 通过标签id获取标签
-	 *
-	 * @param tagId
-	 *            标签id
-	 * @param tagAuthorId
-	 *            标签作者id
-	 * @return
-	 */
 	@Override
-	public Tag tagGetById(int tagId, int tagAuthorId) {
-		Tag result = iTagDao.selectById(tagId, tagAuthorId);
-		return result;
-	}
-
-	/**
-	 * 通过作者id获取所有标签
-	 *
-	 * @param authorId
-	 *            作者id
-	 * @return
-	 */
-	@Override
-	public List<Tag> tagGetAllBy(int authorId) {
-		List<Tag> result = iTagDao.selectBy(authorId);
+	public Tag tagGetById(int tagId) {
+		Tag result = iTagDao.selectById(tagId);
 		return result;
 	}
 
 	@Override
-	public List<TagVo> tagGetAllVoBy(int authorId, Integer articleStatus) {
-		List<TagVo> result = iTagDao.selectVoBy(authorId, articleStatus);
+	public List<Tag> tagGetAllBy() {
+		List<Tag> result = iTagDao.selectBy();
 		return result;
 	}
 
-	private String[] tagGetAllNamesBy(String tagIds, Integer articleAuthorId) {
+	@Override
+	public List<TagVo> tagGetAllVoBy(Integer articleStatus) {
+		List<TagVo> result = iTagDao.selectVoBy(articleStatus);
+		return result;
+	}
+
+	private String[] tagGetAllNamesBy(String tagIds) {
 		String[] tagIdsArr = tagIds.split(",");
 		if (tagIdsArr != null && tagIdsArr[0] != "") {
 			String[] tagNames = new String[tagIdsArr.length];
@@ -265,7 +186,7 @@ public class BlogServiceImpl implements IBlogService {
 					// tagNames[i]=tag.getName();
 				}
 			}
-			List<Tag> tags = iTagDao.selectByIds(tagIdList, articleAuthorId);
+			List<Tag> tags = iTagDao.selectByIds(tagIdList);
 			for (int i = 0; i < tags.size(); i++) {
 				tagNames[i] = tags.get(i).getName();
 			}
@@ -279,11 +200,11 @@ public class BlogServiceImpl implements IBlogService {
 			StringBuilder strBuilderTagIds = new StringBuilder();
 			for (int i = 0; i < tagNames.length; i++) {
 				if (tagNames[i] != null && tagNames[i].trim() != "") {
-					Tag t = iTagDao.selectByName(tagNames[i], 1);
+					Tag t = iTagDao.selectByName(tagNames[i]);
 					if (t != null) {
 						strBuilderTagIds.append(t.getId() + ",");
 					} else {
-						Tag newTag = new Tag(tagNames[i], 1);
+						Tag newTag = new Tag(tagNames[i]);
 						Integer r = iTagDao.insert(newTag);
 						if (r > 0) {
 							strBuilderTagIds.append(newTag.getId() + ",");
@@ -296,13 +217,6 @@ public class BlogServiceImpl implements IBlogService {
 		return null;
 	}
 
-	/**
-	 * 添加文章
-	 *
-	 * @param article
-	 *            文章信息（title,summary,content,categoryIds,tagIds,authorId,status）
-	 * @return
-	 */
 	@Override
 	public Integer articleAdd(ArticleVo article) {
 		if (article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
@@ -310,7 +224,6 @@ public class BlogServiceImpl implements IBlogService {
 		}
 		article.setTagIds(tagGetIdsBy(article.getTagNames()));
 		article.setWriteTime(new Date());
-		article.setAuthorId(1);
 		Integer result = iArticleDao.insert(article);
 		if (returnResult(result)) {
 			return article.getId();
@@ -320,20 +233,11 @@ public class BlogServiceImpl implements IBlogService {
 
 	}
 
-	/**
-	 * 编辑文章
-	 *
-	 * @param article
-	 *            文章信息（id,[title,summary,content,categoryIds,tagIds,status,
-	 *            pubTime](可为空，为空表示该字段不修改)）
-	 * @return
-	 */
 	@Override
 	public Integer articleEdit(ArticleVo article) {
 		Integer result = 0;
 		if (article.getOnlyChangeStatus() != null
 				&& article.getOnlyChangeStatus() == true) {
-			article.setAuthorId(1);
 			result = iArticleDao.updateStatus(article);
 		} else {
 			if (article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
@@ -349,25 +253,16 @@ public class BlogServiceImpl implements IBlogService {
 		}
 	}
 
-	/**
-	 * 通过文章id删除文章
-	 *
-	 * @param articleId
-	 *            文章id
-	 * @param articleAuthorId
-	 *            文章作者id
-	 * @return
-	 */
 	@Override
-	public Boolean articleDeleteById(int articleId, int articleAuthorId) {
-		Article article = iArticleDao.selectById(articleId, articleAuthorId);
+	public Boolean articleDeleteById(int articleId) {
+		Article article = iArticleDao.selectById(articleId);
 		if (article != null) {
 			// 获取该文章id对应的所有评论记录总数
 			Integer counts = iMessageDao.selectCountByArticleId(articleId);
 			// 返回删除所有评论的文章为id的受影响行数
 			Integer results = iMessageDao.deleteByArticleId(articleId);
 			if (results == counts) {
-				Integer result = iArticleDao.delete(articleId, articleAuthorId);
+				Integer result = iArticleDao.delete(articleId);
 				return returnResult(result);
 			}
 		}
@@ -375,65 +270,43 @@ public class BlogServiceImpl implements IBlogService {
 	}
 
 	@Override
-	public Boolean articleDeleteTag(int tagId, int articleId, int authorId) {
-		Article article = iArticleDao.selectById(articleId, authorId);
+	public Boolean articleDeleteTag(int tagId, int articleId) {
+		Article article = iArticleDao.selectById(articleId);
 		if (article != null) {
 			String tagIdsStr = article.getTagIds();
-//			int index = tagIdsStr.indexOf((tagId + ","));
-//			if (index == -1) {
-//				return false;
-//			} else {
-				String str = tagIdsStr.replaceAll((tagId + ","), "");
-				article.setTagIds(str);
-				Integer result = iArticleDao.update(article);
-				return returnResult(result);
-//			}
+			// int index = tagIdsStr.indexOf((tagId + ","));
+			// if (index == -1) {
+			// return false;
+			// } else {
+			String str = tagIdsStr.replaceAll((tagId + ","), "");
+			article.setTagIds(str);
+			Integer result = iArticleDao.update(article);
+			return returnResult(result);
+			// }
 		}
 		return false;
 	}
 
-	/**
-	 * 通过文章id获取文章
-	 *
-	 * @param articleId
-	 *            文章id
-	 * @param articleAuthorId
-	 *            文章作者id
-	 * @return
-	 */
 	@Override
-	public ArticleVo articleVoGetById(int articleId, int articleAuthorId) {
-		ArticleVo article = iArticleDao
-				.selectVoById(articleId, articleAuthorId);
+	public ArticleVo articleVoGetById(int articleId) {
+		ArticleVo article = iArticleDao.selectVoById(articleId);
 		if (article == null) {
 			return null;
 		}
-		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),
-				articleAuthorId));
+		article.setTagNames(tagGetAllNamesBy(article.getTagIds()));
 		return article;
 	}
 
-	/**
-	 * 通过标题取得文章
-	 *
-	 * @param articleTitle
-	 *            文章标题
-	 * @param articleAuthorId
-	 *            文章作者id
-	 * @return
-	 */
 	@Override
-	public Map<String, Object> articleVoGetByTitle(String articleTitle,
-			Integer articleAuthorId) {
+	public Map<String, Object> articleVoGetByTitle(String articleTitle) {
 		// String s = urlStrParamTranscoding(articleTitle);
 		ArticleVo article = iArticleDao.selectVoByTitle(articleTitle,
-				articleAuthorId, CommonConstant.ACTICLE_STATUS_BLOG);
+				CommonConstant.ACTICLE_STATUS_BLOG);
 		if (article == null) {
 			return null;
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		article.setTagNames(tagGetAllNamesBy(article.getTagIds(),
-				articleAuthorId));
+		article.setTagNames(tagGetAllNamesBy(article.getTagIds()));
 		Article preArticle = iArticleDao.selectNextOrPreVoBy(article, false);
 		Article nextArticle = iArticleDao.selectNextOrPreVoBy(article, true);
 		map.put("currentArticle", article);
@@ -457,22 +330,10 @@ public class BlogServiceImpl implements IBlogService {
 		return s;
 	}
 
-	/**
-	 * 通过作者id、文章状态、分页信息获取分页后的文章列表信息
-	 *
-	 * @param articleAuthorId
-	 *            作者id
-	 * @param articleStatus
-	 *            文章状态
-	 * @param pageConfig
-	 *            分页信息
-	 * @return
-	 */
 	@Override
-	public PageInfoResult<Article> articleGetAllBy(int articleAuthorId,
-			Integer articleStatus, PageConfig pageConfig) {
+	public PageInfoResult<Article> articleGetAllBy(Integer articleStatus,
+			PageConfig pageConfig) {
 		Article article = new Article();
-		article.setAuthorId(articleAuthorId);
 		article.setStatus(articleStatus);
 		List<Article> result = iArticleDao.selectBy(article, pageConfig);
 		Integer resultCount = iArticleDao.selectCountBy(article);
@@ -481,22 +342,10 @@ public class BlogServiceImpl implements IBlogService {
 		return pageInfoResult;
 	}
 
-	/**
-	 * 通过作者id、文章状态、分页信息获取分页后的文章管理列表信息
-	 *
-	 * @param articleAuthorId
-	 *            作者id
-	 * @param articleStatus
-	 *            文章状态
-	 * @param pageConfig
-	 *            分页信息
-	 * @return
-	 */
 	@Override
-	public PageInfoResult<ArticleVo> articleGetAllManageBy(int articleAuthorId,
+	public PageInfoResult<ArticleVo> articleGetAllManageBy(
 			Integer articleStatus, PageConfig pageConfig) {
 		Article article = new Article();
-		article.setAuthorId(articleAuthorId);
 		article.setStatus(articleStatus);
 		List<ArticleVo> result = iArticleDao.selectVoBy(article, pageConfig);
 		Integer resultCount = iArticleDao.selectCountBy(article);
@@ -506,58 +355,47 @@ public class BlogServiceImpl implements IBlogService {
 	}
 
 	@Override
-	public List<ArticleVo> articleGetAllByCategoryName(int authorId,
-			String categoryName) {
+	public List<ArticleVo> articleGetAllByCategoryName(String categoryName) {
 		// String s = urlStrParamTranscoding(categoryName);
-		Category category = iCategoryDao.selectByName(1, categoryName);
+		Category category = iCategoryDao.selectByName(categoryName);
 		if (category != null) {
-			List<ArticleVo> result = iArticleDao.selectVoBy(
-					new Article().setAuthorId(1)
-							.setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
-							.setCategoryIds(category.getId()), null);
+			List<ArticleVo> result = iArticleDao.selectVoBy(new Article()
+					.setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
+					.setCategoryIds(category.getId()), null);
 			return result;
 		}
 		return null;
 	}
-	
+
 	@Override
-	public List<Article> articleGetAllByTagId(int authorId, int tagId,
+	public List<Article> articleGetAllByTagId(int tagId, Integer articleStatus) {
+		List<Article> list = iArticleDao.selectBy(
+				new Article().setTagIds(tagId + ",").setStatus(articleStatus),
+				null);
+		return list;
+	}
+
+	@Override
+	public List<Article> articleGetAllByCategoryId(int categoryId,
 			Integer articleStatus) {
 		List<Article> list = iArticleDao.selectBy(
-				new Article().setAuthorId(authorId).setTagIds(tagId+",")
-						.setStatus(articleStatus), null);
+				new Article().setCategoryIds(categoryId).setStatus(
+						articleStatus), null);
 		return list;
 	}
 
 	@Override
-	public List<Article> articleGetAllByCategoryId(int authorId,
-			int categoryId, Integer articleStatus) {
-		List<Article> list = iArticleDao.selectBy(
-				new Article().setAuthorId(authorId).setCategoryIds(categoryId)
-						.setStatus(articleStatus), null);
-		return list;
-	}
-
-	@Override
-	public List<ArticleVo> articleGetAllByTagName(int authorId, String tagName) {
-		Tag tag = iTagDao.selectByName(tagName, 1);
+	public List<ArticleVo> articleGetAllByTagName(String tagName) {
+		Tag tag = iTagDao.selectByName(tagName);
 		if (tag != null) {
 			List<ArticleVo> result = iArticleDao.selectVoBy(
-					new Article().setAuthorId(1)
-							.setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
+					new Article().setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
 							.setTagIds(tag.getId() + ","), null);
 			return result;
 		}
 		return null;
 	}
 
-	/**
-	 * 添加评论
-	 *
-	 * @param message
-	 *            评论信息（articleId，parentId，content，userType，authorId）
-	 * @return
-	 */
 	@Override
 	public Boolean messageAdd(Message message) {
 		message.setPubTime(new Date());
@@ -579,8 +417,7 @@ public class BlogServiceImpl implements IBlogService {
 		Message message = iMessageDao.selectById(messageId);
 		Integer result = 0;
 		if (message != null) {
-			Article article = iArticleDao.selectById(message.getArticleId(),
-					authorId);
+			Article article = iArticleDao.selectById(message.getArticleId());
 			if (article != null) {
 				if (message.getParentId() != CommonConstant.MESSAGE_DEFAULT_PARENT_ID) {
 					Integer counts = iMessageDao.selectCountBy(messageId,
@@ -600,29 +437,12 @@ public class BlogServiceImpl implements IBlogService {
 		}
 		return false;
 	}
-
-	/**
-	 * 通过文章id删除相关评论
-	 *
-	 * @param messageArticleId
-	 *            文章id
-	 * @return
-	 */
 	@Override
 	public Boolean messageDeleteBy(int messageArticleId) {
 		Integer result = iMessageDao.deleteByArticleId(messageArticleId);
 		return returnResult(result);
 	}
 
-	/**
-	 * 通过文章id和排序状态获取转换树后的信息
-	 *
-	 * @param messageArticleId
-	 *            文章id
-	 * @param reverseOrder
-	 *            排序状态
-	 * @return
-	 */
 	@Override
 	public TreeInfoResult messageGetAllBy(int messageArticleId, int reverseOrder) {
 		List<Message> list = iMessageDao.selectByArticleId(messageArticleId,
@@ -632,6 +452,16 @@ public class BlogServiceImpl implements IBlogService {
 		return treeInfo;
 	}
 
-	
+	@Override
+	public List<ArchiveVo> archiveGetAllVo(Integer articleStatus,
+			String archiveType) {
+		return iArticleDao.selectAllArchives(articleStatus, archiveType);
+	}
+
+	@Override
+	public List<Article> archiveGetAllArticles(String name, Integer articleStatus,
+			String archiveType) {
+		return iArticleDao.selectArchiveArticles(articleStatus, archiveType, name);
+	}
 
 }

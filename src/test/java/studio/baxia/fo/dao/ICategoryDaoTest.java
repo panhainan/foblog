@@ -20,7 +20,6 @@ public class ICategoryDaoTest extends BaseTest {
     public void testInsert() {
         Category category = new Category();
         category.setName("Web前端");
-        category.setAuthorId(2);
         Integer result = iCategoryDao.insert(category);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
@@ -45,9 +44,9 @@ public class ICategoryDaoTest extends BaseTest {
         Integer result = null;
         if(c.getParentId()==0){
             //根级别目录
-            result = iCategoryDao.deleteBy(1, categoryId);
+            result = iCategoryDao.deleteBy(categoryId);
         }
-        result += iCategoryDao.deleteById(categoryId,1);
+        result += iCategoryDao.deleteById(categoryId);
 
 
         methodName = new Throwable().getStackTrace()[0].getMethodName();
@@ -55,8 +54,8 @@ public class ICategoryDaoTest extends BaseTest {
     }
 
     @Test
-    public void testSelectByAuthorId() {
-        List<Category> result = iCategoryDao.selectBy(1, null);
+    public void testSelectByFatherId() {
+        List<Category> result = iCategoryDao.selectBy(1);
         methodName = new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null, result);
     }

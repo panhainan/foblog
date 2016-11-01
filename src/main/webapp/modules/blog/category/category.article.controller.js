@@ -40,6 +40,8 @@ app.controller("CategoryArticleController",function($window,$location,$routePara
 			if(sessionStorage.getItem("subNavDatas")!=null && sessionStorage.getItem("subNavDatas")!=""){
 				$scope.subNavDatas=JSON.parse(sessionStorage.getItem("subNavDatas"));
 				$scope.set();
+			}else{
+				$scope.get();
 			}
 		}else{
 			$scope.get();

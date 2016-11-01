@@ -5,49 +5,42 @@
 	<resultMap id="TagMap" type="studio.baxia.fo.pojo.Tag">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
-		<result property="authorId" column="author_id" />
 	</resultMap>
 	<resultMap id="TagVoMap" type="studio.baxia.fo.vo.TagVo">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
-		<result property="authorId" column="author_id" />
 		<result property="counts" column="article_counts" />
 	</resultMap>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
-		INTO t_tag(name,author_id)
+		INTO t_tag(name)
 		VALUES
-		(#{name,jdbcType=VARCHAR},#{authorId,jdbcType=INTEGER})
+		(#{name,jdbcType=VARCHAR})
 	</insert>
 	<insert id="update">
 		UPDATE t_tag
 		SET name=#{name,jdbcType=VARCHAR}
         WHERE id = #{id,jdbcType=INTEGER}
-        AND author_id = #{authorId,jdbcType=INTEGER}
 	</insert>
 	<delete id="delete">
 		DELETE FROM t_tag
 		WHERE id = #{id,jdbcType=INTEGER}
-		AND author_id = #{authorId,jdbcType=INTEGER}
 	</delete>
 
 	<select id="selectById" resultMap="TagMap">
 		SELECT * FROM t_tag
 		WHERE
 		id=#{id,jdbcType=INTEGER}
-		AND author_id = #{authorId,jdbcType=INTEGER}
 	</select>
 
 	<select id="selectByIds" resultMap="TagMap">
 		SELECT * FROM t_tag
-		WHERE
-		author_id = #{authorId,jdbcType=INTEGER}
 		<if test="ids!=null">
 			<if test="ids.size()==0">
-				AND id = 0
+				WHERE id = 0
 			</if>
 			<if test="ids.size()!=0">
-				AND id IN
+				WHERE id IN
 				<foreach collection="ids" index="index" item="item" open="("
 					separator="," close=")">
 					#{item,jdbcType=INTEGER}
@@ -59,8 +52,6 @@
 
 	<select id="selectBy" resultMap="TagMap">
 		SELECT * FROM t_tag
-		WHERE
-		author_id = #{authorId,jdbcType=INTEGER}
 		ORDER BY id
 	</select>
 	<select id="selectVoBy" resultMap="TagVoMap">
@@ -73,7 +64,6 @@
 						    </if>
 				    	) as article_counts 
 			FROM t_tag t1 
-			WHERE t1.author_id = 1
 			ORDER BY article_counts desc
 	</select>
 
@@ -81,8 +71,6 @@
 		SELECT * FROM t_tag
 		WHERE
 		name = #{name,jdbcType=VARCHAR}
-		and author_id =
-		#{authorId,jdbcType=INTEGER}
 		limit 1
 	</select>
 
