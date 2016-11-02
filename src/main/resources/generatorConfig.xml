@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    
+    <!--mybatis生成工具的帮助文档可以看：-->
+    <!--英文：http://www.mybatis.org/generator/usage/mysql.html-->
+    <!--中文：http://www.mybatis.tk/-->
+    <!--中文：http://mbg.cndocs.tk/-->
+    
+    
+    <!--添加你本地的驱动jar-->
+    <classPathEntry location="C:\maven\mvnRespo\mysql\mysql-connector-java\5.1.21\mysql-connector-java-5.1.21.jar"/>
+    
+    <context id="context" targetRuntime="MyBatis3">
+
+        <!--设置编码格式-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!--注释  -->
+        <commentGenerator>
+            <!--value='true' 取消注释-->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!--添加你的 JDBC 连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/foblog" userId="root" password="123"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--要生成的 pojo 模块位置-->
+        <javaModelGenerator targetPackage="generator.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--要生成的 Mapper.xml 文件位置-->
+        <sqlMapGenerator targetPackage="generator.maybatis" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--要生成的 Mapper 接口类-->
+        <javaClientGenerator targetPackage="generator.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--要根据哪张表生成，要在这里配置-->
+        <!--用百分号表示生成所有表,可以直接省去一个一个写 <table tableName="%" /> -->
+        <table tableName="t_guest" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        
+        
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="studio.baxia.fo.dao.IGuestDao" >
+  <resultMap id="BaseResultMap" type="studio.baxia.fo.pojo.Guest" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="personal_website" property="personalWebsite" jdbcType="VARCHAR" />
+    <result column="access_ip" property="accessIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, email, nickname, personal_website, access_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_guest
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_guest
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="studio.baxia.fo.pojo.Guest" >
+    insert into t_guest (id, email, nickname, 
+      personal_website, access_ip)
+    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{personalWebsite,jdbcType=VARCHAR}, #{accessIp,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="studio.baxia.fo.pojo.Guest" >
+    insert into t_guest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="personalWebsite != null" >
+        personal_website,
+      </if>
+      <if test="accessIp != null" >
+        access_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="personalWebsite != null" >
+        #{personalWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="accessIp != null" >
+        #{accessIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="studio.baxia.fo.pojo.Guest" >
+    update t_guest
+    <set >
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="personalWebsite != null" >
+        personal_website = #{personalWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="accessIp != null" >
+        access_ip = #{accessIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="studio.baxia.fo.pojo.Guest" >
+    update t_guest
+    set email = #{email,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      personal_website = #{personalWebsite,jdbcType=VARCHAR},
+      access_ip = #{accessIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
