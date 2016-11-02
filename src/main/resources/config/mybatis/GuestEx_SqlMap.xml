@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="studio.baxia.fo.dao.IGuestDao" >
+    <!--存放自定义用户配置-->
+
+    <!--通过给定条件查询-->
+    <select id="queryOneByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_guest
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="email!=null">
+                AND email = #{email}
+            </if>
+            <if test="nickname!=null">
+                AND nickname = #{nickname}
+            </if>
+            <if test="personal_website!=null">
+                AND personal_website = #{personal_website}
+            </if>
+            <if test="access_ip!=null">
+                AND access_ip = #{access_ip}
+            </if>
+        </trim>
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_guest
+    </select>
+</mapper>

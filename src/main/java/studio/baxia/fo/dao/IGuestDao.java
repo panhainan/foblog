@@ -1,7 +1,13 @@
 package studio.baxia.fo.dao;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import studio.baxia.fo.pojo.Guest;
 
+import java.util.List;
+import java.util.Map;
+
+/*@Repository*/
 public interface IGuestDao {
     /**
      *
@@ -38,4 +44,16 @@ public interface IGuestDao {
      * 主键更新
      */
     int updateByPrimaryKey(Guest record);
+
+    /**
+     *
+     *通过给定条件查询
+     */
+    Guest queryOneByCondition(Map<String, Object> condition);
+
+    /**
+     *
+     *查询所有
+     */
+    List<Guest> queryAll();
 }
