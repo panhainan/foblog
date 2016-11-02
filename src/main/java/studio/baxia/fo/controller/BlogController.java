@@ -80,7 +80,7 @@ public class BlogController {
     @ResponseBody
     @RequestMapping(value = "/archive",method = RequestMethod.GET)
     public CommonResult listArchives(){
-    	List<ArchiveVo> list = iArticleService.archiveGetAllVo(CommonConstant.ACTICLE_STATUS_BLOG,CommonConstant.ARCHIVE_TYPE_YEAR_MONTH);
+    	List<ArchiveVo> list = iArticleService.archiveGetAllVo(CommonConstant.ACTICLE_STATUS_BLOG,CommonConstant.ARCHIVE_TYPE_YEAR,CommonConstant.ARCHIVE_TYPE_YEAR_MONTH);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
     }
     @ResponseBody

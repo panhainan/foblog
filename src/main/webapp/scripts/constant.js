@@ -23,14 +23,16 @@ var nav_archive = "archive";
 var nav_category = "category";
 var nav_tag = "tag";
 var setScreenAvailHeight=function(){
-	var availHeight= window.screen.availHeight-70;
-	$(".customNoMarginRightContainer").css("min-height",
-			availHeight + "px");
-	$(".customManageContainer").css("min-height",
-			availHeight + "px");
-	$(".customContainer").css("min-height",
-			availHeight + "px");
+	var availHeight= window.screen.availHeight;
+//	console.log(availHeight)
+//	$(".customNoMarginRightContainer").css("min-height",
+//			availHeight + "px");
+//	$(".customManageContainer").css("min-height",
+//			availHeight + "px");
+//	$(".customContainer").css("min-height",
+//			availHeight + "px");
 	$("#sub-nav").css("height",availHeight+"px");
+//	$("#sub-nav").css("padding-bottom",availHeight*0.2+"px");
 }
 
 
