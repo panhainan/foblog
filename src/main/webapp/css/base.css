@@ -1,6 +1,7 @@
 html, body {
 	font: 14px/1.5 "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB",
 		"STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+	background-color: #F1F1F1;
 }
 
 body {
@@ -19,7 +20,6 @@ body {
 	margin: 0;
 	margin-left: 260px;
 	height: 100%;
-	background-color: #F1F1F1;
 	overflow-x:hidden; 
 }
 @media ( max-width : 768px) {

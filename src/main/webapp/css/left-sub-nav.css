@@ -1,16 +1,17 @@
 @CHARSET "UTF-8";
 
 #sub-nav {
-	padding: 0px;
+	/* padding: 0px; */
 	background-color: #fff;
 	position: fixed;
 	height: 100%;
 	top: 0;
-	width: 160px;
-	-webkit-transition: margin 0.3s ease;
+	overflow-y: auto;
+	width: 160px; -webkit-transition : margin 0.3s ease;
 	-moz-transition: margin 0.3s ease;
 	-o-transition: margin 0.3s ease;
 	transition: margin 0.3s ease;
+	-webkit-transition: margin 0.3s ease;
 }
 /* 值等于sub-nav的宽度 */
 .margin_left_sub_nav_width {
@@ -35,23 +36,26 @@
 	position: fixed;
 	top: 45%;
 	z-index: 100;
-	width:20px;
-	height:100px;
+	width: 20px;
+	height: 100px;
 }
-.toggle-sidebar-div a{
-	text-decoration:none;
+
+.toggle-sidebar-div a {
+	text-decoration: none;
 	background-color: #E5E5E5;
 	display: block;
-	padding:0;
+	padding: 0;
 }
-.toggle-sidebar-div a span{
-	color:#337AB7;
-	padding-top:40px;
-	padding-left:2px;
-	width:30px;
-	height:100px;
+
+.toggle-sidebar-div a span {
+	color: #337AB7;
+	padding-top: 40px;
+	padding-left: 2px;
+	width: 30px;
+	height: 100px;
 	display: block;
 }
+
 .toggle-sidebar {
 	border: 0;
 	margin: 0;
@@ -72,6 +76,33 @@
 	line-height: 50px;
 	text-align: center;
 	border-bottom: 1px #EBEBEB dashed;
+}
+
+.sub-nav-parent-item {
+	padding-left: 0px;
+	margin: 0;
+	line-height: 20px;
+	width: 100%;
+	text-indent: 10px;
+}
+
+.sub-nav-parent-item span {
+	height: 20px;
+	width: 100%;
+	display: block;
+	color: #fff; 
+	border-bottom: 1px #EBEBEB solid;
+	background-color: #000;
+}
+
+.sub-nav-body{
+	height:500px;
+	overflow-y: auto;
+	padding-bottom: 160px;
+}
+
+.sub-nav-body ul {
+	margin: 0;
 }
 
 .sub-nav-body ul li {
@@ -104,21 +135,21 @@
 }
 
 @media ( max-width : 768px) {
-	.margin_left_sub_nav_width{
+	.margin_left_sub_nav_width {
 		margin-left: 100px;
 	}
-	#sub-nav{
-		width:100px;
+	#sub-nav {
+		width: 100px;
 	}
-	#sub-nav{
+	#sub-nav {
 		position: fixed;
-		top:55px;
+		top: 55px;
 	}
 	.toggle-sidebar-div {
 		position: fixed;
-		top:45%;
+		top: 45%;
 	}
-	.sub-nav-body ul li{
+	.sub-nav-body ul li {
 		text-indent: 0px;
 	}
 }

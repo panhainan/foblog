@@ -28,6 +28,7 @@ app.controller("ArchiveArticleController",function($window,$location,$routeParam
 		if($scope.navItemName!=undefined){
 			$scope.getArchiveArticles($scope.navItemName);
 		}
+		$scope.navItemParentName = $scope.navItemName.split("-")[0]+"年";
 	}
 	
 	$scope.init = function(){

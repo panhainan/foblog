@@ -454,8 +454,8 @@ public class BlogServiceImpl implements IBlogService {
 
 	@Override
 	public List<ArchiveVo> archiveGetAllVo(Integer articleStatus,
-			String archiveType) {
-		return iArticleDao.selectAllArchives(articleStatus, archiveType);
+			String archiveTypeYear,String archiveTypeYearMonth) {
+		return iArticleDao.selectAllArchives(articleStatus, archiveTypeYear,archiveTypeYearMonth);
 	}
 
 	@Override

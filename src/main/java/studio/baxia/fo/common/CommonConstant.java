@@ -29,5 +29,5 @@ public class CommonConstant {
     public static final String NEW_NO_NAME_CATEGORY = "新建分类";
 
     public static final String ARCHIVE_TYPE_YEAR = "%Y年";
-    public static final String ARCHIVE_TYPE_YEAR_MONTH = "%Y年%m月";
+    public static final String ARCHIVE_TYPE_YEAR_MONTH = "%Y-%m";
 }

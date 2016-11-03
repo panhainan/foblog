@@ -25,10 +25,7 @@
 		<result property="writeTime" column="write_time" />
 		<result property="pubTime" column="pub_time" />
 	</resultMap>
-	<resultMap type="studio.baxia.fo.vo.ArchiveVo"  id="ArchiveVoMap">
-		<result property="name" column="month_name" />
-		<result property="counts" column="article_counts" />
-	</resultMap>
+	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO
@@ -211,17 +208,48 @@
 		</if>
 		limit 1
 	</select>
+	<resultMap type="studio.baxia.fo.vo.ArchiveVo"  id="ArchiveVoMap">
+		<result property="name" column="year_name" />
+		<result property="counts" column="year_counts" />
+		<collection property="childArchive" column="child_archive" ofType="studio.baxia.fo.vo.ArchiveVo">
+			<result property="name" column="month_name" />
+			<result property="counts" column="month_counts" />
+		</collection>
+	</resultMap>
 	
 	<select id="selectAllArchives" resultMap="ArchiveVoMap">
-		select count(*) as counts, DATE_FORMAT(t.pub_time, #{archive_type,jdbcType=VARCHAR}) as month_name
-			from t_article as t 
-			where 
-				t.pub_time != ''
-				<if test="status!=null">
-					and status=#{status,jdbcType=INTEGER}  
-				</if>
-			GROUP BY month_name
-			order by t.pub_time DESC;
+		
+		select 
+			tt1.year_name,
+			tt1.year_counts,
+			tt2.month_name,
+			tt2.month_counts
+		from
+		(
+				select 
+					count(*) as year_counts, 
+					DATE_FORMAT(t.pub_time, #{archive_type_year,jdbcType=VARCHAR}) as year_name
+							from t_article as t 
+							where 
+								t.pub_time != ''	
+									and t.status=1
+							GROUP BY year_name
+							order by t.pub_time DESC
+		) tt1
+		left JOIN 
+		(
+				select
+					count(*) as month_counts, 
+					DATE_FORMAT(tt.pub_time, '%Y年') as year_name,
+					DATE_FORMAT(tt.pub_time, #{archive_type_year_month,jdbcType=VARCHAR}) as month_name
+								from t_article as tt
+						where 
+					tt.pub_time != '' 
+					and tt.status=1 
+						GROUP BY month_name 
+						order by month_name DESC	
+		) tt2
+		on tt2.year_name = tt1.year_name
 	</select>
 	
 	<select id="selectArchiveArticles" resultMap="ArticleMap">

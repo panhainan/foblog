@@ -216,11 +216,12 @@ public interface IBlogService {
 	/**
 	 * 获取所有归档（通过文章状态和归档类型）
 	 * @param articleStatus 包含：“博客” 和 “草稿” 两种状态 . CommonConstant类中有对应的常量
-	 * @param archiveType 包含：“年月” 和 “年” 两种类型 . CommonConstant类中有对应的常量
+	 * @param archiveTypeYear CommonConstant类中有对应的常量“年”
+	 * @param archiveTypeYearMonth CommonConstant类中有对应的常量“年月” 
 	 * @return
 	 */
 	List<ArchiveVo> archiveGetAllVo(Integer articleStatus,
-			String archiveType);
+			String archiveTypeYear, String archiveTypeYearMonth);
 
 	/**
 	 * 获取对应归档项的所有文章（待分页处理）
