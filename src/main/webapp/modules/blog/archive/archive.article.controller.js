@@ -23,7 +23,7 @@ app.controller("ArchiveArticleController",function($window,$location,$routeParam
 		if($routeParams.archiveName!=undefined){
 			$scope.navItemName = $routeParams.archiveName;
 		}else if($scope.subNavDatas.data!=null && $scope.subNavDatas.data.length>0){
-			$scope.navItemName = $scope.subNavDatas.data[0].name;
+			$scope.navItemName = $scope.subNavDatas.data[0].childArchive[0].name;
 		}
 		if($scope.navItemName!=undefined){
 			$scope.getArchiveArticles($scope.navItemName);

@@ -1,4 +1,3 @@
-
 <div>
 	<div class="sub-nav-header">
 		<span ng-if="subNavDatas.typeName">{{subNavDatas.typeName}}导航</span>
@@ -6,27 +5,31 @@
 	<div class="sub-nav-body" id="archive">
 		<ul class="padding_none ul_style_none"
 			ng-if="subNavDatas.typeCode=='category' || subNavDatas.typeCode=='tag'">
-			<li
-				ng-style="navItemName == subNavData.name && {'background-color':'#EEEEEE'}"
-				ng-repeat="subNavData in subNavDatas.data"><a
-				ng-if="subNavDatas.typeCode=='category'"
-				ng-click="selectCategory(subNavData.name)">{{subNavData.name}} <span
-					style="color:#337AB7;">({{subNavData.counts}})</span>
-			</a> <a ng-if="subNavDatas.typeCode=='tag'"
-				ng-click="selectTag(subNavData.name)">{{subNavData.name}} <span
-					style="color:#337AB7;">({{subNavData.counts}})</span>
-			</a></li>
+			<li ng-style="navItemName == subNavData.name && {'background-color':'#EEEEEE'}"
+				ng-if="subNavData.counts!=0"
+				ng-repeat="subNavData in subNavDatas.data">
+				<a ng-if="subNavDatas.typeCode=='category'" ng-click="selectCategory(subNavData.name)">
+					{{subNavData.name}} <span style="color:#337AB7;">({{subNavData.counts}})</span>
+				</a> 
+				<a ng-if="subNavDatas.typeCode=='tag'" ng-click="selectTag(subNavData.name)">
+					{{subNavData.name}} <span style="color:#337AB7;">({{subNavData.counts}})</span>
+				</a>
+			</li>
 		</ul>
-		<div ng-if="subNavDatas.typeCode=='archive'" ng-repeat="subNavData in subNavDatas.data" style="width: 100%">
+		<div ng-if="subNavDatas.typeCode=='archive'"
+			ng-repeat="subNavData in subNavDatas.data" style="width: 100%">
 			<p class="sub-nav-parent-item">
 				<span>{{subNavData.name}}({{subNavData.counts}})</span>
 			</p>
 			<div ng-class="{in : navItemParentName==subNavData.name}">
 				<ul class="padding_none ul_style_none">
-					<li
-						ng-click="selectArchive(monthArchive.name)"
+					<li ng-click="selectArchive(monthArchive.name)"
 						ng-style="navItemName == monthArchive.name && {'background-color':'#C1C1C1'}"
-						ng-repeat="monthArchive in subNavData.childArchive"><a><span ng-style="navItemName == monthArchive.name && {'color':'#000'}">{{monthArchive.name}}({{monthArchive.counts}})</span></a>
+						ng-repeat="monthArchive in subNavData.childArchive">
+						<a>
+							<span ng-style="navItemName == monthArchive.name && {'color':'#000'}">
+							{{monthArchive.name}}({{monthArchive.counts}})</span>
+						</a>
 					</li>
 				</ul>
 			</div>

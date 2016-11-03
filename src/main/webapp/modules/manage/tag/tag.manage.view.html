@@ -5,12 +5,14 @@
 		</div>
 		<div class="manage-margin_left_sub_nav_width" id="manage-body-content">
 			<div class="manage-toggle-sidebar-div">
-				<a class="btn btn-primary btn-md manage-toggle-sidebar" ><span
-					class="glyphicon glyphicon-chevron-left" id="manage-close-open-icon"></span></a>
+				<a class="btn btn-primary btn-md manage-toggle-sidebar"><span
+					class="glyphicon glyphicon-chevron-left"
+					id="manage-close-open-icon"></span></a>
 			</div>
 			<div class="manage-body-content-body">
 				<div class=" panel panel-default">
-					<div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
+					<div class="panel-heading"
+						style="padding-bottom:0;padding-left: 30px;height: 50px;">
 						<h3 class="panel-title font_kaiti_20">
 							标签管理<span style="font-size: 12px">(共{{tags.length}}条记录)</span>
 						</h3>
@@ -30,14 +32,12 @@
 									<tr ng-repeat="tag in tags">
 										<td>{{$index+1}}</td>
 										<td>{{tag.name}}</td>
-										<td>{{tag.counts}} <a class="btn btn-xs btn-primary" ng-if="tag.counts!=0" ng-click="editArticle(tag)"
+										<td>{{tag.counts}} <a class="btn btn-xs btn-primary"
+											ng-if="tag.counts!=0" ng-click="editArticle(tag)"
 											title="点击查看">查看</a></td>
-										<td>
-											<ul class="list-unstyled">
-												<li style="float:left"><a class="btn btn-xs btn-warning"  style="margin-right:10px" ng-click="editTag(tag)">编辑</a></li>
-												<li style="float:left"><a class="btn btn-xs btn-danger" ng-click="deleteTag(tag)">删除</a></li>
-											</ul>
-		
+										<td><a class="btn btn-xs btn-warning"
+											style="margin-right:10px" ng-click="editTag(tag)">编辑</a> <a
+											class="btn btn-xs btn-danger" ng-click="deleteTag(tag)">删除</a>
 										</td>
 									</tr>
 								</tbody>
@@ -133,11 +133,14 @@
 </div>
 <script>
 	$(function() {
-		$(".manage-toggle-sidebar").click(function() {
-			$("#manage-sub-nav").toggleClass("collapsed");
-			$("#manage-body-content").toggleClass("col-sm-12  manage-margin_left_sub_nav_width");
-			$("#manage-close-open-icon").toggleClass("glyphicon-chevron-right");
-			return false;
-		});
+		$(".manage-toggle-sidebar").click(
+				function() {
+					$("#manage-sub-nav").toggleClass("collapsed");
+					$("#manage-body-content").toggleClass(
+							"col-sm-12  manage-margin_left_sub_nav_width");
+					$("#manage-close-open-icon").toggleClass(
+							"glyphicon-chevron-right");
+					return false;
+				});
 	});
 </script>
