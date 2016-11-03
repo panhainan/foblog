@@ -42,7 +42,7 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 			templateUrl : 'addCategory.html',
 			controller : 'addCategoryCtrl',
 			backdrop : 'static',
-			size : 'lg',
+			size : 'md',
 			resolve : {
 			}
 		});
@@ -60,7 +60,7 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 			templateUrl : 'editCategory.html',
 			controller : 'editCategoryCtrl',
 			backdrop : 'static',
-			size : 'lg',
+			size : 'md',
 			resolve : {
 				category:function(){
 					return category;

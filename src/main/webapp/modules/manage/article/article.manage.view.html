@@ -35,8 +35,7 @@
 								<tbody>
 									<tr ng-repeat="article in articles">
 										<td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
-										<td><a href="#/manage/article/preview/{{article.id}}"
-											title="点击查看">{{article.title}}</a></td>
+										<td>{{article.title}}</td>
 										<td class="visible-lg">{{article.categoryName}}</td>
 										<td><span ng-if="article.status==1">博客</span><span
 											ng-if="article.status==0" style="color:red">草稿</span></td>
@@ -44,14 +43,10 @@
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<!-- <td>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</td> -->
 										<td>
-											<ul class="list-unstyled">
-												<li style="float:left"><a
-													href="#/manage/article/edit/{{article.id}}">编辑</a> |</li>
-												<li style="float:left"><a
-													ng-click="setDeleteArticle(article)">删除</a></li>
-												<!--ng-click="delete(tbean.id,$index)"-->
-											</ul>
-		
+											<a class="btn btn-xs btn-success" style="margin-right:10px;" href="#/manage/article/preview/{{article.id}}"
+											>预览</a><a class="btn btn-xs btn-warning" style="margin-right:10px;"
+													href="#/manage/article/edit/{{article.id}}">编辑</a><a class="btn btn-xs btn-danger"
+													 style="margin-right:10px;" ng-click="setDeleteArticle(article)">删除</a></li>
 										</td>
 									</tr>
 								</tbody>
@@ -77,7 +72,7 @@
 							<button type="button" class="btn btn-default" ng-click="cancelDeleteArticle()"
 								>取消</button>
 							<button type="button" ng-click="deleteArticle(theDeleteArticle.id)"
-								 class="btn btn-primary">确认</button>
+								 class="btn btn-danger">确认</button>
 						</div>
 					</script>
 				</div>

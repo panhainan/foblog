@@ -30,12 +30,12 @@
 									<tr ng-repeat="tag in tags">
 										<td>{{$index+1}}</td>
 										<td>{{tag.name}}</td>
-										<td>{{tag.counts}} <a ng-if="tag.counts!=0" ng-click="editArticle(tag)"
+										<td>{{tag.counts}} <a class="btn btn-xs btn-primary" ng-if="tag.counts!=0" ng-click="editArticle(tag)"
 											title="点击查看">查看</a></td>
 										<td>
 											<ul class="list-unstyled">
-												<li style="float:left"><a ng-click="editTag(tag)">编辑</a> |</li>
-												<li style="float:left"><a ng-click="deleteTag(tag)">删除</a></li>
+												<li style="float:left"><a class="btn btn-xs btn-warning"  style="margin-right:10px" ng-click="editTag(tag)">编辑</a></li>
+												<li style="float:left"><a class="btn btn-xs btn-danger" ng-click="deleteTag(tag)">删除</a></li>
 											</ul>
 		
 										</td>
@@ -46,23 +46,23 @@
 					</div>
 					<script type="text/ng-template" id="editTag.html">
 						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">修改</h4>
+							<h4 class="modal-title">修改</h4>
 						</div>
-						<div class="modal-body" id="modal-body">
+						<div class="modal-body">
 							名称：<input type="text" class="form-control" ng-model="tag.name"/>
 						</div>		
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" ng-click="cancelEditTag()"
 								>取消</button>
 							<button type="button" ng-click="confirmEditTag(tag)"
-								 class="btn btn-primary">确认</button>
+								 class="btn btn-warning">确认</button>
 						</div>
 					</script>
 					<script type="text/ng-template" id="editTagArticle.html">
 						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">标签：{{tag.name}}</h4>
+							<h4 class="modal-title">标签：{{tag.name}}</h4>
 						</div>
-						<div class="modal-body" id="modal-body">
+						<div class="modal-body">
 							<div class="table-responsive tableTrBottomBorder">
 							<table class="table table-hover">
 								<thead>
@@ -84,12 +84,9 @@
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><a ng-click="goArticle(article.id)">查看</a> |  </li>	
-												<li><a
-													ng-click="deleteArticle(article.id)">删除</a></li> 
-												
+												<li><a  class="btn btn-xs btn-primary" style="margin-right:10px" ng-click="goArticle(article.id)">查看</a><a  class="btn btn-xs btn-danger"
+													ng-click="goDeleteArticle(article)">删除</a></li> 
 											</ul>
-		
 										</td>
 									</tr>
 								</tbody>
@@ -100,18 +97,33 @@
 								>关闭</button>
 						</div>
 					</script>
+					<script type="text/ng-template" id="deleteTagArticle.html">
+						<div class="modal-header">
+							<h4 class="modal-title">警告</h4>
+						</div>
+						<div class="modal-body">
+							确认从标签<span style="font-size:16px;font-weight:bolder;"> {{deleteArticleTag.name}} </span>中<br/>
+							删除文章<span style="font-size:16px;font-weight:bolder;"> {{deleteArticle.title}} </span> 吗？
+						</div>		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" ng-click="cancelDeleteTagArticle()"
+								>取消</button>
+							<button type="button" ng-click="confirmDeleteTagArticle(deleteArticle.id)"
+								 class="btn btn-danger">确认</button>
+						</div>
+					</script>
 					<script type="text/ng-template" id="deleteTag.html">
 						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">警告</h4>
+							<h4 class="modal-title" >警告</h4>
 						</div>
-						<div class="modal-body" id="modal-body">
+						<div class="modal-body">
 							确认删除标签<span style="font-size:16px;font-weight:bolder;"> {{tag.name}} </span>吗？
 						</div>		
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" ng-click="cancelDeleteTag()"
 								>取消</button>
 							<button type="button" ng-click="confirmDeleteTag(tag.id)"
-								 class="btn btn-primary">确认</button>
+								 class="btn btn-danger">确认</button>
 						</div>
 					</script>
 				</div>
