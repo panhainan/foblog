@@ -13,7 +13,7 @@
 <!-- 登录模态框（Modal） -->
 <div class="modal fade" id="signInModal" data-backdrop="static"
 	tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
-	aria-hidden="true">
+	aria-hidden="true" ng-controller="SignController">
 	<div class="modal-dialog">
 		<form class="form-horizontal" action="javascript:void(0)"
 			ng-submit="guestSignin()">
@@ -28,7 +28,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">昵称:</label>
 						<div class="col-sm-10 col-md-9">
-							<input type="text" class="form-control" 
+							<input type="text" class="form-control" name="nickname" id="nickname" ng-model="guest.nickname"
 								placeholder="请输入昵称">
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2 ">邮箱:</label>
 						<div class="col-sm-10 col-md-9">
-							<input type="email" class="form-control"
+							<input type="email" class="form-control" name="email" name="nickname" ng-model="guest.email"
 								placeholder="请输入邮箱">
 						</div>
 					</div>

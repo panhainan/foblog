@@ -1,9 +1,8 @@
 /**
  * 
  */
-app.controller("SignController",function($scope){
-	console.log("signcontroller");
-	$scope.signin = function(){
-		console.log("click sign in button")
+app.controller("SignController",function($scope,guestSignService){
+	$scope.guestSignin = function(){
+		$scope.guest = guestSignService.getGuestByEmail($scope.guest.email);
 	};
 })

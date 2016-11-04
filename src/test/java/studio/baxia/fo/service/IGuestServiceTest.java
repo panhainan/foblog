@@ -21,7 +21,7 @@ public class IGuestServiceTest extends BaseTest {
     public void queryOneByCondition(){
         Guest guest = new Guest();
         Map<String, Object> condition = new HashMap<>();
-        condition.put("email","123@qq.com");
+        condition.put("nickname","呵呵");
         guest = iGuestService.queryOneByCondition(condition);
         printResultStr("queryOneByCondition",null,guest);
     }
