@@ -50,6 +50,8 @@
 <link rel="stylesheet" href="css/modules/manage.view.css" />
 
 <script src="<%=basePath%>plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="<%=basePath%>plugins/jquery-jcryption/jquery.jcryption.3.0.1.js"></script>
+
 <script src="<%=basePath%>plugins/bootstrap/bootstrap.min.js"></script>
 <script src="<%=basePath%>plugins/angularjs/angular-1.5.js"></script>
 <script src="<%=basePath%>plugins/angularjs-extend-lib/angular-route.js"></script>
@@ -88,6 +90,7 @@
 
 <!-- 管理员即作者操作 -->
 <script src="modules/manage/manage.controller.js"></script>
+<script src="modules/manage/sign/sign.manage.service.js"></script>
 <script src="modules/manage/sign/sign.manage.controller.js"></script>
 <script src="modules/manage/article/article.manage.service.js"></script>
 <script src="modules/manage/article/article.manage.controller.js"></script>

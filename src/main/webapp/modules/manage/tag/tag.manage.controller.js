@@ -13,7 +13,7 @@ app.controller("TagManageController", function($uibModal, $scope,$location,
 			templateUrl : 'editTag.html',
 			controller : 'editTagCtrl',
 			backdrop : 'static',
-			size : 'lg',
+			size : 'md',
 			resolve : {
 				tag : function() {
 					return tag;
@@ -69,7 +69,7 @@ app.controller("TagManageController", function($uibModal, $scope,$location,
 			templateUrl : 'deleteTag.html',
 			controller : 'deleteTagCtrl',
 			backdrop : 'static',
-			size : 'lg',
+			size : 'md',
 			resolve : {
 				tag : function() {
 					return tag;
@@ -103,7 +103,7 @@ app.controller("editTagCtrl", function($uibModalInstance, $scope, tag) {
 		$uibModalInstance.close(_tag);
 	}
 });
-app.controller("editTagArticleCtrl", function($uibModalInstance, $scope,
+app.controller("editTagArticleCtrl", function($uibModal,$uibModalInstance, $scope,
 		tagArticles, tag) {
 	$scope.tagArticles = tagArticles;
 	$scope.tag = tag;
@@ -121,11 +121,45 @@ app.controller("editTagArticleCtrl", function($uibModalInstance, $scope,
 		}
 		$uibModalInstance.close(articleParam);
 	}
+	$scope.goDeleteArticle = function(article){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'deleteTagArticle.html',
+			controller : 'deleteTagArticleCtrl',
+			backdrop : 'static',
+			size : 'md',
+			resolve : {
+				tag : function() {
+					return tag;
+				},
+				article:function(){
+					return article;
+				}
+			}
+		});
+
+		modalInstance.result.then(function(articleId) {
+			if(articleId!=null){
+				$scope.deleteArticle(articleId);
+			}
+		});
+	}
 	$scope.cancelEditArticle = function() {
 		$uibModalInstance.dismiss('cancel');
 	}
 
 });
+app.controller("deleteTagArticleCtrl", function($uibModalInstance, $scope, tag,article) {
+	console.log(tag)
+	console.log(article)
+	$scope.deleteArticleTag = tag;
+	$scope.deleteArticle = article;
+	$scope.confirmDeleteTagArticle = function(articleId){
+		$uibModalInstance.close(articleId);
+	};
+	$scope.cancelDeleteTagArticle=function(){
+		$uibModalInstance.dismiss('cancel');
+	}
+})
 app.controller("deleteTagCtrl",function($uibModalInstance, $scope, tag) {
 	$scope.tag = tag;
 	$scope.cancelDeleteTag = function(){
