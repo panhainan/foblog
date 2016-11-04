@@ -28,4 +28,14 @@ public class GuestServiceImpl implements IGuestService{
         return guestDao.queryOneByCondition(condition);
     }
 
+    @Override
+    public int addGuest(Guest guest) {
+        return guestDao.insert(guest);
+    }
+
+    @Override
+    public int updateGuest(Guest guest) {
+        return guestDao.updateByPrimaryKeySelective(guest);
+    }
+
 }

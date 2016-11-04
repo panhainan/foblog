@@ -18,9 +18,19 @@ public interface IGuestService {
 
     /**
      * @param condition
-     * 查询所有游客信息
+     * 根据条件查询游客信息
      */
     Guest queryOneByCondition(Map<String, Object> condition);
+
+    /**
+     * 新增
+     */
+    int addGuest(Guest guest);
+
+    /**
+     * 修改
+     */
+    int updateGuest(Guest guest);
 
 
 }

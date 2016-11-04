@@ -77,6 +77,7 @@
 <script src="modules/index/index.service.js"></script>
 <script src="modules/index/index.controller.js"></script>
 <script src="modules/common/sign.controller.js"></script>
+<script src="modules/common/sign-controller-service.js"></script>
 <script src="modules/blog/article/article.service.js"></script>
 <script src="modules/blog/article/article.controller.js"></script>
 <script src="modules/blog/article/article.detail.controller.js"></script>
