@@ -14,7 +14,8 @@ app.controller("SignController",function($scope,guestSignService){
 		angular.forEach($scope.guests,function(item){
 			$scope.guestNicknameArray.push(item.nickname);
 		})
-		if($scope.guestNicknameArray.indexOf($.trim(nickname))>-1){
+		console.log($scope.guestNicknameArray)
+		if($scope.guestNicknameArray!=null && $scope.guestNicknameArray.indexOf($.trim(nickname))>-1){
 			return true;   //重复
 		}
 		return false;

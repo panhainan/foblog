@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.CommonResult;
-import studio.baxia.fo.util.JCryption;
+import studio.baxia.fo.util.JCryptionUtil;
 import studio.baxia.fo.vo.AuthorVo;
 
 @Controller("manageController")
@@ -30,29 +30,36 @@ public class ManageController {
 
 	@ResponseBody
 	@RequestMapping(value = "/signin", method = { RequestMethod.POST })
-	public CommonResult author(@RequestBody AuthorVo authorVo) {
+	public CommonResult author(@RequestBody AuthorVo authorVo,HttpServletRequest request) {
 		System.out.println("/signin->参数：" + authorVo);
+		KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
+		
 		return new CommonResult(CommonConstant.SUCCESS_CODE, "登录成功", authorVo);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/getKeys")
-	public CommonResult generateKeypair(HttpServletRequest request) {
-		JCryption jCryption = new JCryption();
-		KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
-		if (keys == null) {
-			keys = jCryption.generateKeypair(512);
-			request.getSession().setAttribute("keys", keys);
-		}
-
-		String e = JCryption.getPublicKeyExponent(keys);
-		String n = JCryption.getPublicKeyModulus(keys);
-		String md = String.valueOf(JCryption.getMaxDigits(512));
+	public Map<String, Object> generateKeypair(HttpServletRequest request) {
+		JCryptionUtil jCryption;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("e", e);
-		map.put("n", n);
-		map.put("md", md);
-		return new CommonResult(CommonConstant.SUCCESS_CODE, "", map);
+		try {
+			jCryption = new JCryptionUtil();
+			KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
+			if (keys == null) {
+				keys = jCryption.generateKeypair(512);
+				request.getSession().setAttribute("keys", keys);
+			}
+			
+			String e = JCryptionUtil.getPublicKeyExponent(keys);
+			String n = JCryptionUtil.getPublicKeyModulus(keys);
+			String md = String.valueOf(JCryptionUtil.getMaxDigits(512));
+			map.put("e", e);
+			map.put("n", n);
+			map.put("maxdigits", md);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 }

@@ -1,5 +1,6 @@
 app.service("SignManageService", function(RequestService) {
-	this.getKeys = function(){
-		return RequestService.getRequest("/manage/getKeys", cfg_form);
+	
+	this.post=function(author){
+		return RequestService.postRequest("/manage/signin", author, cfg_json);
 	}
 })

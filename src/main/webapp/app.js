@@ -48,6 +48,8 @@ app.config(function($routeProvider,$stateProvider) {
 	});
 	// 管理
 	$routeProvider.when("/manage", {
+		redirectTo:"/manage/sign"
+	}).when("/manage/index", {
 		templateUrl : "modules/manage/manage.view.html",
 		controller : 'ManageController'
 	}).when("/manage/sign", {

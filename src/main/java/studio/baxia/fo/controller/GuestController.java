@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by 刘俊 on 2016/11/3.
  */
 @Controller
-@RequestMapping("/foblog/guest")
+@RequestMapping("/guest")
 public class GuestController {
     @Autowired
     private IGuestService guestService;
