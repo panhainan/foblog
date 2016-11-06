@@ -104,6 +104,7 @@
 <script src="modules/manage/tag/tag.manage.controller.js"></script>
 <script src="modules/manage/info/info.manage.service.js"></script>
 <script src="modules/manage/info/info.manage.controller.js"></script>
+<script src="modules/manage/info/info.form.manage.controller.js"></script>
 <script src="modules/manage/friendlink/friendlink.manage.service.js"></script>
 <script src="modules/manage/friendlink/friendlink.manage.controller.js"></script>
 
@@ -111,7 +112,6 @@
 <body>
 	<ng-include src="'<%=basePath%>modules/common/left-nav.html'"></ng-include>
 	<div ng-view></div>
-	<%-- <div class="hidden-xs"><ng-include src="'<%=basePath%>modules/common/right-nav.html'"></ng-include></div> --%>
 </body>
 
 <script type="text/javascript" charset="utf-8"

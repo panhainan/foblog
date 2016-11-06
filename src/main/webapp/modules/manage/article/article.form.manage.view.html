@@ -14,7 +14,7 @@
 				<div class="form-group">
 					<div class="col-sm-12">
 						<textarea name="content" ng-model="article.content" required
-							data-provide="markdown" id="markdown_textarea" rows="10"
+							data-provide="markdown" id="markdown_article_textarea" rows="10"
 							placeholder="这里输入内容,支持Markdown语法."></textarea>
 						<p style="text-align:right;color: #8D8D8D;font-size:12px">已输入500字符</p>
 					</div>
@@ -124,7 +124,7 @@
 	</form>
 </div>
 <script>
-	$("#markdown_textarea").markdown({
+	$("#markdown_article_textarea").markdown({
 		language : 'zh',
 		fullscreen : {
 			enable : true

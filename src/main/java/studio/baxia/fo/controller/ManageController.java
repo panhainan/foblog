@@ -1,11 +1,10 @@
 package studio.baxia.fo.controller;
 
-import java.security.KeyPair;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,48 +13,66 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.CommonResult;
-import studio.baxia.fo.util.JCryptionUtil;
+import studio.baxia.fo.pojo.Authors;
+import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.vo.AuthorVo;
 
 @Controller("manageController")
-@RequestMapping(value = "/manage", method = { RequestMethod.GET,
-		RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT })
+@RequestMapping(value = "/manage")
 public class ManageController {
+	@Autowired
+	private IUserService userService;
 
-	@RequestMapping(value = "", method = { RequestMethod.GET })
-	public String manage() {
-		System.out.println("manage/signin");
-		return "manage/index";
-	}
+	/*
+	 * @RequestMapping(value = "", method = { RequestMethod.GET }) public String
+	 * manage() { System.out.println("manage/signin"); return "manage/index"; }
+	 */
 
 	@ResponseBody
 	@RequestMapping(value = "/signin", method = { RequestMethod.POST })
-	public CommonResult author(@RequestBody AuthorVo authorVo,HttpServletRequest request) {
+	public CommonResult signin(@RequestBody AuthorVo authorVo,
+			HttpServletRequest request) {
 		System.out.println("/signin->参数：" + authorVo);
-		KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
-		
-		return new CommonResult(CommonConstant.SUCCESS_CODE, "登录成功", authorVo);
+		Boolean result = false;
+		String message = null;
+		CommonResult commonResult;
+		try {
+			result = userService.signInCheck(authorVo, request);
+		} catch (Exception e) {
+			message = e.getMessage();
+		} finally {
+			if (result) {
+				commonResult = new CommonResult(CommonConstant.SUCCESS_CODE,
+						"登录成功", authorVo);
+			} else {
+				commonResult = new CommonResult(CommonConstant.FAIL_CODE,
+						"登录失败:" + message, null);
+			}
+		}
+		return commonResult;
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/author" ,method={RequestMethod.GET})
+	public CommonResult getInfo(HttpServletRequest request) {
+		Authors author = null;
+		author = userService.getInfo(request);
+		return new CommonResult(CommonConstant.SUCCESS_CODE, "",
+				author);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/author" ,method={RequestMethod.PUT})
+	public CommonResult updateInfo(HttpServletRequest request,@RequestBody Authors info){
+		Boolean result = userService.updateInfo(request,info);
+		return new CommonResult(CommonConstant.SUCCESS_CODE, "",
+				result);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/getKeys")
 	public Map<String, Object> generateKeypair(HttpServletRequest request) {
-		JCryptionUtil jCryption;
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = null;
 		try {
-			jCryption = new JCryptionUtil();
-			KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
-			if (keys == null) {
-				keys = jCryption.generateKeypair(512);
-				request.getSession().setAttribute("keys", keys);
-			}
-			
-			String e = JCryptionUtil.getPublicKeyExponent(keys);
-			String n = JCryptionUtil.getPublicKeyModulus(keys);
-			String md = String.valueOf(JCryptionUtil.getMaxDigits(512));
-			map.put("e", e);
-			map.put("n", n);
-			map.put("maxdigits", md);
+			map = userService.generateKeypair(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -130,7 +130,7 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 //		console.log(marked($('#markdown_textarea').data('markdown').getContent()));
 //		console.log($('#markdown_textarea').data('markdown').getContent());
 
-		$scope.article.content = $('#markdown_textarea').data('markdown').getContent();//$('#markdown_textarea').data('markdown').parseContent();
+		$scope.article.content = $('#markdown_article_textarea').data('markdown').getContent();//$('#markdown_textarea').data('markdown').parseContent();
 		console.log($scope.article);
 		if($scope.article.id!=null && $scope.article.id!=undefined){
 			ArticleManageService.put($scope.article).then(function(data){

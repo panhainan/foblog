@@ -1,0 +1,73 @@
+<div class="customContainer">
+	<div class="row">
+		<div class="">
+			<div class="manage-body-content-body">
+				<form class="form-horizontal" action="javascript:void(0)" novalidate>
+					<div class=" panel panel-default">
+						<div class="panel-heading"
+							style="padding-bottom:0;padding-left: 30px;height: 50px;">
+							<h3 class="panel-title font_kaiti_20">
+								编辑个人信息
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<div class="col-sm-2 control-label col-lg-1">
+									<label style="text-align: center;padding-right: 0">笔名</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										style="height: 40px;font-size: 15px;" placeholder="请输入您的笔名"
+										name="penName" ng-model="info.penName" required />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2 control-label col-lg-1">
+									<label style="text-align: center;padding-right: 0">常用邮箱</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										style="height: 40px;font-size: 15px;"
+										placeholder="请输入您常用邮箱的笔名" name="email" ng-model="info.email"
+										required />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2 control-label col-lg-1">
+									<label style="text-align: center;padding-right: 0">个人介绍</label>
+								</div>
+								<div class="col-sm-10">
+									<textarea name="content" ng-model="info.profile" required
+										data-provide="markdown" id="markdown_info_textarea" rows="10"
+										placeholder="这里输入您的个人介绍,支持Markdown语法."></textarea>
+									<p style="text-align:right;color: #8D8D8D;font-size:12px">已输入500字符</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12 col-lg-11">
+									 <span class="pull-right"><a
+									onclick="javascript:history.back()"
+									class="btn btn-default">取消</a> <a
+									ng-click="updateInfo(info)" class="btn btn-success">保存</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$("#markdown_info_textarea").markdown({
+		language : 'zh',
+		fullscreen : {
+			enable : true
+		},
+		height : 480,
+		resize : 'none',
+		localStorage : 'md',
+		imgurl : '/c/imgUpload',
+		base64url : '/c/imgUpload'
+	});
+</script>

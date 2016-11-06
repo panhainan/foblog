@@ -30,4 +30,6 @@ public class CommonConstant {
 
     public static final String ARCHIVE_TYPE_YEAR = "%Y年";
     public static final String ARCHIVE_TYPE_YEAR_MONTH = "%Y-%m";
+    
+    public static final int USER_TIME_OUT = 30*60*1000;
 }

@@ -18,7 +18,7 @@ app.controller("SignManageController", function($scope, SignManageService,$locat
 				console.log(keys)
 				if (keys == null || keys == "") {
 					// 没有加密串，不能登录，需要先获取加密串
-					alert("服务器错误,请点击刷新按钮刷新页面");
+					alert("服务器错误,请重试！");
 					return false;
 				} else {
 					$.jCryption.encrypt(encodeURIComponent($scope.user.account), keys,
@@ -28,7 +28,7 @@ app.controller("SignManageController", function($scope, SignManageService,$locat
 										encodeURIComponent($scope.user.password), keys,
 										function(encryptedPassword) {
 											author.password = encryptedPassword;
-											console.log(author);
+//											console.log(author);
 											doSignin(author);
 										});
 							});

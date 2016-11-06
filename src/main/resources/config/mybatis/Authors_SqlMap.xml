@@ -2,77 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="studio.baxia.fo.dao.IAuthorsDao">
 
-    <resultMap id="AuthorsMap" type="studio.baxia.fo.pojo.Authors">
-        <result property="id" column="id"/>
-        <result property="account" column="account"/>
-        <result property="password" column="password"/>
-        <result property="userStatus" column="user_status"/>
-        <result property="penName" column="pen_name"/>
-        <result property="email" column="email"/>
-        <result property="profile" column="profile"/>
-        <result property="otherInfo" column="other_info"/>
-        <result property="verificationCode" column="verification_code"/>
-        <result property="verifCodeDeadline" column="verif_code_deadline"/>
-        <result property="securityQuestionId" column="security_question_id"/>
-    </resultMap>
+	<resultMap id="AuthorsMap" type="studio.baxia.fo.pojo.Authors">
+		<result property="id" column="id" />
+		<result property="account" column="account" />
+		<result property="password" column="password" />
+		<result property="userStatus" column="user_status" />
+		<result property="penName" column="pen_name" />
+		<result property="email" column="email" />
+		<result property="profile" column="profile" />
+		<result property="otherInfo" column="other_info" />
+		<result property="verificationCode" column="verification_code" />
+		<result property="verifCodeDeadline" column="verif_code_deadline" />
+		<result property="securityQuestionId" column="security_question_id" />
+	</resultMap>
 
-    <select id="list" resultMap="AuthorsMap" useCache="true">
-        SELECT
-        *
-        FROM t_authors
-        <if test="pageIndex != null">
-            limit #{pageIndex,jdbcType=INTEGER},
-        </if>
-        <if test="pageSize != null">
-            #{pageSize,jdbcType=INTEGER}
-        </if>
-    </select>
+	<select id="list" resultMap="AuthorsMap" useCache="true">
+		SELECT
+		*
+		FROM t_authors
+		<if test="pageIndex != null">
+			limit #{pageIndex,jdbcType=INTEGER},
+		</if>
+		<if test="pageSize != null">
+			#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
 
-    <select id="selectById" resultMap="AuthorsMap" useCache="true">
-        SELECT *
-        FROM t_authors
-        WHERE
-        id=#{id,jdbcType=INTEGER}
-    </select>
+	<select id="selectById" resultMap="AuthorsMap" useCache="true">
+		SELECT *
+		FROM t_authors
+		WHERE
+		id=#{id,jdbcType=INTEGER}
+	</select>
 
-    <select id="selectByAccount" resultMap="AuthorsMap" useCache="true">
-        SELECT *
-        FROM t_authors
-        WHERE
-        account=#{account,jdbcType=INTEGER}
-    </select>
+	<select id="selectByAccount" resultMap="AuthorsMap" useCache="true">
+		SELECT *
+		FROM t_authors
+		WHERE
+		account=#{account,jdbcType=INTEGER}
+	</select>
 
-    <select id="selectByEmail" resultMap="AuthorsMap" useCache="true">
-        SELECT *
-        FROM t_authors
-        WHERE
-        email=#{email,jdbcType=INTEGER}
-    </select>
+	<select id="selectByEmail" resultMap="AuthorsMap" useCache="true">
+		SELECT *
+		FROM t_authors
+		WHERE
+		email=#{email,jdbcType=INTEGER}
+	</select>
 
-    <delete id="deleteById">
-        delete from t_authors
-        WHERE id=#{id,jdbcType=INTEGER}
-    </delete>
+	<delete id="deleteById">
+		delete from t_authors
+		WHERE id=#{id,jdbcType=INTEGER}
+	</delete>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_authors
-        (
-        account,password,user_status
-        )
-        VALUES
-        (
-        #{account,jdbcType=VARCHAR}
-        ,
-        #{password,jdbcType=VARCHAR}
-        ,
-        #{userStatus,jdbcType=INTEGER}
-        )
-    </insert>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_authors
+		(
+		account,password,user_status
+		)
+		VALUES
+		(
+		#{account,jdbcType=VARCHAR}
+		,
+		#{password,jdbcType=VARCHAR}
+		,
+		#{userStatus,jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update">
+		update t_authors
+		set pen_name=#{penName,jdbcType=VARCHAR},
+		email=#{email,jdbcType=VARCHAR},
+		profile=#{profile,jdbcType=VARCHAR},
+		other_info=#{otherInfo,jdbcType=VARCHAR}
+		where id =#{id,jdbcType=INTEGER}
+		and account=#{account,jdbcType=VARCHAR}
+	</update>
 
-    <update id="updateAuthorsStatus">
-        update t_authors
-        set user_status = #{userStatus,jdbcType=INTEGER}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+	<update id="updateAuthorsStatus">
+		update t_authors
+		set user_status = #{userStatus,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 
 </mapper>

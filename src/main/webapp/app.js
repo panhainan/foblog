@@ -52,6 +52,12 @@ app.config(function($routeProvider,$stateProvider) {
 	}).when("/manage/index", {
 		templateUrl : "modules/manage/manage.view.html",
 		controller : 'ManageController'
+	}).when("/manage/info", {
+		templateUrl : "modules/manage/info/info.manage.view.html",
+		controller : 'InfoManageController'
+	}).when("/manage/info/edit", {
+		templateUrl : "modules/manage/info/info.form.manage.view.html",
+		controller : 'InfoFormManageController'
 	}).when("/manage/sign", {
 		templateUrl : "modules/manage/sign/signin.manage.view.html",
 		controller : 'SignManageController'
