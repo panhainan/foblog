@@ -6,4 +6,9 @@ app.service("guestSignService",function(RequestService){
   this.getAllGuests = function(){
     return RequestService.getRequest('/guest/getAllGuests',null,cfg_form);
   }
+
+  this.addOrUpdateGuest = function(guest){
+    var url = guest.id?"/guest/updateGuest":"/guest/addGuest";
+    return RequestService.postRequest(url, $.param({"json":JSON.stringify(guest)}),cfg_form);
+  }
 })

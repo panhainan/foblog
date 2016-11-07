@@ -1,5 +1,6 @@
 package studio.baxia.fo.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,22 @@ public class GuestController {
         condition.put("email",email);
         Guest guest = guestService.queryOneByCondition(condition);
         return  new CommonResult(CommonConstant.SUCCESS_CODE,null,guest);
+    }
+
+    @ResponseBody
+    @RequestMapping("/addGuest")
+    public CommonResult addGuest(String json){
+        Guest guest = JSON.parseObject(json,Guest.class);
+        int result = guestService.addGuest(guest);
+        return  new CommonResult(CommonConstant.SUCCESS_CODE,null,result);
+    }
+
+    @ResponseBody
+    @RequestMapping("/updateGuest")
+    public CommonResult updateGuest(String json){
+        Guest guest = JSON.parseObject(json,Guest.class);
+        int result = guestService.updateGuest(guest);
+        return  new CommonResult(CommonConstant.SUCCESS_CODE,null,result);
     }
 
 }
