@@ -37,14 +37,16 @@ app.controller("SignController",function($scope,guestSignService){
 						layer.alert("该昵称已存在！");
 						return false;
 					}else{
-						if(layer.confirm(("确认修改昵称<em style='color:red;font-style: normal;font-weight: bold'>"+$scope.guest.nickname+"</em>为<em style='color:red;font-style: normal;font-weight: bold'>"+$scope.guestData.nickname+"</em>"),{icon:3})){
+						layer.confirm(("确认修改昵称<em style='color:red;font-style: normal;font-weight: bold'>"+$scope.guest.nickname+"</em>为<em style='color:red;font-style: normal;font-weight: bold'>"+$scope.guestData.nickname+"</em>"),{icon:3},function(){
 							$scope.guest.nickname = $scope.guestData.nickname;
 							guestSignService.addOrUpdateGuest($scope.guest).then(function(data){
 								if(data.resultData==1){
 									layer.alert("登录成功!");
 								}
-							},layer)
-						}
+							})
+						},function(){
+							layer.closeAll();
+						})
 					}
 				}
 			}else{	//不存在该账户
