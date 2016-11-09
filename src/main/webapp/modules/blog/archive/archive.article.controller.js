@@ -1,9 +1,9 @@
 app.controller("ArchiveArticleController", function($window, $location,
-		$routeParams, $rootScope, $scope, ArchiveArticleService) {
+		$routeParams, $rootScope, $scope, ArchiveService) {
 	setScreenAvailHeight();
 
 	$scope.getArtilces = function(name) {
-		ArchiveArticleService.getArtilces(name).then(function(data) {
+		ArchiveService.getArtilces(name).then(function(data) {
 			 console.log(data);
 			$scope.archiveArticles = data.resultData;
 		});

@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="css/manage-left-sub-nav.css" />
 <link rel="stylesheet" href="css/modules/blog.view.css" />
 <link rel="stylesheet" href="css/modules/archive.view.css" />
+<link rel="stylesheet" href="css/modules/category.view.css" />
 <link rel="stylesheet" href="css/modules/friend.view.css" />
 <link rel="stylesheet" href="css/modules/manage.view.css" />
 
@@ -87,7 +88,8 @@
 <script src="modules/blog/article/article.service.js"></script>
 <script src="modules/blog/article/article.controller.js"></script>
 <script src="modules/blog/article/article.detail.controller.js"></script>
-<script src="modules/blog/category/category.article.service.js"></script>
+<script src="modules/blog/category/category.service.js"></script>
+<script src="modules/blog/category/category.list.controller.js"></script>
 <script src="modules/blog/category/category.article.controller.js"></script>
 <script src="modules/blog/tag/tag.article.service.js"></script>
 <script src="modules/blog/tag/tag.article.controller.js"></script>

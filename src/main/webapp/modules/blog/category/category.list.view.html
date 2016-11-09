@@ -1,0 +1,25 @@
+<div class="customContainer">
+	<div class="category-body">
+		<div class="col-sm-12 col-md-6 col-lg-4"
+			ng-repeat="category in categorys">
+			<div class="category-card">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="padding-top: 8px;padding-bottom: 0px;">
+						<h3 class="panel-title">
+							<a href="#/blog/category/{{category.name}}">{{category.name}}</a>
+							&emsp;<span style="font-size: 12px;">文章:{{category.counts}}篇
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						分类的描述
+					</div>
+					<div class="panel-footer"
+						style="text-align: right;padding:3px 16px;">
+						<span style="font-size: 10px">阅读:88次 &emsp; 评论:66条</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

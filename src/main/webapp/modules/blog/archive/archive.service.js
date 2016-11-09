@@ -1,4 +1,4 @@
-app.service("ArchiveArticleService",function(RequestService){
+app.service("ArchiveService",function(RequestService){
     this.get = function () {
     	return RequestService.getRequest('/blog/archive', cfg_form);
     };

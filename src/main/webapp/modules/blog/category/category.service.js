@@ -1,4 +1,4 @@
-app.service("CategoryArticleService",function(RequestService){
+app.service("CategoryService",function(RequestService){
     this.get = function () {
     	return RequestService.getRequest('/blog/category', cfg_form);
     };

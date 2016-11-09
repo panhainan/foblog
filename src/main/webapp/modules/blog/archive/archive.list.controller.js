@@ -1,5 +1,5 @@
 app.controller("ArchiveListController", function($window, $location,
-		$routeParams, $rootScope, $scope, ArchiveArticleService) {
+		$routeParams, $rootScope, $scope, ArchiveService) {
 	setScreenAvailHeight();
 	$scope.selectArchive = function(name) {
 		// 需要仔细考虑是否用这个，因为这样每次都会重新发送两次请求
@@ -7,7 +7,7 @@ app.controller("ArchiveListController", function($window, $location,
 	}
 
 	$scope.get = function() {
-		ArchiveArticleService.get().then(function(data) {
+		ArchiveService.get().then(function(data) {
 			$scope.archives = data.resultData;
 		});
 	}

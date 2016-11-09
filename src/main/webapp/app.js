@@ -37,8 +37,8 @@ app.config(function($routeProvider,$stateProvider) {
 		templateUrl : "modules/blog/archive/archive.article.view.html",
 		controller : 'ArchiveArticleController'
 	}).when("/blog/category", {
-		templateUrl : "modules/blog/category/category.article.view.html",
-		controller : 'CategoryArticleController'
+		templateUrl : "modules/blog/category/category.list.view.html",
+		controller : 'CategoryListController'
 	}).when("/blog/category/:categoryName", {
 		templateUrl : "modules/blog/category/category.article.view.html",
 		controller : 'CategoryArticleController'

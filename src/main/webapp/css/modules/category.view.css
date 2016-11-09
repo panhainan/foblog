@@ -1,0 +1,23 @@
+.category-body {
+	padding: 15px 10px;
+}
+
+.category-card {
+	padding: 10px 0px;
+}
+
+.category-card li {
+	cursor: pointer;
+}
+
+.category-card li:hover {
+	background-color: #F2F2F2;
+}
+
+.category-card  .panel-heading {
+	border-radius: 0;
+}
+
+.category-card  .panel-body {
+	height: 160px;
+}
