@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="css/left-sub-nav.css" />
 <link rel="stylesheet" href="css/manage-left-sub-nav.css" />
 <link rel="stylesheet" href="css/modules/blog.view.css" />
+<link rel="stylesheet" href="css/modules/archive.view.css" />
 <link rel="stylesheet" href="css/modules/friend.view.css" />
 <link rel="stylesheet" href="css/modules/manage.view.css" />
 
@@ -90,7 +91,8 @@
 <script src="modules/blog/category/category.article.controller.js"></script>
 <script src="modules/blog/tag/tag.article.service.js"></script>
 <script src="modules/blog/tag/tag.article.controller.js"></script>
-<script src="modules/blog/archive/archive.article.service.js"></script>
+<script src="modules/blog/archive/archive.service.js"></script>
+<script src="modules/blog/archive/archive.list.controller.js"></script>
 <script src="modules/blog/archive/archive.article.controller.js"></script>
 <script src="modules/common/right-nav.controller.js"></script>
 

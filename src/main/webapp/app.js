@@ -31,8 +31,8 @@ app.config(function($routeProvider,$stateProvider) {
 		templateUrl : "modules/blog/article/article.view.html",
 		controller : 'ArticleController'
 	}).when("/blog/archive", {
-		templateUrl : "modules/blog/archive/archive.article.view.html",
-		controller : 'ArchiveArticleController'
+		templateUrl : "modules/blog/archive/archive.list.view.html",
+		controller : 'ArchiveListController'
 	}).when("/blog/archive/:archiveName", {
 		templateUrl : "modules/blog/archive/archive.article.view.html",
 		controller : 'ArchiveArticleController'

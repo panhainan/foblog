@@ -1,7 +1,7 @@
 html, body {
 	font: 14px/1.5 "Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB",
 		"STHeiti", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
-	background-color: #F1F1F1;
+	background-color: #FBFBFB;
 }
 
 body {
@@ -121,5 +121,6 @@ a {
 	padding: 10px 20px 6px 20px;
 	background-color: #fff;
 	margin-bottom: 15px;
+	border: 1px #EEEEEE solid;
 }
 

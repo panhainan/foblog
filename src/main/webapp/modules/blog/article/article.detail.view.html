@@ -21,17 +21,21 @@
 								</div>
 								<div class="col-md-6" style="padding:0;">
 									<span style="font-family: '楷体'">标签：</span> <span
-										ng-repeat="tName in article.tagNames"> <a href="#/blog/tag/{{tName}}"><span
-										class="tag">
-											{{tName}} </span></a>
+										ng-repeat="tName in article.tagNames"> <a
+										href="#/blog/tag/{{tName}}"><span class="tag">
+												{{tName}} </span></a>
 									</span>
 								</div>
 								<div class="col-sm-12" style="margin-bottom: 0px;padding:0;">
 									<p style="font-family: '楷体';margin-bottom: 0px">摘要：</p>
 									<p style="text-indent: 30px;margin-bottom: 0px">{{article.summary}}</p>
 									<p
-										style="text-align:right;font-family: '楷体';margin-bottom: 0px">发表于
-										{{article.writeTime | date :'yyyy-MM-dd HH:ss'}}</p>
+										style="text-align:right;font-family: '楷体';margin-bottom: 0px">
+										发表于 <a style="text-decoration: underline;"
+											title="归档：{{article.pubTime | date :'yyyy-MM'}}"
+											href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">{{article.pubTime
+											| date :'yyyy-MM-dd HH:ss'}}</a>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -40,12 +44,15 @@
 						</div>
 						<div class="col-sm-12 pre-next">
 							<div class="col-sm-12 col-md-6">
-								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span style="font-family: '楷体';">上一篇：</span>{{preArticle.title}}</a>
-								<span ng-if="!preArticle"><span style="font-family: '楷体';">上一篇：</span>没有了...</span>
+								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span
+									style="font-family: '楷体';">上一篇：</span>{{preArticle.title}}</a> <span
+									ng-if="!preArticle"><span style="font-family: '楷体';">上一篇：</span>没有了...</span>
 							</div>
 							<div class="col-sm-12 col-md-6" style="text-align: right">
-								<a ng-if="nextArticle" href="#/blog/article/{{nextArticle.title}}"><span style="font-family: '楷体';">下一篇：</span>{{nextArticle.title}}</a>
-								<span ng-if="!nextArticle"><span style="font-family: '楷体';">下一篇：</span>没有了...</span>
+								<a ng-if="nextArticle"
+									href="#/blog/article/{{nextArticle.title}}"><span
+									style="font-family: '楷体';">下一篇：</span>{{nextArticle.title}}</a> <span
+									ng-if="!nextArticle"><span style="font-family: '楷体';">下一篇：</span>没有了...</span>
 							</div>
 						</div>
 					</div>

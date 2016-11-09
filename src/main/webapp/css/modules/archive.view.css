@@ -1,0 +1,15 @@
+.archive-body{
+	padding:15px 10px;
+}
+.archive-card{
+	padding: 10px 0px;
+}
+.archive-card li{
+	cursor: pointer;
+}
+.archive-card li:hover{
+	background-color: #F2F2F2;
+}
+.panel-heading{
+	border-radius: 0;
+}
