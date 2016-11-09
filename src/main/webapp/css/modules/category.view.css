@@ -1,9 +1,13 @@
 .category-body {
 	padding: 15px 10px;
 }
+.category-body .col-sm-12,.category-body .col-md-6,.category-body .col-lg-4{
+	padding:0;
+}
 
 .category-card {
-	padding: 10px 0px;
+	padding:  0px;
+	margin-right: 10px;
 }
 
 .category-card li {

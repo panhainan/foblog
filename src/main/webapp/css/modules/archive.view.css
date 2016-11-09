@@ -1,8 +1,12 @@
 .archive-body{
 	padding:15px 10px;
 }
+.archive-body .col-xs-12.archive-body .col-sm-6,.archive-body .col-md-4,.archive-body .col-lg-3{
+	padding:0;
+}
 .archive-card{
 	padding: 10px 0px;
+	margin-right: 10px;
 }
 .archive-card li{
 	cursor: pointer;

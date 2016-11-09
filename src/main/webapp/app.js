@@ -18,7 +18,7 @@ app.filter("trusted", [ "$sce", function($sce) {
 } ]);
 app.config(function($routeProvider,$stateProvider) {
 	  
-	$routeProvider.when("/", {
+	$routeProvider.when("/index", {
 		templateUrl : "modules/index/index.view.html",
 		controller : 'IndexController'
 	}).when("/about", {
@@ -94,7 +94,7 @@ app.config(function($routeProvider,$stateProvider) {
 	});
 
 	$routeProvider.otherwise({
-		redirectTo : '/'
+		redirectTo : '/blog'
 	});
 });
 
