@@ -3,6 +3,7 @@
  */
 app.controller("SignController",function($scope,guestSignService){
 	$scope.repeatIf = false;	//记录昵称是否重复
+	$scope.guestNicknameArray = [];
 	//获取所有guest
 	$scope.getAllGuests = function(){
 		guestSignService.getAllGuests().then(function(data){
@@ -13,9 +14,7 @@ app.controller("SignController",function($scope,guestSignService){
 	//判断重复
 	$scope.chargeRe = function(nickname){
 		angular.forEach($scope.guests,function(item){
-			var guestNicknameArrayTem = [];
-			guestNicknameArrayTem.push(item.nickname);
-			$scope.guestNicknameArray=guestNicknameArrayTem;
+			$scope.guestNicknameArray.push(item.nickname);
 		})
 		if($scope.guestNicknameArray!=null && $scope.guestNicknameArray.indexOf($.trim(nickname))>-1){
 			return true;   //重复
