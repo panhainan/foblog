@@ -11,7 +11,8 @@ app.controller("ArchiveArticleController", function($window, $location,
 
 	$scope.init = function() {
 		if($routeParams.archiveName!=null){
-			$scope.getArtilces($routeParams.archiveName);
+			$scope.archiveName = $routeParams.archiveName;
+			$scope.getArtilces($scope.archiveName);
 		}else{
 			
 		}

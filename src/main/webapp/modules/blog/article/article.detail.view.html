@@ -16,13 +16,14 @@
 							<div class="row">
 								<div class="col-md-6" style="padding:0;">
 									<span style="font-family: '楷体'">类别：</span> <span><a
-										style="color: blue"
+										style="text-decoration: underline;"
 										href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a></span>
 								</div>
 								<div class="col-md-6" style="padding:0;">
 									<span style="font-family: '楷体'">标签：</span> <span
 										ng-repeat="tName in article.tagNames"> <a
-										href="#/blog/tag/{{tName}}"><span class="tag">
+										href="#/blog/tag/{{tName}}"><span
+											style="text-decoration: underline;" class="tag">
 												{{tName}} </span></a>
 									</span>
 								</div>
