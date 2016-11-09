@@ -43,17 +43,15 @@
 						<div class="col-sm-12 content">
 							<div ng-bind-html="article.content | trusted"></div>
 						</div>
-						<div class="col-sm-12 pre-next">
-							<div class="col-sm-12 col-md-6">
-								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span
-									style="font-family: '楷体';">上一篇：</span>{{preArticle.title}}</a> <span
-									ng-if="!preArticle"><span style="font-family: '楷体';">上一篇：</span>没有了...</span>
+						<div class="col-sm-12" style="padding:0;">
+							<div class="col-sm-12 pre">
+								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
+								<span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
 							</div>
-							<div class="col-sm-12 col-md-6" style="text-align: right">
+							<div class="col-sm-12 next">
 								<a ng-if="nextArticle"
-									href="#/blog/article/{{nextArticle.title}}"><span
-									style="font-family: '楷体';">下一篇：</span>{{nextArticle.title}}</a> <span
-									ng-if="!nextArticle"><span style="font-family: '楷体';">下一篇：</span>没有了...</span>
+									href="#/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
+								<span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
 							</div>
 						</div>
 					</div>

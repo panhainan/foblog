@@ -43,17 +43,24 @@
 	padding: 2px 4px;
 	margin: 0 8px 0 0;
 }
-.article-body .pre-next{
+
+.article-body .pre {
 	background-color: #FAFAFA;
-    padding: 15px 10px;
-    /* padding-top: 20px; */
-    /* margin-top: 10px; */
+	padding: 13px 20px 7px 10px;
+	border-bottom: 1px #E6E6E6 dashed;
+	font-size: 14px;
+	font-family: "微软雅黑";
 }
 
-.article-body .content{
+.article-body .next {
+	background-color: #FAFAFA;
+	padding: 10px 20px 10px 10px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+}
+
+.article-body .content {
 	padding: 20px 0px;
-   /*  border-top: 1px dashed #EBEBEB;
-    border-bottom: 1px dashed #EBEBEB; */
 }
 
 .article-body img {
