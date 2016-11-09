@@ -1,0 +1,42 @@
+.friend-body{
+	padding:15px 8px;
+}
+.friend-card {
+	padding: 10px 15px;
+	background-color: #fff;
+	margin:10px 0px;
+	height: 180px;
+}
+
+.friend-card-header {
+	width: 100%;
+	float: left;
+	height:36px;
+}
+
+.friend-card-header p {
+	font-size: 24px;
+	margin: 0px;
+}
+
+.friend-card-body {
+	width: 100%;
+	float: left;
+	height: 100px;
+}
+
+.friend-card-body p {
+	color: #666666;
+	text-indent: 20px
+}
+
+.friend-card-footer {
+	width: 100%;
+	height: 24px;
+	float: left;
+	text-align: right;
+}
+
+.friend-card-footer span {
+	font-size: 8px;
+}

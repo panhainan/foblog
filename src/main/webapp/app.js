@@ -21,6 +21,12 @@ app.config(function($routeProvider,$stateProvider) {
 	$routeProvider.when("/index", {
 		templateUrl : "modules/index/index.view.html",
 		controller : 'IndexController'
+	}).when("/about", {
+		templateUrl : "modules/about/about.view.html",
+		controller : 'AboutController'
+	}).when("/friendlink", {
+		templateUrl : "modules/friendlink/friendlink.view.html",
+		controller : 'FriendlinkController'
 	}).when("/blog", {
 		templateUrl : "modules/blog/article/article.view.html",
 		controller : 'ArticleController'

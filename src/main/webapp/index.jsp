@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="css/left-sub-nav.css" />
 <link rel="stylesheet" href="css/manage-left-sub-nav.css" />
 <link rel="stylesheet" href="css/modules/blog.view.css" />
+<link rel="stylesheet" href="css/modules/friend.view.css" />
 <link rel="stylesheet" href="css/modules/manage.view.css" />
 
 <script src="<%=basePath%>plugins/jquery/jquery-1.11.3.min.js"></script>
@@ -75,6 +76,10 @@
 <script src="modules/common/right-nav.factory.js"></script>
 
 <script src="modules/index/index.service.js"></script>
+<script src="modules/about/about.controller.js"></script>
+<script src="modules/about/about.service.js"></script>
+<script src="modules/friendlink/friendlink.controller.js"></script>
+<script src="modules/friendlink/friendlink.service.js"></script>
 <script src="modules/index/index.controller.js"></script>
 <script src="modules/common/sign.controller.js"></script>
 <script src="modules/common/sign-controller-service.js"></script>
