@@ -1,64 +1,121 @@
 <!--container-fluid-->
 <div class="customContainer">
-	<ng-include src="'modules/common/top-nav.html'"></ng-include>
-	<div class="body-content-body">
-		<div class="article">
-			<div ng-if="error">文章不存在</div>
-			<div ng-if="!error">
-				<div class="article-header row">
-					<div class="col-sm-12" style="padding:0;">
-						<h2>{{article.title}}</h2>
-					</div>
-				</div>
-				<div class="article-body">
-					<div class="row">
-						<div class="col-sm-12 summary">
-							<div class="row">
-								<div class="col-md-6" style="padding:0;">
-									<span style="font-family: '楷体'">类别：</span> <span><a
-										style="text-decoration: underline;"
-										href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a></span>
-								</div>
-								<div class="col-md-6" style="padding:0;">
-									<span style="font-family: '楷体'">标签：</span> <span
-										ng-repeat="tName in article.tagNames"> <a
-										href="#/blog/tag/{{tName}}"><span
-											style="text-decoration: underline;" class="tag">
+    <ng-include src="'modules/common/top-nav.html'"></ng-include>
+    <div class="body-content-body">
+        <div class="article">
+            <div ng-if="error">文章不存在</div>
+            <div ng-if="!error">
+                <div class="article-header row">
+                    <div class="col-sm-12" style="padding:0;">
+                        <h2>{{article.title}}</h2>
+                    </div>
+                </div>
+                <div class="article-body">
+                    <div class="row">
+                        <div class="col-sm-12 summary">
+                            <div class="row">
+                                <div class="col-md-6" style="padding:0;">
+                                    <span style="font-family: '楷体'">类别：</span> <span><a
+                                        style="text-decoration: underline;"
+                                        href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a></span>
+                                </div>
+                                <div class="col-md-6" style="padding:0;">
+                                    <span style="font-family: '楷体'">标签：</span> <span
+                                        ng-repeat="tName in article.tagNames"> <a
+                                        href="#/blog/tag/{{tName}}"><span
+                                        style="text-decoration: underline;" class="tag">
 												{{tName}} </span></a>
 									</span>
-								</div>
-								<div class="col-sm-12" style="margin-bottom: 0px;padding:0;">
-									<p style="font-family: '楷体';margin-bottom: 0px">摘要：</p>
-									<p style="text-indent: 30px;margin-bottom: 0px">{{article.summary}}</p>
-									<p
-										style="text-align:right;font-family: '楷体';margin-bottom: 0px">
-										发表于 <a style="text-decoration: underline;"
-											title="归档：{{article.pubTime | date :'yyyy-MM'}}"
-											href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">{{article.pubTime
-											| date :'yyyy-MM-dd HH:ss'}}</a>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-12 content">
-							<div ng-bind-html="article.content | trusted"></div>
-						</div>
-						<div class="col-sm-12" style="padding:0;">
-							<div class="col-sm-12 pre">
-								<a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
-								<span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
-							</div>
-							<div class="col-sm-12 next">
-								<a ng-if="nextArticle"
-									href="#/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
-								<span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                </div>
+                                <div class="col-sm-12" style="margin-bottom: 0px;padding:0;">
+                                    <p style="font-family: '楷体';margin-bottom: 0px">摘要：</p>
+
+                                    <p style="text-indent: 30px;margin-bottom: 0px">{{article.summary}}</p>
+
+                                    <p style="text-align:right;font-family: '楷体';margin-bottom: 0px">
+                                        发表于 <a style="text-decoration: underline;"
+                                               title="归档：{{article.pubTime | date :'yyyy-MM'}}"
+                                               href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">{{article.pubTime
+                                        | date :'yyyy-MM-dd HH:ss'}}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 content">
+                            <div ng-bind-html="article.content | trusted"></div>
+                        </div>
+                        <div class="col-sm-12" style="padding:0;">
+                            <div class="col-sm-12 pre">
+                                <a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
+                                <span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
+                            </div>
+                            <div class="col-sm-12 next">
+                                <a ng-if="nextArticle"
+                                   href="#/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
+                                <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-footer">
+                    <div class="row">
+                        <div class="col-sm-12 message-header">
+                            <h3 style="padding-bottom: 10px;border-bottom: 4px #C0C0C0 solid;">评论</h3>
+                            <form class="form-horizontal" action="javascript:void(0)" novalidate>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>您的大名<span style="color: red;font-size: 18px">*</span></label>
+                                        <div><input class="form-control" type="text"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>您的邮箱<span style="color: red;font-size: 18px">*</span></label>
+                                        <div><input class="form-control" type="text"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>您的网站</label>
+
+                                        <div><input class="form-control" type="text"/></div>
+                                    </div>
+                                </div>
+                                <label>您的观点<span style="color: red;font-size: 18px">*</span></label>
+                                <div class="col-sm-12">
+                                    <textarea name="content" ng-model="message.content" required
+                                          data-provide="markdown" id="markdown_message_textarea" rows="10" placeholder="这里输入内容,支持Markdown语法."></textarea>
+                                    <p style="text-align:right;color: #8D8D8D;font-size:12px">已输入100字符</p>
+                                </div>
+                                <button class="btn btn-success pull-right" style="width: 100px;">提 交</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 message-body">
+                            <div class="message-card">
+                                <p><span class="message-guest-name">那个天天讲笑话的小明</span>：</p>
+
+                                <div>
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
+<script>
+    $("#markdown_message_textarea").markdown({
+        language: 'zh',
+        fullscreen: {
+            enable: true
+        },
+        height: 240,
+        resize: 'none',
+        localStorage: 'md',
+        imgurl: '/c/imgUpload',
+        base64url: '/c/imgUpload'
+    });
+</script>
