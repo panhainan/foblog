@@ -1,148 +1,158 @@
 <div class="customContainer">
-	<div class="row">
-		<div id="manage-sub-nav">
-			<ng-include src="'modules/manage/manage-left-sub-nav.html'"></ng-include>
-		</div>
-		<div class="manage-margin_left_sub_nav_width" id="manage-body-content">
-			<div class="manage-toggle-sidebar-div">
-				<a class="btn btn-primary btn-md manage-toggle-sidebar" ><span
-					class="glyphicon glyphicon-chevron-left" id="manage-close-open-icon"></span></a>
-			</div>
-			<div class="manage-body-content-body">
-				<div class=" panel panel-default">
-					<div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
-						<h3 class="panel-title font_kaiti_20">
-							类别管理<span style="font-size: 12px">(共{{categorys.length}}条记录)</span> <a
-								type="button" ng-click="addCategory()"
-								class="btn btn-sm btn-primary" style="float: right;color: #fff">新
-								建</a>
-						</h3>
-					</div>
-					<div class="panel-body " style="min-height: 440px">
-						<div class="table-responsive tableTrBottomBorder">
-							<table class="table table-hover">
-								<thead>
-									<tr class="border_bottom">
-										<td>#</td>
-										<td>名称</td>
-										<td>文章</td>
-										<td>操作</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="category in categorys">
-										<td>{{$index+1}}</td>
-										<td>{{category.name}}</td>
-										<td>{{category.counts}} <a class="btn btn-xs btn-primary" ng-if="category.counts!=0" ng-click="editArticle(category)"
-											title="点击查看">查看</a></td>
-										<td>
-											<ul class="list-unstyled">
-												<li><a class="btn btn-xs btn-warning" style="margin-right:10px" ng-click="editCategory(category)"
-													>编辑</a><a class="btn btn-xs btn-danger"
-													ng-click="deleteCategory(category)">删除</a></li>
-											</ul>
-		
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<script type="text/ng-template" id="editCategoryArticle.html">
-						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">类别：{{category.name}}</h4>
-						</div>
-						<div class="modal-body" id="modal-body">
-							<div class="table-responsive tableTrBottomBorder">
-							<table class="table table-hover">
-								<thead>
-									<tr class="border_bottom">
-										<td>#</td>
-										<td>标题</td>
-										<td>状态</td>
-										<td class="visible-lg">撰写时间</td>
-										<td>操作</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="article in categoryArticles">
-										<td>{{$index+1}}</td>
-										<td>{{article.title}}</td>
-										<td><span ng-if="article.status==1">博客</span><span
-											ng-if="article.status==0">草稿</span></td>
-										<td class="visible-lg">{{article.writeTime | date
-											:'yyyy-MM-dd HH:ss'}}</td>
-										<td>
-											<ul class="list-unstyled">
-												<!--<li style="float:left"><a
-													ng-click="setDeleteArticle(article)">移动</a> |  </li> -->
-												<li style="float:left"><a class="btn btn-xs btn-primary" ng-click="goArticle(article.id)">查看</a></li>
-											</ul>
-		
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="cancelEditArticle()"
-								>关闭</button>
-						</div>
-					</script>
-					<script type="text/ng-template" id="addCategory.html">
-						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">添加</h4>
-						</div>
-						<div class="modal-body" id="modal-body">
-							名称：<input type="text" class="form-control" ng-model="category.name"/>
-						</div>		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="cancelAddCategory()"
-								>取消</button>
-							<button type="button" ng-click="confirmAddCategory(category)"
-								 class="btn btn-success">确认</button>
-						</div>
-					</script>
-					<script type="text/ng-template" id="editCategory.html">
-						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">修改</h4>
-						</div>
-						<div class="modal-body" id="modal-body">
-							名称：<input type="text" class="form-control" ng-model="editCategory.name"/>
-						</div>		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="cancelEditCategory()"
-								>取消</button>
-							<button type="button" ng-click="confirmEditCategory(editCategory)"
-								 class="btn btn-warning">确认</button>
-						</div>
-					</script>
-					<script type="text/ng-template" id="deleteCategory.html">
-						<div class="modal-header">
-							<h4 class="modal-title" id="modal-title">警告</h4>
-						</div>
-						<div class="modal-body" id="modal-body">
-							确认删除类别<span style="font-size:16px;font-weight:bolder;"> {{category.name}} </span>吗？
-						</div>		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="cancelDeleteCategory()"
-								>取消</button>
-							<button type="button" ng-click="deleteCategory(category.id)"
-								 class="btn btn-danger">确认</button>
-						</div>
-					</script>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div id="manage-sub-nav">
+            <ng-include src="'modules/manage/manage-left-sub-nav.html'"></ng-include>
+        </div>
+        <div class="manage-margin_left_sub_nav_width" id="manage-body-content">
+            <div class="manage-toggle-sidebar-div">
+                <a class="btn btn-primary btn-md manage-toggle-sidebar"><span
+                        class="glyphicon glyphicon-chevron-left" id="manage-close-open-icon"></span></a>
+            </div>
+            <div class="manage-body-content-body">
+                <div class=" panel panel-default">
+                    <div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
+                        <h3 class="panel-title font_kaiti_20">
+                            类别管理<span style="font-size: 12px">(共{{categorys.length}}条记录)</span> <a
+                                type="button" ng-click="addCategory()"
+                                class="btn btn-sm btn-primary" style="float: right;color: #fff">新
+                            建</a>
+                        </h3>
+                    </div>
+                    <div class="panel-body " style="min-height: 440px">
+                        <div class="table-responsive tableTrBottomBorder">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr class="border_bottom">
+                                    <td>#</td>
+                                    <td>名称</td>
+                                    <td>文章</td>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="category in categorys">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{category.name}}</td>
+                                    <td>{{category.counts}} <a class="btn btn-xs btn-primary" ng-if="category.counts!=0" ng-click="editArticle(category)" style="margin: 0;"  title="点击查看">查看</a></td>
+                                    <td>
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-xs btn-warning" style="margin-left: 0;margin-right:10px;"
+                                                   ng-click="editCategory(category)"
+                                                    >编辑</a><a class="btn btn-xs btn-danger"
+                                                              ng-click="deleteCategory(category)">删除</a></li>
+                                        </ul>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <script type="text/ng-template" id="editCategoryArticle.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">类别：{{category.name}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive tableTrBottomBorder">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr class="border_bottom">
+                                        <td>#</td>
+                                        <td>标题</td>
+                                        <td>状态</td>
+                                        <td class="visible-lg">撰写时间</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="article in categoryArticles">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{article.title}}</td>
+                                        <td><span ng-if="article.status==1">博客</span><span
+                                                ng-if="article.status==0">草稿</span></td>
+                                        <td class="visible-lg">{{article.writeTime | date
+                                            :'yyyy-MM-dd HH:ss'}}
+                                        </td>
+                                        <td>
+                                            <ul class="list-unstyled">
+                                                <!--<li style="float:left"><a
+                                                    ng-click="setDeleteArticle(article)">移动</a> |  </li> -->
+                                                <li style="float:left"><a class="btn btn-xs btn-primary"
+                                                                          ng-click="goArticle(article.id)">查看</a></li>
+                                            </ul>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelEditArticle()"
+                                    >关闭
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="addCategory.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">添加</h4>
+                        </div>
+                        <div class="modal-body">
+                            名称：<input type="text" class="form-control" ng-model="category.name"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelAddCategory()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="confirmAddCategory(category)"
+                                    class="btn btn-success">确认
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="editCategory.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">修改</h4>
+                        </div>
+                        <div class="modal-body">
+                            名称：<input type="text" class="form-control" ng-model="editCategory.name"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelEditCategory()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="confirmEditCategory(editCategory)"
+                                    class="btn btn-warning">确认
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="deleteCategory.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">警告</h4>
+                        </div>
+                        <div class="modal-body">
+                            确认删除类别<span style="font-size:16px;font-weight:bolder;"> {{category.name}} </span>吗？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelDeleteCategory()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="deleteCategory(category.id)"
+                                    class="btn btn-danger">确认
+                            </button>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-	$(function() {
-		$(".manage-toggle-sidebar").click(function() {
-			$("#manage-sub-nav").toggleClass("collapsed");
-			$("#manage-body-content").toggleClass("col-sm-12  manage-margin_left_sub_nav_width");
-			$("#manage-close-open-icon").toggleClass("glyphicon-chevron-right");
-			return false;
-		});
-	});
+    $(function () {
+        $(".manage-toggle-sidebar").click(function () {
+            $("#manage-sub-nav").toggleClass("collapsed");
+            $("#manage-body-content").toggleClass("col-sm-12  manage-margin_left_sub_nav_width");
+            $("#manage-close-open-icon").toggleClass("glyphicon-chevron-right");
+            return false;
+        });
+    });
 </script>

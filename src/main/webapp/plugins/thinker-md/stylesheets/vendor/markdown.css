@@ -512,6 +512,7 @@
 /*
 upload*/
 .md-editor > .md-upload {
+    margin-left: 260px;
     position: fixed;
     width: auto;
     max-width: 100%;
@@ -524,10 +525,10 @@ upload*/
     z-index: 1;
     background-color: rgba(0, 0, 0, .25);
 }
-
 .md-editor > .md-upload > .md-dialog {
     margin: 80px auto;
     width: 600px;
+    max-width: 100%;
     height: auto;
     background-color: #f6f6f6;
     border-radius: 6px;
@@ -663,6 +664,7 @@ upload*/
 }
 
 .md-editor > .md-emoji {
+    margin-left: 260px;
     position: fixed;
     width: auto;
     max-width: 100%;
@@ -679,6 +681,7 @@ upload*/
 .md-editor > .md-emoji > .md-dialog {
     margin: 80px auto;
     width: 850px;
+    max-width: 100%;
     height: auto;
     background-color: #f6f6f6;
     border-radius: 6px;
@@ -895,7 +898,14 @@ i.md-loading {
     bottom: 5px;
     display: none;
 }
-
+@media ( max-width : 768px) {
+    .md-editor > .md-upload  {
+        margin-left:0px;
+    }
+    .md-editor > .md-emoji  {
+        margin-left:0px;
+    }
+}
 /*
 ::-webkit-scrollbar {
     -webkit-appearance: none;

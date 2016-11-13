@@ -3,8 +3,8 @@
     <ng-include src="'modules/common/top-nav.html'"></ng-include>
     <div class="body-content-body">
         <div class="article">
-            <div ng-if="error">文章不存在</div>
-            <div ng-if="!error">
+            <div ng-show="error">文章不存在</div>
+            <div ng-show="!error">
                 <div class="article-header row">
                     <div class="col-sm-12" style="padding:0;">
                         <h2>{{article.title}}</h2>
@@ -59,40 +59,44 @@
                 </div>
                 <div class="article-footer">
                     <div class="row">
-                        <div class="col-sm-12 message-header">
-                            <h3 style="padding-bottom: 10px;border-bottom: 4px #C0C0C0 solid;">评论</h3>
-                            <form class="form-horizontal" action="javascript:void(0)" novalidate>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>您的大名<span style="color: red;font-size: 18px">*</span></label>
-                                        <div><input class="form-control" type="text"/></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>您的邮箱<span style="color: red;font-size: 18px">*</span></label>
-                                        <div><input class="form-control" type="text"/></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>您的网站</label>
+                        <div class="col-xs-12 message-header">
+                            <h3 style="padding-bottom: 10px;border-bottom: 4px #C0C0C0 solid;">我要发表看法</h3>
 
-                                        <div><input class="form-control" type="text"/></div>
-                                    </div>
-                                </div>
-                                <label>您的观点<span style="color: red;font-size: 18px">*</span></label>
+                            <form class="form-horizontal" action="javascript:void(0)" novalidate>
+                                <label>您的观点<span style="color: red;">（必填，请合法用词，谢谢 ^_^ ）</span></label>
+
                                 <div class="col-sm-12">
                                     <textarea name="content" ng-model="message.content" required
-                                          data-provide="markdown" id="markdown_message_textarea" rows="10" placeholder="这里输入内容,支持Markdown语法."></textarea>
-                                    <p style="text-align:right;color: #8D8D8D;font-size:12px">已输入100字符</p>
+                                              data-provide="markdown" id="markdown_message_textarea" rows="10"
+                                              placeholder="这里输入内容,支持Markdown语法."></textarea>
+                                    <p style="text-align:right;color: #8D8D8D;font-size:12px;margin-bottom: 0">已输入100字符</p>
                                 </div>
-                                <button class="btn btn-success pull-right" style="width: 100px;">提 交</button>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>您的邮箱<span style="color: red;">（必填，放心我不会公开也不会发送广告）</span></label>
+                                        <div><input class="form-control" type="email" name="email" ng-model="guest.email" ng-blur="getGuestInfo(guest.email)" required/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>您的大名<span style="color: red;">（必填）</span></label>
+                                        <div><input class="form-control"  type="text" name="nickname" ng-model="guest.nickname" type="text" required/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>您的网站<span style="color: green;">（希望我们能够互相信任 ^_^）</span></label>
+                                        <div><input class="form-control" type="text"/></div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-success" style="width: 100px;margin-top: 10px;">提 交</button>
                             </form>
                         </div>
-                        <div class="col-sm-12 message-body">
+                        <div class="col-xs-12 message-body">
+                            <h3 style="padding-bottom: 10px;border-bottom: 4px #C0C0C0 solid;">留言（1条）</h3>
                             <div class="message-card">
-                                <p><span class="message-guest-name">那个天天讲笑话的小明</span>：</p>
+                                <p style="font-weight: bold"><span class="message-guest-name">那个天天讲笑话的小明</span> 说：</p>
 
                                 <div>
                                     xxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -114,7 +118,7 @@
         },
         height: 240,
         resize: 'none',
-        localStorage: 'md',
+        localStorage: 'cmd',
         imgurl: '/c/imgUpload',
         base64url: '/c/imgUpload'
     });

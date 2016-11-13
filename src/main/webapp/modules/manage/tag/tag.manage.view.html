@@ -33,7 +33,7 @@
 										<td>{{$index+1}}</td>
 										<td>{{tag.name}}</td>
 										<td>{{tag.counts}} <a class="btn btn-xs btn-primary"
-											ng-if="tag.counts!=0" ng-click="editArticle(tag)"
+											ng-if="tag.counts!=0" style="margin: 0;"  ng-click="editArticle(tag)"
 											title="点击查看">查看</a></td>
 										<td><a class="btn btn-xs btn-warning"
 											style="margin-right:10px" ng-click="editTag(tag)">编辑</a> <a
@@ -84,7 +84,7 @@
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<td>
 											<ul class="list-unstyled">
-												<li><a  class="btn btn-xs btn-primary" style="margin-right:10px" ng-click="goArticle(article.id)">查看</a><a  class="btn btn-xs btn-danger"
+												<li><a  class="btn btn-xs btn-primary" style="margin-right:10px;margin-left: 0" ng-click="goArticle(article.id)">查看</a><a  class="btn btn-xs btn-danger"
 													ng-click="goDeleteArticle(article)">删除</a></li> 
 											</ul>
 										</td>

@@ -86,7 +86,7 @@
 <script src="modules/common/sign.controller.js"></script>
 <script src="modules/common/sign-controller-service.js"></script>
 <script src="modules/blog/article/article.service.js"></script>
-<script src="modules/blog/article/article.controller.js"></script>
+<script src="modules/blog/article/message.service.js"></script><script src="modules/blog/article/article.controller.js"></script>
 <script src="modules/blog/article/article.detail.controller.js"></script>
 <script src="modules/blog/category/category.service.js"></script>
 <script src="modules/blog/category/category.list.controller.js"></script>
