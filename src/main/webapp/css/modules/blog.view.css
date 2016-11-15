@@ -9,22 +9,22 @@
 }
 
 .body-content-body {
-	padding: 0px 5px 10px 5px;
+	padding: 0px 0px 10px 0px;
 	margin: 0 20px;
 }
 
 .article {
-	padding: 40px 60px 40px 60px;
+	padding: 10px 40px 40px 40px;
 	background-color: #fff;
 	/* min-height: 600px; */
 	height: 100%;
-	border: 1px solid #E6E6E6;
+	/*border: 1px solid #E6E6E6;*/
 }
 
 .article-header {
 	/* padding-top:10px; */
 	/* height: 90px; */
-	border-bottom: 4px solid silver;
+	/*border-bottom: 2px solid #EBEBEB;*/
 }
 
 .article-body {
@@ -33,7 +33,7 @@
 }
 
 .article-body .summary {
-	background-color: #FAFAFA;
+	background-color: #F7F9F7;
 	padding: 10px;
 }
 
@@ -45,18 +45,20 @@
 }
 
 .article-body .pre {
-	background-color: #FAFAFA;
+	background-color: #F7F9F7;
 	padding: 13px 20px 7px 10px;
 	border-bottom: 1px #E6E6E6 dashed;
 	font-size: 14px;
 	font-family: "微软雅黑";
+    margin-top: 30px;
 }
 
 .article-body .next {
-	background-color: #FAFAFA;
+	background-color: #F7F9F7;
 	padding: 10px 20px 10px 10px;
 	font-size: 14px;
 	font-family: "微软雅黑";
+    margin-bottom: 30px;
 }
 
 .article-body .content {
@@ -90,13 +92,13 @@
 }
 
 .message-body{
-    margin-top: 10px;
+    margin-bottom: 30px;
     height: 100%;
     width: 100%;
 }
 .message-card{
-    padding: 10px;
-    border-bottom: 1px #C0C0C0 dashed;
+    padding: 10px  0 20px 0;
+    border-bottom: 1px #EBEBEB dashed;
 }
 .message-card p{
     margin-bottom: 5px;

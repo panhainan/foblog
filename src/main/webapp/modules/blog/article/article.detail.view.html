@@ -59,49 +59,59 @@
                 </div>
                 <div class="article-footer">
                     <div class="row">
-                        <div class="col-xs-12 message-header">
-                            <h3 style="padding-bottom: 10px;border-bottom: 4px #C0C0C0 solid;">我要发表看法</h3>
 
-                            <form class="form-horizontal" action="javascript:void(0)" novalidate>
-                                <label>您的观点<span style="color: red;">（必填，请合法用词，谢谢 ^_^ ）</span></label>
-
-                                <div class="col-sm-12">
-                                    <textarea name="content" ng-model="message.content" required
-                                              data-provide="markdown" id="markdown_message_textarea" rows="10"
-                                              placeholder="这里输入内容,支持Markdown语法."></textarea>
-                                    <p style="text-align:right;color: #8D8D8D;font-size:12px;margin-bottom: 0">已输入100字符</p>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>您的邮箱<span style="color: red;">（必填，放心我不会公开也不会发送广告）</span></label>
-                                        <div><input class="form-control" type="email" name="email" ng-model="guest.email" ng-blur="getGuestInfo(guest.email)" required/></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>您的大名<span style="color: red;">（必填）</span></label>
-                                        <div><input class="form-control"  type="text" name="nickname" ng-model="guest.nickname" type="text" required/></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>您的网站<span style="color: green;">（希望我们能够互相信任 ^_^）</span></label>
-                                        <div><input class="form-control" type="text"/></div>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-success" style="width: 100px;margin-top: 10px;">提 交</button>
-                            </form>
-                        </div>
                         <div class="col-xs-12 message-body">
-                            <h3 style="padding-bottom: 10px;border-bottom: 4px #C0C0C0 solid;">留言（1条）</h3>
-                            <div class="message-card">
-                                <p style="font-weight: bold"><span class="message-guest-name">那个天天讲笑话的小明</span> 说：</p>
+                            <h3 style="padding-bottom: 10px;border-bottom: 2px #EBEBEB solid;">留言（1条）</h3>
 
-                                <div>
+                            <div class="message-card">
+                                <p ><span style="color:#52769C">那个天天讲笑话的小明</span> 说：</p>
+
+                                <div style="text-indent: 40px;">
                                     xxxxxxxxxxxxxxxxxxxxxxxxxxxx
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-xs-12 message-header">
+                            <!--<h3 style="padding-bottom: 10px;border-bottom: 2px #EBEBEB solid;">我要发表看法</h3>-->
+
+                            <form class="form-horizontal" action="javascript:void(0)" novalidate>
+                                <label>观点</label>
+
+                                <div class="col-sm-12">
+                                    <div id="message-editormd" style="margin-bottom: 0">
+                                        <textarea style="display:none;"></textarea>
+                                    </div>
+                                    <!--<p style="text-align:right;color: #8D8D8D;font-size:12px;margin-bottom: 0">
+                                        已输入100字符</p>-->
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>邮箱</label>
+
+                                        <div><input placeholder="必填，放心我不会公开也不会发送广告" class="form-control" type="email" name="email"
+                                                    ng-model="guest.email" ng-blur="getGuestInfo(guest.email)"
+                                                    required/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>昵称</label>
+
+                                        <div><input placeholder="必填，您的大名" class="form-control" type="text" name="nickname"
+                                                    ng-model="guest.nickname" type="text" required/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label>个人网址</label>
+
+                                        <div><input placeholder="希望我们能够互相信任 ^_^" class="form-control" type="text"/></div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary" style="width: 100px;margin-top: 10px;border-radius: 4px;">提 交
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -109,17 +119,30 @@
         </div>
     </div>
 </div>
-
+<style>
+    .editormd{
+        padding-top: 6px;
+    }
+</style>
 <script>
-    $("#markdown_message_textarea").markdown({
-        language: 'zh',
-        fullscreen: {
-            enable: true
-        },
-        height: 240,
-        resize: 'none',
-        localStorage: 'cmd',
-        imgurl: '/c/imgUpload',
-        base64url: '/c/imgUpload'
+    var messageEditor;
+
+    $(function () {
+        messageEditor = editormd("message-editormd", {
+            width: "100%",
+            height: 180,
+            watch:false,
+            path: web_project_name + "/plugins/editor.md/lib/",
+            toolbarIcons: function () {
+                return editormd.toolbarModes["mini"];
+            },
+            toolbar  : false,             //关闭工具栏
+            saveHTMLToTextarea: true,
+            lineNumbers:false,
+            styleSelectedText:false,
+            styleActiveLine:false,
+            autoFocus:false,
+            toolbarAutoFixed:false
+        });
     });
 </script>

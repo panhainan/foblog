@@ -6,7 +6,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
         ArticleService.get(articleTitle).then(function (data) {
             console.log(data);
             if (data.resultData != null) {
-                data.resultData.currentArticle.content = marked(data.resultData.currentArticle.content)
+                //data.resultData.currentArticle.content = marked(data.resultData.currentArticle.content)
                 $scope.article = data.resultData.currentArticle;
                 $scope.preArticle = data.resultData.preArticle;
                 $scope.nextArticle = data.resultData.nextArticle;

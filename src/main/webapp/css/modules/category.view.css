@@ -2,7 +2,7 @@
 	padding: 15px 10px;
 }
 .category-body .col-sm-12,.category-body .col-md-6,.category-body .col-lg-4{
-	padding:0;
+	padding:10px 0;
 }
 
 .category-card {
@@ -19,9 +19,9 @@
 }
 
 .category-card  .panel-heading {
-	border-radius: 0;
+	/*border-radius: 0;*/
 }
 
 .category-card  .panel-body {
-	height: 160px;
+	height: 80px;
 }
