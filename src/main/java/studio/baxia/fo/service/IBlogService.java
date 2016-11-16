@@ -2,10 +2,8 @@ package studio.baxia.fo.service;
 
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
-import studio.baxia.fo.common.TreeInfoResult;
 import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Category;
-import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.vo.ArchiveVo;
 import studio.baxia.fo.vo.ArticleVo;
@@ -158,62 +156,22 @@ public interface IBlogService {
 	PageInfoResult<Article> articleGetAllBy(Integer articleStatus,
 			PageConfig pageConfig);
 
-	/**
-	 * 添加评论
-	 * 
-	 * @param message
-	 *            评论信息（articleId，parentId，content，userType，authorId）
-	 * @return
-	 */
-	Boolean messageAdd(Message message);
+    PageInfoResult<ArticleVo> articleGetAllManageBy(Integer articleStatus,
+                                                    PageConfig pageConfig);
 
-	/**
-	 * 通过评论id删除评论
-	 * 
-	 * @param messageId
-	 *            评论id
-	 * @param authorId
-	 *            操作的作者id
-	 * @return
-	 */
-	Boolean messageDeleteById(int messageId, int authorId);
+    List<CategoryVo> categoryGetAllVoBy(Integer articleStatus);
 
-	/**
-	 * 通过文章id删除相关评论
-	 * 
-	 * @param messageArticleId
-	 *            文章id
-	 * @return
-	 */
-	Boolean messageDeleteBy(int messageArticleId);
+    List<ArticleVo> articleGetAllByCategoryName(String categoryName);
 
-	/**
-	 * 通过文章id和排序状态获取转换树后的信息
-	 * 
-	 * @param messageArticleId
-	 *            文章id
-	 * @param reverseOrder
-	 *            排序状态
-	 * @return
-	 */
-	TreeInfoResult messageGetAllBy(int messageArticleId, int reverseOrder);
+    List<ArticleVo> articleGetAllByTagName(String tagName);
 
-	PageInfoResult<ArticleVo> articleGetAllManageBy(Integer articleStatus,
-			PageConfig pageConfig);
+    List<Article> articleGetAllByCategoryId(int id, Integer articleStatus);
 
-	List<CategoryVo> categoryGetAllVoBy(Integer articleStatus);
+    Boolean articleDeleteTag(int tagId, int articleId);
 
-	List<ArticleVo> articleGetAllByCategoryName(String categoryName);
+    List<Article> articleGetAllByTagId(int tagId, Integer articleStatus);
 
-	List<ArticleVo> articleGetAllByTagName(String tagName);
-
-	List<Article> articleGetAllByCategoryId(int id, Integer articleStatus);
-
-	Boolean articleDeleteTag(int tagId, int articleId);
-
-	List<Article> articleGetAllByTagId(int tagId, Integer articleStatus);
-
-	/**
+    /**
 	 * 获取所有归档（通过文章状态和归档类型）
 	 * @param articleStatus 包含：“博客” 和 “草稿” 两种状态 . CommonConstant类中有对应的常量
 	 * @param archiveTypeYear CommonConstant类中有对应的常量“年”

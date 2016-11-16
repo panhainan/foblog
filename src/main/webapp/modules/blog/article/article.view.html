@@ -1,6 +1,7 @@
 <div class="customContainer">
-	<ng-include src="'modules/common/top-nav.html'"></ng-include>
-	<div class="body-content-body">
+	<!--<ng-include src="'modules/common/top-nav.html'"></ng-include>-->
+    <ng-include src="'modules/common/loading.html'"></ng-include>
+    <div ng-show="loaded" class="body-content-body">
 		<div class="card" ng-repeat="article in articles">
 			<div>
 				<h3>

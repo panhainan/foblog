@@ -1,5 +1,7 @@
 app.controller("ArticleController", function($uibModal,$scope,ArticleService) {
 	setScreenAvailHeight();
+    $scope.loadingPath=loading_path;
+    $scope.loaded = false;
     $scope.currentPage = 1;
     $scope.pageSize = 3;
 
@@ -13,6 +15,7 @@ app.controller("ArticleController", function($uibModal,$scope,ArticleService) {
 //			console.log(data)
 			$scope.articles = data.resultData.list;
 			$scope.totalItems = data.resultData.pageConfig.allCount;
+            $scope.loaded = true;
 		});
 	}
 	

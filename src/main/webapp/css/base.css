@@ -24,6 +24,7 @@ body {
     padding: 0px 0px 0px 0px;
     margin: 0;
     margin-left: 260px;
+    min-height: 400px;
     height: 100%;
     overflow-x: hidden;
 }
@@ -40,7 +41,7 @@ body {
 }
 .panel-custom-primary{
     border:1px solid #52768E;
-    border-radius: 4.5px;
+    border-radius: 4px;
 }
 .panel-custom-primary .panel-heading{
     border-top-left-radius: 4px;

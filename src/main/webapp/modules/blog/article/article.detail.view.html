@@ -1,8 +1,9 @@
 <!--container-fluid-->
 <div class="customContainer">
-    <ng-include src="'modules/common/top-nav.html'"></ng-include>
-    <div class="body-content-body">
-        <div class="article">
+    <!--<ng-include src="'modules/common/top-nav.html'"></ng-include>-->
+    <ng-include src="'modules/common/loading.html'"></ng-include>
+    <div ng-show="loaded" class="body-content-body">
+        <div  class="article">
             <div ng-show="error">文章不存在</div>
             <div ng-show="!error">
                 <div class="article-header row">
@@ -79,10 +80,10 @@
 
                                 <div class="col-sm-12">
                                     <div id="message-editormd" style="margin-bottom: 0">
-                                        <textarea style="display:none;"></textarea>
+                                        <textarea class="editormd-markdown-textarea" name="$id-markdown-doc"></textarea>
+                                        <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
+                                        <textarea class="editormd-html-textarea" name="$id-html-code"></textarea>
                                     </div>
-                                    <!--<p style="text-align:right;color: #8D8D8D;font-size:12px;margin-bottom: 0">
-                                        已输入100字符</p>-->
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
@@ -109,7 +110,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-primary" style="width: 100px;margin-top: 10px;border-radius: 4px;">提 交
+                                <button type="button" ng-click="comment()" class="btn btn-primary" style="width: 100px;margin-top: 10px;border-radius: 4px;">提 交
                                 </button>
                             </form>
                         </div>
@@ -123,9 +124,12 @@
     .editormd{
         padding-top: 6px;
     }
+    .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty{
+        width: 100%;
+    }
 </style>
 <script>
-    var messageEditor;
+/*    var messageEditor;
 
     $(function () {
         messageEditor = editormd("message-editormd", {
@@ -144,5 +148,5 @@
             autoFocus:false,
             toolbarAutoFixed:false
         });
-    });
+    });*/
 </script>

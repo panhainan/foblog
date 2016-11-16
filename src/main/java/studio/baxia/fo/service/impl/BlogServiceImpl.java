@@ -1,34 +1,26 @@
 package studio.baxia.fo.service.impl;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import studio.baxia.fo.common.CommonConstant;
-import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
-import studio.baxia.fo.common.TreeInfoResult;
-import studio.baxia.fo.common.TreeInfoUtil;
 import studio.baxia.fo.dao.IArticleDao;
 import studio.baxia.fo.dao.ICategoryDao;
 import studio.baxia.fo.dao.IMessageDao;
 import studio.baxia.fo.dao.ITagDao;
 import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.pojo.Category;
-import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.pojo.Tag;
 import studio.baxia.fo.service.IBlogService;
+import studio.baxia.fo.util.ReturnUtil;
 import studio.baxia.fo.vo.ArchiveVo;
 import studio.baxia.fo.vo.ArticleVo;
 import studio.baxia.fo.vo.CategoryVo;
 import studio.baxia.fo.vo.TagVo;
+
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * Created by Pan on 2016/10/16.
@@ -45,24 +37,17 @@ public class BlogServiceImpl implements IBlogService {
 	@Autowired
 	private IMessageDao iMessageDao;
 
-	private Boolean returnResult(Integer result) {
-		if (result > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	@Override
 	public Boolean categoryAdd(Category category) {
 		Integer result = iCategoryDao.insert(category);
-		return returnResult(result);
+		return ReturnUtil.returnResult(result);
 	}
 
 	@Override
 	public Boolean categoryEdit(Category category) {
 		Integer result = iCategoryDao.update(category);
-		return returnResult(result);
+		return ReturnUtil.returnResult(result);
 	}
 
 	@Override
@@ -87,7 +72,7 @@ public class BlogServiceImpl implements IBlogService {
 			Integer result1 = iArticleDao.updateCategoryId(categoryId,
 					newCategoryId);
 			Integer result2 = iCategoryDao.deleteById(categoryId);
-			return returnResult(result2);
+			return ReturnUtil.returnResult(result2);
 		}
 
 		// 下面的代码是为多级目录准备的，但是此次已经舍弃多级目录
@@ -121,13 +106,13 @@ public class BlogServiceImpl implements IBlogService {
 	@Override
 	public Boolean tagAdd(Tag tag) {
 		Integer result = iTagDao.insert(tag);
-		return returnResult(result);
+		return ReturnUtil.returnResult(result);
 	}
 
 	@Override
 	public Boolean tagEdit(Tag tag) {
 		Integer result = iTagDao.update(tag);
-		return returnResult(result);
+		return ReturnUtil.returnResult(result);
 	}
 
 	@Override
@@ -152,7 +137,7 @@ public class BlogServiceImpl implements IBlogService {
 			}
 		}
 		Integer result = iTagDao.delete(tagId);
-		return returnResult(result);
+		return ReturnUtil.returnResult(result);
 	}
 
 	@Override
@@ -225,7 +210,7 @@ public class BlogServiceImpl implements IBlogService {
 		article.setTagIds(tagGetIdsBy(article.getTagNames()));
 		article.setWriteTime(new Date());
 		Integer result = iArticleDao.insert(article);
-		if (returnResult(result)) {
+		if (ReturnUtil.returnResult(result)) {
 			return article.getId();
 		} else {
 			return 0;
@@ -246,7 +231,7 @@ public class BlogServiceImpl implements IBlogService {
 			article.setTagIds(tagGetIdsBy(article.getTagNames()));
 			result = iArticleDao.update(article);
 		}
-		if (returnResult(result)) {
+		if (ReturnUtil.returnResult(result)) {
 			return article.getId();
 		} else {
 			return 0;
@@ -263,7 +248,7 @@ public class BlogServiceImpl implements IBlogService {
 			Integer results = iMessageDao.deleteByArticleId(articleId);
 			if (results == counts) {
 				Integer result = iArticleDao.delete(articleId);
-				return returnResult(result);
+				return ReturnUtil.returnResult(result);
 			}
 		}
 		return false;
@@ -281,7 +266,7 @@ public class BlogServiceImpl implements IBlogService {
 			String str = tagIdsStr.replaceAll((tagId + ","), "");
 			article.setTagIds(str);
 			Integer result = iArticleDao.update(article);
-			return returnResult(result);
+			return ReturnUtil.returnResult(result);
 			// }
 		}
 		return false;
@@ -396,61 +381,7 @@ public class BlogServiceImpl implements IBlogService {
 		return null;
 	}
 
-	@Override
-	public Boolean messageAdd(Message message) {
-		message.setPubTime(new Date());
-		Integer result = iMessageDao.insert(message);
-		return returnResult(result);
-	}
 
-	/**
-	 * 通过评论id删除评论
-	 *
-	 * @param messageId
-	 *            评论id
-	 * @param authorId
-	 *            操作的作者id
-	 * @return
-	 */
-	@Override
-	public Boolean messageDeleteById(int messageId, int authorId) {
-		Message message = iMessageDao.selectById(messageId);
-		Integer result = 0;
-		if (message != null) {
-			Article article = iArticleDao.selectById(message.getArticleId());
-			if (article != null) {
-				if (message.getParentId() != CommonConstant.MESSAGE_DEFAULT_PARENT_ID) {
-					Integer counts = iMessageDao.selectCountBy(messageId,
-							message.getBlockId());
-					result = iMessageDao.deleteBy(messageId,
-							message.getBlockId());
-					if (result == counts) {
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					result = iMessageDao.deleteById(messageId);
-					return returnResult(result);
-				}
-			}
-		}
-		return false;
-	}
-	@Override
-	public Boolean messageDeleteBy(int messageArticleId) {
-		Integer result = iMessageDao.deleteByArticleId(messageArticleId);
-		return returnResult(result);
-	}
-
-	@Override
-	public TreeInfoResult messageGetAllBy(int messageArticleId, int reverseOrder) {
-		List<Message> list = iMessageDao.selectByArticleId(messageArticleId,
-				CommonConstant.MESSAGE_NULL_PARENT_ID, null, reverseOrder);
-		TreeInfoResult treeInfo = TreeInfoUtil.convertToTreeInfoResult(list,
-				null);
-		return treeInfo;
-	}
 
 	@Override
 	public List<ArchiveVo> archiveGetAllVo(Integer articleStatus,

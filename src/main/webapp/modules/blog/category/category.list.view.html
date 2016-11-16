@@ -4,7 +4,8 @@
 			<li><a href="#/">XXX的博客</a></li>
 			<li class="active">分类</li>
 		</ol>
-		<div class="col-sm-12 col-md-6 col-lg-4"
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+		<div ng-show="loaded" class="col-sm-12 col-md-6 col-lg-4"
 			ng-repeat="category in categorys">
 			<div class="category-card">
 				<div class="panel panel-custom-primary">

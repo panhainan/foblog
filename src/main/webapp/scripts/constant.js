@@ -3,6 +3,7 @@
  */
 var web_project_name = "/foblog";
 var web_project_host = "http://localhost:8080";
+var loading_path =web_project_name+"/images/loading.gif";
 var cfg_form = {
 	headers : {
 		'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'

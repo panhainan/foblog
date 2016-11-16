@@ -1,27 +1,28 @@
 <div class="customContainer">
-	<div class="archive-body">
-		<ol class="breadcrumb">
-			<li><a href="#/">XXX的博客</a></li>
-			<li class="active">归档</li>
-		</ol>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"
-			ng-repeat="archive in archives">
-			<div class="archive-card">
-				<div class="panel panel-custom-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							{{archive.name}}<span style="font-size: 12px;">（共计{{archive.counts}}篇）</span>
-						</h3>
-					</div>
-					<ul class="list-group">
-						<li ng-click="selectArchive(monthArchive.name)"
-							ng-repeat="monthArchive in archive.childArchive"
-							class="list-group-item">{{monthArchive.name}}<span
-							style="font-size: 12px;">（{{monthArchive.counts}}）</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="archive-body">
+        <ol class="breadcrumb">
+            <li><a href="#/">XXX的博客</a></li>
+            <li class="active">归档</li>
+        </ol>
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+        <div ng-show="loaded" class="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+             ng-repeat="archive in archives">
+            <div class="archive-card">
+                <div class="panel panel-custom-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{archive.name}}<span style="font-size: 12px;">（共计{{archive.counts}}篇）</span>
+                        </h3>
+                    </div>
+                    <ul class="list-group">
+                        <li ng-click="selectArchive(monthArchive.name)"
+                            ng-repeat="monthArchive in archive.childArchive"
+                            class="list-group-item">{{monthArchive.name}}<span
+                                style="font-size: 12px;">（{{monthArchive.counts}}）</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

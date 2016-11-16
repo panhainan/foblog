@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by FirePan on 2016/10/11.
  * 文章留言实体信息.
- * 注意：评论这里采用廖雪峰老师的博客的方式，分块，最多两层。
+ * 注意：评论这里采用廖雪峰老师的博客的方式，分块，最多两层。(舍弃)
  */
 public class Message extends TreeInfo {
     private Integer id;
