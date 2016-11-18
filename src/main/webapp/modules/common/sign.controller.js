@@ -58,7 +58,7 @@ app.controller("SignController",function($scope,guestSignService){
 						if(data.resultData==1){
 							layer.alert("登录成功!");
 						}
-					},layer)
+					})
 				}
 			}
 		})

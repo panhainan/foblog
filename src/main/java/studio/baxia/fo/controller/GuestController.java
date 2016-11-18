@@ -33,8 +33,8 @@ public class GuestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{email:.+}",method = {RequestMethod.GET})
-    public CommonResult getGuestByEmail(@PathVariable String email){
+    @RequestMapping(value = "/getGuestByEmail",method = {RequestMethod.POST})
+    public CommonResult getGuestByEmail(String email){
         Map<String,Object> condition = new HashMap<>();
         condition.put("email",email);
         Guest guest = guestService.queryOneByCondition(condition);
