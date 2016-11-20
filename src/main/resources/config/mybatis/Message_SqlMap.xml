@@ -49,6 +49,7 @@
         SELECT * FROM t_message
         WHERE id = #{id,jdbcType=INTEGER}
     </select>
+
     <select id="selectByArticleId" resultMap="MessageMap">
         SELECT * FROM t_message
         <where>
@@ -77,5 +78,26 @@
         SELECT count(*) FROM t_message
         WHERE parent_id = #{parentId,jdbcType=INTEGER}
         AND block_id = #{blockId,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="ArticleMessageVoMap" type="studio.baxia.fo.vo.ArticleMessageVo">
+    </resultMap>
+
+    <select id="selectArticleMessageVo" resultMap="ArticleMessageVoMap">
+        select tm1.id as messageId,tm1.content as messageContent,tm1.support_count as messageSupportCount,tm1.pub_time as messagePubTime,tg.nickname as guestNickname,tg.personal_website as guestWebsite
+        from
+        (
+        select tm.*
+        from t_message tm
+        where article_id = #{articleId,jdbcType=INTEGER}
+        ) as tm1
+        left JOIN t_guest tg
+        on tm1.author_id = tg.id
+        <if test="reverseOrder==1">
+            ORDER BY messageId DESC
+        </if>
+        <if test="reverseOrder==0">
+            ORDER BY messageId
+        </if>
     </select>
 </mapper>

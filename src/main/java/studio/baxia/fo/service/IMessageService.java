@@ -2,6 +2,9 @@ package studio.baxia.fo.service;
 
 import studio.baxia.fo.pojo.Guest;
 import studio.baxia.fo.pojo.Message;
+import studio.baxia.fo.vo.ArticleMessageVo;
+
+import java.util.List;
 
 /**
  * Created by Pan on 2016/11/16.
@@ -35,4 +38,10 @@ public interface IMessageService {
     Boolean messageDeleteBy(int messageArticleId);
 
 
+    /**
+     * 获取所有留言信息
+     * @param messageArticleId 文章id
+     * @return
+     */
+    List<ArticleMessageVo> list(int messageArticleId);
 }

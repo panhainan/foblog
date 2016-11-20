@@ -3,8 +3,8 @@
     <!--<ng-include src="'modules/common/top-nav.html'"></ng-include>-->
     <ng-include src="'modules/common/loading.html'"></ng-include>
     <div ng-show="loaded" class="body-content-body">
-        <div  class="article">
-            <div ng-show="error">文章不存在</div>
+        <div class="article">
+            <div ng-show="error">{{errorMessage}}</div>
             <div ng-show="!error">
                 <div class="article-header row">
                     <div class="col-sm-12" style="padding:0;">
@@ -62,56 +62,70 @@
                     <div class="row">
 
                         <div class="col-xs-12 message-body">
-                            <h3 style="padding-bottom: 10px;border-bottom: 2px #EBEBEB solid;">留言（1条）</h3>
-
-                            <div class="message-card">
-                                <p ><span style="color:#52769C">那个天天讲笑话的小明</span> 说：</p>
+                            <h3 style="padding-bottom: 10px;border-bottom: 2px #EBEBEB solid;">留言<span style="color: #7E7E7E;font-size: 14px;" ng-if="messages">（{{messages.length}}条）</span></h3>
+                            <p>注意：请慎重投出你的支持票，不要刷赞，谢谢配合！^_^</p>
+                            <div class="message-card" ng-repeat="msg in messages">
+                                <p>
+                                    <a href="http://{{msg.guestWebsite}}" target="_blank"><span style="color:#52769C">{{msg.guestNickname}}</span></a>
+                                    说：
+                                    <span class="pull-right" style="line-height: 16px;text-indent: 6px;">{{msg.messageSupportCount}}</span>
+                                    <a href="javascript:void(0)" title="支持数"><span class="glyphicon glyphicon-thumbs-up pull-right"></span></a>
+                                </p>
 
                                 <div style="text-indent: 40px;">
-                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                    <div ng-bind-html="msg.messageContent | trusted"></div>
                                 </div>
+                                <p class="pull-right" style="color:#B9B9B9;margin-bottom: 0;font-size: 10px;">发表于 {{msg.messagePubTime | date:'yyyy-MM-dd HH:mm'}}</p>
                             </div>
                         </div>
                         <div class="col-xs-12 message-header">
                             <!--<h3 style="padding-bottom: 10px;border-bottom: 2px #EBEBEB solid;">我要发表看法</h3>-->
 
-                            <form class="form-horizontal" action="javascript:void(0)" novalidate>
+                            <form class="form-horizontal" name="messageForm" ng-submit="comment(messageForm.$valid)"
+                                  novalidate>
                                 <label>观点</label>
 
                                 <div class="col-sm-12">
                                     <div id="message-editormd" style="margin-bottom: 0;width:100%">
-                                        <textarea class="editormd-markdown-textarea" name="$id-markdown-doc"></textarea>
+                                        <textarea class="editormd-markdown-textarea"
+                                                  name="$id-markdown-doc"></textarea>
                                         <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
-                                        <textarea class="editormd-html-textarea" name="$id-html-code"></textarea>
+                                        <textarea class="editormd-html-textarea"
+                                                  name="$id-html-code"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label>邮箱</label>
 
-                                        <div><input placeholder="必填，放心我不会公开也不会发送广告" class="form-control" type="email" name="email"
-                                                    ng-model="guest.email" ng-blur="getGuestInfo(guest.email)"
-                                                    required/></div>
+                                        <div><input placeholder="必填，放心我不会公开也不会发送广告" class="form-control" type="email"
+                                                    name="email" ng-model="guest.email"
+                                                    ng-blur="getGuestInfo(guest.email)" required/></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label>昵称</label>
 
-                                        <div><input placeholder="必填，您的大名" class="form-control" type="text" name="nickname"
-                                                    ng-model="guest.nickname" type="text" required/></div>
+                                        <div><input placeholder="必填，您的大名" class="form-control" type="text"
+                                                    name="nickname" ng-model="guest.nickname" type="text" required/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label>个人网址</label>
 
-                                        <div><input placeholder="希望我们能够互相信任 ^_^" class="form-control" type="text"/></div>
+                                        <div><input placeholder="希望我们能够互相信任 ^_^" class="form-control"
+                                                    name="personalWebsite" ng-model="guest.personalWebsite"
+                                                    type="text"/></div>
                                     </div>
                                 </div>
 
-                                <button type="button" ng-click="comment()" class="btn btn-primary" style="width: 100px;margin-top: 10px;border-radius: 4px;">提 交
+                                <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-primary"
+                                        style="width: 100px;margin-top: 10px;border-radius: 4px;">提 交
                                 </button>
+                                <span style="line-height: 36px;color:green" ng-bind="resultMessage"></span>
                             </form>
                         </div>
                     </div>
@@ -121,32 +135,33 @@
     </div>
 </div>
 <style>
-    .editormd{
+    .editormd {
         padding-top: 6px;
     }
-/*    .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty{
-        width: 100%;
-    }*/
+
+    /*    .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty{
+            width: 100%;
+        }*/
 </style>
 <script>
-/*    var messageEditor;
+    /*    var messageEditor;
 
-    $(function () {
-        messageEditor = editormd("message-editormd", {
-            width: "100%",
-            height: 180,
-            watch:false,
-            path: web_project_name + "/plugins/editor.md/lib/",
-            toolbarIcons: function () {
-                return editormd.toolbarModes["mini"];
-            },
-            toolbar  : false,             //关闭工具栏
-            saveHTMLToTextarea: true,
-            lineNumbers:false,
-            styleSelectedText:false,
-            styleActiveLine:false,
-            autoFocus:false,
-            toolbarAutoFixed:false
-        });
-    });*/
+     $(function () {
+     messageEditor = editormd("message-editormd", {
+     width: "100%",
+     height: 180,
+     watch:false,
+     path: web_project_name + "/plugins/editor.md/lib/",
+     toolbarIcons: function () {
+     return editormd.toolbarModes["mini"];
+     },
+     toolbar  : false,             //关闭工具栏
+     saveHTMLToTextarea: true,
+     lineNumbers:false,
+     styleSelectedText:false,
+     styleActiveLine:false,
+     autoFocus:false,
+     toolbarAutoFixed:false
+     });
+     });*/
 </script>

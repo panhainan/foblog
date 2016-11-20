@@ -28,6 +28,10 @@ public class Message extends TreeInfo {
         this.id = id;
     }
 
+    public Message(String content) {
+        this.content = content;
+    }
+
     public Integer getId() {
         return id;
     }

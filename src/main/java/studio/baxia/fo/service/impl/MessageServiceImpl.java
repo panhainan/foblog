@@ -13,6 +13,7 @@ import studio.baxia.fo.pojo.Guest;
 import studio.baxia.fo.pojo.Message;
 import studio.baxia.fo.service.IMessageService;
 import studio.baxia.fo.util.ReturnUtil;
+import studio.baxia.fo.vo.ArticleMessageVo;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -37,41 +38,28 @@ public class MessageServiceImpl implements IMessageService {
         return ReturnUtil.returnResult(result);
     }
 
-    /**
-     * 游客评论操作
-     *
-     * @param guest
-     * @param message
-     * @return
-     */
     @Override
     public boolean guestMessage(Guest guest, Message message) {
         int guestId = addOrUpdateGuest(guest);
-        message.setAuthorId(guestId);
-        addMessage(message);
-        return true;
+        if(ReturnUtil.returnResult(guestId)){
+            message.setAuthorId(guestId);
+            message.setUserType(CommonConstant.USER_TYPE_GUEST);
+            return addMessage(message);
+        }
+        return false;
     }
 
     private int addOrUpdateGuest(Guest guest) {
         Map<String, Object> map = new HashMap<>();
-        if (guest != null && !"".equals(guest.getEmail().trim())) {
-            map.put("email", guest.getEmail());
-        } else {
-            //这里需要做异常处理，提示没有填写邮箱
-            return -1;
-        }
+        map.put("email", guest.getEmail());
         Guest isExistGuest = guestDao.queryOneByCondition(map);
         if (isExistGuest == null) {
             //该游客没有在网站评论过，需要保存信息，注意游客guest中必须包含email和nickname
-            if ("".equals(guest.getNickname().trim())) {
-                //异常处理，提示没有填写昵称
-                return -1;
-            }
             return guestDao.insert(guest);
         } else {
             //该游客已经存在网站数据库中，需要比对更新信息
-            if (!isExistGuest.getNickname().equals(guest.getNickname().trim())
-                    || !isExistGuest.getPersonalWebsite().equals(guest.getPersonalWebsite().trim())) {
+            if ( !guest.getNickname().trim().equals(isExistGuest.getNickname())
+                    || (guest.getPersonalWebsite()!=null && !guest.getPersonalWebsite().trim().equals(isExistGuest.getPersonalWebsite()))) {
                 guest.setId(isExistGuest.getId());
                 return guestDao.updateByPrimaryKey(guest);
             }
@@ -81,7 +69,9 @@ public class MessageServiceImpl implements IMessageService {
     }
 
     private boolean addMessage(Message message) {
-        return true;
+        message.setPubTime(new Date());
+        int result = iMessageDao.insert(message);
+        return ReturnUtil.returnResult(result);
     }
 
     @Override
@@ -114,6 +104,11 @@ public class MessageServiceImpl implements IMessageService {
     public Boolean messageDeleteBy(int messageArticleId) {
         Integer result = iMessageDao.deleteByArticleId(messageArticleId);
         return ReturnUtil.returnResult(result);
+    }
+
+    @Override
+    public List<ArticleMessageVo> list(int messageArticleId) {
+        return iMessageDao.selectArticleMessageVo(messageArticleId,CommonConstant.REVERSE_ORDER);
     }
 
     public TreeInfoResult messageGetAllBy(int messageArticleId, int reverseOrder) {

@@ -1,6 +1,8 @@
 app.controller("ArticleFormManageController", function($scope,$location, $routeParams,
 		ArticleManageService) {
 	setScreenAvailHeight();
+    var articleEditor;
+
 //	console.log($routeParams.articleId)
 	$scope.get = function(articleId) {
 		ArticleManageService.get(articleId).then(function(data) {
@@ -11,9 +13,6 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 			}else{
 				$scope.selectedTagNames = new Array();
 			}
-//			console.log($scope.selectedTagNames)
-			$scope.article.content=toMarkdown($scope.article.content)
-//			console.log($scope.article.content)
 		});
 	}
 	$scope.getTypes = function() {
@@ -126,15 +125,12 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 	$scope.saveOrUpdate = function(status) {
 		$scope.article.status = status;
 		$scope.article.tagNames=$scope.selectedTagNames;
-//		console.log($('#markdown_textarea').data('markdown').parseContent())
-//		console.log(marked($('#markdown_textarea').data('markdown').getContent()));
-//		console.log($('#markdown_textarea').data('markdown').getContent());
-
-		$scope.article.content = $('#markdown_article_textarea').data('markdown').getContent();//$('#markdown_textarea').data('markdown').parseContent();
-		console.log($scope.article);
+		$scope.article.content = articleEditor.getMarkdown();
+            //$('#markdown_article_textarea').data('markdown').getContent();//$('#markdown_textarea').data('markdown').parseContent();
+		//console.log($scope.article);
 		if($scope.article.id!=null && $scope.article.id!=undefined){
 			ArticleManageService.put($scope.article).then(function(data){
-				console.log(data);
+				//console.log(data);
 				if(data.resultCode==1){
 					if(data.resultData>0){
 						$location.path('/manage/article/preview/'+data.resultData);
@@ -148,7 +144,7 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 			})
 		}else{
 			ArticleManageService.post($scope.article).then(function(data){
-				console.log(data);
+				//console.log(data);
 				if(data.resultCode==1){
 					if(data.resultData>0){
 						$location.path('/manage/article/preview/'+data.resultData);
@@ -163,7 +159,7 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 		
 		
 	}
-	
+	var content;
 	if($routeParams.articleId!=undefined){
 		// 获取文章信息
 		$scope.get($routeParams.articleId);
@@ -173,5 +169,21 @@ app.controller("ArticleFormManageController", function($scope,$location, $routeP
 	// $scope.getTypes();
 	$scope.getCategorys();
 	$scope.getTags();
-	
+    $(function () {
+        articleEditor = editormd("article-editormd", {
+            width: "100%",
+            height: 520,
+            watch:false,
+            path: web_project_name + "/plugins/editor.md/lib/",
+            toolbarIcons: function () {
+                return editormd.toolbarModes["simple"];
+            },
+            onload : function() {
+                this.setMarkdown($scope.article.content);
+            },
+            saveHTMLToTextarea: true,
+            autoFocus:false,
+            toolbarAutoFixed:false
+        });
+    });
 });

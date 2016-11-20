@@ -98,5 +98,6 @@
 
 
 <script src="<%=basePath%>plugins/editor.md/editormd.js"></script>
+<script src="<%=basePath%>plugins/editor.md/lib/marked.min.js"></script>
 <script src="<%=basePath%>plugins/layer/layer.js"></script>
 </html>
