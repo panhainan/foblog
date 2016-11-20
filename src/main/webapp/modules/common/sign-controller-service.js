@@ -1,6 +1,7 @@
 app.service("guestSignService",function(RequestService){
   this.getGuestByEmail = function(email){
-    return RequestService.postRequest('/guest/getGuestByEmail', $.param({"email":email}),cfg_form)
+    return RequestService.postRequest('/guest/getGuestByEmail', $.param({"email":email}),cfg_form);
+    /*return RequestService.getRequest('/guest/getGuestByEmail/'+email,cfg_form);*/
   };
 
   this.getAllGuests = function(){

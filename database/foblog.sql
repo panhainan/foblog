@@ -162,3 +162,21 @@ CREATE TABLE `t_tag` (
 -- Records of t_tag
 -- ----------------------------
 
+-- ----------------------------
+-- Table structure for `t_friend_link`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_friend_link`;
+CREATE TABLE `t_friend_link` (
+  `id` int(10) NOT NULL,
+  `title` varchar(70) NOT NULL COMMENT '标题',
+  `summary` varchar(100) DEFAULT NULL COMMENT '简介',
+  `counts` int(10) DEFAULT '0' COMMENT '点击次数',
+  `type` int(5) DEFAULT '0' COMMENT '所属类型（记录改网站所属类型，可用于后期扩展）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_friend_link
+-- ----------------------------
+
+
