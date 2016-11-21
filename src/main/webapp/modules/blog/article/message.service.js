@@ -1,6 +1,9 @@
 app.service("MessageService", function(RequestService) {
-    this.getGuestInfo = function (email) {
-        return RequestService.postRequest('/message/guest/email', email, cfg_form);
+    this.getGuestInfoByEmail = function (email) {
+        return RequestService.postRequest('/message/guest/email',$.param({email:email}), cfg_form);
+    };
+    this.getGuestInfoByNickname = function (email,nickname) {
+        return RequestService.postRequest('/message/guest/nickname',$.param({email:email,nickname:nickname}), cfg_form);
     };
 
     this.comment = function(guest,messageContent,articleId){

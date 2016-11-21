@@ -25,7 +25,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
     //console.log($routeParams.articleTitle)
     $scope.get = function (articleTitle) {
         ArticleService.get(articleTitle).then(function (data) {
-            console.log(data);
+            //console.log(data);
             if(data.resultCody==0){
                 $scope.error=true;
                 $scope.errorMessage = "服务器错误";
@@ -39,7 +39,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
                     $scope.error = false;
                     $scope.loaded =true;
                     MessageService.list($scope.article.id).then(function(data){
-                        console.log(data)
+                        //console.log(data)
                         if(data.resultCode==0){
                             $scope.errorMessage = "服务器异常，没有获取到评论信息！"
                         }else{
@@ -47,6 +47,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
                         }
                     })
                 } else {
+                    $scope.loaded = true;
                     $scope.error=true;
                     $scope.errorMessage = "文章不存在";
                 }
@@ -61,9 +62,11 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
         //testEditor.getPreviewedHTML();  // 获取预览窗口里的 HTML，在开启 watch 且没有开启 saveHTMLToTextarea 时使用
         var message = messageEditor.getHTML();
         if(message.trim()==""){
-            $scope.resultMessage = "请输入你的观点！";
-            $("#message-editormd").css("border-color","red");
+            $scope.contentValidInfo = "请输入您的观点！";
+            //$("#message-editormd").css("border-color","red");
             return false;
+        }else{
+            $scope.contentValidInfo = "谢谢您的发言！";
         }
         //console.log(message)
         //console.log($scope.guest);
@@ -82,6 +85,8 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
                             $scope.errorMessage = "服务器异常，没有获取到评论信息！"
                         }else{
                             $scope.messages = data.resultData;
+                            //message-body-top
+                            $("html,body").animate({scrollTop: $("#message-body-top").offset().top}, 500);
                         }
                     })
                 }
@@ -89,15 +94,45 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             }
         })
     }
-    $scope.getGuestInfo = function (email) {
-        $("#message-editormd").css("border-color","#ddd");
-        //console.log(email);
+    $scope.getGuestInfoByEmail = function (email) {
+        //$("#message-editormd").css("border-color","#ddd");
+        console.log(email);
         if(email==null || email.trim()==""){
+            $scope.emailValidInfo ="邮箱不能为空"
             return false;
         }
-        MessageService.getGuestInfo(email).then(function(data){
-            //console.log(data);
-            $scope.guest =data.resultData;
+        $scope.emailValidInfo ="OK，邮箱可用"
+        MessageService.getGuestInfoByEmail(email).then(function(data){
+            console.log(data);
+            if(data.resultCode==1 && data.resultData!=null){
+                $scope.nicknameValidInfo ="OK，您的昵称独一无二";
+                $scope.guest =data.resultData;
+            }else{
+                $scope.guest.email =email;
+            }
+        });
+    }
+    $scope.getGuestInfoByNickname= function(email,nickname){
+        if(email==null || email.trim()==""){
+            $scope.nicknameValidInfo ="请先填写您的邮箱"
+            return false;
+        }
+        console.log(nickname)
+        if(nickname==null || nickname.trim()==""){
+            $scope.nicknameValidInfo ="昵称不能为空"
+            return false;
+        }
+        MessageService.getGuestInfoByNickname(email,nickname).then(function(data){
+            console.log(data);
+            if(data.resultCode==1){
+                if(data.resultData){
+                    $scope.nicknameValidInfo ="昵称已存在，请再想想";
+                }else{
+                    $scope.nicknameValidInfo ="OK，您的昵称独一无二";
+                }
+            }else{
+                $scope.nicknameValidInfo ="服务器验证失败，请稍后再试";
+            }
         });
     }
     // 获取文章信息

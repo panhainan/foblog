@@ -55,7 +55,12 @@ public class MessageServiceImpl implements IMessageService {
         Guest isExistGuest = guestDao.queryOneByCondition(map);
         if (isExistGuest == null) {
             //该游客没有在网站评论过，需要保存信息，注意游客guest中必须包含email和nickname
-            return guestDao.insert(guest);
+            int temp = guestDao.insert(guest);
+            if(temp>0){
+                return guest.getId();
+            }else{
+                return 0;
+            }
         } else {
             //该游客已经存在网站数据库中，需要比对更新信息
             if ( !guest.getNickname().trim().equals(isExistGuest.getNickname())

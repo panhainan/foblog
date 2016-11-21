@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.CommonResult;
 import studio.baxia.fo.pojo.Guest;
@@ -52,13 +49,37 @@ public class MessageController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/guest/email", method = {RequestMethod.POST})
+    @RequestMapping(value = "/guest/email", method = RequestMethod.POST)
     public CommonResult getGuestByEmail(String email) {
+        if(email==null || email.trim().equals("")){
+            return new CommonResult(CommonConstant.FAIL_CODE, "邮箱不能为空");
+        }
         Map<String, Object> condition = new HashMap<>();
         condition.put("email", email);
         Guest guest = guestService.queryOneByCondition(condition);
-        return new CommonResult(CommonConstant.SUCCESS_CODE, null, guest);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,null,guest);
+
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "/guest/nickname", method = RequestMethod.POST)
+    public CommonResult getGuestByNickname(String email,String nickname) {
+        if(email==null || email.trim().equals("")){
+            return new CommonResult(CommonConstant.FAIL_CODE, "邮箱不能为空");
+        }
+        if(nickname==null || nickname.trim().equals("")){
+            return new CommonResult(CommonConstant.FAIL_CODE, "昵称不能为空");
+        }
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("nickname", nickname);
+        Guest guest = guestService.queryOneByCondition(condition);
+        if (guest != null) {
+            if(guest.getEmail().equals(email)){
+                return new CommonResult(CommonConstant.SUCCESS_CODE,null,false);
+            }
+            return new CommonResult(CommonConstant.SUCCESS_CODE,null,true);
+        }else{
+            return new CommonResult(CommonConstant.SUCCESS_CODE,null,false);
+        }
+    }
 }

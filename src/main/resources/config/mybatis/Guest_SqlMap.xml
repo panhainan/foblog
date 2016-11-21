@@ -24,7 +24,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="studio.baxia.fo.pojo.Guest" >
+  <insert id="insert" parameterType="studio.baxia.fo.pojo.Guest" useGeneratedKeys="true" keyProperty="id" >
     insert into t_guest (id, email, nickname, 
       personal_website, access_ip)
     values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 

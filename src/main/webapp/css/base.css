@@ -75,7 +75,7 @@ body {
 
 a {
     cursor: pointer;
-    color: #000;
+    /*color: #000;*/
 }
 
 .img-circle {

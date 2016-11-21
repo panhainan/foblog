@@ -25,7 +25,8 @@ public class GuestServiceImpl implements IGuestService{
 
     @Override
     public Guest queryOneByCondition(Map<String, Object> condition) {
-        return guestDao.queryOneByCondition(condition);
+        Guest g =  guestDao.queryOneByCondition(condition);
+        return g;
     }
 
     @Override
