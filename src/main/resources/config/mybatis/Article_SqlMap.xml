@@ -82,10 +82,8 @@
 		t1.category_ids = t2.id
 		WHERE
 		t1.id = #{id,jdbcType=INTEGER}
-		AND
-		t1.category_ids = t2.id
 	</select>
-	<select id="selectById" resultMap="ArticleVoMap">
+	<select id="selectById" resultMap="ArticleMap">
 		SELECT *
 		FROM t_article
 		WHERE

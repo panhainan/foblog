@@ -17,9 +17,17 @@ app.controller("ArticleDetailManageController", function($scope, $routeParams,
 				status:statusValue,
 				onlyChangeStatus:true
 		}
-		ArticleManageService.put(article).then(function(data){
+		ArticleManageService.put2(article).then(function(data){
 //			console.log(data)
-			$scope.get($routeParams.articleId);
+            if (data.resultCode == 1) {
+                if (data.resultData > 0) {
+                    $scope.get(data.resultData);
+                } else {
+                    alert("修改操作失败,原因如下："+data.resultMsg)
+                }
+            } else {
+                alert("操作异常,原因如下："+data.resultMsg)
+            }
 		});
 	}
 	// 获取文章信息

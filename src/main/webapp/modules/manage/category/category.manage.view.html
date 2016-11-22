@@ -98,7 +98,8 @@
                             <h4 class="modal-title">添加</h4>
                         </div>
                         <div class="modal-body">
-                            名称：<input type="text" class="form-control" ng-model="category.name"/>
+                            名称：<input type="text" class="form-control" ng-model="category.name"/><br/>
+                            描述：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="6" ng-model="category.description"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelAddCategory()"
@@ -114,7 +115,8 @@
                             <h4 class="modal-title">修改</h4>
                         </div>
                         <div class="modal-body">
-                            名称：<input type="text" class="form-control" ng-model="editCategory.name"/>
+                            名称：<input type="text" class="form-control" ng-model="editCategory.name"/><br/>
+                            描述：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="6" ng-model="editCategory.description"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelEditCategory()"

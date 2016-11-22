@@ -23,5 +23,12 @@
 }
 
 .category-card  .panel-body {
-	height: 80px;
+	height: 70px;
+    padding: 9px;
+    font-size: 13px;
+    overflow: hidden;
+}
+.category-card .panel-footer{
+    text-align: right;
+    padding:2px 16px;
 }

@@ -7,7 +7,12 @@ app.controller("CategoryArticleController", function($window, $location,
 	$scope.getCategoryArticles = function(name) {
 		CategoryService.getArtilces(name).then(function(data) {
 			// console.log(data);
-			$scope.categoryArticles = data.resultData;
+            if(data.resultData.category!=null){
+                $scope.category = data.resultData.category;
+                $scope.categoryArticles = data.resultData.listArticle;
+            }else{
+                $scope.noSuchCategory = true;
+            }
             $scope.loaded = true;
 		});
 	}

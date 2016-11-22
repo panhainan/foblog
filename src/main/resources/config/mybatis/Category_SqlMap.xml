@@ -4,19 +4,19 @@
 
     <resultMap id="CategoryMap" type="studio.baxia.fo.pojo.Category">
         <result property="id" column="id"/>
-        <result property="parentId" column="parent_id"/>
+        <result property="description" column="description"/>
         <result property="name" column="name"/>
     </resultMap>
     <resultMap id="CategoryVoMap" type="studio.baxia.fo.vo.CategoryVo">
         <result property="id" column="id"/>
-        <result property="parentId" column="parent_id"/>
+        <result property="description" column="description"/>
         <result property="name" column="name"/>
         <result property="counts" column="article_counts" />
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_category(parent_id,name)
-        VALUES (#{parentId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR})
+        INSERT INTO t_category(name,description)
+        VALUES (#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR})
     </insert>
 
     <delete id="delete">
@@ -34,11 +34,6 @@
         </if>
     </delete>
 
-    <delete id="deleteBy">
-        DELETE FROM t_category
-        WHERE  parent_id = #{parentId,jdbcType=INTEGER}
-    </delete>
-
     <delete id="deleteById">
         DELETE FROM t_category
         WHERE id = #{id,jdbcType=INTEGER}
@@ -46,7 +41,7 @@
 
     <update id="update">
         UPDATE t_category
-        SET parent_id = #{parentId,jdbcType=INTEGER},name=#{name,jdbcType=VARCHAR}
+        SET name=#{name,jdbcType=VARCHAR},description = #{description,jdbcType=VARCHAR}
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -57,18 +52,15 @@
 
     <select id="selectBy" resultMap="CategoryMap">
         SELECT * FROM t_category
-        <if test="parentId!=null">
-           WHERE parent_id = #{parentId,jdbcType=INTEGER}
-        </if>
         ORDER BY  id
     </select>
     
     <select id="selectByName" resultMap="CategoryMap">
     	SELECT * FROM t_category
-        WHERE  name = #{name,jdbcType=INTEGER}
+        WHERE  name = #{name,jdbcType=VARCHAR}
         limit 1
     </select>
-    
+
     <select id="selectVoBy" resultMap="CategoryVoMap">
     	SELECT t1.*, ( 
 				    	select count(*) 
@@ -79,9 +71,6 @@
 						    </if>
 				    	) as article_counts 
 			FROM t_category t1 
-				<if test="parentId!=null">
-	             WHERE t1.parent_id = #{parentId,jdbcType=INTEGER}
-	        	</if>
 			ORDER BY article_counts desc
     </select>
 

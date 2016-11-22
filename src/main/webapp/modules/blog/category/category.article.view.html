@@ -1,26 +1,47 @@
 <div class="customContainer">
-    <div  class="category-body">
+    <div class="category-body">
         <ol class="breadcrumb">
             <li><a href="#/">XXX的博客</a></li>
             <li><a href="#/blog/category">分类</a></li>
             <li class="active">{{categoryName}}</li>
         </ol>
         <ng-include src="'modules/common/loading.html'"></ng-include>
-        <div ng-show="loaded" ng-repeat="article in categoryArticles" class="card">
-            <div>
-                <h3>
-                    <a href="#/blog/article/{{article.title}}"
-                       title="{{article.title}}">{{article.title}}</a>
-                </h3>
+        <div ng-if="noSuchCategory">您要查看的分类不存在</div>
+        <div ng-show="loaded">
+            <div class="category-card" style="margin:8px 0 16px 0px;">
+                <div class="panel panel-custom-primary">
+                    <div class="panel-heading">
+                        <p class="panel-title">
+                            《{{category.name}}》
+                            &emsp;<span style="font-size: 12px;">文章:{{category.counts}}篇
+							</span>
+                        </p>
+                    </div>
+                    <div class="panel-body" style="">
+                        <p style="text-indent: 25px;margin-bottom: 0;">
+                            {{category.description}}
+                        </p></div>
+                    <div class="panel-footer">
+                        <span style="font-size: 10px">阅读:88次 &emsp; 评论:66条</span>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p style="color:#666666;text-indent: 30px">{{article.summary}}</p>
+            <div ng-repeat="article in categoryArticles" class="card">
+                <div>
+                    <h3>
+                        <a href="#/blog/article/{{article.title}}"
+                           title="{{article.title}}">{{article.title}}</a>
+                    </h3>
+                </div>
+                <div>
+                    <p style="color:#666666;text-indent: 30px">{{article.summary}}</p>
 
-                <p style="text-align: right;color:#999999">
-                    <span>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</span> <span
-                        style="padding-left: 10px">阅读</span> <span
-                        style="padding-left: 10px">评论</span>
-                </p>
+                    <p style="text-align: right;color:#999999">
+                        <span>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</span> <span
+                            style="padding-left: 10px">阅读</span> <span
+                            style="padding-left: 10px">评论</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

@@ -88,6 +88,7 @@
 
 <script src="modules/manage/category/category.manage.service.js"></script>
 <script src="modules/manage/category/category.manage.controller.js"></script>
+<script src="modules/manage/category/category.add.controller.js"></script>
 <script src="modules/manage/tag/tag.manage.service.js"></script>
 <script src="modules/manage/tag/tag.manage.controller.js"></script>
 <script src="modules/manage/info/info.manage.service.js"></script>

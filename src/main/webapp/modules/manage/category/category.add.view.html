@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title">添加类别</h4>
+</div>
+<div class="modal-body">
+    名称：<input type="text" class="form-control" ng-model="category.name"/><br/>
+    描述：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="6"
+                 ng-model="category.description"></textarea>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelAddCategory()"
+            >取消
+    </button>
+    <button type="button" ng-click="confirmAddCategory(category)"
+            class="btn btn-success">确认
+    </button>
+</div>

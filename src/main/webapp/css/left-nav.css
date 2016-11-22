@@ -53,16 +53,18 @@
 }
 
 .sidebar-nav {
-	font: 17px/1.0 "楷体", "Arial", "Helvetica Neue", Helvetica,
-		"Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei",
-		"Microsoft Yahei", sans-serif;
+	font: 14px/1.0  "Microsoft Yahei" ,sans-serif,"Arial", "Helvetica Neue", Helvetica,
+		"Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei"
+		;
 	background-color: #FFFFFF;
 	text-align: center;
 	height: 100%;
 	padding: 0;
 	z-index: 10;
 }
-
+.sidebar-nav .navbar li a {
+    COLOR: #000;
+}
 /* make sidebar nav vertical */
 @media ( min-width : 768px) {
 	.sidebar-nav .navbar .navbar-collapse {

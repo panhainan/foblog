@@ -125,7 +125,7 @@ public interface IBlogService {
 	 * @return
 	 */
 	Boolean articleDeleteById(int articleId);
-
+    public Article articleGetById(int articleId);
 	/**
 	 * 通过文章id获取文章
 	 * 
@@ -161,7 +161,7 @@ public interface IBlogService {
 
     List<CategoryVo> categoryGetAllVoBy(Integer articleStatus);
 
-    List<ArticleVo> articleGetAllByCategoryName(String categoryName);
+    Map<String,Object> articleGetAllByCategoryName(String categoryName);
 
     List<ArticleVo> articleGetAllByTagName(String tagName);
 

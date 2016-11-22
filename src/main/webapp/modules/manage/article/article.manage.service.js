@@ -10,7 +10,10 @@ app.service("ArticleManageService", function(RequestService) {
         return RequestService.getRequest('/manage/article/' + id, cfg_form);
     };
     this.put = function(article){
-    	return RequestService.putRequest('/manage/article/save' ,article, cfg_json);
+    	return RequestService.putRequest('/manage/article/update' ,article, cfg_json);
+    }
+    this.put2 = function(article){
+        return RequestService.putRequest('/manage/article/draft2article' ,article, cfg_json);
     }
     this.post = function(article){
     	return RequestService.postRequest('/manage/article/save' ,article, cfg_json);

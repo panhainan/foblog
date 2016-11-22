@@ -39,7 +39,7 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 	$scope.addCategory = function(){
 		
 		var modalInstance = $uibModal.open({
-			templateUrl : 'addCategory.html',
+			templateUrl : web_project_name+'/modules/manage/category/category.add.view.html',
 			controller : 'addCategoryCtrl',
 			backdrop : 'static',
 			size : 'md',
@@ -49,6 +49,7 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 		modalInstance.result.then(function(_category) {
 			if(_category!=null){
 				CategoryManageService.post(_category).then(function(data){
+                    alert(data.resultMsg)
 					$scope.list();
 				})
 			}
@@ -115,14 +116,7 @@ app.controller("editCategoryArticleCtrl", function($uibModalInstance, $scope,
 	}
 });
 
-app.controller("addCategoryCtrl",function($uibModalInstance, CategoryManageService,$scope){
-	$scope.confirmAddCategory = function(category){
-		$uibModalInstance.close(category);
-	};
-	$scope.cancelAddCategory= function() {
-		$uibModalInstance.dismiss('cancel');
-	}
-})
+
 
 app.controller("editCategoryCtrl",function($uibModalInstance, CategoryManageService,$scope,category){
 	$scope.editCategory = category;
@@ -132,7 +126,7 @@ app.controller("editCategoryCtrl",function($uibModalInstance, CategoryManageServ
 			id:editCategory.id,
 			name:editCategory.name,
 			authorId:editCategory.authorId,
-			parentId:editCategory.parentId
+            description:editCategory.description
 		}
 		$uibModalInstance.close(_category);
 	};

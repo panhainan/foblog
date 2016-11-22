@@ -1,6 +1,6 @@
 package studio.baxia.fo.pojo;
 
-import studio.baxia.fo.common.CommonConstant;
+import org.hibernate.validator.constraints.NotEmpty;
 import studio.baxia.fo.common.TreeInfo;
 
 /**
@@ -10,29 +10,19 @@ import studio.baxia.fo.common.TreeInfo;
  */
 public class Category extends TreeInfo {
     private Integer id;
-    private Integer parentId = CommonConstant.CATEGORY_DEFAULT_PARENT_ID;//父类别id
+    @NotEmpty(message = "名称不能为空")
     private String name;//名称
+    @NotEmpty(message = "描述不能为空")
+    private String description;
 
     @Override
-	public String toString() {
-		return "Category [id=" + id + ", parentId=" + parentId + ", name="
-				+ name + "]";
-	}
-
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
     }
 
     public String getName() {
@@ -43,4 +33,11 @@ public class Category extends TreeInfo {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

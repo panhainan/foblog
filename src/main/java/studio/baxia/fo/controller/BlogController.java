@@ -75,8 +75,8 @@ public class BlogController {
     @ResponseBody
     @RequestMapping(value = "/category/{name:.+}",method = RequestMethod.GET)
     public CommonResult listCategoryArticle(@PathVariable("name")String name){
-    	List<ArticleVo> listArticles = iArticleService.articleGetAllByCategoryName(name);
-    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",listArticles);
+    	Map<String,Object> resultData = iArticleService.articleGetAllByCategoryName(name);
+    	return new CommonResult(CommonConstant.SUCCESS_CODE,"",resultData);
     }
     @ResponseBody
     @RequestMapping(value = "/category",method = RequestMethod.GET)

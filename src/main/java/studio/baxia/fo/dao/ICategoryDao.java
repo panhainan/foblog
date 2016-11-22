@@ -18,7 +18,7 @@ public interface ICategoryDao {
 	 * 插入类别
 	 * 
 	 * @param category
-	 *            类别（parent_id,name）
+	 *            类别（name,description）
 	 * @return 受影响的行数
 	 */
 	Integer insert(Category category);
@@ -27,7 +27,7 @@ public interface ICategoryDao {
 	 * 更新类别
 	 * 
 	 * @param category
-	 *            类别（id,parentId,name）(前一个字段用于验证该用户具备权限，后两个字段为小更新的字段)
+	 *            类别（id,name,description）
 	 * @return 受影响的行数
 	 */
 	Integer update(Category category);
@@ -50,14 +50,6 @@ public interface ICategoryDao {
 	 */
 	Integer deleteById(@Param("id") Integer categoryId);
 
-	/**
-	 * 通过作者id和父类别id删除类别
-	 * 
-	 * @param categoryParentId
-	 *            父类别id
-	 * @return 受影响的行数
-	 */
-	Integer deleteBy(@Param("parentId") Integer categoryParentId);
 
 	/**
 	 * 通过类别id查找
@@ -69,17 +61,13 @@ public interface ICategoryDao {
 	Category selectById(@Param("id") Integer categoryId);
 
 	/**
-	 * 通过类别父id查找
-	 * 
-	 * @param categoryParentId
-	 *            类别父id（null：查找作者的所有类别）
+	 * 查找所有
 	 * @return
 	 */
-	List<Category> selectBy(@Param("parentId") Integer categoryParentId);
+	List<Category> selectBy();
 
 	Category selectByName(@Param("name") String categoryName);
 
-	List<CategoryVo> selectVoBy(@Param("articleStatus") Integer articleStatus,
-			@Param("parentId") Integer categoryParentId);
+	List<CategoryVo> selectVoBy(@Param("articleStatus") Integer articleStatus);
 
 }

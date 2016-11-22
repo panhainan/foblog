@@ -40,12 +40,20 @@ public class BlogServiceImpl implements IBlogService {
 
 	@Override
 	public Boolean categoryAdd(Category category) {
+        Category tempCategory = iCategoryDao.selectByName(category.getName());
+        if(null!=tempCategory){
+            return false;
+        }
 		Integer result = iCategoryDao.insert(category);
 		return ReturnUtil.returnResult(result);
 	}
 
 	@Override
 	public Boolean categoryEdit(Category category) {
+        Category tempCategory = iCategoryDao.selectByName(category.getName());
+        if(null!=tempCategory && tempCategory.getId()!=category.getId()){
+            return false;
+        }
 		Integer result = iCategoryDao.update(category);
 		return ReturnUtil.returnResult(result);
 	}
@@ -87,13 +95,13 @@ public class BlogServiceImpl implements IBlogService {
 
 	@Override
 	public List<Category> categoryGetAllBy() {
-		List<Category> result = iCategoryDao.selectBy(null);
+		List<Category> result = iCategoryDao.selectBy();
 		return result;
 	}
 
 	@Override
 	public List<CategoryVo> categoryGetAllVoBy(Integer articleStatus) {
-		List<CategoryVo> result = iCategoryDao.selectVoBy(articleStatus, null);
+		List<CategoryVo> result = iCategoryDao.selectVoBy(articleStatus);
 		return result;
 	}
 
@@ -271,7 +279,11 @@ public class BlogServiceImpl implements IBlogService {
 		}
 		return false;
 	}
-
+    @Override
+    public Article articleGetById(int articleId) {
+        Article article = iArticleDao.selectById(articleId);
+        return article;
+    }
 	@Override
 	public ArticleVo articleVoGetById(int articleId) {
 		ArticleVo article = iArticleDao.selectVoById(articleId);
@@ -340,16 +352,22 @@ public class BlogServiceImpl implements IBlogService {
 	}
 
 	@Override
-	public List<ArticleVo> articleGetAllByCategoryName(String categoryName) {
+	public  Map<String,Object> articleGetAllByCategoryName(String categoryName) {
 		// String s = urlStrParamTranscoding(categoryName);
 		Category category = iCategoryDao.selectByName(categoryName);
+        Map<String,Object> map = new HashMap<>();
+        CategoryVo categoryVo = new CategoryVo();
+        map.put("category",categoryVo.categor2Vo(category));
 		if (category != null) {
 			List<ArticleVo> result = iArticleDao.selectVoBy(new Article()
 					.setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
 					.setCategoryIds(category.getId()), null);
-			return result;
+            int counts = result==null?0:result.size();
+            categoryVo.setCounts(counts);
+            map.put("listArticle",result);
+			return map;
 		}
-		return null;
+		return map;
 	}
 
 	@Override
