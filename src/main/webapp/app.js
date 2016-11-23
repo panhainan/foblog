@@ -2,7 +2,7 @@
  * Created by phn on 2016/2/2.
  */
 
-var app = angular.module("webApp", [ "tm.pagination", "ngRoute",
+var app = angular.module("webApp", [  "ngRoute",
 		'ui.bootstrap', "ngSanitize", "ui.router", "ngFileUpload" ]);
 app.config(function($httpProvider) {
 	$httpProvider.interceptors.push('HttpInterceptor');
@@ -43,8 +43,8 @@ app.config(function($routeProvider,$stateProvider) {
 		templateUrl : "modules/blog/category/category.article.view.html",
 		controller : 'CategoryArticleController'
 	}).when("/blog/tag", {
-		templateUrl : "modules/blog/tag/tag.article.view.html",
-		controller : 'TagArticleController'
+		templateUrl : "modules/blog/tag/tag.list.view.html",
+		controller : 'TagListController'
 	}).when("/blog/tag/:tagName", {
 		templateUrl : "modules/blog/tag/tag.article.view.html",
 		controller : 'TagArticleController'

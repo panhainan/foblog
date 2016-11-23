@@ -1,0 +1,23 @@
+<div class="customContainer">
+	<div class="tag-body">
+		<ol class="breadcrumb">
+			<li><a href="#/">XXX的博客</a></li>
+			<li class="active">标签</li>
+		</ol>
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+		<div ng-show="loaded" class="col-sm-6 col-md-4 col-lg-3"
+			ng-repeat="tag in tags">
+			<div class="tag-card" style="margin: 10px 0;">
+				<div class="panel panel-custom-primary">
+					<div class="panel-heading" >
+						<p class="panel-title"  style="margin-top: 0px">
+							<a href="#/blog/tag/{{tag.name}}">《{{tag.name}}》</a>
+							&emsp;<span style="font-size: 12px;">文章:{{tag.counts}}篇
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

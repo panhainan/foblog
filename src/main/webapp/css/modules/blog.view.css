@@ -33,8 +33,15 @@
 }
 
 .article-body .summary {
-	background-color: #F7F9F7;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+	/*background-color: #F7F9F7;*/
+    color: #000;
 	padding: 10px;
+}
+.article-body .summary a{
+    font-size: 13px;
+    text-decoration: none;
 }
 
 .article-body .tag {
@@ -98,9 +105,9 @@
     width: 100%;
 }
 .message-card{
-    margin-bottom: 6px;
-    padding: 10px 10px 20px 10px;
-    border: 1px #EBEBEB dashed;
+    margin-bottom: 10px;
+    padding: 0;/*10px 15px 25px 15px;*/
+    border: 1px silver solid;
 }
 .message-card p{
     margin-bottom: 5px;

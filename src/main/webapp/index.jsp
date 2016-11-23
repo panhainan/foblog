@@ -41,7 +41,6 @@
     <script src="<%=basePath%>plugins/angularjs-extend-lib/angular-sanitize.min.js"></script>
     <script src="<%=basePath%>plugins/angularjs-extend-lib/angular-ui-router.js"></script>
     <script src="<%=basePath%>plugins/angularjs-ui-bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
-    <script src="<%=basePath%>plugins/angularjs-pagination/tm.pagination.js"></script>
     <script src="<%=basePath%>plugins/angularjs-file-upload/ng-file-upload.min.js"></script>
     <script src="<%=basePath%>plugins/angularjs-file-upload/ng-file-upload-shim.min.js"></script>
 
@@ -65,7 +64,8 @@
     <script src="modules/blog/category/category.service.js"></script>
     <script src="modules/blog/category/category.list.controller.js"></script>
     <script src="modules/blog/category/category.article.controller.js"></script>
-    <script src="modules/blog/tag/tag.article.service.js"></script>
+    <script src="modules/blog/tag/tag.service.js"></script>
+    <script src="modules/blog/tag/tag.list.controller.js"></script>
     <script src="modules/blog/tag/tag.article.controller.js"></script>
     <script src="modules/blog/archive/archive.service.js"></script>
     <script src="modules/blog/archive/archive.list.controller.js"></script>

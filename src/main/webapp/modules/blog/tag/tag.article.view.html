@@ -1,43 +1,35 @@
 <div class="customContainer">
-	<div class="row">
-		<div id="sub-nav">
-			<ng-include src="'modules/common/left-sub-nav.html'"></ng-include>
-		</div>
-		<div class="margin_left_sub_nav_width" id="body-content">
-			<div class="toggle-sidebar-div">
-				<a class="toggle-sidebar" ><span
-					class="glyphicon glyphicon-chevron-left" id="close-open-icon"></span></a>
-			</div>
-			<ng-include src="'modules/common/top-nav.html'"></ng-include>
-			<div class="body-content-body">
-				<div ng-repeat="article in tagArticles"
-					class="card">
-					<div>
-						<h3>
-							<a href="#/blog/article/{{article.title}}"
-								title="{{article.title}}">{{article.title}}</a>
-						</h3>
-					</div>
-					<div>
-						<p style="color:#666666;text-indent: 30px">{{article.summary}}</p>
-						<p style="text-align: right;color:#999999">
-							<span>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</span> 
-							<span style="padding-left: 10px">阅读</span> 
-							<span style="padding-left: 10px">评论</span>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="category-body">
+        <ol class="breadcrumb">
+            <li><a href="#/">XXX的博客</a></li>
+            <li><a href="#/blog/tag">标签</a></li>
+            <li class="active">{{tagName}}  <span ng-if="tagArticles" style="font-size: 12px;">(共{{tagArticles.length}}文章)</span></li>
+        </ol>
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+        <div ng-if="noSuchTag">您要查看的分类不存在</div>
+        <div ng-show="loaded">
+            <div class="" id="body-content">
+                <div ng-repeat="article in tagArticles"
+                     class="card">
+                    <div>
+                        <h3>
+                            <a href="#/blog/article/{{article.title}}"
+                               title="{{article.title}}">{{article.title}}</a>
+                        </h3>
+                    </div>
+                    <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-	$(function() {
-		$(".toggle-sidebar").click(function() {
-			$("#sub-nav").toggleClass("collapsed");
-			$("#body-content").toggleClass("col-sm-12  margin_left_sub_nav_width");
-			$("#close-open-icon").toggleClass("glyphicon-chevron-right");
-			return false;
-		});
-	});
+    $(function () {
+        $(".toggle-sidebar").click(function () {
+            $("#sub-nav").toggleClass("collapsed");
+            $("#body-content").toggleClass("col-sm-12  margin_left_sub_nav_width");
+            $("#close-open-icon").toggleClass("glyphicon-chevron-right");
+            return false;
+        });
+    });
 </script>
