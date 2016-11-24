@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="css/manage-left-sub-nav.css"/>
     <link rel="stylesheet" href="css/modules/blog.view.css"/>
     <link rel="stylesheet" href="css/modules/archive.view.css"/>
-    <link rel="stylesheet" href="css/modules/category.view.css"/>
+    <link rel="stylesheet" href="css/modules/category-tag.view.css"/>
     <link rel="stylesheet" href="css/modules/friend.view.css"/>
     <link rel="stylesheet" href="css/modules/manage.view.css"/>
 

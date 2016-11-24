@@ -1,90 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0" id="WebApp_ID">
-	<display-name></display-name>
-	<!-- spring hibernate -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0" id="WebApp_ID">
+    <display-name></display-name>
+    <!-- spring hibernate -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
             classpath*:config/**/*Context*.xml<!-- 包含了*Context-mybatis.xml等类似 -->
         </param-value>
-	</context-param>
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<!--spring mvc 配置 -->
-	<servlet>
-		<servlet-name>springMVC</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--spring mvc 配置 -->
+    <servlet>
+        <servlet-name>springMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
                 classpath*:config/spring/spring-mvc*.xml
             </param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<!-- 是启动顺序，让这个Servlet随Servlet容器一起启动。 -->
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>springMVC</servlet-name>
-		<url-pattern>/</url-pattern>
-		<!-- 会拦截/的请求。 -->
-	</servlet-mapping>
-	<!-- encodeing -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<!-- encoding filter for jsp page -->
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<!-- 静态资源放行,注意不能有和controller层的url相同的配置，因此可以配后缀 -->
-	<servlet-mapping>  
-	    <servlet-name>default</servlet-name>  
-	 	<url-pattern>/css/*</url-pattern>  
-	    <url-pattern>/fonts/*</url-pattern>  
-	    <url-pattern>/images/*</url-pattern>  
-	    <url-pattern>/json/*</url-pattern>
-	    <url-pattern>/modules/*</url-pattern> 
-	    <url-pattern>/plugins/*</url-pattern>  
-	    <url-pattern>/scripts/*</url-pattern>  
-	    <url-pattern>/app.js</url-pattern>
-<!-- 	    <url-pattern>*.html</url-pattern>
-	    <url-pattern>*.js</url-pattern>
-	    <url-pattern>*.css</url-pattern>
-	    <url-pattern>*.scss</url-pattern>
-	    <url-pattern>*.ttf</url-pattern>
-	    <url-pattern>*.woff</url-pattern>
-	    <url-pattern>*.woff2</url-pattern>
-	    <url-pattern>*.jpg</url-pattern>
-	    <url-pattern>*.jpeg</url-pattern>
-	    <url-pattern>*.gif</url-pattern>
-	    <url-pattern>*.png</url-pattern>
-	    <url-pattern>*.pdf</url-pattern>
-	    <url-pattern>*.map</url-pattern> -->
-	</servlet-mapping>
-	<!-- 跨域问题解决过滤器 -->
-	<!--<filter> <filter-name>corsFilter</filter-name> <filter-class>studio.baxia.foweb.module.filter.CorsFilter</filter-class> 
-		<init-param> <param-name>allowOrigin</param-name> <param-value>*,http://localhost:63343</param-value> 
-		</init-param> <init-param> <param-name>allowMethods</param-name> <param-value>GET,POST,PUT,DELETE</param-value> 
-		</init-param> <init-param> <param-name>allowCredentials</param-name> <param-value>true</param-value> 
-		</init-param> <init-param> <param-name>allowHeaders</param-name> <param-value>X-Requested-With,Content-Type</param-value> 
-		</init-param> </filter> <filter-mapping> <filter-name>corsFilter</filter-name> 
-		<url-pattern>/*</url-pattern> </filter-mapping> -->
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <!-- 是启动顺序，让这个Servlet随Servlet容器一起启动。 -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>/</url-pattern>
+        <!-- 会拦截/的请求。 -->
+    </servlet-mapping>
+    <!-- encodeing -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <!-- encoding filter for jsp page -->
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 静态资源放行,注意不能有和controller层的url相同的配置，因此可以配后缀 -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/css/*</url-pattern>
+        <url-pattern>/fonts/*</url-pattern>
+        <url-pattern>/images/*</url-pattern>
+        <url-pattern>/json/*</url-pattern>
+        <url-pattern>/modules/*</url-pattern>
+        <url-pattern>/plugins/*</url-pattern>
+        <url-pattern>/scripts/*</url-pattern>
+        <url-pattern>/app.js</url-pattern>
+        <!-- 	    <url-pattern>*.html</url-pattern>
+                <url-pattern>*.js</url-pattern>
+                <url-pattern>*.css</url-pattern>
+                <url-pattern>*.scss</url-pattern>
+                <url-pattern>*.ttf</url-pattern>
+                <url-pattern>*.woff</url-pattern>
+                <url-pattern>*.woff2</url-pattern>
+                <url-pattern>*.jpg</url-pattern>
+                <url-pattern>*.jpeg</url-pattern>
+                <url-pattern>*.gif</url-pattern>
+                <url-pattern>*.png</url-pattern>
+                <url-pattern>*.pdf</url-pattern>
+                <url-pattern>*.map</url-pattern> -->
+    </servlet-mapping>
+    <!-- 跨域问题解决过滤器 -->
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>studio.baxia.fo.filter.CorsFilter</filter-class>
+        <init-param>
+            <param-name>allowOrigin</param-name>
+            <param-value>*</param-value>
+        </init-param>
+        <init-param>
+            <param-name>allowMethods</param-name>
+            <param-value>GET,POST,PUT,DELETE</param-value>
+        </init-param>
+        <init-param>
+            <param-name>allowCredentials</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>allowHeaders</param-name>
+            <param-value>X-Requested-With,Content-Type</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

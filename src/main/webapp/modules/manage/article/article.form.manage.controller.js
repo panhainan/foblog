@@ -195,6 +195,7 @@ app.controller("ArticleFormManageController", function ($scope, $location,$uibMo
                 return editormd.toolbarModes["simple"];
             },
             onload: function () {
+                this.setMarkdown("");
                 if ($scope.article != undefined && $scope.article != null) {
                     this.setMarkdown($scope.article.content);
                 }

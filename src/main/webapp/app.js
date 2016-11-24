@@ -5,6 +5,7 @@
 var app = angular.module("webApp", [  "ngRoute",
 		'ui.bootstrap', "ngSanitize", "ui.router", "ngFileUpload" ]);
 app.config(function($httpProvider) {
+    $httpProvider.interceptors.push('TokenInterceptor');
 	$httpProvider.interceptors.push('HttpInterceptor');
 });
 app.filter("trusted", [ "$sce", function($sce) {
@@ -55,51 +56,82 @@ app.config(function($routeProvider,$stateProvider) {
 	// 管理
 	$routeProvider.when("/manage", {
 		redirectTo:"/manage/sign"
-	}).when("/manage/index", {
-		templateUrl : "modules/manage/manage.view.html",
-		controller : 'ManageController'
-	}).when("/manage/info", {
-		templateUrl : "modules/manage/info/info.manage.view.html",
-		controller : 'InfoManageController'
-	}).when("/manage/info/edit", {
-		templateUrl : "modules/manage/info/info.form.manage.view.html",
-		controller : 'InfoFormManageController'
 	}).when("/manage/sign", {
-		templateUrl : "modules/manage/sign/signin.manage.view.html",
-		controller : 'SignManageController'
-	}).when("/manage/article", {
-		templateUrl : "modules/manage/article/article.manage.view.html",
-		controller : 'ArticleManageController'
-	}).when("/manage/article/new", {
-		templateUrl : "modules/manage/article/article.form.manage.view.html",
-		controller : 'ArticleFormManageController'
-	}).when("/manage/article/edit/:articleId", {
-		templateUrl : "modules/manage/article/article.form.manage.view.html",
-		controller : 'ArticleFormManageController'
-	}).when("/manage/article/preview/:articleId", {
-		templateUrl : "modules/manage/article/article.detail.manage.view.html",
-		controller : 'ArticleDetailManageController'
-	}).when("/manage/category", {
-		templateUrl : "modules/manage/category/category.manage.view.html",
-		controller : 'CategoryManageController'
-	}).when("/manage/tag", {
-		templateUrl : "modules/manage/tag/tag.manage.view.html",
-		controller : 'TagManageController'
-	}).when("/manage/info", {
+        templateUrl : "modules/manage/sign/signin.manage.view.html",
+        controller : 'SignManageController'
+    }).when("/manage/index", {
+		templateUrl : "modules/manage/manage.view.html",
+		controller : 'ManageController',
+        requiredLogin:  true
+    }).when("/manage/info", {
 		templateUrl : "modules/manage/info/info.manage.view.html",
-		controller : 'InfoManageController'
-	}).when("/manage/friendlink", {
+		controller : 'InfoManageController',
+        requiredLogin:  true
+    }).when("/manage/info/edit", {
+		templateUrl : "modules/manage/info/info.form.manage.view.html",
+		controller : 'InfoFormManageController',
+        requiredLogin:  true
+    }).when("/manage/article", {
+		templateUrl : "modules/manage/article/article.manage.view.html",
+		controller : 'ArticleManageController',
+        requiredLogin:  true
+    }).when("/manage/article/new", {
+		templateUrl : "modules/manage/article/article.form.manage.view.html",
+		controller : 'ArticleFormManageController',
+        requiredLogin:  true
+    }).when("/manage/article/edit/:articleId", {
+		templateUrl : "modules/manage/article/article.form.manage.view.html",
+		controller : 'ArticleFormManageController',
+        requiredLogin:  true
+    }).when("/manage/article/preview/:articleId", {
+		templateUrl : "modules/manage/article/article.detail.manage.view.html",
+		controller : 'ArticleDetailManageController',
+        requiredLogin:  true
+    }).when("/manage/category", {
+		templateUrl : "modules/manage/category/category.manage.view.html",
+		controller : 'CategoryManageController',
+        requiredLogin:  true
+    }).when("/manage/tag", {
+		templateUrl : "modules/manage/tag/tag.manage.view.html",
+		controller : 'TagManageController',
+        requiredLogin:  true
+    }).when("/manage/info", {
+		templateUrl : "modules/manage/info/info.manage.view.html",
+		controller : 'InfoManageController',
+        requiredLogin:  true
+    }).when("/manage/friendlink", {
 		templateUrl : "modules/manage/friendlink/friendlink.manage.view.html",
-		controller : 'FriendlinkManageController'
+		controller : 'FriendlinkManageController',
+        requiredLogin:  true
 	});
 
 	$routeProvider.otherwise({
 		redirectTo : '/blog'
 	});
 });
-
 app.run(function($rootScope, $location, $window) {
-	// $rootScope.$on("$routeChangeStart", function (event, nextRoute,
-	// currentRoute) {
-	// });
+    $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+        //redirect only if both isLogged is false and no token is set
+        var t = sessionStorage.getItem("token");
+        if (nextRoute != null && nextRoute.requiredLogin != null && nextRoute.requiredLogin
+             && (t==undefined || t=="" || t=="null" || t==null)) {
+            $location.path("/manage/sign");
+        }
+    });
+});
+app.factory('TokenInterceptor', function ($q, $window) {
+    return {
+        request: function (config) {
+            config.headers = config.headers || {};
+            if (sessionStorage.getItem("token")) {
+                config.headers['X-Token'] =sessionStorage.getItem("token");
+                //console.log(config)
+            }
+            return config;
+        },
+
+        response: function (response) {
+            return response || $q.when(response);
+        }
+    };
 });

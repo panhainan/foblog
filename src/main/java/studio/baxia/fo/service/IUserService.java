@@ -3,10 +3,9 @@ package studio.baxia.fo.service;
 import studio.baxia.fo.pojo.Authors;
 import studio.baxia.fo.vo.AuthorVo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by FirePan on 2016/10/11.
@@ -83,10 +82,10 @@ public interface IUserService {
      * 登录检查
      * @param authorVo
      * @param request
-     * @return
+     * @return token
      * @throws Exception 
      */
-	Boolean signInCheck(AuthorVo authorVo, HttpServletRequest request) throws Exception;
+	String signInCheck(AuthorVo authorVo, HttpServletRequest request) throws Exception;
 
 	Map<String, Object> generateKeypair(HttpServletRequest request) throws Exception;
 

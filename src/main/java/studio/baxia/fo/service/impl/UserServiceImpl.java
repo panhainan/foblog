@@ -1,24 +1,22 @@
 package studio.baxia.fo.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import studio.baxia.fo.dao.IAuthorsDao;
+import studio.baxia.fo.pojo.Authors;
+import studio.baxia.fo.service.IUserService;
+import studio.baxia.fo.util.CookieUtil;
+import studio.baxia.fo.util.JCryptionUtil;
+import studio.baxia.fo.util.TokenManagerUtil;
+import studio.baxia.fo.vo.AuthorVo;
+
+import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.security.KeyPair;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import studio.baxia.fo.common.CommonConstant;
-import studio.baxia.fo.dao.IAuthorsDao;
-import studio.baxia.fo.pojo.Authors;
-import studio.baxia.fo.service.IUserService;
-import studio.baxia.fo.util.JCryptionUtil;
-import studio.baxia.fo.vo.AuthorSessionVo;
-import studio.baxia.fo.vo.AuthorVo;
 
 /**
  * Created by FirePan on 2016/10/11.
@@ -26,7 +24,8 @@ import studio.baxia.fo.vo.AuthorVo;
 @Transactional
 @Service("userService")
 public class UserServiceImpl implements IUserService {
-
+    @Autowired
+    private TokenManagerUtil tokenManager;
 	@Autowired
 	private IAuthorsDao iAuthorsDao;
 
@@ -97,10 +96,11 @@ public class UserServiceImpl implements IUserService {
 		return map;
 	}
 	@Override
-	public Boolean signInCheck(AuthorVo authorVo, HttpServletRequest request) throws Exception {
+	public String signInCheck(AuthorVo authorVo, HttpServletRequest request) throws Exception {
 		KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
+        String token =null;
 		if (keys == null) {
-			return false;
+			return null;
 		}
 		String account;
 		try {
@@ -109,29 +109,29 @@ public class UserServiceImpl implements IUserService {
 							"utf-8");
 			Authors au = iAuthorsDao.selectByAccount(account);
 			if (au == null) {
-				return false;
+				return null;
 			}
-			
 			String password = URLDecoder.decode(
 					JCryptionUtil.decrypt(authorVo.getPassword(), keys),
 					"utf-8");
 			if (!au.getPassword().equals(password)) {
-				return false;
+				return null;
 			}
-			setAuthorInSession(request,new AuthorSessionVo(au.getAccount(),au.getId()));
+            token = tokenManager.createToken(au.getAccount());
+            System.out.println("用户'" + au.getAccount() + "'生成的token:" + token);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("服务器异常，解码失败！");
 		}
-		return true;
+        return token;
 	}
 	@Override
 	public Authors getInfo(HttpServletRequest request) {
-		AuthorSessionVo authorSessionVo = getAuthorInSession(request);
-		if(authorSessionVo ==null){
+		String account = getAuthorInSession(request);
+		if(account ==null){
 			return null;
 		}
-		Authors author = iAuthorsDao.selectByAccount(authorSessionVo.getAccount());
+		Authors author = iAuthorsDao.selectByAccount(account);
 		author.setAccount(null);
 		author.setId(0);
 		author.setPassword(null);
@@ -139,24 +139,25 @@ public class UserServiceImpl implements IUserService {
 	}
 	@Override
 	public Boolean updateInfo(HttpServletRequest request, Authors info) {
-		AuthorSessionVo authorSessionVo = getAuthorInSession(request);
-		if(authorSessionVo ==null){
+		String account = getAuthorInSession(request);
+		if(account ==null){
 			return false;
 		}
-		info.setId(authorSessionVo.getId());
-		info.setAccount(authorSessionVo.getAccount());
+        Authors author = iAuthorsDao.selectByAccount(account);
+        if(author==null){
+            return false;
+        }
+        info.setId(author.getId());
+		info.setAccount(account);
 		int result = iAuthorsDao.update(info);
 		if(result<=0){
 			return false;
 		}
 		return true;
 	}
-	private void setAuthorInSession( HttpServletRequest request, AuthorSessionVo authors) {
-		request.getSession(true).setAttribute("authorSessionVo", authors);
-		request.getSession(true).setMaxInactiveInterval(CommonConstant.USER_TIME_OUT);
-	}
-	private AuthorSessionVo getAuthorInSession(HttpServletRequest request){
-		return (AuthorSessionVo) request.getSession(true).getAttribute("authorSessionVo");
+	private String getAuthorInSession(HttpServletRequest request){
+        String token = request.getHeader(CookieUtil.DEFAULT_TOKEN_NAME);
+		return tokenManager.getUserName(token);
 	}
 
 	

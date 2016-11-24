@@ -1,92 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 http://www.springframework.org/schema/mvc 
 http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
-	default-lazy-init="true">
-	<!-- 静态资源文件 -->
-<!--<mvc:default-servlet-handler  default-servlet-name="default" /> --> 
-<!--<mvc:resources mapping="/manage/**" location="/WEB-INF/manage/" />
- 	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/fonts/**" location="/fonts/" />    
-	<mvc:resources mapping="/images/**" location="/images/" />    
-	<mvc:resources mapping="/json/**" location="/json/" />    
-	<mvc:resources mapping="/modules/**" location="/modules/" />    
-	<mvc:resources mapping="/plugins/**" location="/plugins/" />    
-	<mvc:resources mapping="/scripts/**" location="/scripts/" />    
-	<mvc:resources mapping="/**" location="/" />  -->
+       default-lazy-init="true">
+    <!-- 静态资源文件 -->
+    <!--<mvc:default-servlet-handler  default-servlet-name="default" /> -->
+    <!--<mvc:resources mapping="/manage/**" location="/WEB-INF/manage/" />
+         <mvc:resources mapping="/css/**" location="/css/" />
+        <mvc:resources mapping="/fonts/**" location="/fonts/" />
+        <mvc:resources mapping="/images/**" location="/images/" />
+        <mvc:resources mapping="/json/**" location="/json/" />
+        <mvc:resources mapping="/modules/**" location="/modules/" />
+        <mvc:resources mapping="/plugins/**" location="/plugins/" />
+        <mvc:resources mapping="/scripts/**" location="/scripts/" />
+        <mvc:resources mapping="/**" location="/" />  -->
 
     <!-- 校验错误信息配置文件 -->
     <!-- bind your messages.properties -->
     <bean class="org.springframework.context.support.ResourceBundleMessageSource"
           id="messageSource">
-        <property name="basename" value="messages" />
+        <property name="basename" value="messages"/>
     </bean>
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射,解决@ResponseBody乱码问题, 需要在annotation-driven和component-scan之前,否则乱码问题同样无法解决 -->
     <mvc:annotation-driven/>
 
 
-	<!-- 使Spring支持自动检测组件，如注解的Controller -->
-	<context:component-scan base-package="studio.baxia"
-		use-default-filters="false">
-		<context:include-filter expression="org.springframework.stereotype.Controller"
-			type="annotation" />
-		<!-- 在springMVC配置文件中将Service注解给去掉,而由applicationContext.xml父容器进行初始化以保证service的事务的增强处理 -->
-		<context:exclude-filter expression="org.springframework.stereotype.Service"
-			type="annotation" />
-	</context:component-scan>
+    <!-- 使Spring支持自动检测组件，如注解的Controller -->
+    <context:component-scan base-package="studio.baxia"
+                            use-default-filters="false">
+        <context:include-filter expression="org.springframework.stereotype.Controller"
+                                type="annotation"/>
+        <!-- 在springMVC配置文件中将Service注解给去掉,而由applicationContext.xml父容器进行初始化以保证service的事务的增强处理 -->
+        <context:exclude-filter expression="org.springframework.stereotype.Service"
+                                type="annotation"/>
+    </context:component-scan>
 
-	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
-	<!-- <mvc:default-servlet-handler /> -->
+    <!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+    <!-- <mvc:default-servlet-handler /> -->
 
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/" p:suffix=".jsp" />
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/" p:suffix=".jsp"/>
 
 
-	<!-- 处理JSON数据转换，为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
+    <!-- 处理JSON数据转换，为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
                 <value>text/html;charset=utf-8</value>
                 <value>text/xml;charset=utf-8</value>
                 <value>text/plain;</value>
                 <value>text/json;charset=utf-8</value>
                 <value>application/json;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
-	<bean id="stringHttpMessageConverter"
-		class="org.springframework.http.converter.StringHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
+            </list>
+        </property>
+    </bean>
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
 
     <!-- Spring3.1推荐使用RequestMappingHandlerAdapter -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
-                <ref bean="stringHttpMessageConverter" />
-                <ref bean="mappingJacksonHttpMessageConverter" />
+                <ref bean="stringHttpMessageConverter"/>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
             </list>
         </property>
     </bean>
-	<!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		p:defaultEncoding="UTF-8" p:maxUploadSize="5400000" p:uploadTempDir="file/upload">
-	</bean>
-	<!-- 配置拦截器 -->
-	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
-		class ="com.eshore.onlinecount.interceptor.CountInterceptor"/> </mvc:interceptor> 
-		</mvc:interceptors> -->
+    <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="UTF-8" p:maxUploadSize="5400000" p:uploadTempDir="file/upload">
+    </bean>
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <bean class="studio.baxia.fo.interceptor.TokenInterceptor">
+                <property name="tokenManager" ref="tokenManager" />
+                <property name="tokenName" value="X-Token" />
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

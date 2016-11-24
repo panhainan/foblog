@@ -365,8 +365,12 @@
             }
             
             var _this            = this;
-            var classPrefix      = this.classPrefix  = editormd.classPrefix; 
-            var settings         = this.settings     = $.extend(true, editormd.defaults, options);
+            var classPrefix      = this.classPrefix  = editormd.classPrefix;
+            var defaultConfig = {};
+            $.each(editormd.defaults, function (k, v) {
+                defaultConfig[k] = v;
+            });
+            var settings         = this.settings     = $.extend(true, defaultConfig, options);
             
             id                   = (typeof id === "object") ? settings.id : id;
             

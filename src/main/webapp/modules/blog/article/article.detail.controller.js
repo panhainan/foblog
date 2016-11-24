@@ -12,6 +12,9 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             toolbarIcons: function () {
                 return editormd.toolbarModes["mini"];
             },
+            onload: function () {
+                this.setMarkdown("");
+            },
             toolbar  : false,             //关闭工具栏
             saveHTMLToTextarea: true,
             lineNumbers:false,

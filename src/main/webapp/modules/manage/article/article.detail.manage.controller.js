@@ -1,7 +1,7 @@
 app.controller("ArticleDetailManageController", function($scope, $routeParams,
 		ArticleManageService) {
 	setScreenAvailHeight();
-	console.log($routeParams.articleId)
+	//console.log($routeParams.articleId)
 	$scope.get = function(articleId) {
 		ArticleManageService.get(articleId).then(function(data) {
 			console.log(data);

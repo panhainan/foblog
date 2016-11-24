@@ -4,8 +4,11 @@ app.controller("SignManageController", function($scope, SignManageService,$locat
 		SignManageService.post(author).then(function(data) {
 			console.log(data);
 			if (data.resultCode == 1) {
+                sessionStorage.setItem("token",data.resultData);
 				$location.path("/manage/index");
-			}
+			}else{
+                alert("用户名或者密码错误！");
+            }
 		})
 	}
 	$scope.signin = function() {
