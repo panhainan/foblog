@@ -55,14 +55,11 @@ app.config(function($routeProvider,$stateProvider) {
 	});
 	// 管理
 	$routeProvider.when("/manage", {
-		redirectTo:"/manage/sign"
-	}).when("/manage/sign", {
+        templateUrl : "modules/manage/manage.view.html",
+        controller : 'ManageController'
+    }).when("/manage/sign", {
         templateUrl : "modules/manage/sign/signin.manage.view.html",
         controller : 'SignManageController'
-    }).when("/manage/index", {
-		templateUrl : "modules/manage/manage.view.html",
-		controller : 'ManageController',
-        requiredLogin:  true
     }).when("/manage/info", {
 		templateUrl : "modules/manage/info/info.manage.view.html",
 		controller : 'InfoManageController',

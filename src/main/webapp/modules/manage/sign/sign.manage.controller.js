@@ -1,11 +1,11 @@
-app.controller("SignManageController", function($scope, SignManageService,$location) {
+app.controller("SignManageController", function($scope, $rootScope,SignManageService,$location) {
 	
 	var doSignin = function(author) {
 		SignManageService.post(author).then(function(data) {
 			console.log(data);
 			if (data.resultCode == 1) {
                 sessionStorage.setItem("token",data.resultData);
-				$location.path("/manage/index");
+				$location.path("/manage/info");
 			}else{
                 alert("用户名或者密码错误！");
             }

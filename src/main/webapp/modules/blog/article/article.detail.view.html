@@ -14,18 +14,21 @@
                 <div class="article-body">
                     <div class="row">
                         <div class="col-sm-12 summary">
-                            <span class="glyphicon glyphicon-th-list"></span>
+                            <div class="row">
+                            <div class="col-xs-12 col-sm-9" style="padding: 0"><span class="glyphicon glyphicon-th-list"></span>
                             <a style="" href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
                             <span ng-if="article.tagNames" class="glyphicon glyphicon-tags"></span>
                             <span ng-repeat="tName in article.tagNames">
                                 <a href="#/blog/tag/{{tName}}">
-                                    <span > {{tName}} </span>
+                                    <span> {{tName}} </span>
                                 </a>
 							</span>
-                            <a class="pull-right" title="归档：{{article.pubTime | date :'yyyy-MM'}}"
-                                          href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
-                                   {{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</a>
-                            <span class="glyphicon glyphicon-time pull-right" style="margin-top: 2px;"></span>
+                            </div>
+                            <div class="col-xs-12 col-sm-3" style="padding: 0">
+                            <span class="glyphicon glyphicon-time pull-right" ><a style="font-family: '微软雅黑'" title="归档：{{article.pubTime | date :'yyyy-MM'}}"  href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
+                                {{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</a></span>
+                            </div>
+                            </div>
                         </div>
                         <!--<div class="col-sm-12 summary">
 
@@ -78,31 +81,38 @@
 
                         <div class="col-xs-12 message-body" style="margin: 0;">
                             <h3 id="message-body-top" style="padding-bottom: 10px;border-bottom: 2px silver solid;">
-                                <span class="glyphicon btn-lg glyphicon-comment" style="padding: 3px 6px;"></span>留言<span style="color: #7E7E7E;font-size: 14px;"
-                                        ng-if="messages">（{{messages.length}}条）</span></h3>
+                                <span class="glyphicon btn-lg glyphicon-comment"
+                                      style="padding: 3px 6px;"></span>留言<span style="color: #7E7E7E;font-size: 14px;"
+                                                                               ng-if="messages">（{{messages.length}}条）</span>
+                            </h3>
 
                             <p style="color: #7E7E7E;">注意：请慎重投出你的支持票，谢谢配合！^_^</p>
 
                             <div class="message-card" ng-repeat="msg in messages">
                                 <span style="background-color: #52768E;padding: 8px 15px;height: 36px;line-height: 36px;color: #fff;text-shadow: 5px 5px 5px #3f5b6e;">
-                                    <a ng-if="msg.guestWebsite" href="http://{{msg.guestWebsite}}" target="_blank"><span style="color:#fff;text-decoration: underline;">{{msg.guestNickname}}</span></a>
-                                    <span ng-if="!msg.guestWebsite" >{{msg.guestNickname}}</span>
+                                    <a ng-if="msg.guestWebsite" href="http://{{msg.guestWebsite}}" target="_blank"><span
+                                            style="color:#fff;text-decoration: underline;">{{msg.guestNickname}}</span></a>
+                                    <span ng-if="!msg.guestWebsite">{{msg.guestNickname}}</span>
                                 </span>
                                 <span class="pull-right" style="padding-right: 10px;">
                                     <span style="line-height: 32px;">{{msg.messageSupportCount}}</span>
                                     <a href="javascript:void(0)" style="margin-left:10px;" title="支持数"><span
-                                            class="glyphicon btn-lg glyphicon-thumbs-up pull-right" style="padding: 2px 0 0 0;"></span></a>
+                                            class="glyphicon btn-lg glyphicon-thumbs-up pull-right"
+                                            style="padding: 2px 0 0 0;"></span></a>
                                 </span>
 
                                 <div style="padding: 10px 15px 5px 15px;">
                                     <div ng-bind-html="msg.messageContent | trusted"></div>
                                 </div>
-                                <p class="" style="color:#B9B9B9;margin:0 10px 4px 0;font-size: 10px;text-align: right;">发表于
+                                <p class=""
+                                   style="color:#B9B9B9;margin:0 10px 4px 0;font-size: 10px;text-align: right;">发表于
                                     {{msg.messagePubTime | date:'yyyy-MM-dd HH:mm'}}</p>
                             </div>
                         </div>
                         <div class="col-xs-12 message-header">
-                            <h4 style="padding-bottom: 10px;border-bottom: 1px silver solid;margin-bottom: 0">发表您的看法</h4>
+                            <h4 style="padding-bottom: 10px;border-bottom: 1px silver solid;margin-bottom: 0">
+                                发表您的看法</h4>
+
                             <form class="form-horizontal" name="messageForm" ng-submit="comment(messageForm.$valid)"
                                   novalidate>
                                 <div class="form-group">
@@ -141,7 +151,8 @@
                                                            ng-bind="contentValidInfo"></span>
 
                                     <div class="col-sm-12">
-                                        <div id="message-editormd" style="margin-bottom: 0;width:100%;border-color: silver;">
+                                        <div id="message-editormd"
+                                             style="margin-bottom: 0;width:100%;border-color: silver;">
                                         <textarea class="editormd-markdown-textarea"
                                                   name="$id-markdown-doc"></textarea>
                                             <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->

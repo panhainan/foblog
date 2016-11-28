@@ -15,7 +15,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             onload: function () {
                 this.setMarkdown("");
             },
-            toolbar  : false,             //关闭工具栏
+            //toolbar  : false,             //关闭工具栏
             saveHTMLToTextarea: true,
             lineNumbers:false,
             styleSelectedText:false,

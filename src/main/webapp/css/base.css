@@ -191,6 +191,6 @@ table > tbody > tr:nth-of-type(odd) {
     padding: 5px 20px 6px 20px;
     background-color: #fff;
     margin-bottom: 15px;
-    border: 1px silver solid;
+    border-bottom: 1px silver solid;
 }
 

@@ -83,8 +83,7 @@
         ],
         mini : [
             "undo", "redo", "|",
-            "watch", "preview", "|",
-            "help", "info"
+            "watch", "preview"
         ],
 		none:[]
     };
