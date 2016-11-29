@@ -188,7 +188,7 @@ app.controller("ArticleFormManageController", function ($scope, $location,$uibMo
     $(function () {
         articleEditor = editormd("article-editormd", {
             width: "100%",
-            height: 520,
+            height: 480,
             watch: false,
             path: web_project_name + "/plugins/editor.md/lib/",
             toolbarIcons: function () {
@@ -205,4 +205,18 @@ app.controller("ArticleFormManageController", function ($scope, $location,$uibMo
             toolbarAutoFixed: false
         });
     });
+    $scope.nowIsFirst=true;
+    $scope.nowIsLast=false;
+    $scope.preStep = function(){
+        $scope.nowIsFirst=true;
+        $scope.nowIsLast=false;
+        $(".article-editor-div").css("display","block");
+        $(".article-other-div").css("display","none");
+    }
+    $scope.nextStep = function(){
+        $scope.nowIsFirst=false;
+        $scope.nowIsLast=true;
+        $(".article-editor-div").css("display","none");
+        $(".article-other-div").css("display","block");
+    }
 });
