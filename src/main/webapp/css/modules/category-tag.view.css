@@ -1,11 +1,17 @@
 .category-body,.tag-body {
 	padding: 15px 10px;
 }
-.category-body .col-sm-12,.category-body .col-md-6,.category-body .col-lg-4{
+.category-body .col-sm-12{
 	padding:10px 0;
 }
+.category-body .col-md-6{
+    padding:10px 10px;
+ }
+.category-body .col-lg-6{
+    padding:10px 15px;
+ }
 .tag-body .col-sm-6,.tag-body .col-md-4,.tag-body .col-lg-3{
-    padding:10px 20px 10px 0;
+    padding:10px 20px 10px 15px;
 }
 .category-card {
 	padding:  0px;

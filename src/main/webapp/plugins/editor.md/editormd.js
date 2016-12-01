@@ -82,7 +82,7 @@
 
         ],
         mini : [
-            "undo", "redo", "|",
+            "undo", "redo", "|","bold","link","code","code-block",
             "watch", "preview"
         ],
 		none:[]

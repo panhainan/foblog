@@ -8,13 +8,15 @@
         <ng-include src="'modules/common/loading.html'"></ng-include>
         <div ng-if="noSuchCategory">您要查看的分类不存在</div>
         <div ng-show="loaded">
-            <div class="category-card" style="margin:8px 0 16px 0px;">
+            <div class="category-card" style="margin:8px 0 16px 0px;padding: 0 15px;">
                 <div class="panel panel-custom-primary">
                     <div class="panel-heading">
                         <p class="panel-title">
-                            《{{category.name}}》
+                            <span class="glyphicon glyphicon-th-list"></span>&emsp;{{category.name}}
                             &emsp;<span style="font-size: 12px;">文章:{{category.counts}}篇
 							</span>
+                            <span style="font-size: 12px;" class="pull-right"><a  style="color: #fff"
+                                href="#/blog/category"><span class="glyphicon glyphicon-chevron-left"></span> 返回列表</a></span>
                         </p>
                     </div>
                     <div class="panel-body" style="">

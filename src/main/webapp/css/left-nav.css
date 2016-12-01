@@ -1,86 +1,102 @@
 @CHARSET "UTF-8";
 
 .navbar-vertical-left {
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 260px;
-	height: 100%;
-	overflow: auto;
-	border: none;
-	border-radius: 0;
-	margin: 0;
-	background-color: #fff;
-	z-index: 999;
-	border-right: 1px silver solid;
-	border-bottom: 1px silver solid;
-	/* color: #000; */
+    color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    overflow: auto;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    background-color: #006699;
+    z-index: 999;
+    /*border-right: 1px silver solid;*/
+    /*border-bottom: 1px silver solid;*/
+    /* color: #000; */
 }
 
-@media ( max-width : 768px) {
-	.navbar-vertical-left {
-		background-color: #fff; 
-		top: 0;
-		bottom: auto;
-		height: auto;
-		width: 100%;
-		position: fixed;
-	}
-	.navbar-vertical-left, .navbar-vertical-left ul.navbar-nav {
-		-webkit-transition: none;
-		-moz-transition: none;
-		transition: none;
-		-webkit-transform: none;
-		-moz-transform: none;
-		transform: none;
-	}
-	.navbar-vertical-left ul.navbar-nav>li {
-		display: table-cell;
-	}
-	.navbar-vertical-left ul.navbar-nav>li>a {
-		display: inline-block;
-		width: 100%;
-		text-align: center;
-		height: 50px;
-		line-height: 30px;
-	}
-	.navbar-vertical-left ul.navbar-nav>li>a>i.fa {
-		margin: 0;
-	}
-	.navbar-vertical-left ul.navbar-nav>li>a>span {
-		display: none;
-	}
+@media ( max-width: 768px) {
+    .navbar-vertical-left {
+        /*background-color: #fff; */
+        top: 0;
+        bottom: auto;
+        height: auto;
+        width: 100%;
+        position: fixed;
+    }
+
 }
 
 .sidebar-nav {
-	font: 14px/1.0  "Microsoft Yahei" ,sans-serif,"Arial", "Helvetica Neue", Helvetica,
-		"Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei"
-		;
-	background-color: #FFFFFF;
-	text-align: center;
-	height: 100%;
-	padding: 0;
-	z-index: 10;
+    font: 14px/1.0 "Microsoft Yahei", sans-serif, "Arial", "Helvetica Neue", Helvetica,
+    "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei";
+    /*background-color: #FFFFFF;*/
+    text-align: center;
+    height: 100%;
+    padding: 0;
+    z-index: 10;
 }
+
+.sidebar-nav .navbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav .navbar li {
+    margin-top: 0;
+}
+
 .sidebar-nav .navbar li a {
-    COLOR: #000;
+    COLOR: #fff;
 }
+
+.sidebar-nav .navbar li a:hover {
+    background-color: #336699;
+}
+
+.sidebar-nav .nav-custom {
+    margin-bottom: 20px;
+    margin-left: 0;
+    list-style: none
+}
+
+.sidebar-nav .nav-custom > li > a {
+    display: block;
+    text-decoration: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.sidebar-nav .nav-custom > li > a:hover {
+    text-decoration: none;
+    background-color: #003366
+}
+
 /* make sidebar nav vertical */
-@media ( min-width : 768px) {
-	.sidebar-nav .navbar .navbar-collapse {
-		padding: 0;
-		max-height: none;
-	}
-	.sidebar-nav .navbar ul {
-		float: none;
-		display: block;
-	}
-	.sidebar-nav .navbar li {
-		float: none;
-		display: block;
-	}
-	.sidebar-nav .navbar li a {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
+@media ( min-width: 768px) {
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+
+    .sidebar-nav .navbar ul {
+        float: none;
+        display: block;
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
 }

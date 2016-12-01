@@ -6,7 +6,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
     $(function () {
         messageEditor = editormd("message-editormd", {
             width: "100%",
-            height: 180,
+            height: 250,
             watch:false,
             path: web_project_name + "/plugins/editor.md/lib/",
             toolbarIcons: function () {
