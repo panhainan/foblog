@@ -18,7 +18,7 @@ app.controller("SignManageController", function($scope, $rootScope,SignManageSer
 					account : "",
 					password : ""
 				}
-				console.log(keys)
+				//console.log(keys)
 				if (keys == null || keys == "") {
 					// 没有加密串，不能登录，需要先获取加密串
 					alert("服务器错误,请重试！");

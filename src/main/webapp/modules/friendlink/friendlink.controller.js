@@ -3,6 +3,15 @@
  */
 
 app.controller("FriendlinkController", function (FriendlinkService, $scope) {
-	console.log("FriendlinkController")
-	
+    $scope.loaded = false;
+    $scope.isFriendlinkNav = true;
+    setScreenAvailHeight();
+
+    $scope.list = function(){
+        FriendlinkService.list().then(function(data){
+            $scope.friendlinks = data.resultData;
+            $scope.loaded = true;
+        })
+    };
+    $scope.list();
 });

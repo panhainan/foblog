@@ -1,67 +1,33 @@
 <!--container-fluid-->
 <div class="customContainer">
-	<div class="friend-body">
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="friend-card">
-				<div class="friend-card-header">
-					<p>
-						<a href="#" title="">xxx</a>
-					</p>
-				</div>
-				<div class="friend-card-body">
-					<p>一个什么样的网站</p>
-				</div>
-				<div class="friend-card-footer">
-					<span>浏览：88次</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="friend-card">
-				<div class="friend-card-header">
-					<p>
-						<a href="#" title="">xxx</a>
-					</p>
-				</div>
-				<div class="friend-card-body">
-					<p>一个什么样的网站</p>
-				</div>
-				<div class="friend-card-footer">
-					<span>浏览：88次</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="friend-card">
-				<div class="friend-card-header">
-					<p>
-						<a href="#" title="">xxx</a>
-					</p>
-				</div>
-				<div class="friend-card-body">
-					<p>一个什么样的网站</p>
-				</div>
-				<div class="friend-card-footer">
-					<span>浏览：88次</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="friend-card">
-				<div class="friend-card-header">
-					<p>
-						<a href="#" title="">xxx</a>
-					</p>
-				</div>
-				<div class="friend-card-body">
-					<p>一个什么样的网站</p>
-				</div>
-				<div class="friend-card-footer ">
-					<span>浏览：88次</span>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="friend-body">
+        <ol class="breadcrumb">
+            <li><a href="#/">XXX的博客</a></li>
+            <li class="active">友情链接</li>
+        </ol>
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+        <div ng-show="loaded">
+            <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="friendlink in friendlinks">
+                <div class="friend-card">
+                    <div class="panel panel-custom-primary">
+                        <div class="panel-heading">
+                            <p class="panel-title">
+                                <span class="glyphicon glyphicon-link"></span>&emsp;<a href="{{friendlink.website}}"
+                                                                                       target="_blank">{{friendlink.name}}</a>
+                            </p>
+                        </div>
+                        <div class="panel-body" style="">
+                            <p style="text-indent: 25px;margin-bottom: 0;">
+                                {{friendlink.description}}
+                            </p></div>
+                        <div class="panel-footer">
+                            <span style="font-size: 10px">浏览:88次</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
