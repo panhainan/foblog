@@ -34,7 +34,7 @@ public class BTagController {
     @ResponseBody
     @RequestMapping(value = "/blog/tag/{name:.+}",method = RequestMethod.GET)
     public CommonResult listTagArticle(@PathVariable("name")String name){
-        List<ArticleVo> listArticles = iArticleService.articleGetAllByTagName(name);
+        List<ArticleVo> listArticles = iArticleService.getAllByTagName(name);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",listArticles);
     }
 
@@ -67,7 +67,7 @@ public class BTagController {
     @ResponseBody
     @RequestMapping(value = "/manage/tag/{tagId}", method = RequestMethod.GET)
     public CommonResult listTagArticles(@PathVariable("tagId") Integer tagId) {
-        List<Article> listTagArticles = iArticleService.articleGetAllByTagId(tagId, null);
+        List<Article> listTagArticles = iArticleService.getAllByTagId(tagId, null);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "", listTagArticles);
     }
 
@@ -81,7 +81,7 @@ public class BTagController {
     @ResponseBody
     @RequestMapping(value = "/manage/tag/{tagId}/{articleId}", method = RequestMethod.DELETE)
     public CommonResult deleteTag(@PathVariable Integer tagId, @PathVariable Integer articleId) {
-        Boolean result = iArticleService.articleDeleteTag(tagId, articleId);
+        Boolean result = iArticleService.deleteTag(tagId, articleId);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "", result);
     }
 

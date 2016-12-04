@@ -30,7 +30,7 @@ public class BArticleController {
     @ResponseBody
     @RequestMapping(value = "/blog/article",method = RequestMethod.POST)
     public CommonResult list(PageConfig pageConfig){
-        PageInfoResult<Article> list = articleService.articleGetAllBy(CommonConstant.ACTICLE_STATUS_BLOG, pageConfig);
+        PageInfoResult<Article> list = articleService.getAllBy(CommonConstant.ACTICLE_STATUS_BLOG, pageConfig);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
     }
     @ResponseBody
@@ -57,26 +57,26 @@ public class BArticleController {
     @ResponseBody
     @RequestMapping(value = "/blog/article/id/{id}",method = RequestMethod.GET)
     public CommonResult get(@PathVariable("id")Integer articleId){
-        ArticleVo article = articleService.articleVoGetById(articleId);
+        ArticleVo article = articleService.getVoById(articleId);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
     }
     @ResponseBody
     @RequestMapping(value = "/blog/article/{title:.+}",method = RequestMethod.GET)
     public CommonResult getByTitle(@PathVariable("title")String articleTitle){
-        Map<String,Object> map = articleService.articleVoGetByTitle(articleTitle);
+        Map<String,Object> map = articleService.getVoByTitle(articleTitle);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",map);
     }
 
     @ResponseBody
     @RequestMapping(value = "/blog/archive",method = RequestMethod.GET)
     public CommonResult listArchives(){
-        List<ArchiveVo> list = articleService.archiveGetAllVo(CommonConstant.ACTICLE_STATUS_BLOG,CommonConstant.ARCHIVE_TYPE_YEAR,CommonConstant.ARCHIVE_TYPE_YEAR_MONTH);
+        List<ArchiveVo> list = articleService.getAllArchiveVo(CommonConstant.ACTICLE_STATUS_BLOG, CommonConstant.ARCHIVE_TYPE_YEAR, CommonConstant.ARCHIVE_TYPE_YEAR_MONTH);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
     }
     @ResponseBody
     @RequestMapping(value = "/blog/archive/{name}",method = RequestMethod.GET)
     public CommonResult listArchiveArticles(@PathVariable String name){
-        List<Article> list = articleService.archiveGetAllArticles(name,CommonConstant.ACTICLE_STATUS_BLOG,CommonConstant.ARCHIVE_TYPE_YEAR_MONTH);
+        List<Article> list = articleService.getAllArchiveArticles(name,CommonConstant.ACTICLE_STATUS_BLOG,CommonConstant.ARCHIVE_TYPE_YEAR_MONTH);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
     }
 
@@ -95,21 +95,21 @@ public class BArticleController {
     @RequestMapping(value = "/manage/article", method = RequestMethod.POST)
     public CommonResult listArticles(PageConfig pageConfig, @RequestParam(required = false) Integer articleStatus) {
 //        logger.info("参数->pageConfig:" + pageConfig + ",articleStatus:" + articleStatus);
-        PageInfoResult<ArticleVo> articlesWithPages = articleService.articleGetAllManageBy(articleStatus, pageConfig);
+        PageInfoResult<ArticleVo> articlesWithPages = articleService.getAllManageBy(articleStatus, pageConfig);
         return new CommonResult(CommonConstant.SUCCESS_CODE, null, articlesWithPages);
     }
 
     @ResponseBody
     @RequestMapping(value = "/manage/article/{id}", method = RequestMethod.GET)
     public CommonResult getArticle(@PathVariable("id") Integer articleId) {
-        ArticleVo article = articleService.articleVoGetById(articleId);
+        ArticleVo article = articleService.getVoById(articleId);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "", article);
     }
 
     @ResponseBody
     @RequestMapping(value = "/manage/article/{id}", method = RequestMethod.DELETE)
     public CommonResult deleteArticle(@PathVariable("id") Integer articleId) {
-        Boolean result = articleService.articleDeleteById(articleId);
+        Boolean result = articleService.deleteById(articleId);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "", result);
     }
 
@@ -128,9 +128,9 @@ public class BArticleController {
             return new CommonResult(CommonConstant.SUCCESS_CODE, message.toString(), resultData);
         } else {
             if (article.getStatus() != CommonConstant.ACTICLE_STATUS_BLOG) {
-                resultData = articleService.articleEdit(article);
+                resultData = articleService.edit(article);
             } else {
-                Article articleTmp = articleService.articleGetById(article.getId());
+                Article articleTmp = articleService.getById(article.getId());
                 if (articleTmp.getContent() == null || articleTmp.getContent().trim().equals("")) {
                     message.append("内容不能为空.");
                     return new CommonResult(CommonConstant.SUCCESS_CODE, message.toString(), resultData);
@@ -141,7 +141,7 @@ public class BArticleController {
                     message.append("摘要不能为空.");
                     return new CommonResult(CommonConstant.SUCCESS_CODE, message.toString(), resultData);
                 } else {
-                    resultData = articleService.articleEdit(article);
+                    resultData = articleService.edit(article);
                 }
             }
             return new CommonResult(CommonConstant.SUCCESS_CODE, message.toString(), resultData);
@@ -163,7 +163,7 @@ public class BArticleController {
         } else {
             if (article.getStatus() == CommonConstant.ACTICLE_STATUS_DRAFT) {
                 //草稿
-                resultData = articleService.articleEdit(article);
+                resultData = articleService.edit(article);
             } else {
                 if (article.getContent() == null || article.getContent().trim().equals("")) {
                     message.append("内容不能为空.");
@@ -175,7 +175,7 @@ public class BArticleController {
                     message.append("摘要不能为空.");
                     return new CommonResult(CommonConstant.SUCCESS_CODE, message.toString(), resultData);
                 } else {
-                    resultData = articleService.articleEdit(article);
+                    resultData = articleService.edit(article);
                 }
             }
             return new CommonResult(CommonConstant.SUCCESS_CODE, "", resultData);
@@ -193,7 +193,7 @@ public class BArticleController {
         } else {
             if (article.getStatus() == CommonConstant.ACTICLE_STATUS_DRAFT) {
                 //草稿
-                resultData = articleService.articleAdd(article);
+                resultData = articleService.add(article);
             } else {
                 if (article.getContent() == null || article.getContent().trim().equals("")) {
                     message.append("内容不能为空.");
@@ -205,7 +205,7 @@ public class BArticleController {
                     message.append("摘要不能为空.");
                     return new CommonResult(CommonConstant.SUCCESS_CODE, message.toString(), resultData);
                 } else {
-                    resultData = articleService.articleAdd(article);
+                    resultData = articleService.add(article);
                 }
             }
             return new CommonResult(CommonConstant.SUCCESS_CODE, "", resultData);
