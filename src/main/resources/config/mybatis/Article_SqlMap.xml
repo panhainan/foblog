@@ -24,6 +24,7 @@
 		<result property="status" column="status" />
 		<result property="writeTime" column="write_time" />
 		<result property="pubTime" column="pub_time" />
+        <result property="countMessages" column="count_messages" />
 	</resultMap>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">

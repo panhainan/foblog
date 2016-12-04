@@ -16,6 +16,7 @@ public class Article {
     private Integer status;//文章状态：0-草稿，1-博文
     private Date writeTime;//撰写时间
     private Date pubTime; //发布时间
+    private int hits;//点击数
 
     @Override
 	public String toString() {
@@ -100,5 +101,13 @@ public class Article {
 
     public void setPubTime(Date pubTime) {
         this.pubTime = pubTime;
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
     }
 }

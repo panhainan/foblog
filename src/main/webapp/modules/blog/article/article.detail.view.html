@@ -65,20 +65,8 @@
                         <div class="col-sm-12 content">
                             <div ng-bind-html="article.content | trusted"></div>
                         </div>
-                        <!--<div class="col-sm-12" style="padding:0;">
-                            <div class="col-sm-12 pre">
-                                <a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
-                                <span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
-                            </div>
-                            <div class="col-sm-12 next">
-                                <a ng-if="nextArticle"
-                                   href="#/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
-                                <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
-                            </div>
-                        </div>-->
-                        <div class="row" ng-if="article.tagNames">
+                        <div class="row visible-sm visible-xs">
                             <span style="float: left;">标签：</span><span ng-repeat="tName in article.tagNames"
-                                                                       class="visible-sm visible-xs"
                                                                        style="float: left">
                                 <span class="glyphicon glyphicon-tag"></span>
                                 <a href="#/blog/tag/{{tName}}">
@@ -86,14 +74,22 @@
                                 </a>&nbsp;
 							</span>
                         </div>
-                    </div>
-                </div>
-                <div class="article-footer">
-                    <div class="row">
-
 
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row" style="padding:0;">
+            <div class="col-sm-12 pre">
+                <span class="glyphicon glyphicon-arrow-up"></span>
+                <a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
+                <span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
+            </div>
+            <div class="col-sm-12 next">
+                <span class="glyphicon glyphicon-arrow-down"></span>
+                <a ng-if="nextArticle"
+                   href="#/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
+                <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
             </div>
         </div>
         <div class="message-list">

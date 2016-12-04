@@ -110,7 +110,7 @@ public interface IArticleDao {
 
 	/**
 	 * 获取所有归档，即获取每年或者每月的归档
-	 * 
+	 *
 	 * @param articleStatus
 	 *            文章状态，传值设定为blog状态 . CommonConstant类中有对应的常量
 	 * @param archiveTypeYear
@@ -124,7 +124,7 @@ public interface IArticleDao {
 
 	/**
 	 * 获取某归档对应的所有文章
-	 * 
+	 *
 	 * @param articleStatus
 	 *            文章状态，传值设定为blog状态 . CommonConstant类中有对应的常量
 	 * @param archiveType
