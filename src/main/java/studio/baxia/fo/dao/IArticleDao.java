@@ -1,14 +1,13 @@
 package studio.baxia.fo.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.pojo.Article;
 import studio.baxia.fo.vo.ArchiveVo;
 import studio.baxia.fo.vo.ArticleVo;
+
+import java.util.List;
 
 /**
  * Created by Pan on 2016/10/13.
@@ -136,4 +135,6 @@ public interface IArticleDao {
 	List<Article> selectArchiveArticles(@Param("status") Integer articleStatus,
 			@Param("archive_type") String archiveType,
 			@Param("month_name") String monthName);
+
+    int updateHits(Article article);
 }

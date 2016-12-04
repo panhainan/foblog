@@ -7,7 +7,6 @@ public class ArticleVo extends Article {
 	private String categoryName;
 	private String statusName;
 	private String[] tagNames;
-    private int countMessages;
 	private Boolean onlyChangeStatus=false;
 	
 	public String getCategoryName() {
@@ -46,11 +45,4 @@ public class ArticleVo extends Article {
 		this.onlyChangeStatus = onlyChangeStatus;
 	}
 
-    public int getCountMessages() {
-        return countMessages;
-    }
-
-    public void setCountMessages(int countMessages) {
-        this.countMessages = countMessages;
-    }
 }

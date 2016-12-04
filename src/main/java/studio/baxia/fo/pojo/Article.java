@@ -17,6 +17,7 @@ public class Article {
     private Date writeTime;//撰写时间
     private Date pubTime; //发布时间
     private int hits;//点击数
+    private int countMessages;
 
     @Override
 	public String toString() {
@@ -109,5 +110,13 @@ public class Article {
 
     public void setHits(int hits) {
         this.hits = hits;
+    }
+
+    public int getCountMessages() {
+        return countMessages;
+    }
+
+    public void setCountMessages(int countMessages) {
+        this.countMessages = countMessages;
     }
 }

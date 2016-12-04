@@ -108,6 +108,7 @@ public class BArticleServiceImpl implements IBArticleService {
     @Override
     public Article getById(int articleId) {
         Article article = iArticleDao.selectById(articleId);
+        updateAritcleHits(articleId);
         return article;
     }
 
@@ -117,6 +118,7 @@ public class BArticleServiceImpl implements IBArticleService {
         if (article == null) {
             return null;
         }
+        updateAritcleHits(articleId);
         article.setTagNames(getAllTagNamesBy(article.getTagIds()));
         return article;
     }
@@ -129,6 +131,8 @@ public class BArticleServiceImpl implements IBArticleService {
         if (article == null) {
             return null;
         }
+        article.setCountMessages(getArticleCountMessages(article.getId()));
+        updateAritcleHits(article.getId());
         Map<String, Object> map = new HashMap<String, Object>();
         article.setTagNames(getAllTagNamesBy(article.getTagIds()));
         Article preArticle = iArticleDao.selectNextOrPreVoBy(article, false);
@@ -145,6 +149,9 @@ public class BArticleServiceImpl implements IBArticleService {
         Article article = new Article();
         article.setStatus(articleStatus);
         List<Article> result = iArticleDao.selectBy(article, pageConfig);
+        for(int i =0,len = result.size();i<len;i++){
+            result.get(i).setCountMessages(getArticleCountMessages(result.get(i).getId()));
+        }
         Integer resultCount = iArticleDao.selectCountBy(article);
         PageInfoResult<Article> pageInfoResult = new PageInfoResult(result,
                 pageConfig, resultCount);
@@ -174,6 +181,15 @@ public class BArticleServiceImpl implements IBArticleService {
             List<ArticleVo> result = iArticleDao.selectVoBy(new Article()
                     .setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
                     .setCategoryIds(category.getId()), null);
+            int countMessages=0,hits = 0;
+            for(int i =0,len = result.size();i<len;i++){
+                int messageCount = getArticleCountMessages(result.get(i).getId());
+                result.get(i).setCountMessages(messageCount);
+                hits+=result.get(i).getHits();
+                countMessages+=result.get(i).getCountMessages();
+            }
+            categoryVo.setCountMessages(countMessages);
+            categoryVo.setHits(hits);
             int counts = result == null ? 0 : result.size();
             categoryVo.setCounts(counts);
             map.put("listArticle", result);
@@ -206,6 +222,9 @@ public class BArticleServiceImpl implements IBArticleService {
             List<ArticleVo> result = iArticleDao.selectVoBy(
                     new Article().setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
                             .setTagIds(tag.getId() + ","), null);
+            for(int i =0,len = result.size();i<len;i++){
+                result.get(i).setCountMessages(getArticleCountMessages(result.get(i).getId()));
+            }
             return result;
         }
         return null;
@@ -220,7 +239,21 @@ public class BArticleServiceImpl implements IBArticleService {
     @Override
     public List<Article> getAllArchiveArticles(String name, Integer articleStatus,
                                                String archiveType) {
-        return iArticleDao.selectArchiveArticles(articleStatus, archiveType, name);
+        List<Article> list = iArticleDao.selectArchiveArticles(articleStatus, archiveType, name);
+        for(int i =0,len = list.size();i<len;i++){
+            list.get(i).setCountMessages(getArticleCountMessages(list.get(i).getId()));
+        }
+        return list;
+    }
+
+    private int getArticleCountMessages(int articleId){
+        int count = iMessageDao.selectCountByArticleId(articleId);
+        return count;
+    }
+    private void updateAritcleHits(int articleId){
+        Article article = iArticleDao.selectById(articleId);
+        article.setHits(article.getHits()+1);
+        iArticleDao.updateHits(article);
     }
 
     private String[] getAllTagNamesBy(String tagIds) {

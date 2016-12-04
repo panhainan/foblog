@@ -14,7 +14,7 @@
                 <div class="article-body">
                     <div class="row">
                         <div class="col-sm-12 summary">
-                            <div class="row">
+                            <div class="row" style="font-family: '微软雅黑';color:#9B9B9B;font-size: 13px;padding-top: 5px">
                                 <span class="glyphicon glyphicon-th-list"></span>
                                 <a style="" href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
                                 <span ng-if="article.tagNames"
@@ -25,12 +25,16 @@
                                 </a>
 							</span>
                             <span class="pull-right">
-                                <span class="glyphicon glyphicon-time" style="padding-top: 3px;"></span>
-                                <a style="font-family: '微软雅黑'" title="归档：{{article.pubTime | date :'yyyy-MM'}}"
+                                <span class="glyphicon glyphicon-time"></span>
+                                <a style="margin-right:5px" title="归档：{{article.pubTime | date :'yyyy-MM'}}"
                                    href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
                                     {{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</a>
-                            </div>
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span style="margin-right:5px">阅读({{article.hits}})</span>
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <span>评论({{article.countMessages}})</span>
                             </span>
+                            </div>
                         </div>
                         <!--<div class="col-sm-12 summary">
 
@@ -82,7 +86,8 @@
         <div class="row" style="padding:0;">
             <div class="col-sm-12 pre">
                 <span class="glyphicon glyphicon-arrow-up"></span>
-                <a ng-if="preArticle" href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
+                <a ng-if="preArticle"
+                   href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
                 <span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
             </div>
             <div class="col-sm-12 next">
@@ -128,7 +133,7 @@
         </div>
         <div class="message-new">
             <div class="row">
-                <div class="col-xs-12 message-header" >
+                <div class="col-xs-12 message-header">
                     <h3 style="padding-bottom: 10px;border-bottom: 2px silver solid;">
                         发表您的看法</h3>
 
