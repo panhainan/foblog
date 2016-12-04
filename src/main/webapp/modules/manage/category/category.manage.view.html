@@ -33,7 +33,7 @@
                                 <tr ng-repeat="category in categorys">
                                     <td>{{$index+1}}</td>
                                     <td>{{category.name}}</td>
-                                    <td>{{category.counts}} <a class="btn btn-xs btn-primary" ng-if="category.counts!=0" ng-click="editArticle(category)" style="margin: 0;"  title="点击查看">查看</a></td>
+                                    <td>{{category.counts}} <a class="btn btn-xs btn-info" ng-if="category.counts!=0" ng-click="editArticle(category)" style="margin: 0;"  title="点击查看">查看</a></td>
                                     <td>
                                         <ul class="list-unstyled" style="margin-bottom: 0px;">
                                             <li><a class="btn btn-xs btn-warning" style="margin-left: 0;margin-right:10px;"
@@ -77,7 +77,7 @@
                                             <ul class="list-unstyled">
                                                 <!--<li style="float:left"><a
                                                     ng-click="setDeleteArticle(article)">移动</a> |  </li> -->
-                                                <li style="float:left"><a class="btn btn-xs btn-primary"
+                                                <li style="float:left"><a class="btn btn-xs btn-info"
                                                                           ng-click="goArticle(article.id)">查看</a></li>
                                             </ul>
 

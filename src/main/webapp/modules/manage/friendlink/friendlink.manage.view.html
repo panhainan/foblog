@@ -34,8 +34,7 @@
 								<tbody>
 									<tr ng-repeat="friendlink in friendlinks">
 										<td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
-										<td><a ng-click="previewFriendlink(friendlink)"
-											title="点击查看">{{friendlink.name}}</a></td>
+										<td>{{friendlink.name}}</td>
 										<td><a href="{{friendlink.website}}"
                                                title="点击访问" target="_blank">{{friendlink.website}}</a></td>
 										<td>{{friendlink.priority}}</td>
@@ -44,9 +43,10 @@
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<td>
 											<ul class="list-unstyled">
-												<li style="float:left"><a ng-click="setEditFriendlink(friendlink)">编辑</a> |</li>
-												<li style="float:left"><a
-													ng-click="setDeleteFriendlink(friendlink)">删除</a></li>
+                                                <li style="float:left"><a class="btn btn-xs btn-info" style="margin-right:10px"                                                     ng-click="previewFriendlink(friendlink)" title="点击查看">查看</a></li>
+                                                <li style="float:left"><a class="btn btn-xs btn-warning" style="margin-right:10px"
+                                                                          ng-click="setEditFriendlink(friendlink)">编辑</a></li>
+												<li style="float:left"><a class="btn btn-xs btn-danger"	ng-click="setDeleteFriendlink(friendlink)">删除</a></li>
 											</ul>
 		
 										</td>

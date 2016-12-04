@@ -179,7 +179,7 @@
 				AND t1.status =#{article.status,jdbcType=VARCHAR}
 			</if>
 		</where>
-		ORDER BY t1.pub_time DESC
+		ORDER BY t1.id DESC
 		<if
 			test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
 			LIMIT

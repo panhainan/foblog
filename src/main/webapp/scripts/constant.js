@@ -23,6 +23,8 @@ var nav_index = "index";
 var nav_archive = "archive";
 var nav_category = "category";
 var nav_tag = "tag";
+var dialogwidth = window.screen.width*80/100;
+var dialogheight = window.screen.height*50/100;
 var setScreenAvailHeight=function(){
 	var availHeight= window.screen.availHeight;
 //	console.log(availHeight)

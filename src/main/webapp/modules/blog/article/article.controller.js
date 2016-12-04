@@ -3,7 +3,7 @@ app.controller("ArticleController", function($uibModal,$scope,ArticleService) {
     $scope.loadingPath=loading_path;
     $scope.loaded = false;
     $scope.currentPage = 1;
-    $scope.pageSize = 3;
+    $scope.pageSize = 10;
 
     $scope.pageChanged = function() {
         //console.log('Page changed to: ' + $scope.currentPage);

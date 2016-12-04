@@ -3,7 +3,7 @@ app.controller("ArticleManageController", function($uibModal,$scope,ArticleManag
 	setScreenAvailHeight();
 //	console.log("ArticleManageController")
     $scope.currentPage = 1;
-    $scope.pageSize = 3;
+    $scope.pageSize = 10;
 
     $scope.pageChanged = function() {
         //console.log('Page changed to: ' + $scope.currentPage);

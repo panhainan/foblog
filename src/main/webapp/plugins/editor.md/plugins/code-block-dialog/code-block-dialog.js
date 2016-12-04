@@ -90,8 +90,8 @@
                 dialog = this.createDialog({
                     name   : dialogName,
                     title  : dialogLang.title,
-                    width  : 780,
-                    height : 565,
+                    width  : "80%",
+                    height : "60%",
                     mask   : settings.dialogShowMask,
                     drag   : settings.dialogDraggable,
                     content    : dialogHTML,
@@ -188,7 +188,7 @@
 					border    : "1px solid #ddd",
 					fontSize  : settings.fontSize,
 					width     : "100%",
-					height    : "390px"
+					height    : "200px"
 				});
 
 				cmEditor.on("change", function(cm) {

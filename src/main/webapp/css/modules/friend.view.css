@@ -2,17 +2,17 @@
 	padding:15px 8px;
 }
 .friend-body .col-sm-12{
-    padding:10px 0;
+    padding:10px 10px;
 }
 .friend-body .col-md-6{
     padding:10px 10px;
 }
 .friend-body .col-lg-4{
-    padding:10px 15px;
+    padding:10px 10px;
 }
 .friend-card {
     padding:  0px;
-    margin-right: 10px;
+    margin-right: 0px;
 }
 
 .friend-card  .panel-heading {

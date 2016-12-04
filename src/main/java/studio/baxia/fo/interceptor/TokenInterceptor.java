@@ -3,7 +3,6 @@ package studio.baxia.fo.interceptor;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import studio.baxia.fo.util.ExecuteSecurity;
-import studio.baxia.fo.util.TokenException;
 import studio.baxia.fo.util.TokenManagerUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,8 +49,9 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if (!tokenManager.checkToken(token)) {
             String message = String.format("token [%s] is invalid", token);
             System.out.println(message);
-            throw new TokenException(message);
-//            return false;
+            response.addHeader("x-login", "true");
+//            throw new TokenException(message);
+            return false;
         }
         // 调用目标方法
         return true;

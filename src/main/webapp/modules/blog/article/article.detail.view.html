@@ -16,17 +16,19 @@
                         <div class="col-sm-12 summary">
                             <div class="row">
                                 <span class="glyphicon glyphicon-th-list"></span>
-                            <a style="" href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
-                            <span ng-if="article.tagNames" class="glyphicon glyphicon-tags  hidden-sm hidden-xs"></span>
+                                <a style="" href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
+                                <span ng-if="article.tagNames"
+                                      class="glyphicon glyphicon-tags  hidden-sm hidden-xs"></span>
                             <span ng-repeat="tName in article.tagNames" class="hidden-sm hidden-xs">
                                 <a href="#/blog/tag/{{tName}}">
                                     <span> {{tName}} </span>
                                 </a>
 							</span>
                             <span class="pull-right">
-                                <span class="glyphicon glyphicon-time" style="padding-top: 3px;" ></span>
-                                <a style="font-family: '微软雅黑'" title="归档：{{article.pubTime | date :'yyyy-MM'}}"  href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
-                                {{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</a>
+                                <span class="glyphicon glyphicon-time" style="padding-top: 3px;"></span>
+                                <a style="font-family: '微软雅黑'" title="归档：{{article.pubTime | date :'yyyy-MM'}}"
+                                   href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
+                                    {{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</a>
                             </div>
                             </span>
                         </div>
@@ -74,9 +76,11 @@
                                 <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
                             </div>
                         </div>-->
-                        <div class="row">
-                            <span style="float: left;">标签：</span><span ng-repeat="tName in article.tagNames" class="visible-sm visible-xs" style="float: left">
-                                <span ng-if="article.tagNames" class="glyphicon glyphicon-tag"></span>
+                        <div class="row" ng-if="article.tagNames">
+                            <span style="float: left;">标签：</span><span ng-repeat="tName in article.tagNames"
+                                                                       class="visible-sm visible-xs"
+                                                                       style="float: left">
+                                <span class="glyphicon glyphicon-tag"></span>
                                 <a href="#/blog/tag/{{tName}}">
                                     <span> {{tName}} </span>
                                 </a>&nbsp;
@@ -87,16 +91,23 @@
                 <div class="article-footer">
                     <div class="row">
 
-                        <div class="col-xs-12 message-body" style="margin: 0;">
-                            <h3 id="message-body-top" style="padding-bottom: 10px;border-bottom: 2px silver solid;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="message-list">
+            <div class="row">
+                <div class="col-xs-12 message-body" style="margin: 0;">
+                    <h3 id="message-body-top" style="padding-bottom: 10px;border-bottom: 2px silver solid;">
                                 <span class="glyphicon btn-lg glyphicon-comment"
                                       style="padding: 3px 6px;"></span>留言<span style="color: #7E7E7E;font-size: 14px;"
                                                                                ng-if="messages">（{{messages.length}}条）</span>
-                            </h3>
+                    </h3>
 
-                            <p style="color: #7E7E7E;">注意：请慎重投出你的支持票，谢谢配合！^_^</p>
+                    <p style="color: #7E7E7E;">注意：请慎重投出你的支持票，谢谢配合！^_^</p>
 
-                            <div class="message-card" ng-repeat="msg in messages">
+                    <div class="message-card" ng-repeat="msg in messages">
                                 <span style="background-color: #52768E;padding: 8px 15px;height: 36px;line-height: 36px;color: #fff;text-shadow: 5px 5px 5px #3f5b6e;">
                                     <a ng-if="msg.guestWebsite" href="http://{{msg.guestWebsite}}" target="_blank"><span
                                             style="color:#fff;text-decoration: underline;">{{msg.guestNickname}}</span></a>
@@ -109,76 +120,79 @@
                                             style="padding: 2px 0 0 0;"></span></a>
                                 </span>
 
-                                <div style="padding: 10px 15px 5px 15px;">
-                                    <div ng-bind-html="msg.messageContent | trusted"></div>
-                                </div>
-                                <p class=""
-                                   style="color:#B9B9B9;margin:0 10px 4px 0;font-size: 10px;text-align: right;">发表于
-                                    {{msg.messagePubTime | date:'yyyy-MM-dd HH:mm'}}</p>
-                            </div>
+                        <div style="padding: 10px 15px 5px 15px;">
+                            <div ng-bind-html="msg.messageContent | trusted"></div>
                         </div>
-                        <div class="col-xs-12 message-header">
-                            <h4 style="padding-bottom: 10px;border-bottom: 1px silver solid;margin-bottom: 0">
-                                发表您的看法</h4>
-
-                            <form class="form-horizontal" name="messageForm" ng-submit="comment(messageForm.$valid)"
-                                  novalidate>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>邮箱</label><span style="padding-left:20px;font-size: 12px;color:green;"
-                                                               ng-bind="emailValidInfo"></span>
-
-                                        <div><input placeholder="必填，放心我不会公开也不会发送广告" class="form-control" type="email"
-                                                    name="email" ng-model="guest.email"
-                                                    ng-blur="getGuestInfoByEmail(guest.email)" required/></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>昵称</label><span style="padding-left:20px;font-size: 12px;color:green;"
-                                                               ng-bind="nicknameValidInfo"></span>
-
-                                        <div><input placeholder="必填，您的大名" class="form-control" type="text"
-                                                    ng-blur="getGuestInfoByNickname(guest.email,guest.nickname)"
-                                                    ng-disabled="!guest.email" name="nickname" ng-model="guest.nickname"
-                                                    type="text" required/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label>个人网址</label>
-
-                                        <div><input placeholder="希望我们能够互相信任 ^_^" class="form-control"
-                                                    ng-disabled="!guest.email" name="personalWebsite"
-                                                    ng-model="guest.personalWebsite" type="text"/></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>观点</label><span style="padding-left:20px;font-size: 12px;color:green;"
-                                                           ng-bind="contentValidInfo"></span>
-
-                                    <div class="col-sm-12">
-                                        <div id="message-editormd"
-                                             style="margin-bottom: 0;width:100%;border-color: silver;">
-                                        <textarea class="editormd-markdown-textarea"
-                                                  name="$id-markdown-doc"></textarea>
-                                            <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
-                                        <textarea class="editormd-html-textarea"
-                                                  name="$id-html-code"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-primary"
-                                        style="width: 100px;margin-top: 10px;">提 交
-                                </button>
-                                <span style="line-height: 36px;color:green" ng-bind="resultMessage"></span>
-                            </form>
-                        </div>
+                        <p class=""
+                           style="color:#B9B9B9;margin:0 10px 4px 0;font-size: 10px;text-align: right;">发表于
+                            {{msg.messagePubTime | date:'yyyy-MM-dd HH:mm'}}</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="message-new">
+            <div class="row">
+                <div class="col-xs-12 message-header" >
+                    <h3 style="padding-bottom: 10px;border-bottom: 2px silver solid;">
+                        发表您的看法</h3>
+
+                    <form class="form-horizontal" name="messageForm" ng-submit="comment(messageForm.$valid)"
+                          novalidate>
+                        <div class="form-group">
+                            <div class="row">
+                                <label>邮箱</label><span style="padding-left:20px;font-size: 12px;color:green;"
+                                                       ng-bind="emailValidInfo"></span>
+
+                                <div><input placeholder="必填，放心我不会公开也不会发送广告" class="form-control" type="email"
+                                            name="email" ng-model="guest.email"
+                                            ng-blur="getGuestInfoByEmail(guest.email)" required/></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label>昵称</label><span style="padding-left:20px;font-size: 12px;color:green;"
+                                                       ng-bind="nicknameValidInfo"></span>
+
+                                <div><input placeholder="必填，您的大名" class="form-control" type="text"
+                                            ng-blur="getGuestInfoByNickname(guest.email,guest.nickname)"
+                                            ng-disabled="!guest.email" name="nickname" ng-model="guest.nickname"
+                                            type="text" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label>个人网址</label>
+
+                                <div><input placeholder="希望我们能够互相信任 ^_^" class="form-control"
+                                            ng-disabled="!guest.email" name="personalWebsite"
+                                            ng-model="guest.personalWebsite" type="text"/></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>观点</label><span style="padding-left:20px;font-size: 12px;color:green;"
+                                                   ng-bind="contentValidInfo"></span>
+
+                            <div class="col-sm-12" style="padding:0">
+                                <div id="message-editormd"
+                                     style="margin-bottom: 0;width:100%;border-color: silver;">
+                                        <textarea class="editormd-markdown-textarea"
+                                                  name="$id-markdown-doc"></textarea>
+                                    <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
+                                        <textarea class="editormd-html-textarea"
+                                                  name="$id-html-code"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-primary"
+                                style="width: 100px;margin-top: 10px;">提 交
+                        </button>
+                        <span style="line-height: 36px;color:green" ng-bind="resultMessage"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <style>

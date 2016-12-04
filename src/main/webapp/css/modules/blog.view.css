@@ -10,7 +10,7 @@
 
 .body-content-body {
 	padding: 20px 15px 10px 15px;
-	margin: 0 20px;
+	/*margin: 0 20px;*/
 }
 
 .article {
@@ -87,6 +87,20 @@
     /*margin: 0;*/
     padding: 0;
 }
+.message-list{
+    padding: 10px 15px 20px 15px;
+    background-color: #fff;
+    /* min-height: 600px; */
+    height: 100%;
+    margin: 20px 0px;
+}
+.message-new{
+    padding: 10px 15px 40px 15px;
+    background-color: #fff;
+    /* min-height: 600px; */
+    height: 100%;
+    margin: 0px 0px 20px 0px;
+}
 .message-header .form-group{
     margin: 0;
 }
@@ -121,6 +135,6 @@
 		margin: 0;
 	}
 	.article {
-		padding: 10px;
+		padding: 20px;
 	}
 }
