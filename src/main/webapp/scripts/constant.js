@@ -1,7 +1,7 @@
 /**
  * Created by Pan on 2016/9/11.
  */
-var web_project_name = "/foblog";
+var web_project_name = "";
 var web_project_host = "http://localhost:8080";
 var loading_path =web_project_name+"/images/loading.gif";
 var cfg_form = {

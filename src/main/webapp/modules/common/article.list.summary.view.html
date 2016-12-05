@@ -1,9 +1,9 @@
 <div>
     <p style="color:#666666;text-indent: 30px">{{article.summary}}</p>
 
-    <p style="text-align: right;color:#999999;margin-bottom: 0">
-        <span><span class="glyphicon glyphicon-time" style="padding: 0px;margin-right: 4px;"></span>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</span>
-        <span style="padding-left: 10px"><span class="glyphicon glyphicon-eye-open" style="padding: 0px;margin-right: 4px;"></span>阅读({{article.hits}})</span>
-        <span style="padding-left: 10px"><span class="glyphicon glyphicon-comment" style="padding: 0px;margin-right: 4px;"></span>评论({{article.countMessages}})</span>
+    <p style="text-align: right;color:#999999;margin-bottom: 0;font-size: 13px;">
+        <span><span class="glyphicon glyphicon-time" style="padding: 0px;margin-right: 2px;"></span>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</span>
+        <span style="padding-left: 5px"><span class="glyphicon glyphicon-eye-open" style="padding: 0px;margin-right: 2px;"></span>阅读({{article.hits}})</span>
+        <span style="padding-left: 5px"><span class="glyphicon glyphicon-comment" style="padding: 0px;"></span>评论({{article.countMessages}})</span>
     </p>
 </div>
