@@ -6,6 +6,8 @@ app.controller("SignManageController", function($scope, $rootScope,SignManageSer
 			if (data.resultCode == 1) {
                 if(data.resultData==null){
                     alert("用户名或者密码错误！");
+                    $scope.user.account="";
+                    $scope.user.password="";
                 }else{
                     sessionStorage.setItem("token",data.resultData);
                     $location.path("/manage/info");
