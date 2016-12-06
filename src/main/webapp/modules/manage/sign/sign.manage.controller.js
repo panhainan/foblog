@@ -4,10 +4,14 @@ app.controller("SignManageController", function($scope, $rootScope,SignManageSer
 		SignManageService.post(author).then(function(data) {
 			console.log(data);
 			if (data.resultCode == 1) {
-                sessionStorage.setItem("token",data.resultData);
-				$location.path("/manage/info");
+                if(data.resultData==null){
+                    alert("用户名或者密码错误！");
+                }else{
+                    sessionStorage.setItem("token",data.resultData);
+                    $location.path("/manage/info");
+                }
 			}else{
-                alert("用户名或者密码错误！");
+                alert("服务器异常，请稍后再试！");
             }
 		})
 	}

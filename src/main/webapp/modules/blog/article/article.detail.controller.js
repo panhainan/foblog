@@ -4,6 +4,28 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
     $scope.loadingPath=loading_path;
     $scope.loaded = false;
     $(function () {
+        $("#gomessages").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:$("#message-list").offset().top-40
+            },500);
+        });
+        $("#gomessage").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:$("#message-new").offset().top-40
+            },500);
+        });
+        $("#gotop").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:0
+            },500);
+        });
+        $(window).scroll(function() {
+            if ( $(this).scrollTop() > 300){
+                $('#gotop').fadeIn("fast");
+            } else {
+                $('#gotop').stop().fadeOut("fast");
+            }
+        });
         messageEditor = editormd("message-editormd", {
             width: "100%",
             height: 250,

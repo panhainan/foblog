@@ -25,9 +25,9 @@
 										<td>#</td>
 										<td>网站名称</td>
 										<td>URL</td>
-                                        <td>优先级</td>
+                                        <td class="hidden-xs">优先级</td>
                                         <td>点击量</td>
-                                        <td>添加时间</td>
+                                        <td class="hidden-xs">添加时间</td>
 										<td>操作</td>
 									</tr>
 								</thead>
@@ -37,17 +37,16 @@
 										<td>{{friendlink.name}}</td>
 										<td><a href="{{friendlink.website}}"
                                                title="点击访问" target="_blank">{{friendlink.website}}</a></td>
-										<td>{{friendlink.priority}}</td>
+										<td class="hidden-xs">{{friendlink.priority}}</td>
                                         <td>{{friendlink.hits}}</td>
-										<td>{{friendlink.addTime | date
+										<td class="hidden-xs">{{friendlink.addTime | date
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<td>
-											<ul class="list-unstyled">
-                                                <li style="float:left"><a class="btn btn-xs btn-info" style="margin-right:10px"                                                     ng-click="previewFriendlink(friendlink)" title="点击查看">查看</a></li>
-                                                <li style="float:left"><a class="btn btn-xs btn-warning" style="margin-right:10px"
-                                                                          ng-click="setEditFriendlink(friendlink)">编辑</a></li>
-												<li style="float:left"><a class="btn btn-xs btn-danger"	ng-click="setDeleteFriendlink(friendlink)">删除</a></li>
-											</ul>
+											<a class="btn btn-xs btn-info" style="margin-right:8px"  ng-click="previewFriendlink(friendlink)" title="点击查看">查看</a>
+                                             <a class="btn btn-xs btn-warning" style="margin-right:8px"
+                                                                          ng-click="setEditFriendlink(friendlink)">编辑</a>
+											<a class="btn btn-xs btn-danger"	ng-click="setDeleteFriendlink(friendlink)">删除</a>
+
 		
 										</td>
 									</tr>

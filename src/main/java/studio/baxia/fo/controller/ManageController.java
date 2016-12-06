@@ -17,37 +17,46 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller("manageController")
-@RequestMapping(value = "/manage")
+@RequestMapping(value = "")
 public class ManageController {
 	@Autowired
 	private IUserService userService;
 
-	/*
-	 * @RequestMapping(value = "", method = { RequestMethod.GET }) public String
-	 * manage() { System.out.println("manage/signin"); return "manage/index"; }
-	 */
-
+    @ResponseBody
+    @RequestMapping(value = "/author" ,method={RequestMethod.GET})
+    public CommonResult about(HttpServletRequest request) {
+        Authors author = userService.getAuthor(CommonConstant.AUTHOR_ID);
+        return new CommonResult(CommonConstant.SUCCESS_CODE, "",
+                author);
+    }
 	@ResponseBody
-	@RequestMapping(value = "/signin", method = { RequestMethod.POST })
+	@RequestMapping(value = "/manage/signin", method = { RequestMethod.POST })
 	public CommonResult signin(@RequestBody AuthorVo authorVo,
 			HttpServletRequest request) {
 		System.out.println("/signin->参数：" + authorVo);
 		String resultData="";
 		String message = null;
+        boolean isSuccess = true;
 		CommonResult commonResult;
 		try {
             resultData = userService.signInCheck(authorVo, request);
 		} catch (Exception e) {
 			message = e.getMessage();
+            isSuccess = false;
 		} finally {
-				commonResult = new CommonResult(CommonConstant.SUCCESS_CODE,
+            if(isSuccess){
+                commonResult = new CommonResult(CommonConstant.SUCCESS_CODE,
                         message, resultData);
+            }else{
+                commonResult = new CommonResult(CommonConstant.FAIL_CODE,
+                        message, resultData);
+            }
             return commonResult;
 		}
 	}
     @ExecuteSecurity
 	@ResponseBody
-	@RequestMapping(value = "/author" ,method={RequestMethod.GET})
+	@RequestMapping(value = "/manage/author" ,method={RequestMethod.GET})
 	public CommonResult getInfo(HttpServletRequest request) {
 		Authors author = null;
 		author = userService.getInfo(request);
@@ -56,7 +65,7 @@ public class ManageController {
 	}
     @ExecuteSecurity
 	@ResponseBody
-	@RequestMapping(value = "/author" ,method={RequestMethod.PUT})
+	@RequestMapping(value = "/manage/author" ,method={RequestMethod.PUT})
 	public CommonResult updateInfo(HttpServletRequest request,@RequestBody Authors info){
 		Boolean result = userService.updateInfo(request,info);
 		return new CommonResult(CommonConstant.SUCCESS_CODE, "",
@@ -64,7 +73,7 @@ public class ManageController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/getKeys")
+	@RequestMapping(value = "/manage/getKeys")
 	public Map<String, Object> generateKeypair(HttpServletRequest request) {
 		Map<String, Object> map = null;
 		try {

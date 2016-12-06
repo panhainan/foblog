@@ -4,7 +4,7 @@ app.controller("InfoFormManageController", function($location,$scope,InfoManageS
     var infoEditor;
 	var getInfo = function(){
 		InfoManageService.get().then(function(data){
-			console.log(data);
+			//console.log(data);
 			if(data.resultData!=null){
 				$scope.info = data.resultData;
 			}

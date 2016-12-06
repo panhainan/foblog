@@ -13,6 +13,9 @@
 .tag-body .col-sm-6,.tag-body .col-md-4,.tag-body .col-lg-3{
     padding:10px 10px 10px 10px;
 }
+.body-category-body,.body-tag-body{
+    margin: 0 10px;
+}
 .category-card {
     margin: 0 10px;
 	padding:  0px;

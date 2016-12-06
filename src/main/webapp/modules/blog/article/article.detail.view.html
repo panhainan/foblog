@@ -97,7 +97,7 @@
                 <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
             </div>
         </div>
-        <div class="message-list">
+        <div class="message-list" id="message-list">
             <div class="row">
                 <div class="col-xs-12 message-body" style="margin: 0;">
                     <h3 id="message-body-top" style="padding-bottom: 10px;border-bottom: 2px silver solid;">
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="message-new">
+        <div class="message-new" id="message-new">
             <div class="row">
                 <div class="col-xs-12 message-header">
                     <h3 style="padding-bottom: 10px;border-bottom: 2px silver solid;">
@@ -196,6 +196,9 @@
 
     </div>
 </div>
+<div id="gomessages"><span title="查看留言" class="glyphicon glyphicon-comment"></span></div>
+<div id="gomessage"><span title="表达看法" class="glyphicon 	glyphicon glyphicon-edit"></span></div>
+<div id="gotop"><span title="回到顶部" class="glyphicon glyphicon-chevron-up"></span></div>
 <style>
     .editormd {
         padding-top: 6px;
@@ -204,26 +207,27 @@
     /*    .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty{
             width: 100%;
         }*/
+    #gomessages,#gomessage,#gotop {
+        position: fixed;
+        right: 20px;
+        padding: 5px 10px;
+        font-size: 20px;
+        background: #B7B7B7;
+        color: white;
+        cursor: pointer;
+        z-index: 100;
+    }
+    #gotop {
+        display: none;
+        bottom: 112px;
+    }
+    #gomessages{
+        bottom: 71px;
+    }
+    #gomessage {
+        bottom: 30px;
+    }
+    #gotop:hover,#gomessage:hover,#gomessages:hover{
+        background: #777;
+    }
 </style>
-<script>
-    /*    var messageEditor;
-
-     $(function () {
-     messageEditor = editormd("message-editormd", {
-     width: "100%",
-     height: 180,
-     watch:false,
-     path: web_project_name + "/plugins/editor.md/lib/",
-     toolbarIcons: function () {
-     return editormd.toolbarModes["mini"];
-     },
-     toolbar  : false,             //关闭工具栏
-     saveHTMLToTextarea: true,
-     lineNumbers:false,
-     styleSelectedText:false,
-     styleActiveLine:false,
-     autoFocus:false,
-     toolbarAutoFixed:false
-     });
-     });*/
-</script>

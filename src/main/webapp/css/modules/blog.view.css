@@ -10,16 +10,17 @@
 
 .body-content-body {
 	padding: 20px 15px 10px 15px;
-	/*margin: 0 20px;*/
+	margin: 0 5px;
+}
+.article {
+    padding: 10px 40px 30px 40px;
+    background-color: #fff;
+    /* min-height: 600px; */
+    height: 100%;
+    /*border: 1px solid #E6E6E6;*/
 }
 
-.article {
-	padding: 10px 40px 30px 40px;
-	background-color: #fff;
-	/* min-height: 600px; */
-	height: 100%;
-	/*border: 1px solid #E6E6E6;*/
-}
+
 
 .article-header {
 	/* padding-top:10px; */
@@ -69,7 +70,10 @@
 }
 
 .article-body .content {
+    font: 16px "Microsoft Yahei","Arial", "Helvetica Neue", Helvetica, "Hiragino Sans GB",
+    "STHeiti", "WenQuanYi Micro Hei",  sans-serif;
 	padding: 20px 0px;
+    line-height: 180%;
 }
 
 .article-body img {
@@ -101,6 +105,9 @@
     height: 100%;
     margin: 0px 0px 20px 0px;
 }
+.message-header{
+    padding:0 25px;
+}
 .message-header .form-group{
     margin: 0;
 }
@@ -117,6 +124,7 @@
     margin-bottom: 30px;
     height: 100%;
     width: 100%;
+    padding:0 25px;
 }
 .message-card{
     margin-bottom: 10px;
@@ -131,10 +139,23 @@
     background-color: silver;
 }
 @media ( max-width : 768px) {
-	.body-content-body {
-		margin: 0;
-	}
-	.article {
-		padding: 20px;
-	}
+    .body-content-body {
+        margin: 0;
+    }
+    .article {
+        padding: 20px;
+    }
+    .pre {
+        padding: 13px 20px 7px 20px;
+    }
+
+    .next {
+        padding: 10px 20px 10px 20px;
+    }
+    .message-body{
+        padding:0 5px;
+    }
+    .message-header{
+        padding:0 5px;
+    }
 }

@@ -93,4 +93,10 @@ public interface IUserService {
 
 	Boolean updateInfo(HttpServletRequest request, Authors info);
 
+    /**
+     * 获取网站作者信息
+     * @param authorId
+     * @return
+     */
+    Authors getAuthor(int authorId);
 }

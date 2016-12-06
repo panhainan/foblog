@@ -1,19 +1,25 @@
 <div class="customContainer">
     <div class="archive-body">
         <ol class="breadcrumb">
-            <li><a href="#/">XXX的博客</a></li>
+            <li><a href="#/"><ng-include src="'modules/common/web-name.html'"></ng-include></a></li>
             <li><a href="#/blog/archive">归档</a></li>
             <li class="active">{{archiveName}}</li>
         </ol>
         <ng-include src="'modules/common/loading.html'"></ng-include>
-        <div ng-show="loaded" ng-repeat="article in archiveArticles" class="card">
-            <div>
-                <h3>
-                    <a href="#/blog/article/{{article.title}}"
-                       title="{{article.title}}">{{article.title}}</a>
-                </h3>
+        <div ng-show="loaded">
+            <div class="body-archive-body">
+                <div  ng-repeat="article in archiveArticles" class="card">
+                    <h3>
+                        <a style="color:#000" href="#/blog/article/{{article.title}}"
+                           title="{{article.title}}">{{article.title}}</a>
+                        <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
+                            <a
+                                    href="#/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </span>
+                    </h3>
+                    <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
+                </div>
             </div>
-            <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
         </div>
     </div>
 </div>

@@ -5,7 +5,11 @@
 		<div class="card" style="" ng-repeat="article in articles">
 			<div>
 				<h3>
-					<a href="#/blog/article/{{article.title}}" title="{{article.title}}">{{article.title}}</a>
+					<a style="color:#000" href="#/blog/article/{{article.title}}" title="{{article.title}}">{{article.title}}</a>
+                    <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
+                        <a
+                            href="#/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </span>
 				</h3>
 			</div>
             <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>

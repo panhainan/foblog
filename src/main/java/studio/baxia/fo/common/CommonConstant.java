@@ -4,6 +4,7 @@ package studio.baxia.fo.common;
  * Created by Pan on 2016/10/13.
  */
 public class CommonConstant {
+    public static final int AUTHOR_ID =1;//设定作者在数据库中的id为1
     public static final int ACTICLE_STATUS_DRAFT = 0;
     public static final int ACTICLE_STATUS_BLOG = 1;
 

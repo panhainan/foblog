@@ -8,6 +8,7 @@ import studio.baxia.fo.pojo.Authors;
 import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.util.CookieUtil;
 import studio.baxia.fo.util.JCryptionUtil;
+import studio.baxia.fo.util.MD5Util;
 import studio.baxia.fo.util.TokenManagerUtil;
 import studio.baxia.fo.vo.AuthorVo;
 
@@ -114,9 +115,10 @@ public class UserServiceImpl implements IUserService {
 			String password = URLDecoder.decode(
 					JCryptionUtil.decrypt(authorVo.getPassword(), keys),
 					"utf-8");
-			if (!au.getPassword().equals(password)) {
-				return null;
-			}
+            String cryptPwd = MD5Util.MD5(account+password);
+            if(cryptPwd==null||!cryptPwd.equals(au.getPassword())){
+                return null;
+            }
             token = tokenManager.createToken(au.getAccount());
             System.out.println("用户'" + au.getAccount() + "'生成的token:" + token);
 		} catch (Exception e) {
@@ -155,7 +157,19 @@ public class UserServiceImpl implements IUserService {
 		}
 		return true;
 	}
-	private String getAuthorInSession(HttpServletRequest request){
+
+    /**
+     * 获取网站作者信息
+     *
+     * @param authorId
+     * @return
+     */
+    @Override
+    public Authors getAuthor(int authorId) {
+        return iAuthorsDao.selectById(authorId);
+    }
+
+    private String getAuthorInSession(HttpServletRequest request){
         String token = request.getHeader(CookieUtil.DEFAULT_TOKEN_NAME);
 		return tokenManager.getUserName(token);
 	}

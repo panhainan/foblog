@@ -76,13 +76,13 @@
         simple : [
             "undo", "redo", "|", 
             "bold", "del", "italic", "quote", "|",
-            "h1", "h2", "h3",  "|","list-ul", "list-ol", "hr", "|",
+            "h2", "h3","h4",  "|","list-ul", "list-ol", "hr", "|",
             "link", "reference-link", "image", "code","code-block", "table", "datetime","pagebreak", "|",
             "watch", "preview", "help",
 
         ],
         mini : [
-            "undo", "redo", "|","bold","link","code","code-block",
+            "undo", "redo", "|","bold","link","code",
             "watch", "preview"
         ],
 		none:[]
@@ -104,7 +104,7 @@
         delay                : 300,            // Delay parse markdown to html, Uint : ms
         autoLoadModules      : true,           // Automatic load dependent module files
         watch                : true,
-        placeholder          : "请合法输入文字，可使用markdown语法。",
+        placeholder          : "请合法输入文字，可使用markdown语法。\n代码块前后行使用```。",
         gotoLine             : true,
         codeFold             : false,
         autoHeight           : false,

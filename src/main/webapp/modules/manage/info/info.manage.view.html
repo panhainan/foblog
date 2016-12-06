@@ -17,9 +17,11 @@
 						</h3>
 					</div>
 					<div class="panel-body" >
-						<div>笔名：{{info.penName}}</div>
-						<div>常用邮箱：{{info.email}}</div>
-						<div>个人介绍：<div ng-bind-html="info.profile | trusted"></div></div>
+						<div style="margin: 10px;">
+                            笔名：{{info.penName}}<br/>
+                            常用邮箱：{{info.email}}
+                        </div>
+						<div style="padding: 20px;margin: 10px;border: 1px #EEEEEE solid"><div ng-bind-html="info.profile | trusted"></div></div>
 					</div>
 					
 				</div>

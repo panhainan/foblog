@@ -30,7 +30,9 @@
 .archive-body .col-xs-6, .archive-body .col-xs-7, .archive-body .col-xs-8, .archive-body .col-xs-9 {
     padding:0 10px;
 }
-
+.body-archive-body{
+    margin: 0 10px;
+}
 .archive-card {
     padding: 10px 0px;
     margin-right: 0px;
