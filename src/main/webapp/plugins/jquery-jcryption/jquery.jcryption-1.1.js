@@ -54,14 +54,12 @@
 	$.jCryption.getKeys = function(url,callback) {
 		var base = this;
 		base.getKeys = function() {
-//			$.ajaxSettings.async = false;
 			$.getJSON(url,function(data){
 				keys = new base.jCryptionKeyPair(data.e,data.n,data.maxdigits);
 				if($.isFunction(callback)) {
 					callback.call(this, keys);
 				}
 			});
-//			$.ajaxSettings.async = true;
 		};
 
 		base.jCryptionKeyPair = function(encryptionExponent, modulus, maxdigits) {

@@ -8,7 +8,7 @@ import studio.baxia.fo.pojo.Authors;
 import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.util.CookieUtil;
 import studio.baxia.fo.util.JCryptionUtil;
-import studio.baxia.fo.util.MD5Util;
+import studio.baxia.fo.util.MDUtil;
 import studio.baxia.fo.util.TokenManagerUtil;
 import studio.baxia.fo.vo.AuthorVo;
 
@@ -80,6 +80,7 @@ public class UserServiceImpl implements IUserService {
 			JCryptionUtil jCryption = new JCryptionUtil();
 			KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
 			if (keys == null) {
+//                jCryption=null;
 				keys = jCryption.generateKeypair(512);
 				request.getSession().setAttribute("keys", keys);
 			}
@@ -91,8 +92,7 @@ public class UserServiceImpl implements IUserService {
 			map.put("n", n);
 			map.put("maxdigits", md);
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("服务器异常，获取密钥失败！");
+			throw new RuntimeException("服务器异常，获取密钥失败！");
 		}
 		return map;
 	}
@@ -115,7 +115,7 @@ public class UserServiceImpl implements IUserService {
 			String password = URLDecoder.decode(
 					JCryptionUtil.decrypt(authorVo.getPassword(), keys),
 					"utf-8");
-            String cryptPwd = MD5Util.MD5(account+password);
+            String cryptPwd = MDUtil.encodeMD5ToStr(account + password);
             if(cryptPwd==null||!cryptPwd.equals(au.getPassword())){
                 return null;
             }
@@ -123,11 +123,21 @@ public class UserServiceImpl implements IUserService {
             System.out.println("用户'" + au.getAccount() + "'生成的token:" + token);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception("服务器异常，解码失败！");
+			throw new RuntimeException("服务器异常，解码失败！");
 		}
         return token;
 	}
-	@Override
+    @Override
+    public void signOut(HttpServletRequest request) {
+        tokenManager.deleteToken(getAuthorInSession(request));
+    }
+
+    private String getAuthorInSession(HttpServletRequest request){
+        String token = request.getHeader(CookieUtil.DEFAULT_TOKEN_NAME);
+        return tokenManager.getUserName(token);
+    }
+
+    @Override
 	public Authors getInfo(HttpServletRequest request) {
 		String account = getAuthorInSession(request);
 		if(account ==null){
@@ -158,21 +168,11 @@ public class UserServiceImpl implements IUserService {
 		return true;
 	}
 
-    /**
-     * 获取网站作者信息
-     *
-     * @param authorId
-     * @return
-     */
     @Override
     public Authors getAuthor(int authorId) {
         return iAuthorsDao.selectById(authorId);
     }
 
-    private String getAuthorInSession(HttpServletRequest request){
-        String token = request.getHeader(CookieUtil.DEFAULT_TOKEN_NAME);
-		return tokenManager.getUserName(token);
-	}
 
 	
 

@@ -19,69 +19,105 @@ import java.util.Map;
 @Controller("manageController")
 @RequestMapping(value = "")
 public class ManageController {
-	@Autowired
-	private IUserService userService;
+
+    @Autowired
+    private IUserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/author" ,method={RequestMethod.GET})
+    @RequestMapping(value = "/author", method = {RequestMethod.GET})
     public CommonResult about(HttpServletRequest request) {
         Authors author = userService.getAuthor(CommonConstant.AUTHOR_ID);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "",
                 author);
     }
-	@ResponseBody
-	@RequestMapping(value = "/manage/signin", method = { RequestMethod.POST })
-	public CommonResult signin(@RequestBody AuthorVo authorVo,
-			HttpServletRequest request) {
-		System.out.println("/signin->参数：" + authorVo);
-		String resultData="";
-		String message = null;
+
+    @ExecuteSecurity
+    @ResponseBody
+    @RequestMapping(value = "/manage/signout", method = {RequestMethod.DELETE})
+    public CommonResult signout(HttpServletRequest request) {
+        CommonResult commonResult;
+        userService.signOut(request);
+        commonResult = new CommonResult(CommonConstant.SUCCESS_CODE,
+                "已成功注销！");
+        return commonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/manage/signin", method = {RequestMethod.POST})
+    public CommonResult signin(@RequestBody AuthorVo authorVo,
+                               HttpServletRequest request) {
+        System.out.println("/signin->参数：" + authorVo);
+        String resultData = "";
+        String message = null;
         boolean isSuccess = true;
-		CommonResult commonResult;
-		try {
+        CommonResult commonResult;
+        try {
             resultData = userService.signInCheck(authorVo, request);
-		} catch (Exception e) {
-			message = e.getMessage();
+        } catch (Exception e) {
+            message = e.getMessage();
             isSuccess = false;
-		} finally {
-            if(isSuccess){
+        } finally {
+            if (isSuccess) {
                 commonResult = new CommonResult(CommonConstant.SUCCESS_CODE,
                         message, resultData);
-            }else{
+            } else {
                 commonResult = new CommonResult(CommonConstant.FAIL_CODE,
                         message, resultData);
             }
             return commonResult;
-		}
-	}
-    @ExecuteSecurity
-	@ResponseBody
-	@RequestMapping(value = "/manage/author" ,method={RequestMethod.GET})
-	public CommonResult getInfo(HttpServletRequest request) {
-		Authors author = null;
-		author = userService.getInfo(request);
-		return new CommonResult(CommonConstant.SUCCESS_CODE, "",
-				author);
-	}
-    @ExecuteSecurity
-	@ResponseBody
-	@RequestMapping(value = "/manage/author" ,method={RequestMethod.PUT})
-	public CommonResult updateInfo(HttpServletRequest request,@RequestBody Authors info){
-		Boolean result = userService.updateInfo(request,info);
-		return new CommonResult(CommonConstant.SUCCESS_CODE, "",
-				result);
-	}
+        }
+    }
 
-	@ResponseBody
-	@RequestMapping(value = "/manage/getKeys")
-	public Map<String, Object> generateKeypair(HttpServletRequest request) {
-		Map<String, Object> map = null;
-		try {
-			map = userService.generateKeypair(request);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return map;
-	}
+    @ExecuteSecurity
+    @ResponseBody
+    @RequestMapping(value = "/manage/author", method = {RequestMethod.GET})
+    public CommonResult getInfo(HttpServletRequest request) {
+        Authors author = null;
+        author = userService.getInfo(request);
+        return new CommonResult(CommonConstant.SUCCESS_CODE, "",
+                author);
+    }
+
+    @ExecuteSecurity
+    @ResponseBody
+    @RequestMapping(value = "/manage/author", method = {RequestMethod.PUT})
+    public CommonResult updateInfo(HttpServletRequest request, @RequestBody Authors info) {
+        Boolean result = userService.updateInfo(request, info);
+        return new CommonResult(CommonConstant.SUCCESS_CODE, "",
+                result);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/manage/getKeys1")
+    public Map<String, Object> generateKeypair1(HttpServletRequest request) {
+        Map<String, Object> map = null;
+        try {
+            map = userService.generateKeypair(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/manage/getKeys")
+    public CommonResult generateKeypair(HttpServletRequest request) {
+        Map<String, Object> map = null;
+        String msg = CommonConstant.OPERATE_SUCCESS_MESSAGE;
+        CommonResult commonResult = null;
+        boolean isSuccess = true;
+        try {
+            map = userService.generateKeypair(request);
+        } catch (Exception e) {
+            isSuccess = false;
+            msg = e.getMessage();
+        }finally {
+            if (isSuccess){
+                commonResult = new CommonResult(CommonConstant.SUCCESS_CODE,msg,
+                        map);
+            }else{
+                commonResult= new CommonResult(CommonConstant.FAIL_CODE,msg);
+            }
+        }
+        return commonResult;
+    }
 
 }

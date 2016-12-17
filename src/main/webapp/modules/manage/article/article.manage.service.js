@@ -18,7 +18,7 @@ app.service("ArticleManageService", function(RequestService) {
     this.post = function(article){
     	return RequestService.postRequest('/manage/article/save' ,article, cfg_json);
     }
-    this.deletee = function (id) { 
+    this.delete = function (id) {
 		return RequestService.deleteRequest('/manage/article/' + id, cfg_form); 
 	};
     this.getCategorys = function () {

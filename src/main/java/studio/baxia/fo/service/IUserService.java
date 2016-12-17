@@ -99,4 +99,6 @@ public interface IUserService {
      * @return
      */
     Authors getAuthor(int authorId);
+
+    void signOut(HttpServletRequest request);
 }

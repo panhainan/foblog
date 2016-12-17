@@ -10,7 +10,8 @@
 			<li><a ng-style="isCategoryNav && {'background-color':'#EEEEEE'}" href="#/manage/category">类别管理 </a></li>
 			<li><a ng-style="isTagNav && {'background-color':'#EEEEEE'}" href="#/manage/tag">标签管理 </a></li>
 			<li><a ng-style="isFriendlinkNav && {'background-color':'#EEEEEE'}" href="#/manage/friendlink">友链管理 </a></li>
-		</ul>
+            <li><a ng-controller="SignManageController" ng-click="signout()">安全退出 </a></li>
+        </ul>
 	</div>
 </div>
 

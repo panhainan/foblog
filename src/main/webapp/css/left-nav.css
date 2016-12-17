@@ -11,7 +11,7 @@
     border: none;
     border-radius: 0;
     margin: 0;
-    background-color: #2561A0;
+    background-color: #222222; //#2561A0;
     z-index: 999;
     /*border-right: 1px silver solid;*/
     /*border-bottom: 1px silver solid;*/
@@ -72,15 +72,15 @@
 
 .sidebar-nav .nav-custom > li > a:hover {
     text-decoration: none;
-    background-color: #003366
+    background-color: #000; //#003366
 }
 
 /* make sidebar nav vertical */
-@media ( min-width: 768px) {
-    .sidebar-nav .navbar .navbar-collapse {
-        padding: 0;
-        max-height: none;
-    }
+    @media ( min-width: 768px) {
+        .sidebar-nav .navbar .navbar-collapse {
+            padding: 0;
+            max-height: none;
+        }
 
     .sidebar-nav .navbar ul {
         float: none;

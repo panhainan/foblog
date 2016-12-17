@@ -32,7 +32,7 @@ app.controller("ArticleManageController", function($uibModal,$scope,ArticleManag
 
 		    modalInstance.result.then(function (articleId) {
 //		    	console.log(articleId);
-		    	ArticleManageService.deletee(articleId).then(function(data){
+		    	ArticleManageService.delete(articleId).then(function(data){
 		    		console.log(data);
 		    		$scope.list($scope.currentPage, $scope.pageSize);
 		    	});
