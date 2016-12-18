@@ -311,7 +311,7 @@ public class BArticleServiceImpl implements IBArticleService {
             s = new String(param.getBytes("ISO-8859-1"), "UTF-8");
             System.out.println(s);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             s = param;
         }
         return s;

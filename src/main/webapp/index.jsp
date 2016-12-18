@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html ng-app="webApp">
 <head lang="zh">
-    <base href="<%=basePath%>">
+    <%--<base href="<%=basePath%>">--%>
     <meta charset="UTF-8">
     <title>潘海南的博客-正在开发中</title>
     <!-- by霸下工作室 -->
@@ -17,8 +17,7 @@
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <style type="text/css">
     </style>
-
-    <%--<link rel="stylesheet" href="plugins/editor.md/css/style.css"/>--%>
+    <!--<link rel="stylesheet" href="plugins/editor.md/css/style.css"/>-->
     <link rel="stylesheet" href="plugins/editor.md/css/editormd.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -34,17 +33,10 @@
     <link rel="stylesheet" href="css/modules/manage.view.css"/>
 
     <script src="plugins/jquery/jquery-1.11.3.min.js"></script>
-    <script src="plugins/jquery-jcryption/jquery.jcryption-1.1.js"></script>
-    <script src="plugins/jquery-jcryption/fo-jcryption-gen-keys.js"></script>
 
     <script src="plugins/bootstrap/bootstrap.min.js"></script>
     <script src="plugins/angularjs/angular.min.js"></script>
-    <script src="plugins/angularjs-extend-lib/angular-route.min.js"></script>
-    <script src="plugins/angularjs-extend-lib/angular-sanitize.min.js"></script>
-    <script src="plugins/angularjs-extend-lib/angular-ui-router.js"></script>
-    <script src="plugins/angularjs-ui-bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
-    <script src="plugins/angularjs-file-upload/ng-file-upload.min.js"></script>
-    <script src="plugins/angularjs-file-upload/ng-file-upload-shim.min.js"></script>
+
 
     <script src="app.js"></script>
     <script src="scripts/constant.js"></script>
@@ -64,6 +56,16 @@
 <ng-include src="'modules/common/left-nav.html'"></ng-include>
 <div ng-view></div>
 </body>
+
+</html>
+
+<script src="plugins/angularjs-extend-lib/angular-route.min.js"></script>
+<script src="plugins/angularjs-extend-lib/angular-sanitize.min.js"></script>
+<script src="plugins/angularjs-extend-lib/angular-ui-router.js"></script>
+<script src="plugins/angularjs-ui-bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<script src="plugins/angularjs-file-upload/ng-file-upload.min.js"></script>
+<script src="plugins/angularjs-file-upload/ng-file-upload-shim.min.js"></script>
+
 <script src="modules/blog/category/category.service.js"></script>
 <script src="modules/blog/category/category.list.controller.js"></script>
 <script src="modules/blog/category/category.article.controller.js"></script>
@@ -99,9 +101,5 @@
 <script src="modules/manage/info/info.form.manage.controller.js"></script>
 <script src="modules/manage/friendlink/friendlink.manage.service.js"></script>
 <script src="modules/manage/friendlink/friendlink.manage.controller.js"></script>
-
-
-<script src="plugins/editor.md/editormd.js"></script>
 <script src="plugins/editor.md/lib/marked.min.js"></script>
-<script src="plugins/layer/layer.js"></script>
-</html>
+

@@ -74,7 +74,7 @@ public class UserServiceImpl implements IUserService {
 		return null;
 	}
 	@Override
-	public Map<String,Object> generateKeypair(HttpServletRequest request) throws Exception{
+	public Map<String,Object> generateKeypair(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			JCryptionUtil jCryption = new JCryptionUtil();
@@ -92,12 +92,12 @@ public class UserServiceImpl implements IUserService {
 			map.put("n", n);
 			map.put("maxdigits", md);
 		} catch (Exception e) {
-			throw new RuntimeException("服务器异常，获取密钥失败！");
+			throw new RuntimeException("服务器异常，获取密钥失败！",e);
 		}
 		return map;
 	}
 	@Override
-	public String signInCheck(AuthorVo authorVo, HttpServletRequest request) throws Exception {
+	public String signInCheck(AuthorVo authorVo, HttpServletRequest request){
 		KeyPair keys = (KeyPair) request.getSession().getAttribute("keys");
         String token =null;
 		if (keys == null) {
@@ -123,7 +123,7 @@ public class UserServiceImpl implements IUserService {
             System.out.println("用户'" + au.getAccount() + "'生成的token:" + token);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("服务器异常，解码失败！");
+			throw new RuntimeException("服务器异常，解码失败！",e);
 		}
         return token;
 	}

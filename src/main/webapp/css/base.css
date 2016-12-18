@@ -103,13 +103,11 @@ a {
     height: 100px;
     width: 100px;
 }
-.editormd-dialog{
-    width: 80%;
-}
+
 .border_bottom {
     border-bottom: 1px silver solid;
 }
-.border_bottom_wihte {
+.border_bottom_white {
     border-bottom: 1px #fff solid;
 }
 .border_top {

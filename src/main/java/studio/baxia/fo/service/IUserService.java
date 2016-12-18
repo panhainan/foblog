@@ -85,9 +85,9 @@ public interface IUserService {
      * @return token
      * @throws Exception 
      */
-	String signInCheck(AuthorVo authorVo, HttpServletRequest request) throws Exception;
+	String signInCheck(AuthorVo authorVo, HttpServletRequest request);
 
-	Map<String, Object> generateKeypair(HttpServletRequest request) throws Exception;
+	Map<String, Object> generateKeypair(HttpServletRequest request);
 
 	Authors getInfo(HttpServletRequest request);
 

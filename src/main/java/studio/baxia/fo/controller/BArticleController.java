@@ -31,7 +31,7 @@ public class BArticleController {
     @RequestMapping(value = "/blog/article",method = RequestMethod.POST)
     public CommonResult list(PageConfig pageConfig){
         PageInfoResult<Article> list = articleService.getAllBy(CommonConstant.ACTICLE_STATUS_BLOG, pageConfig);
-        return new CommonResult(CommonConstant.SUCCESS_CODE,"",list);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,null,list);
     }
     @ResponseBody
     @RequestMapping(value = "/blog/article/{articleId}/messages", method = RequestMethod.GET)
@@ -39,6 +39,7 @@ public class BArticleController {
         String message=null;
         boolean isSuccess = true;
         List<ArticleMessageVo> list = null;
+        CommonResult commonResult=null;
         try{
             list = messageService.list(articleId);
         }catch (Exception e){
@@ -46,25 +47,41 @@ public class BArticleController {
             message = "服务器异常，获取留言失败！";
         }finally {
             if(!isSuccess){
-                return new CommonResult(CommonConstant.FAIL_CODE, message,null);
+                commonResult= new CommonResult(CommonConstant.FAIL_CODE, message);
             }else{
-                return new CommonResult(CommonConstant.SUCCESS_CODE, message,list);
+                commonResult= new CommonResult(CommonConstant.SUCCESS_CODE, message,list);
             }
         }
-
+        return commonResult;
     }
 
     @ResponseBody
     @RequestMapping(value = "/blog/article/id/{id}",method = RequestMethod.GET)
     public CommonResult get(@PathVariable("id")Integer articleId){
         ArticleVo article = articleService.getVoById(articleId);
-        return new CommonResult(CommonConstant.SUCCESS_CODE,"",article);
+        String msg = null;
+        CommonResult commonResult=null;
+        if(article==null){
+            msg="抱歉，你要查看的文章不存在！";
+            commonResult = new CommonResult(CommonConstant.FAIL_CODE,msg);
+        }else{
+            commonResult =  new CommonResult(CommonConstant.SUCCESS_CODE,msg,article);
+        }
+        return commonResult;
     }
     @ResponseBody
     @RequestMapping(value = "/blog/article/{title:.+}",method = RequestMethod.GET)
     public CommonResult getByTitle(@PathVariable("title")String articleTitle){
         Map<String,Object> map = articleService.getVoByTitle(articleTitle);
-        return new CommonResult(CommonConstant.SUCCESS_CODE,"",map);
+        String msg = null;
+        CommonResult commonResult=null;
+        if(map==null){
+            msg="抱歉，你要查看的文章不存在！";
+            commonResult = new CommonResult(CommonConstant.FAIL_CODE,msg);
+        }else{
+            commonResult =  new CommonResult(CommonConstant.SUCCESS_CODE,msg,map);
+        }
+        return commonResult;
     }
 
     @ResponseBody
