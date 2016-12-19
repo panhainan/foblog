@@ -15,29 +15,33 @@
 						</div>
 						<div class="col-md-3" style="padding:0;">
 							<span style="font-family: '楷体'">类别：</span> 
-							<span class="tag">
+							<span class="tag" ng-if="article.categoryName">
 								{{article.categoryName}}
 							</span>
+                            <span ng-if="!article.categoryName">未填写</span>
 							<!-- <span><a class="btn btn-xs btn-default" title="点击进入类别管理"
 										href="#/manage/category">管理</a></span> -->
 						</div>
 						<div class="col-md-7" style="padding:0;">
-							<span style="font-family: '楷体'">标签：</span> <span
-								ng-repeat="tName in article.tagNames"> <span
+							<span style="font-family: '楷体'">标签：</span>
+                            <span ng-repeat="tName in article.tagNames"
+                                ng-if="article.tagNames.length>0"> <span
 								class="tag">
 									{{tName}} </span>
 							</span>
+                            <span ng-if="!article.tagNames || article.tagNames.length==0">未填写</span>
 						</div>
 						<div class="col-sm-12"
 							style="margin-bottom: 0px;padding:0;">
 							<p style="font-family: '楷体';margin-bottom: 0px">摘要：</p>
-							<p style="text-indent: 30px;margin-bottom: 0px">{{article.summary}}</p>
-							<p style="text-align:right;font-family: '楷体';margin-bottom: 0px">发表于
+							<p style="text-indent: 30px;margin-bottom: 0px" ng-if="article.summary">{{article.summary}}</p>
+                            <p style="text-indent: 30px;margin-bottom: 0px" ng-if="!article.summary">未填写</p>
+							<p style="text-align:right;font-family: '楷体';margin-bottom: 0px">撰写时间：
 								{{article.writeTime | date :'yyyy-MM-dd HH:ss'}}</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12 content" >
+				<div class="col-sm-12 content"  style="min-height: 350px">
 					<div ng-bind-html="article.content | trusted"></div>
 				</div>
 				<div class="col-sm-12 pre-next"  >
