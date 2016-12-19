@@ -1,4 +1,4 @@
-<div class="sidebar-nav">
+<div class="sidebar-nav"  ng-controller="leftNavController">
 	<nav class="navbar navbar-default navbar-vertical-left"
 		role="navigation">
 		<div class="container-fluid">
@@ -12,7 +12,7 @@
 			</div>
 			<div class="navbar-collapse collapse sidebar-navbar-collapse"
 				id="example-navbar-collapse">
-				<ul class="nav-custom">
+				<ul class="nav-custom" style="z-index: 20">
 					<!--style="list-style: none;padding: 0;text-align: center"-->
 					<li class="hidden-xs border_bottom">
 						<div style="min-height: 200px">
@@ -24,12 +24,38 @@
 							</div>
 						</div>
 					</li>
-					<li class="border_bottom"><a href="#/blog">首 页</a></li>
-					<li class="border_bottom"><a href="#/blog/archive">归 档</a></li>
-					<li class="border_bottom"><a href="#/blog/category">分 类</a></li>
-					<li class="border_bottom"><a href="#/blog/tag">标 签</a></li>
-					<li class="border_bottom"><a href="#/about">关 于</a></li>
-					<li class="border_bottom"><a href="#/friendlink">友 链</a></li>
+					<li class="border_bottom"><a href="#/blog">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首&emsp;页</a>
+                    </li>
+                    <li id="blog-ul-parent">
+                        <a ng-click="clickBlogNav()"  class="border_bottom" id="blog_a"
+                           data-parent="#blog-ul-parent" href="#/blog">
+                            <span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;博&emsp;客</a>
+                        <!-- id="data-parent" data-toggle="collapse" id="demo" class="collapsing"
+                           data-target="#demo" data-parent="data-parent"-->
+                        <div id="blog-ul" class="collapsing">
+                            <ul  class="border_bottom" ng-model="blogNavStatus" style="z-index:10" >
+                                <li class="border_bottom_black"><a href="#/blog/archive">
+                                    <span style="font-size: 12px;" class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;归 档</a>
+                                </li>
+                                <li class="border_bottom_black"><a href="#/blog/category">
+                                    <span style="font-size: 12px;" class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;分 类</a>
+                                </li>
+                                <li class="border_bottom_black"><a href="#/blog/tag">
+                                    <span style="font-size: 12px;" class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;标 签</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="border_bottom"><a href="#/blog">
+                        <span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;项&emsp;目</a></li>
+                    <li class="border_bottom"><a href="#/blog">
+                        <span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;荐&emsp;文</a>
+                    </li>
+					<li class="border_bottom"><a href="#/friendlink">
+                        <span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;友&emsp;链</a></li>
+                    <li class="border_bottom"><a href="#/about">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;关&emsp;于</a></li>
 				</ul>
 			</div>
 		</div>
@@ -38,9 +64,12 @@
 <script type="text/javascript">
 	$(function() {
 		$('#example-navbar-collapse ul li a').on('click', function(e) {
-			if (!$("#nav-btn").is(":hidden")) {
-				$("#nav-btn")[0].click();
-			}
+            console.log(e)
+            if(e.currentTarget.id!="blog_a"){
+                if (!$("#nav-btn").is(":hidden")) {
+                    $("#nav-btn")[0].click();
+                }
+            }
 		});
 	})
 </script>

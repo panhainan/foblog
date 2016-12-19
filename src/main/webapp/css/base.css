@@ -110,6 +110,9 @@ a {
 .border_bottom_white {
     border-bottom: 1px #fff solid;
 }
+.border_bottom_black{
+    border-bottom: 1px #222 solid;
+}
 .border_top {
     border-top: 1px silver solid;
 }

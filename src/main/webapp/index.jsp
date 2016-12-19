@@ -42,7 +42,7 @@
     <script src="scripts/constant.js"></script>
     <script src="scripts/http.interceptor.js"></script>
     <script src="scripts/request.service.js"></script>
-
+    <script src="modules/common/left-nav.controller.js"></script>
     <script src="modules/index/index.controller.js"></script>
     <script src="modules/index/index.service.js"></script>
 
