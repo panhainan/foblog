@@ -105,7 +105,7 @@ a {
 }
 
 .border_bottom {
-    border-bottom: 1px silver solid;
+    border-bottom: 1px #333 solid;
 }
 .border_bottom_white {
     border-bottom: 1px #fff solid;
