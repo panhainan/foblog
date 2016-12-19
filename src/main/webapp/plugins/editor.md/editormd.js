@@ -74,10 +74,9 @@
             "help", "info"
         ],
         simple : [
-            "undo", "redo", "|", 
-            "bold", "del", "italic", "quote", "|",
-            "h2", "h3","h4",  "|","list-ul", "list-ol", "hr", "|",
-            "link", "reference-link", "image", "code","code-block", "table", "datetime","pagebreak", "|",
+            "undo", "redo",
+            "bold", "del", "italic", "quote", "h3", "list-ul", "list-ol", "hr",
+            "link", "reference-link", "image", "code","code-block", "table", "datetime","pagebreak",
             "watch", "preview", "help",
 
         ],
@@ -3495,7 +3494,7 @@
                     });
 
                     text = text.replace(atLinkReg, function($1, $2) {
-                        return "<a href=\"" + editormd.urls.atLinkBase + "" + $2 + "\" title=\"&#64;" + $2 + "\" class=\"at-link\">" + $1 + "</a>";
+                        return "<a target=\"_blank\" href=\"" + editormd.urls.atLinkBase + "" + $2 + "\" title=\"&#64;" + $2 + "\" class=\"at-link\">" + $1 + "</a>";
                     }).replace(/_#_&#64;_#_/g, "@");
                 }
                 
@@ -3526,7 +3525,7 @@
                 }
             }
 
-            var out = "<a href=\"" + href + "\"";
+            var out = "<a target=\"_blank\" href=\"" + href + "\"";
             
             if (atLinkReg.test(title) || atLinkReg.test(text))
             {

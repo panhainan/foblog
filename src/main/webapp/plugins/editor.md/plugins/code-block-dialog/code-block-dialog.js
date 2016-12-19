@@ -91,7 +91,7 @@
                     name   : dialogName,
                     title  : dialogLang.title,
                     width  : "80%",
-                    height : "60%",
+                    height : "65%",
                     mask   : settings.dialogShowMask,
                     drag   : settings.dialogDraggable,
                     content    : dialogHTML,

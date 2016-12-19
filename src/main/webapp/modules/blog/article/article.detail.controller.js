@@ -28,6 +28,11 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
                         $scope.messages = data.resultData;
                     }
                 });
+                if(window.localStorage.getItem("guest")!=null){
+                    var guest = JSON.parse(window.localStorage.getItem("guest"));
+                    //console.log(guest)
+                    $scope.guest=guest;
+                }
                 $(function () {
                     $("#gomessages").click(function () {
                         jQuery("html,body").animate({
@@ -74,10 +79,8 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             }
         });
     }
-
     $scope.comment = function (guest) {
-        console.log(guest)
-
+        //console.log(guest)
         //testEditor.getMarkdown();       // 获取 Markdown 源码
         //testEditor.getHTML();           // 获取 Textarea 保存的 HTML 源码
         //testEditor.getPreviewedHTML();  // 获取预览窗口里的 HTML，在开启 watch 且没有开启 saveHTMLToTextarea 时使用
@@ -87,17 +90,18 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             //$("#message-editormd").css("border-color","red");
             return false;
         } else {
-            $scope.contentValidInfo = "谢谢您的发言！";
+            $scope.contentValidInfo = "";
         }
         //console.log(message)
         MessageService.comment(guest, message, $scope.article.id).then(function (data) {
-            console.log(data)
+            //console.log(data)
             if (data.resultCode == 0) {
                 $scope.resultMessage = data.resultMessage;
             } else {
                 if (data.resultData == false) {
                     $scope.resultMessage = data.resultMessage;
                 } else {
+                    window.localStorage.setItem("guest",JSON.stringify(guest));
                     messageEditor.setValue("");
                     //列出刚刚评论的信息
                     MessageService.list($scope.article.id).then(function (data) {
@@ -114,7 +118,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             }
         })
     }
-    $scope.getGuestInfoByEmail = function (email) {
+    /*$scope.getGuestInfoByEmail = function (email) {
         //$("#message-editormd").css("border-color","#ddd");
         console.log(email);
         if (email == null || email.trim() == "") {
@@ -129,8 +133,8 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
                 $scope.guest = data.resultData;
             }
         });
-    }
-    $scope.getGuestInfoByNickname = function (email, nickname) {
+    }*/
+    /*$scope.getGuestInfoByNickname = function (email, nickname) {
         if (email == null || email.trim() == "") {
             $scope.nicknameValidInfo = "请先填写您的邮箱";
             return false;
@@ -152,7 +156,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
                 $scope.nicknameValidInfo = "服务器验证失败，请稍后再试";
             }
         });
-    }
+    }*/
     // 获取文章信息
     $scope.get($routeParams.articleTitle);
 

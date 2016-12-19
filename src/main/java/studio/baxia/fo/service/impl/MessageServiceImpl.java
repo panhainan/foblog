@@ -52,6 +52,7 @@ public class MessageServiceImpl implements IMessageService {
     private int addOrUpdateGuest(Guest guest) {
         Map<String, Object> map = new HashMap<>();
         map.put("email", guest.getEmail());
+        map.put("nickname", guest.getNickname());
         Guest isExistGuest = guestDao.queryOneByCondition(map);
         if (isExistGuest == null) {
             //该游客没有在网站评论过，需要保存信息，注意游客guest中必须包含email和nickname
@@ -63,10 +64,9 @@ public class MessageServiceImpl implements IMessageService {
             }
         } else {
             //该游客已经存在网站数据库中，需要比对更新信息
-            if ( !guest.getNickname().trim().equals(isExistGuest.getNickname())
-                    || (guest.getPersonalWebsite()!=null && !guest.getPersonalWebsite().trim().equals(isExistGuest.getPersonalWebsite()))) {
+            if ( guest.getPersonalWebsite()!=null && !guest.getPersonalWebsite().trim().equals(isExistGuest.getPersonalWebsite())) {
                 guest.setId(isExistGuest.getId());
-                return guestDao.updateByPrimaryKey(guest);
+                guestDao.updateByPrimaryKey(guest);
             }
             return isExistGuest.getId();
         }

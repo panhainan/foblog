@@ -141,21 +141,22 @@
                               novalidate>
                             <div class="form-group">
                                 <div class="row">
-                                    <label>邮箱</label><span style="padding-left:20px;font-size: 12px;color:green;"
-                                                           ng-bind="emailValidInfo"></span>
-
+                                    <label>邮箱</label>
+                                    <!--<span style="padding-left:20px;font-size: 12px;color:green;"
+                                          ng-bind="emailValidInfo"
+                                          ></span>-->
                                     <div><input placeholder="必填，放心我不会公开也不会发送广告" class="form-control" type="email"
                                                 name="email" ng-model="guest.email"
-                                                ng-blur="getGuestInfoByEmail(guest.email)" required/></div>
+                                                required/></div>
+                                    <!-- ng-blur="getGuestInfoByEmail(guest.email)" -->
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label>昵称</label><span style="padding-left:20px;font-size: 12px;color:green;"
-                                                           ng-bind="nicknameValidInfo"></span>
-
+                                    <label>昵称</label><!--<span style="padding-left:20px;font-size: 12px;color:green;"
+                                                           ng-bind="nicknameValidInfo"></span>-->
                                     <div><input placeholder="必填，您的大名" class="form-control" type="text"
-                                                 name="nickname" ng-model="guest.nickname"
+                                                name="nickname" ng-model="guest.nickname"
                                                 required/>
                                         <!--ng-blur="getGuestInfoByNickname(guest.email,guest.nickname)"-->
                                         <!--ng-disabled="!guest.email"-->
@@ -165,28 +166,32 @@
                             <div class="form-group">
                                 <div class="row">
                                     <label>个人网址</label>
+
                                     <div><input placeholder="希望我们能够互相信任 ^_^" class="form-control"
-                                                 name="personalWebsite"
-                                                ng-model="guest.personalWebsite" type="text"/></div><!--ng-disabled="!guest.email"-->
+                                                name="personalWebsite"
+                                                ng-model="guest.personalWebsite" type="text"/></div>
+                                    <!--ng-disabled="!guest.email"-->
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>观点</label><span style="padding-left:20px;font-size: 12px;color:green;"
-                                                       ng-bind="contentValidInfo"></span>
+                                <label>观点</label>
+
                                 <div class="col-sm-12" style="padding:0">
                                     <div id="message-editormd"
                                          style="margin-bottom: 0;width:100%;border-color: silver;">
                                         <textarea class="editormd-markdown-textarea"
                                                   name="$id-markdown-doc"></textarea>
                                         <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
-                                        <textarea class="editormd-html-textarea"
-                                                  name="$id-html-code"></textarea>
+                                        <!--<textarea class="editormd-html-textarea"
+                                                  name="$id-html-code"></textarea>-->
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-primary"
                                     style="width: 100px;margin-top: 10px;">提 交
                             </button>
+                            <span style="padding-left:20px;font-size: 12px;color:red;"
+                                           ng-bind="contentValidInfo"></span>
                             <span style="line-height: 36px;color:green" ng-bind="resultMessage"></span>
                         </form>
                     </div>
@@ -202,9 +207,10 @@
 
 <script src="plugins/editor.md/editormd.js"></script>
 <style>
-    .editormd-dialog{
+    .editormd-dialog {
         width: 80%;
     }
+
     .editormd {
         padding-top: 6px;
     }
