@@ -64,7 +64,7 @@
     <update id="updateHits">
         UPDATE t_article
         SET
-        hits=#{hits,jdbcType=TIMESTAMP}
+        hits=#{hits,jdbcType=INTEGER}
         WHERE id =
         #{id,jdbcType=INTEGER}
     </update>

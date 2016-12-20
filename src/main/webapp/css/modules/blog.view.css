@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+.blog-body{
+    padding:15px 8px;
+}
 
 #body-content {
 	padding: 0;
@@ -7,9 +10,11 @@
 	-o-transition: width 0.3s ease;
 	transition: width 0.3s ease;
 }
-
+.body-blog-body{
+    margin: 0 10px;
+}
 .body-content-body {
-	padding: 20px 15px 10px 15px;
+	padding: 20px 10px 10px 10px;
 	margin: 0 5px;
 }
 .article {

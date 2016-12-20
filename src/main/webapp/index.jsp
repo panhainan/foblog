@@ -23,14 +23,6 @@
 
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/left-nav.css"/>
-    <link rel="stylesheet" href="css/top-nav.css"/>
-    <link rel="stylesheet" href="css/left-sub-nav.css"/>
-    <link rel="stylesheet" href="css/manage-left-sub-nav.css"/>
-    <link rel="stylesheet" href="css/modules/blog.view.css"/>
-    <link rel="stylesheet" href="css/modules/archive.view.css"/>
-    <link rel="stylesheet" href="css/modules/category-tag.view.css"/>
-    <link rel="stylesheet" href="css/modules/friend.view.css"/>
-    <link rel="stylesheet" href="css/modules/manage.view.css"/>
 
     <script src="plugins/jquery/jquery-1.11.3.min.js"></script>
 
@@ -46,11 +38,6 @@
     <script src="modules/index/index.controller.js"></script>
     <script src="modules/index/index.service.js"></script>
 
-    <script src="modules/blog/article/article.service.js"></script>
-    <script src="modules/blog/article/message.service.js"></script>
-    <script src="modules/blog/article/article.controller.js"></script>
-    <script src="modules/blog/article/article.detail.controller.js"></script>
-
 </head>
 <body>
 <ng-include src="'modules/common/left-nav.html'"></ng-include>
@@ -58,6 +45,15 @@
 </body>
 
 </html>
+<link rel="stylesheet" href="css/top-nav.css"/>
+<link rel="stylesheet" href="css/left-sub-nav.css"/>
+<link rel="stylesheet" href="css/manage-left-sub-nav.css"/>
+<link rel="stylesheet" href="css/modules/blog.view.css"/>
+<link rel="stylesheet" href="css/modules/archive.view.css"/>
+<link rel="stylesheet" href="css/modules/category-tag.view.css"/>
+<link rel="stylesheet" href="css/modules/recmd-proj.view.css"/>
+<link rel="stylesheet" href="css/modules/friend.view.css"/>
+<link rel="stylesheet" href="css/modules/manage.view.css"/>
 
 <script src="plugins/angularjs-extend-lib/angular-route.min.js"></script>
 <script src="plugins/angularjs-extend-lib/angular-sanitize.min.js"></script>
@@ -66,6 +62,14 @@
 <script src="plugins/angularjs-file-upload/ng-file-upload.min.js"></script>
 <script src="plugins/angularjs-file-upload/ng-file-upload-shim.min.js"></script>
 
+<script src="modules/recommend/recommend.service.js"></script>
+<script src="modules/recommend/recommend.controller.js"></script>
+<script src="modules/project/project.service.js"></script>
+<script src="modules/project/project.controller.js"></script>
+<script src="modules/blog/article/article.service.js"></script>
+<script src="modules/blog/article/message.service.js"></script>
+<script src="modules/blog/article/article.controller.js"></script>
+<script src="modules/blog/article/article.detail.controller.js"></script>
 <script src="modules/blog/category/category.service.js"></script>
 <script src="modules/blog/category/category.list.controller.js"></script>
 <script src="modules/blog/category/category.article.controller.js"></script>

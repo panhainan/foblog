@@ -1,24 +1,30 @@
 <div class="customContainer">
-	<!--<ng-include src="'modules/common/top-nav.html'"></ng-include>-->
-    <ng-include src="'modules/common/loading.html'"></ng-include>
-    <div ng-show="loaded" class="body-content-body">
-		<div class="card" style="" ng-repeat="article in articles">
-			<div>
-				<h3>
-					<a  href="#/blog/article/{{article.title}}" title="{{article.title}}">{{article.title}}</a>
+    <div class="blog-body">
+        <ol class="breadcrumb">
+            <li><a href="#/">主页</a></li>
+            <li class="active">博客</li>
+        </ol>
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+        <div ng-show="loaded" class="body-blog-body">
+            <div class="card" style="" ng-repeat="article in articles">
+                <div>
+                    <h3>
+                        <a href="#/blog/article/{{article.title}}" title="{{article.title}}">{{article.title}}</a>
                     <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
                         <a
-                            href="#/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                href="#/blog/article/{{article.title}}">阅读全文<span
+                                class="glyphicon glyphicon-chevron-right"></span></a>
                     </span>
-				</h3>
-			</div>
-            <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
-		</div>
-		<div style="text-align: center">
-			<ul uib-pagination total-items="totalItems" max-size="5"
-				boundary-link-numbers="true" items-per-page="pageSize"
-				ng-model="currentPage" ng-change="pageChanged()"
-				class="pagination_border_radius_0"></ul>
-		</div>
-	</div>
+                    </h3>
+                </div>
+                <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
+            </div>
+            <div style="text-align: center">
+                <ul uib-pagination total-items="totalItems" max-size="5"
+                    boundary-link-numbers="true" items-per-page="pageSize"
+                    ng-model="currentPage" ng-change="pageChanged()"
+                    class="pagination_border_radius_0"></ul>
+            </div>
+        </div>
+    </div>
 </div>

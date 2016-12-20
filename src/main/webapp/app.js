@@ -22,7 +22,13 @@ app.config(function($routeProvider,$stateProvider) {
 	$routeProvider.when("/", {
 		templateUrl : "modules/index/index.view.html",
 		controller : 'IndexController'
-	}).when("/about", {
+	}).when("/recommend", {
+        templateUrl : "modules/recommend/recommend.view.html",
+        controller : 'RecommendController'
+    }).when("/project", {
+        templateUrl : "modules/project/project.view.html",
+        controller : 'ProjectController'
+    }).when("/about", {
 		templateUrl : "modules/about/about.view.html",
 		controller : 'AboutController'
 	}).when("/friendlink", {

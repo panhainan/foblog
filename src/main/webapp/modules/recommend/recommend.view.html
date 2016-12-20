@@ -1,0 +1,41 @@
+<div class="customContainer">
+    <div class="recommend-body">
+        <ol class="breadcrumb">
+            <li><a href="#/">主页</a></li>
+            <li class="active">推荐文章</li>
+        </ol>
+        <ng-include src="'modules/common/loading.html'"></ng-include>
+        <div ng-show="loaded">
+            <div class="body-recommend-body">
+                <div class="card" style="" ng-repeat="recommend in recommends">
+                    <div>
+                        <h3 style="font-size: 20px;text-indent: 20px">
+                            <a ng-click="hit(recommend.articleUrl,recommend.id)"  target="_blank"
+                               title="{{recommend.title}}">{{recommend.title}}</a>
+                    <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
+                        <a target="_blank"
+                           ng-click="hit(recommend.articleUrl,recommend.id)">阅读全文<span
+                                class="glyphicon glyphicon-chevron-right"></span></a>
+                    </span>
+                        </h3>
+                    </div>
+                    <div style="padding-bottom: 8px;">
+                        <p style="color:#666666;text-indent: 20px">{{recommend.summary}}</p>
+
+                        <p style="text-align: right;color:#999999;margin-bottom: 0;font-size: 13px;">
+                            <span><span class="glyphicon glyphicon-time" style="padding: 0px;margin-right: 2px;"></span>{{recommend.pubTime | date :'yyyy-MM-dd HH:ss'}}</span>
+                    <span style="padding-left: 5px"><span class="glyphicon glyphicon-eye-open"
+                                                          style="padding: 0px;margin-right: 2px;"></span>阅读({{recommend.hits}})</span>
+                        </p>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <ul uib-pagination total-items="totalItems" max-size="5"
+                        boundary-link-numbers="true" items-per-page="pageSize"
+                        ng-model="currentPage" ng-change="pageChanged()"
+                        class="pagination_border_radius_0"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
