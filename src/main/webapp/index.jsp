@@ -10,7 +10,7 @@
 <head lang="zh">
     <%--<base href="<%=basePath%>">--%>
     <meta charset="UTF-8">
-    <title>潘海南的博客-正在开发中</title>
+    <title>潘海南的个人网站-正在开发中</title>
     <!-- by霸下工作室 -->
     <link rel="icon" href="images/fire_favicon.ico">
     <meta name="viewport"

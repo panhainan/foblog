@@ -19,7 +19,7 @@ app.filter("trusted", [ "$sce", function($sce) {
 } ]);
 app.config(function($routeProvider,$stateProvider) {
 	  
-	$routeProvider.when("/index", {
+	$routeProvider.when("/", {
 		templateUrl : "modules/index/index.view.html",
 		controller : 'IndexController'
 	}).when("/about", {
@@ -52,7 +52,9 @@ app.config(function($routeProvider,$stateProvider) {
 	}).when("/blog/article/:articleTitle", {
 		templateUrl : "modules/blog/article/article.detail.view.html",
 		controller : 'ArticleDetailController'
-	});
+	}).when("/404",{
+        templateUrl : "modules/common/404.view.html",
+    });
 	// 管理
 	$routeProvider.when("/manage", {
         templateUrl : "modules/manage/manage.view.html",
@@ -103,7 +105,7 @@ app.config(function($routeProvider,$stateProvider) {
 	});
 
 	$routeProvider.otherwise({
-		redirectTo : '/blog'
+		redirectTo : '/404'
 	});
 });
 app.run(function($rootScope, $location, $window) {

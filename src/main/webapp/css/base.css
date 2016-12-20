@@ -48,7 +48,7 @@ body {
     overflow-x: hidden;
 }
 
-@media ( max-width: 768px) {
+@media ( max-width: 767px) {
     .customContainer {
         padding: 55px 0px 0px 0px;
         margin-left: 0px;
