@@ -7,10 +7,8 @@ import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.dao.IRecommendDao;
 import studio.baxia.fo.pojo.Recommend;
-import studio.baxia.fo.pojo.RecommendContent;
 import studio.baxia.fo.service.IRecommendService;
 import studio.baxia.fo.util.ReturnUtil;
-import studio.baxia.fo.vo.RecommendVo;
 
 import java.util.Date;
 import java.util.List;
@@ -25,15 +23,7 @@ public class RecommendServiceImpl implements IRecommendService {
     @Autowired
     private IRecommendDao iRecommendDao;
     @Override
-    public long add(RecommendVo recommendVo) {
-        if(recommendVo.isHasContent()) {
-            RecommendContent recommendContent = new RecommendContent(recommendVo.getContent());
-            Integer result = iRecommendDao.insertRecommendContent(recommendContent);
-            if (ReturnUtil.returnResult(result)) {
-                recommendVo.setContentId(recommendContent.getId());
-            }
-        }
-        Recommend recommend = recommendVo.toRecommend();
+    public long add(Recommend recommend) {
         recommend.setHits(0);
         recommend.setPubTime(new Date());
         Integer result = iRecommendDao.insert(recommend);
@@ -44,13 +34,18 @@ public class RecommendServiceImpl implements IRecommendService {
     }
 
     @Override
-    public long edit(RecommendVo recommendVo) {
+    public long edit(Recommend recommend) {
+        Integer result = iRecommendDao.update(recommend);
+        if(ReturnUtil.returnResult(result)){
+            return recommend.getId();
+        }
         return 0;
     }
 
     @Override
-    public boolean remove(Long id) {
-        return false;
+    public boolean remove(long id) {
+        Integer result = iRecommendDao.delete(id);
+        return ReturnUtil.returnResult(result);
     }
 
     @Override
@@ -67,5 +62,10 @@ public class RecommendServiceImpl implements IRecommendService {
         recommend.setHits(recommend.getHits()+1);
         iRecommendDao.updateHits(recommend);
         return false;
+    }
+
+    @Override
+    public Recommend get(long id) {
+        return iRecommendDao.selectById(id);
     }
 }

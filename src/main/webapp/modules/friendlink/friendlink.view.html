@@ -12,8 +12,8 @@
                     <div class="panel panel-custom-primary">
                         <div class="panel-heading">
                             <p class="panel-title">
-                                <span class="glyphicon glyphicon-link"></span>&emsp;<a href="{{friendlink.website}}"
-                                                                                       target="_blank">{{friendlink.name}}</a>
+                                <span class="glyphicon glyphicon-link"></span>&emsp;
+                                <a ng-click="clickLink(friendlink.id,friendlink.website)" target="_blank">{{friendlink.name}}</a>
                             </p>
                         </div>
                         <div class="panel-body" style="">
@@ -21,7 +21,7 @@
                                 {{friendlink.description}}
                             </p></div>
                         <div class="panel-footer">
-                            <span style="font-size: 10px">浏览:88次</span>
+                            <span style="font-size: 10px">浏览:{{friendlink.hits}}次</span>
                         </div>
                     </div>
                 </div>

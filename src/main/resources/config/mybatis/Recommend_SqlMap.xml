@@ -5,8 +5,6 @@
 	<resultMap id="RecommendMap" type="studio.baxia.fo.pojo.Recommend">
 		<result property="id" column="id" />
 		<result property="title" column="title" />
-		<result property="hasContent" column="has_content" />
-		<result property="contentId" column="content_id" />
 		<result property="articleUrl" column="article_url" />
         <result property="summary" column="summary" />
         <result property="pubTime" column="pub_time" />
@@ -16,28 +14,14 @@
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO
-		t_recommend(title,has_content,content_id,article_url,summary,pub_time,hits)
+		t_recommend(title,article_url,summary,pub_time,hits)
 		VALUES
 		(#{title,jdbcType=VARCHAR},
-		#{hasContent,jdbcType=INTEGER},
-		#{contentId,jdbcType=INTEGER},
 		#{articleUrl,jdbcType=VARCHAR},
 		#{summary,jdbcType=VARCHAR},
 		#{pubTime,jdbcType=TIMESTAMP},
-		#{hits,jdbcType=INTEGER},
+		#{hits,jdbcType=INTEGER})
 	</insert>
-
-    <resultMap id="RecommendContentMap"  type="studio.baxia.fo.pojo.RecommendContent">
-        <result property="id" column="id" />
-        <result property="content" column="content" />
-    </resultMap>
-    <insert id="insertRecommendContent"  useGeneratedKeys="true" keyProperty="id">
-        INSERT  INTO
-        t_recommend_content(content)
-        VALUES (
-          #{content,jdbcType=VARCHAR}
-        )
-    </insert>
 
 	<delete id="delete">
 		DELETE FROM t_recommend
@@ -49,8 +33,6 @@
 		UPDATE t_recommend
 		SET
 		title=#{title,jdbcType=VARCHAR},
-		has_content=#{hasContent,jdbcType=INTEGER},
-		content_id=#{contentId,jdbcType=INTEGER},
 		article_url=#{articleUrl,jdbcType=VARCHAR},
 		summary=#{summary,jdbcType=VARCHAR},
 		pub_time=#{pubTime,jdbcType=TIMESTAMP}

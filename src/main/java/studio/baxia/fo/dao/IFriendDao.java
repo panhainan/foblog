@@ -24,4 +24,6 @@ public interface IFriendDao {
     List<Friendlink> selectBy(@Param("pageConfig")PageConfig pageConfig);
 
     int selectCountBy();
+
+    int updateHits(Friendlink friendlink);
 }

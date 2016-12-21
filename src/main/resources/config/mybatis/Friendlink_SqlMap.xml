@@ -59,6 +59,13 @@
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
+    <update id="updateHits">
+        UPDATE t_friendlink
+        SET
+        hits=#{hits,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
     <select id="selectById" resultMap="FriendlinkMap">
         SELECT * FROM t_friendlink
         WHERE id=#{id,jdbcType=INTEGER}

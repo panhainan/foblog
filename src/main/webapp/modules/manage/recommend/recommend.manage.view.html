@@ -1,0 +1,151 @@
+<div class="customContainer">
+    <div class="row">
+        <div id="manage-sub-nav">
+            <ng-include src="'modules/manage/manage-left-sub-nav.html'"></ng-include>
+        </div>
+        <div class="manage-margin_left_sub_nav_width" id="manage-body-content">
+            <div class="manage-toggle-sidebar-div">
+                <a class="btn btn-primary btn-md manage-toggle-sidebar"><span
+                        class="glyphicon glyphicon-chevron-left" id="manage-close-open-icon"></span></a>
+            </div>
+            <div class="manage-body-content-body">
+                <div class=" panel panel-default">
+                    <div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
+                        <h3 class="panel-title font_kaiti_20">
+                            荐文管理<span style="font-size: 12px">(共{{totalItems}}条记录)</span> <a
+                                type="button" ng-click="addRecommend()"
+                                class="btn btn-sm btn-primary" style="float: right;color: #fff">添加</a>
+                        </h3>
+                    </div>
+                    <div class="panel-body " style="min-height: 440px">
+                        <div class="table-responsive tableTrBottomBorder">
+                            <table class="table  table-hover">
+                                <thead>
+                                <tr class="border_bottom">
+                                    <td>#</td>
+                                    <td>文章标题</td>
+                                    <td>点击量</td>
+                                    <td class="hidden-xs hidden-sm hidden-md">发布时间</td>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="recommend in recommends">
+                                    <td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
+                                    <td><a href="{{recommend.articleUrl}}"
+                                           title="点击访问" target="_blank">{{recommend.title}}</a></td>
+                                    <td>{{recommend.hits}}</td>
+                                    <td class="hidden-xs hidden-sm hidden-md">{{recommend.pubTime | date
+                                        :'yyyy-MM-dd HH:ss'}}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-xs btn-info" style="margin-right:8px"
+                                           ng-click="previewRecommend(recommend)" title="点击查看">查看</a>
+                                        <a class="btn btn-xs btn-warning" style="margin-right:8px"
+                                           ng-click="setEditRecommend(recommend)">编辑</a>
+                                        <a class="btn btn-xs btn-danger" ng-click="setDeleteRecommend(recommend)">删除</a>
+
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="text-align: center">
+                        <!--style="padding: 0;"-->
+                        <!--style="margin: 5px 0 0 0;"-->
+                        <ul uib-pagination total-items="totalItems" max-size="5"
+                            boundary-link-numbers="true" items-per-page="pageSize"
+                            ng-model="currentPage" ng-change="pageChanged()"
+                            class="pagination_border_radius_0"></ul>
+                    </div>
+                    <script type="text/ng-template" id="previewRecommend.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">查看详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            标题：<a href="{{recommend.articleUrl}}" target="_blank" title="{{recommend.articleUrl}}">{{recommend.title}}</a><br/>
+                            点击量: {{recommend.hits}}<br/>
+                            发布时间: {{recommend.pubTime | date:'yyyy-MM-dd HH:ss'}} <br/>
+                            介绍: {{recommend.summary}} <br/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="closeRecommend()"
+                                    >关闭
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="addRecommend.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">添加</h4>
+                        </div>
+                        <div class="modal-body">
+                            标题：<input type="text" class="form-control" ng-model="recommend.title"/>
+                            URL: <input type="text" class="form-control" ng-model="recommend.articleUrl"/>
+                            介绍：<textarea name="description"
+                                         style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
+                                         ng-model="recommend.summary"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelAddRecommend()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="confirmAddRecommend(recommend)"
+                                    class="btn btn-success">确认
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="editRecommend.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">修改</h4>
+                        </div>
+                        <div class="modal-body">
+                            标题：<input type="text" class="form-control" ng-model="recommend.title"/>
+                            URL: <input type="url" class="form-control" ng-model="recommend.articleUrl"/>
+                            介绍：<textarea name="description"
+                                         style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
+                                         ng-model="recommend.summary"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelEditRecommend()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="confirmEditRecommend(recommend)"
+                                    class="btn btn-success">确认
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="deleteRecommend.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">警告</h4>
+                        </div>
+                        <div class="modal-body">
+                            确认删除推荐文章 <a href="{{recommend.articleUrl}}" target="_blank"><span
+                                style="font-size:16px;font-weight:bolder;"> {{recommend.title}} </span> </a>吗？
+                            <p>介绍：{{recommend.summary}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelDeleteRecommend()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="deleteRecommend(recommend.id)"
+                                    class="btn btn-danger">确认
+                            </button>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".manage-toggle-sidebar").click(function () {
+            $("#manage-sub-nav").toggleClass("collapsed");
+            $("#manage-body-content").toggleClass("col-sm-12  manage-margin_left_sub_nav_width");
+            $("#manage-close-open-icon").toggleClass("glyphicon-chevron-right");
+            return false;
+        });
+    });
+</script>

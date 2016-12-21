@@ -2,7 +2,7 @@ app.controller("FriendlinkManageController", function($uibModal,$scope,Friendlin
 	$scope.isFriendlinkNav = true;
 	setScreenAvailHeight();
     $scope.currentPage = 1;
-    $scope.pageSize = 3;
+    $scope.pageSize = 11;
     $scope.list = function(currentPage, pageSize){
         FriendlinkManageService.list(currentPage, pageSize).then(function(data){
             $scope.friendlinks = data.resultData.list;

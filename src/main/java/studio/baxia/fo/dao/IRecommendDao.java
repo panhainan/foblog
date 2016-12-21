@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.pojo.Recommend;
-import studio.baxia.fo.pojo.RecommendContent;
 
 import java.util.List;
 
@@ -26,8 +25,6 @@ public interface IRecommendDao {
                            @Param("pageConfig") PageConfig pageConfig);
 
     Integer selectCountBy(@Param("recommend") Recommend recommend);
-
-    Integer insertRecommendContent(RecommendContent recommendContent);
 
     Recommend selectById(@Param("id")Long id);
 }

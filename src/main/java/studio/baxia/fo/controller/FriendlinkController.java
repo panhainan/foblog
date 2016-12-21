@@ -22,6 +22,24 @@ public class FriendlinkController {
 
     @Autowired
     private IFriendlinkService iFriendlinkService;
+
+    @ResponseBody
+    @RequestMapping(value = "/friendlink", method = RequestMethod.GET)
+    public CommonResult list() {
+        List<Friendlink> list = iFriendlinkService.list();
+        return new CommonResult(CommonConstant.SUCCESS_CODE, null, list);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/friendlink/hits", method = RequestMethod.POST)
+    public CommonResult hits(Integer id) {
+        iFriendlinkService.hits(id);
+        return new CommonResult(CommonConstant.SUCCESS_CODE, null);
+    }
+
+
+
+
     @ExecuteSecurity
     @ResponseBody
     @RequestMapping(value = "/manage/friendlink", method = RequestMethod.POST)
@@ -69,12 +87,7 @@ public class FriendlinkController {
 
         }
     }
-    @ResponseBody
-    @RequestMapping(value = "/friendlink", method = RequestMethod.GET)
-    public CommonResult list() {
-        List<Friendlink> list = iFriendlinkService.list();
-        return new CommonResult(CommonConstant.SUCCESS_CODE, null, list);
-    }
+
     @ExecuteSecurity
     @ResponseBody
     @RequestMapping(value = "/manage/friendlink/save", method = RequestMethod.POST)

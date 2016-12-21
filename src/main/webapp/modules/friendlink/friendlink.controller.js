@@ -7,6 +7,12 @@ app.controller("FriendlinkController", function (FriendlinkService, $scope) {
     $scope.isFriendlinkNav = true;
     setScreenAvailHeight();
 
+    $scope.clickLink = function(id,url){
+        FriendlinkService.hits(id).then(function(data){
+//			console.log(data)
+        });
+        window.open(url);
+    }
     $scope.list = function(){
         FriendlinkService.list().then(function(data){
             $scope.friendlinks = data.resultData;

@@ -94,7 +94,6 @@
 <script src="modules/manage/article/article.manage.controller.js"></script>
 <script src="modules/manage/article/article.form.manage.controller.js"></script>
 <script src="modules/manage/article/article.detail.manage.controller.js"></script>
-
 <script src="modules/manage/category/category.manage.service.js"></script>
 <script src="modules/manage/category/category.manage.controller.js"></script>
 <script src="modules/manage/category/category.add.controller.js"></script>
@@ -105,5 +104,8 @@
 <script src="modules/manage/info/info.form.manage.controller.js"></script>
 <script src="modules/manage/friendlink/friendlink.manage.service.js"></script>
 <script src="modules/manage/friendlink/friendlink.manage.controller.js"></script>
+<script src="modules/manage/recommend/recommend.manage.service.js"></script>
+<script src="modules/manage/recommend/recommend.manage.controller.js"></script>
+
 <script src="plugins/editor.md/lib/marked.min.js"></script>
 

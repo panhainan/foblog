@@ -27,7 +27,7 @@
 										<td>URL</td>
                                         <td class="hidden-xs">优先级</td>
                                         <td>点击量</td>
-                                        <td class="hidden-xs">添加时间</td>
+                                        <td class="hidden-xs hidden-sm hidden-md">添加时间</td>
 										<td>操作</td>
 									</tr>
 								</thead>
@@ -39,7 +39,7 @@
                                                title="点击访问" target="_blank">{{friendlink.website}}</a></td>
 										<td class="hidden-xs">{{friendlink.priority}}</td>
                                         <td>{{friendlink.hits}}</td>
-										<td class="hidden-xs">{{friendlink.addTime | date
+										<td class="hidden-xs hidden-sm hidden-md">{{friendlink.addTime | date
 											:'yyyy-MM-dd HH:ss'}}</td>
 										<td>
 											<a class="btn btn-xs btn-info" style="margin-right:8px"  ng-click="previewFriendlink(friendlink)" title="点击查看">查看</a>

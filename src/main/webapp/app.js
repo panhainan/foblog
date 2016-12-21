@@ -100,9 +100,13 @@ app.config(function($routeProvider,$stateProvider) {
 		templateUrl : "modules/manage/tag/tag.manage.view.html",
 		controller : 'TagManageController',
         requiredLogin:  true
-    }).when("/manage/info", {
-		templateUrl : "modules/manage/info/info.manage.view.html",
-		controller : 'InfoManageController',
+    }).when("/manage/recommend", {
+		templateUrl : "modules/manage/recommend/recommend.manage.view.html",
+		controller : 'RecommendManageController',
+        requiredLogin:  true
+    }).when("/manage/project", {
+        templateUrl : "modules/manage/project/project.manage.view.html",
+        controller : 'ProjectManageController',
         requiredLogin:  true
     }).when("/manage/friendlink", {
 		templateUrl : "modules/manage/friendlink/friendlink.manage.view.html",

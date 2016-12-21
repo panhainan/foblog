@@ -5,4 +5,9 @@ app.service("FriendlinkService", function ($http, $q,RequestService) {
     this.list = function () {
         return RequestService.getRequest('/friendlink', cfg_form);
     };
+    this.hits = function(id){
+        return RequestService.postRequest('/friendlink/hits' ,$.param({
+            "id": id
+        }), cfg_form);
+    }
 });

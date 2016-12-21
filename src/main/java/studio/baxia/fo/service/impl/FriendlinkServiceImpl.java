@@ -80,4 +80,12 @@ public class FriendlinkServiceImpl implements IFriendlinkService {
         int result = iFriendDao.update(friendlink);
         return ReturnUtil.returnResult(result);
     }
+
+    @Override
+    public boolean hits(int id) {
+        Friendlink friendlink = iFriendDao.selectById(id);
+        friendlink.setHits(friendlink.getHits()+1);
+        iFriendDao.updateHits(friendlink);
+        return true;
+    }
 }

@@ -36,4 +36,6 @@ public interface IFriendlinkService {
     boolean delete(int fId);
 
     boolean update(Friendlink friendlink);
+
+    boolean hits(int id);
 }

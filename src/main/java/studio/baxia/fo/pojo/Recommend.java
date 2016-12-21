@@ -8,8 +8,6 @@ import java.util.Date;
 public class Recommend {
     private long id;
     private String title;
-    private boolean hasContent;
-    private int contentId;
     private String articleUrl;
     private String summary;
     private Date pubTime;;
@@ -20,8 +18,6 @@ public class Recommend {
         return "RecommendVo{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", hasContent=" + hasContent +
-                ", contentId=" + contentId +
                 ", articleUrl='" + articleUrl + '\'' +
                 ", summary='" + summary + '\'' +
                 ", pubTime=" + pubTime +
@@ -43,22 +39,6 @@ public class Recommend {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public boolean isHasContent() {
-        return hasContent;
-    }
-
-    public void setHasContent(boolean hasContent) {
-        this.hasContent = hasContent;
-    }
-
-    public int getContentId() {
-        return contentId;
-    }
-
-    public void setContentId(int contentId) {
-        this.contentId = contentId;
     }
 
     public String getArticleUrl() {
