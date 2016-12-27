@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studio.baxia.fo.dao.IProjectDao">
+
+    <resultMap id="ProjectMap" type="studio.baxia.fo.pojo.Project">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="introduction" column="introduction"/>
+        <result property="pubTime" column="pub_time"/>
+        <result property="hits" column="hits"/>
+        <result property="downUrl" column="down_url"/>
+        <result property="articleUrl" column="article_url"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO
+		t_project(name,introduction,pub_time,hits,down_url,article_url,status)
+		VALUES
+		(#{name,jdbcType=VARCHAR},
+		#{introduction,jdbcType=VARCHAR},
+		#{pubTime,jdbcType=TIMESTAMP},
+		#{hits,jdbcType=INTEGER},
+		#{downUrl,jdbcType=VARCHAR},
+		#{articleUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER})
+	</insert>
+
+    <delete id="delete">
+		DELETE FROM t_project
+		WHERE
+		id=#{id,jdbcType=INTEGER}
+	</delete>
+
+    <update id="update">
+		UPDATE t_project
+		SET
+		name=#{name,jdbcType=VARCHAR},
+		introduction=#{introduction,jdbcType=VARCHAR},
+		down_url=#{downUrl,jdbcType=VARCHAR},
+		pub_time=#{pubTime,jdbcType=TIMESTAMP},
+		article_url=#{articleUrl,jdbcType=VARCHAR},
+		status=#{status,jdbcType=VARCHAR}
+		WHERE id =
+		#{id,jdbcType=INTEGER}
+	</update>
+    <update id="updateHits">
+        UPDATE t_project
+        SET
+        hits=#{hits,jdbcType=INTEGER}
+        WHERE id =
+        #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectById" resultMap="ProjectMap">
+		SELECT *
+		FROM t_project
+		WHERE
+		id = #{id,jdbcType=INTEGER}
+	</select>
+    <select id="selectBy" resultMap="ProjectMap">
+        SELECT *
+        FROM t_project
+        <where>
+            <if test="project.status!=null">
+                status = #{project.status,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY pub_time DESC
+        <if
+                test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
+            LIMIT
+            #{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectCountBy" resultType="Integer">
+		SELECT COUNT(*)
+		FROM t_project
+	</select>
+
+
+</mapper>

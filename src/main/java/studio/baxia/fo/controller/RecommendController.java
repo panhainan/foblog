@@ -46,7 +46,7 @@ public class RecommendController {
     @RequestMapping(value = "/manage/recommend/{id}",method = RequestMethod.GET)
     public CommonResult get(@PathVariable long id){
         Recommend recommend = iRecommendService.get(id);
-        return new CommonResult(CommonConstant.SUCCESS_CODE,null,id);
+        return new CommonResult(CommonConstant.SUCCESS_CODE,null,recommend);
     }
     @ExecuteSecurity
     @ResponseBody

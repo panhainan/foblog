@@ -74,8 +74,8 @@
     color: #fff;
     display: block;
     text-decoration: none;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 13px;
 }
 .sidebar-nav .nav-custom > li > a:hover {

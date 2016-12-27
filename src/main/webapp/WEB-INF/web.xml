@@ -57,7 +57,7 @@
     <!-- 静态资源放行,注意不能有和controller层的url相同的配置，因此可以配后缀 -->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/css/*</url-pattern>
+<!--        <url-pattern>/css/*</url-pattern>
         <url-pattern>/fonts/*</url-pattern>
         <url-pattern>/images/*</url-pattern>
         <url-pattern>/json/*</url-pattern>
@@ -65,7 +65,8 @@
         <url-pattern>/plugins/*</url-pattern>
         <url-pattern>/scripts/*</url-pattern>
         <url-pattern>/app.js</url-pattern>
-        <!-- 	    <url-pattern>*.html</url-pattern>
+        <url-pattern>*.html</url-pattern>-->
+         	    <url-pattern>*.html</url-pattern>
                 <url-pattern>*.js</url-pattern>
                 <url-pattern>*.css</url-pattern>
                 <url-pattern>*.scss</url-pattern>
@@ -74,10 +75,11 @@
                 <url-pattern>*.woff2</url-pattern>
                 <url-pattern>*.jpg</url-pattern>
                 <url-pattern>*.jpeg</url-pattern>
+                <url-pattern>*.ico</url-pattern>
                 <url-pattern>*.gif</url-pattern>
                 <url-pattern>*.png</url-pattern>
                 <url-pattern>*.pdf</url-pattern>
-                <url-pattern>*.map</url-pattern> -->
+                <url-pattern>*.map</url-pattern>
     </servlet-mapping>
     <!-- 跨域问题解决过滤器 -->
     <filter>
@@ -105,7 +107,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>-->
 </web-app>

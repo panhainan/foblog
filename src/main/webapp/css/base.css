@@ -3,7 +3,10 @@ html, body {
     "STHeiti", "WenQuanYi Micro Hei",  sans-serif;
     /*background-color: #FBFBFB;*/
 }
-
+a,input{outline:none;}
+a:focus,input:focus {
+    outline: none;
+}
 body {
     background-image: url(http://ww3.sinaimg.cn/large/7011d6cfjw1f1yyk5xe1sj203h03d742.jpg);
     position: relative;

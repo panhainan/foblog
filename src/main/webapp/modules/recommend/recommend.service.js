@@ -1,5 +1,5 @@
 app.service("RecommendService", function(RequestService) {
-	this.list = function (pageNumber, pageSize,articleStatus) {
+	this.list = function (pageNumber, pageSize) {
         return RequestService.postRequest('/recommend' ,$.param({
         	"pageNumber": pageNumber,
         	"pageSize":pageSize
