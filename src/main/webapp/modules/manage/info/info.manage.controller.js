@@ -3,7 +3,7 @@ app.controller("InfoManageController", function($scope,InfoManageService) {
 	setScreenAvailHeight(); 
 	var getInfo = function(){
 		InfoManageService.get().then(function(data){
-			console.log(data);
+			//console.log(data);
 			if(data.resultData!=null){
                 if(data.resultData.profile!=null && data.resultData.profile!=""){
                     data.resultData.profile = marked(data.resultData.profile);

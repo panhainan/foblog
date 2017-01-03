@@ -83,8 +83,8 @@ public class BCategoryServiceImpl implements IBCategoryService {
     }
 
     @Override
-    public List<CategoryVo> getAllVoBy(Integer articleStatus) {
-        List<CategoryVo> result = iCategoryDao.selectVoBy(articleStatus);
+    public List<CategoryVo> getAllVoBy(Integer articleStatus,Boolean status) {
+        List<CategoryVo> result = iCategoryDao.selectVoBy(articleStatus,status);
         return result;
     }
 

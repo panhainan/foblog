@@ -6,6 +6,7 @@
         <result property="id" column="id"/>
         <result property="description" column="description"/>
         <result property="name" column="name"/>
+        <result property="status" column="status"/>
     </resultMap>
     <resultMap id="CategoryVoMap" type="studio.baxia.fo.vo.CategoryVo">
         <result property="id" column="id"/>
@@ -70,7 +71,12 @@
 						    		and t2.status = #{articleStatus,jdbcType=INTEGER}
 						    </if>
 				    	) as article_counts 
-			FROM t_category t1 
+			FROM t_category t1
+            <where>
+              <if test="status!=null">
+                t1.status = #{status,jdbcType=TINYINT}
+              </if>
+            </where>
 			ORDER BY article_counts desc
     </select>
 

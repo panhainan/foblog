@@ -14,6 +14,15 @@ public class CommonConstant {
     public static final String ACTICLE_STATUS_DRAFT_NAME = "草稿";
     public static final String ACTICLE_STATUS_BLOG_NAME = "博客";
 
+    /**
+     * 类别不展示
+     */
+    public static final boolean CATEGORY_HIDDEN = false;
+    /**
+     * 类别展示
+     */
+    public static final boolean CATEGORY_SHOW = true;
+
     public static final int PROJECT_PRIVATE = 0;
     public static final int PROJECT_PUBLIC = 1;
     public static final int USER_TYPE_GUEST = 0;

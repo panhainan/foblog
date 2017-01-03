@@ -51,5 +51,12 @@ public interface IBCategoryService {
      * @return
      */
     Category getById(int categoryId);
-    List<CategoryVo> getAllVoBy(Integer articleStatus);
+
+    /**
+     * 通过类别类别状态和文章状态查询类别
+     * @param articleStatus
+     * @param status
+     * @return
+     */
+    List<CategoryVo> getAllVoBy(Integer articleStatus,Boolean status);
 }

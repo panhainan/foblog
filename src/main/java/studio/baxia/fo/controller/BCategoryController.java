@@ -37,7 +37,7 @@ public class BCategoryController {
     @ResponseBody
     @RequestMapping(value = "/blog/category",method = RequestMethod.GET)
     public CommonResult listCategorys(){
-        List<CategoryVo> listCategorys = categoryService.getAllVoBy(CommonConstant.ACTICLE_STATUS_BLOG);
+        List<CategoryVo> listCategorys = categoryService.getAllVoBy(CommonConstant.ACTICLE_STATUS_BLOG,CommonConstant.CATEGORY_SHOW);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",listCategorys);
     }
 
@@ -49,7 +49,7 @@ public class BCategoryController {
     @ResponseBody
     @RequestMapping(value = "/manage/category", method = RequestMethod.GET)
     public CommonResult listMCategorys() {
-        List<CategoryVo> listCategorys = categoryService.getAllVoBy(null);
+        List<CategoryVo> listCategorys = categoryService.getAllVoBy(null,null);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "", listCategorys);
     }
 

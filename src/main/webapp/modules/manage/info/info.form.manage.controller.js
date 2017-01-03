@@ -13,7 +13,7 @@ app.controller("InfoFormManageController", function($location,$scope,InfoManageS
 	$scope.updateInfo = function(info){
 		info.profile = infoEditor.getMarkdown();
 		InfoManageService.put(info).then(function(data){
-			console.log(data)
+			//console.log(data)
 			if(data.resultCode==1){
 				$location.path("/manage/info");
 			}

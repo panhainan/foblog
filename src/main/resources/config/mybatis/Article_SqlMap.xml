@@ -105,9 +105,9 @@
 		ON
 		t1.category_ids = t2.id
 		WHERE
-		title = #{title,jdbcType=VARCHAR}
+		t1.title = #{title,jdbcType=VARCHAR}
 		AND
-		status = #{status,jdbcType=VARCHAR}
+		t1.status = #{status,jdbcType=VARCHAR}
 		AND
 		t1.category_ids = t2.id
 	</select>

@@ -9,25 +9,27 @@
             <div class="body-project-body">
                 <table>
                     <tr class="row" style="background-color: #fff;" ng-repeat="project in projects">
-                        <td class="col-xs-3 col-sm-3 col-md-2 col-lg-1 "
+                        <td class="col-xs-3 col-sm-3 col-md-2 col-lg-2 "
                             style="text-align: center;vertical-align: middle;">
                             <span style="font-size: 22px;margin-top: 20px">{{project.pubTime | date :'yyyy.MM'}}</span>
                         </td>
-                        <td class="col-xs-9 col-sm-9 col-md-10 col-lg-11 ">
-                            <h3 style="font-size: 22px;text-indent: 20px">{{project.name}}</h3>
+                        <td class="col-xs-9 col-sm-9 col-md-10 col-lg-10 ">
+                            <h3 style="font-size: 22px;text-indent: 20px"><a ng-if="project.articleUrl" ng-click="hit(project.articleUrl,project.id)"
+                                                                             target="_blank" style="margin-right:10px;"
+                                                                             title="{{project.name}}">{{project.name}}</a><span ng-if="!project.articleUrl">{{project.name}}</span></h3>
 
                             <p style="color:#666666;text-indent: 20px">{{project.introduction}}</p>
 
                             <p style="text-align: right;color:#999999;font-size: 13px;">
-                                <a ng-click="hit(project.articleUrl,project.id)"
+                                <a ng-click="hit(project.articleUrl,project.id)" ng-if="project.articleUrl"
                                     target="_blank" style="margin-right:10px;"
                                     title="{{project.name}}"><span
                                     class="	glyphicon glyphicon-search" style="padding: 0px;margin-right: 4px;"></span>项目详情</a>
-                                <a style="margin-right: 10px;" ng-click="hit(project.downUrl,project.id)" target="_blank"
+                                <a style="margin-right: 10px;" ng-if="project.downUrl" ng-click="hit(project.downUrl,project.id)" target="_blank"
                                    title="{{project.name}}"><span
                                         class="glyphicon glyphicon-download-alt" style="padding: 0px;margin-right: 4px;"></span>源码下载</a>
-                                <span style="padding-left: 5px"><span class="glyphicon glyphicon-eye-open"
-                                                                      style="padding: 0px;margin-right: 4px;"></span>阅读({{project.hits}})</span>
+                                <!--<span style="padding-left: 5px"><span class="glyphicon glyphicon-eye-open"
+                                                                      style="padding: 0px;margin-right: 4px;"></span>阅读({{project.hits}})</span>-->
                             </p>
                         </td>
                     </tr>

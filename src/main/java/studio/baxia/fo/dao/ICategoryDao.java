@@ -68,6 +68,6 @@ public interface ICategoryDao {
 
 	Category selectByName(@Param("name") String categoryName);
 
-	List<CategoryVo> selectVoBy(@Param("articleStatus") Integer articleStatus);
+	List<CategoryVo> selectVoBy(@Param("articleStatus") Integer articleStatus,@Param("status") Boolean status);
 
 }

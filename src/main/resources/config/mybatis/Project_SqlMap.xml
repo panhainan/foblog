@@ -62,13 +62,12 @@
         SELECT *
         FROM t_project
         <where>
-            <if test="project.status!=null">
+            <if test="project!=null and project.status!=null">
                 status = #{project.status,jdbcType=INTEGER}
             </if>
         </where>
         ORDER BY pub_time DESC
-        <if
-                test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
+        <if test="pageConfig!=null and pageConfig.pageIndex!=null and pageConfig.pageSize!=null">
             LIMIT
             #{pageConfig.pageIndex,jdbcType=INTEGER},#{pageConfig.pageSize,jdbcType=INTEGER}
         </if>

@@ -8,7 +8,7 @@ app.controller("SignManageController", function ($scope, $rootScope, SignManageS
     }
     var doSignin = function (author) {
         SignManageService.post(author).then(function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.resultCode == 1) {
                 if (data.resultData == null) {
                     alert("用户名或者密码错误！");
@@ -29,13 +29,13 @@ app.controller("SignManageController", function ($scope, $rootScope, SignManageS
             url: web_project_name + '/manage/getKeys',
             dataType: "json",
             success: function (data) {
-                console.log(data)
+                //console.log(data)
                 if (data.resultCode == 0) {
                     alert(data.resultMsg)
                     return false;
                 } else {
                     var keys =genkeys(data.resultData.e, data.resultData.n, data.resultData.maxdigits);
-                    console.log(keys)
+                    //console.log(keys)
                     var author = {
                         account: "",
                         password: ""

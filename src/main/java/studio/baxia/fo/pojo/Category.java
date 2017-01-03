@@ -14,6 +14,10 @@ public class Category extends TreeInfo {
     private String name;//名称
     @NotEmpty(message = "描述不能为空")
     private String description;
+    /**
+     * 类别状态
+     */
+    private boolean status;
 
     @Override
     public Integer getId() {
@@ -39,5 +43,13 @@ public class Category extends TreeInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

@@ -1,10 +1,144 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="customContainer">
+    <div class="row">
+        <div id="manage-sub-nav">
+            <ng-include src="'modules/manage/manage-left-sub-nav.html'"></ng-include>
+        </div>
+        <div class="manage-margin_left_sub_nav_width" id="manage-body-content">
+            <div class="manage-toggle-sidebar-div">
+                <a class="btn btn-primary btn-md manage-toggle-sidebar" ><span
+                        class="glyphicon glyphicon-chevron-left" id="manage-close-open-icon"></span></a>
+            </div>
+            <div class="manage-body-content-body">
+                <div class=" panel panel-default">
+                    <div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
+                        <h3 class="panel-title font_kaiti_20">
+                            项目管理<span style="font-size: 12px">(共{{totalItems}}条记录)</span> <a
+                                type="button" ng-click="addProject()"
+                                class="btn btn-sm btn-primary" style="float: right;color: #fff">添加</a>
+                        </h3>
+                    </div>
+                    <div class="panel-body " style="min-height: 440px">
+                        <div class="table-responsive tableTrBottomBorder">
+                            <table class="table  table-hover">
+                                <thead>
+                                <tr class="border_bottom">
+                                    <td>#</td>
+                                    <td>网站名称</td>
+                                    <td class="hidden-xs">源码地址</td>
+                                    <td>点击量</td>
+                                    <td class="hidden-xs hidden-sm hidden-md">添加时间</td>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="project in projects">
+                                    <td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
+                                    <td><a href="{{project.articleUrl}}"
+                                           title="点击访问" target="_blank">{{project.name}}</a></td>
+                                    <td class="hidden-xs">{{project.downUrl}}</td>
+                                    <td>{{project.hits}}</td>
+                                    <td class="hidden-xs hidden-sm hidden-md">{{project.pubTime | date :'yyyy-MM-dd'}}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-info" style="margin-right:8px"  ng-click="previewProject(project)" title="点击查看">查看</a>
+                                        <a class="btn btn-xs btn-warning" style="margin-right:8px"
+                                           ng-click="setEditProject(project)">编辑</a>
+                                        <a class="btn btn-xs btn-danger"	ng-click="setDeleteProject(project)">删除</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="text-align: center">
+                        <ul uib-pagination total-items="totalItems" max-size="5"
+                            boundary-link-numbers="true" items-per-page="pageSize"
+                            ng-model="currentPage" ng-change="pageChanged()"
+                            class="pagination_border_radius_0"></ul>
+                    </div>
+                    <script type="text/ng-template" id="previewProject.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">查看详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            名称：{{project.name}}<br/>
+                            <a href="{{project.articleUrl}}" target="_blank">文章详情</a><br/>
+                            <a href="{{project.downUrl}}" target="_blank">源码地址</a><br/>
+                            点击量：{{project.hits}} <br/>
+                            开发时间：{{project.pubTime | date : 'yyyy-MM-dd HH:ss'}}<br/>
+                            文章简介：{{project.introduction}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="closeProject()"
+                                    >关闭
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="addProject.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">添加</h4>
+                        </div>
+                        <div class="modal-body">
+                            名称：<input type="text" class="form-control" ng-model="project.name" required/>
+                            URL: <input type="url" class="form-control" ng-model="project.articleUrl" required/>
+                            源码地址: <input type="url" class="form-control" ng-model="project.downUrl" required/>
+                            介绍：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="project.introduction" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelAddProject()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="confirmAddProject(project)"
+                                    class="btn btn-success">确认
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="editProject.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">修改</h4>
+                        </div>
+                        <div class="modal-body">
+                            名称：<input type="text" class="form-control" ng-model="project.name" required/>
+                            URL: <input type="url" class="form-control" ng-model="project.articleUrl" required/>
+                            源码地址: <input type="url" class="form-control" ng-model="project.downUrl" required/>
+                            介绍：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" required ng-model="project.introduction"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelEditProject()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="confirmEditProject(project)"
+                                    class="btn btn-success">确认
+                            </button>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="deleteProject.html">
+                        <div class="modal-header">
+                            <h4 class="modal-title">警告</h4>
+                        </div>
+                        <div class="modal-body">
+                            确认删除项目 <a href="{{project.articleUrl}}" target="_blank"><span style="font-size:16px;font-weight:bolder;"> {{project.name}} </span> </a>吗？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="cancelDeleteProject()"
+                                    >取消
+                            </button>
+                            <button type="button" ng-click="deleteProject(project.id)"
+                                    class="btn btn-danger">确认
+                            </button>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        $(".manage-toggle-sidebar").click(function() {
+            $("#manage-sub-nav").toggleClass("collapsed");
+            $("#manage-body-content").toggleClass("col-sm-12  manage-margin_left_sub_nav_width");
+            $("#manage-close-open-icon").toggleClass("glyphicon-chevron-right");
+            return false;
+        });
+    });
+</script>

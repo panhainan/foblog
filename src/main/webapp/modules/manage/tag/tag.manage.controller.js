@@ -4,7 +4,7 @@ app.controller("TagManageController", function($uibModal, $scope,$location,
 	setScreenAvailHeight();
 	$scope.list = function() {
 		TagManageService.list().then(function(data) {
-			console.log(data)
+			//console.log(data)
 			$scope.tags = data.resultData;
 		})
 	}
@@ -33,7 +33,7 @@ app.controller("TagManageController", function($uibModal, $scope,$location,
 		TagManageService.getArticles(tag.id).then(
 				function(data) {
 					// 需要判断请求是否成功，其他地方也是，暂时还没有进行处理
-					console.log(data);
+					//console.log(data);
 					var modalInstance = $uibModal.open({
 						templateUrl : 'editTagArticle.html',
 						controller : 'editTagArticleCtrl',
