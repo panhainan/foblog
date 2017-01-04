@@ -4,6 +4,7 @@
 
 app.controller("AboutController", function (AboutService, $scope) {
 	//console.log("AboutController")
+    $scope.loaded = false;
     var getInfo = function(){
         AboutService.get().then(function(data){
             console.log(data);
@@ -12,6 +13,7 @@ app.controller("AboutController", function (AboutService, $scope) {
                     data.resultData.profile = marked(data.resultData.profile);
                 }
                 $scope.info = data.resultData;
+                $scope.loaded = true;
             }
         })
     }

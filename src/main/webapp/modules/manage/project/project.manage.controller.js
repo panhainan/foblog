@@ -7,6 +7,10 @@ app.controller("ProjectManageController", function ($uibModal,$scope, ProjectMan
 
     $scope.currentPage = 1;
     $scope.pageSize = 11;
+    $scope.pageChanged = function() {
+        //console.log('Page changed to: ' + $scope.currentPage);
+        $scope.list($scope.currentPage, $scope.pageSize);
+    };
     $scope.list = function (currentPage, pageSize) {
         ProjectManageService.list(currentPage, pageSize).then(function (data) {
             console.log(data)

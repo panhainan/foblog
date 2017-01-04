@@ -9,6 +9,10 @@ app.controller("FriendlinkManageController", function($uibModal,$scope,Friendlin
             $scope.totalItems = data.resultData.pageConfig.allCount;
         })
     };
+    $scope.pageChanged = function() {
+        //console.log('Page changed to: ' + $scope.currentPage);
+        $scope.list($scope.currentPage, $scope.pageSize);
+    };
     $scope.list($scope.currentPage, $scope.pageSize);
     $scope.addFriendlink = function(){
         var modalInstance = $uibModal.open({

@@ -1,10 +1,16 @@
-app.controller("ArticleController", function($uibModal,$scope,ArticleService) {
+app.controller("ArticleController", function($location,$uibModal,$scope,ArticleService) {
 	setScreenAvailHeight();
     $scope.loadingPath=loading_path;
     $scope.loaded = false;
     $scope.currentPage = 1;
     $scope.pageSize = 10;
 
+    $scope.selectedValue = "/blog"
+
+    $scope.goUrl = function(url){
+        //console.log(url)
+        $location.path(url)
+    }
     $scope.pageChanged = function() {
         //console.log('Page changed to: ' + $scope.currentPage);
         $scope.list($scope.currentPage, $scope.pageSize);
