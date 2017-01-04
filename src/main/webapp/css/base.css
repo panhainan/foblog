@@ -8,7 +8,7 @@ a:focus,input:focus {
     outline: none;
 }
 body {
-    background-image: url(http://ww3.sinaimg.cn/large/7011d6cfjw1f1yyk5xe1sj203h03d742.jpg);
+    background-image: url(/images/bg.jpg);
     position: relative;
     height: 100%;
     overflow-x: hidden;
@@ -18,6 +18,9 @@ body {
 }
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;
+}
+.navbar-default .navbar-toggle:hover{
+    background-color: #505864;
 }
 .breadcrumb {
     margin : 0 10px 15px 10px;
@@ -68,7 +71,7 @@ body {
 .panel-custom-primary .panel-heading {
     /*border-top-left-radius: 4px;*/
     /*border-top-right-radius: 4px;*/
-    background-color:#333333; //#336699;
+    background-color:#393D49; /*#336699;*/
     padding: 2px 15px 0px 15px;
     color: #fff;
     /*text-shadow: 5px 5px 5px #3f5b6e;*/
@@ -100,6 +103,9 @@ a {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+img{
+    max-width: 600px;
+}
 .img-circle {
     border: 1px solid #dddddd;
     border-radius: 50%;
@@ -108,13 +114,13 @@ a {
 }
 
 .border_bottom {
-    border-bottom: 1px #333 solid;
+    border-bottom: 1px #424857 solid;
 }
 .border_bottom_white {
     border-bottom: 1px #fff solid;
 }
 .border_bottom_black{
-    border-bottom: 1px #222 solid;
+    border-bottom: 1px #393D49 solid;
 }
 .border_top {
     border-top: 1px silver solid;

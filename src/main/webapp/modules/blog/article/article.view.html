@@ -2,7 +2,14 @@
     <div class="blog-body">
         <ol class="breadcrumb">
             <li><a href="#/">主页</a></li>
-            <li class="active">博客</li>
+            <li class="active">
+                <select ng-change="goUrl(selectedValue)"  ng-model="selectedValue" style="border: none;background-color: #F5F5F5">
+                    <option value="/blog" >博客</option>
+                    <option value="/blog/archive">归档</option>
+                    <option value="/blog/category">分类</option>
+                    <option value="/blog/tag">标签</option>
+                </select>
+            </li>
         </ol>
         <ng-include src="'modules/common/loading.html'"></ng-include>
         <div ng-show="loaded" class="body-blog-body">
@@ -28,3 +35,8 @@
         </div>
     </div>
 </div>
+<style>
+    select option{
+        height: 40px;
+    }
+</style>

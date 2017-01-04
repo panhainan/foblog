@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 .navbar-vertical-left {
-    color: #fff;
+    color: #999999;
     position: fixed;
     left: 0;
     top: 0;
@@ -11,13 +11,18 @@
     border: none;
     border-radius: 0;
     margin: 0;
-    background-color: #222222; //#2561A0;
+    background-color: #393D49;/*222222;#2561A0;*/
     z-index: 999;
     /*border-right: 1px silver solid;*/
     /*border-bottom: 1px silver solid;*/
     /* color: #000; */
 }
-
+.navbar-vertical-left a{
+    color: #999999;
+}
+.navbar-vertical-left a:hover{
+    color: #fff;
+}
 @media ( max-width: 767px) {
     .navbar-vertical-left {
         /*background-color: #fff; */
@@ -49,12 +54,12 @@
     margin-top: 0;
 }
 
-.sidebar-nav .navbar li a,.sidebar-nav .navbar li ul li a {
-    COLOR: #fff;
-}
+/*.sidebar-nav .navbar li a,.sidebar-nav .navbar li ul li a {
+    COLOR: #999999;
+}*/
 
 .sidebar-nav .navbar li a:hover,.sidebar-nav .navbar li ul li a:hover {
-    background-color: #336699;
+    background-color: #31343B;
 }
 
 .sidebar-nav .nav-custom {
@@ -70,8 +75,8 @@
     padding-bottom: 12px;
 }
 .sidebar-nav .nav-custom > li >div>ul>li > a{
-    background-color: #333;
-    color: #fff;
+    background-color: #40485A;
+    /*color: #999999;*/
     display: block;
     text-decoration: none;
     padding-top: 10px;
@@ -80,7 +85,7 @@
 }
 .sidebar-nav .nav-custom > li > a:hover {
     text-decoration: none;
-    background-color: #000; //#003366
+    background-color: #31343B;/* #003366*/
 }
 
 /* make sidebar nav vertical */

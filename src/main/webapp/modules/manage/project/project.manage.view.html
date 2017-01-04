@@ -33,8 +33,10 @@
                                 <tbody>
                                 <tr ng-repeat="project in projects">
                                     <td>{{totalItems-(currentPage-1)*pageSize-$index}}</td>
-                                    <td><a href="{{project.articleUrl}}"
-                                           title="点击访问" target="_blank">{{project.name}}</a></td>
+                                    <td><a ng-if="project.articleUrl" href="{{project.articleUrl}}"
+                                           title="点击访问" target="_blank">{{project.name}}</a>
+                                        <span ng-if="!project.articleUrl">{{project.name}}</span>
+                                    </td>
                                     <td class="hidden-xs">{{project.downUrl}}</td>
                                     <td>{{project.hits}}</td>
                                     <td class="hidden-xs hidden-sm hidden-md">{{project.pubTime | date :'yyyy-MM-dd'}}</td>
