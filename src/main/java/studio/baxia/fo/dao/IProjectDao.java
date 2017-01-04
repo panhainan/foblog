@@ -26,6 +26,6 @@ public interface IProjectDao {
 
     Integer selectCountBy(@Param("project")Project project);
 
-    Project selectById(@Param("id")Long id);
+    Project selectById(@Param("id")Long id,@Param("status")boolean status);
 
 }

@@ -47,7 +47,7 @@ public class ProjectController {
     @ResponseBody
     @RequestMapping(value = "/manage/project/{id}",method = RequestMethod.GET)
     public CommonResult get(@PathVariable long id){
-        Project project = iProjectService.get(id);
+        Project project = iProjectService.get(id,CommonConstant.PROJECT_ALL);
         return new CommonResult(CommonConstant.SUCCESS_CODE,null,project);
     }
     @ExecuteSecurity

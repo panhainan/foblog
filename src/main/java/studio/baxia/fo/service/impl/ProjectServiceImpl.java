@@ -3,6 +3,7 @@ package studio.baxia.fo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import studio.baxia.fo.common.CommonConstant;
 import studio.baxia.fo.common.PageConfig;
 import studio.baxia.fo.common.PageInfoResult;
 import studio.baxia.fo.dao.IProjectDao;
@@ -50,7 +51,7 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
-    public List<Project> list(int status) {
+    public List<Project> list(boolean status) {
         return iProjectDao.selectBy(new Project(status),null);
     }
 
@@ -64,14 +65,14 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public boolean hits(Long id) {
-        Project project = iProjectDao.selectById(id);
+        Project project = iProjectDao.selectById(id, CommonConstant.PROJECT_ALL);
         project.setHits(project.getHits()+1);
         iProjectDao.updateHits(project);
         return false;
     }
 
     @Override
-    public Project get(long id) {
-        return iProjectDao.selectById(id);
+    public Project get(long id,boolean status) {
+        return iProjectDao.selectById(id,status);
     }
 }

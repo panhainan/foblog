@@ -13,11 +13,11 @@ public class Project {
     private int hits;
     private String downUrl;
     private String articleUrl;
-    private int status;
+    private boolean status;
 
     public Project() {
     }
-    public Project(int status) {
+    public Project(boolean status) {
         this.status = status;
     }
     @Override
@@ -93,12 +93,11 @@ public class Project {
     }
 
 
-    public int getStatus() {
-
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

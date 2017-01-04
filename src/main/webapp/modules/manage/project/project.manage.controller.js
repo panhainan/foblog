@@ -13,7 +13,7 @@ app.controller("ProjectManageController", function ($uibModal,$scope, ProjectMan
     };
     $scope.list = function (currentPage, pageSize) {
         ProjectManageService.list(currentPage, pageSize).then(function (data) {
-            console.log(data)
+            //console.log(data)
             $scope.projects = data.resultData.list;
             $scope.totalItems = data.resultData.pageConfig.allCount;
         })
@@ -24,7 +24,7 @@ app.controller("ProjectManageController", function ($uibModal,$scope, ProjectMan
             templateUrl: 'addProject.html',
             controller: 'addProjectCtrl',
             backdrop: 'static',
-            size: 'lg',
+            size: 'md',
             resolve: {}
         });
         modalInstance.result.then(function (_project) {
@@ -40,7 +40,7 @@ app.controller("ProjectManageController", function ($uibModal,$scope, ProjectMan
             templateUrl: 'editProject.html',
             controller: 'editProjectCtrl',
             backdrop: 'static',
-            size: 'lg',
+            size: 'md',
             resolve: {
                 project: function () {
                     return project;

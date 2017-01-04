@@ -50,7 +50,7 @@ public interface IBCategoryService {
      *            类别id
      * @return
      */
-    Category getById(int categoryId);
+    Category getById(int categoryId,boolean status);
 
     /**
      * 通过类别类别状态和文章状态查询类别
@@ -58,5 +58,5 @@ public interface IBCategoryService {
      * @param status
      * @return
      */
-    List<CategoryVo> getAllVoBy(Integer articleStatus,Boolean status);
+    List<CategoryVo> getAllVoBy(Integer articleStatus,boolean status);
 }

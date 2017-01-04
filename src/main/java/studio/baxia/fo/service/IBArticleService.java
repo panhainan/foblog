@@ -68,7 +68,7 @@ public interface IBArticleService {
 
     PageInfoResult<ArticleVo> getAllManageBy(Integer articleStatus, PageConfig pageConfig);
 
-    Map<String,Object> getAllByCategoryName(String categoryName);
+    Map<String,Object> getAllByCategoryName(String categoryName,boolean status);
 
     List<ArticleVo> getAllByTagName(String tagName);
 

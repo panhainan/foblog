@@ -49,8 +49,11 @@
 							<h4 class="modal-title">修改</h4>
 						</div>
 						<div class="modal-body">
-							名称：<input type="text" class="form-control" ng-model="tag.name"/>
-						</div>		
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" class="form-control" ng-model="tag.name"/>
+                            </div>
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" ng-click="cancelEditTag()"
 								>取消</button>

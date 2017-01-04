@@ -62,6 +62,7 @@ app.config(function($routeProvider,$stateProvider) {
         templateUrl : "modules/common/404.view.html",
     });
 	// 管理
+    //管理入口为/manage，需要输入用户名密码登录
 	$routeProvider.when("/manage", {
         templateUrl : "modules/manage/manage.view.html",
         controller : 'ManageController'

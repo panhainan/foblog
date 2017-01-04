@@ -19,7 +19,7 @@ app.controller("FriendlinkManageController", function($uibModal,$scope,Friendlin
             templateUrl : 'addFriendlink.html',
             controller : 'addFriendlinkCtrl',
             backdrop : 'static',
-            size : 'lg',
+            size : 'md',
             resolve : {
             }
         });
@@ -36,7 +36,7 @@ app.controller("FriendlinkManageController", function($uibModal,$scope,Friendlin
             templateUrl : 'editFriendlink.html',
             controller : 'editFriendlinkCtrl',
             backdrop : 'static',
-            size : 'lg',
+            size : 'md',
             resolve : {
                 friendlink:function(){
                     return friendlink;

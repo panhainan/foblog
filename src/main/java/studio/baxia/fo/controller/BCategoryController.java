@@ -31,7 +31,7 @@ public class BCategoryController {
     @ResponseBody
     @RequestMapping(value = "/blog/category/{name:.+}",method = RequestMethod.GET)
     public CommonResult listCategoryArticle(@PathVariable("name")String name){
-        Map<String,Object> resultData = articleService.getAllByCategoryName(name);
+        Map<String,Object> resultData = articleService.getAllByCategoryName(name,CommonConstant.CATEGORY_ALL);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",resultData);
     }
     @ResponseBody
@@ -49,7 +49,7 @@ public class BCategoryController {
     @ResponseBody
     @RequestMapping(value = "/manage/category", method = RequestMethod.GET)
     public CommonResult listMCategorys() {
-        List<CategoryVo> listCategorys = categoryService.getAllVoBy(null,null);
+        List<CategoryVo> listCategorys = categoryService.getAllVoBy(null,CommonConstant.CATEGORY_ALL);
         return new CommonResult(CommonConstant.SUCCESS_CODE, "", listCategorys);
     }
 

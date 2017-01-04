@@ -44,8 +44,6 @@
                                         <a class="btn btn-xs btn-warning" style="margin-right:8px"
                                            ng-click="setEditRecommend(recommend)">编辑</a>
                                         <a class="btn btn-xs btn-danger" ng-click="setDeleteRecommend(recommend)">删除</a>
-
-
                                     </td>
                                 </tr>
                                 </tbody>
@@ -53,8 +51,6 @@
                         </div>
                     </div>
                     <div class="panel-footer" style="text-align: center">
-                        <!--style="padding: 0;"-->
-                        <!--style="margin: 5px 0 0 0;"-->
                         <ul uib-pagination total-items="totalItems" max-size="5"
                             boundary-link-numbers="true" items-per-page="pageSize"
                             ng-model="currentPage" ng-change="pageChanged()"
@@ -65,10 +61,22 @@
                             <h4 class="modal-title">查看详情</h4>
                         </div>
                         <div class="modal-body">
-                            标题：<a href="{{recommend.articleUrl}}" target="_blank" title="{{recommend.articleUrl}}">{{recommend.title}}</a><br/>
-                            点击量: {{recommend.hits}}<br/>
-                            发布时间: {{recommend.pubTime | date:'yyyy-MM-dd HH:ss'}} <br/>
-                            介绍: {{recommend.summary}} <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">标题</span>
+                                <span class="form-control"><a href="{{recommend.articleUrl}}" target="_blank">{{recommend.title}}</a></span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">点击</span>
+                                <span class="form-control">{{recommend.hits}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">时间</span>
+                                <span class="form-control">{{recommend.pubTime | date:'yyyy-MM-dd HH:ss'}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea readonly rows="4" style="resize: none;" class="form-control">{{recommend.summary}}</textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="closeRecommend()"
@@ -81,11 +89,20 @@
                             <h4 class="modal-title">添加</h4>
                         </div>
                         <div class="modal-body">
-                            标题：<input type="text" class="form-control" ng-model="recommend.title"/>
-                            URL: <input type="text" class="form-control" ng-model="recommend.articleUrl"/>
-                            介绍：<textarea name="description"
-                                         style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
-                                         ng-model="recommend.summary"></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon">标题</span>
+                                <input type="text" class="form-control" ng-model="recommend.title"/>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <input type="text" class="form-control" ng-model="recommend.articleUrl"/>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea name="description" class="form-control"
+                                          style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
+                                          ng-model="recommend.summary"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelAddRecommend()"
@@ -101,11 +118,20 @@
                             <h4 class="modal-title">修改</h4>
                         </div>
                         <div class="modal-body">
-                            标题：<input type="text" class="form-control" ng-model="recommend.title"/>
-                            URL: <input type="url" class="form-control" ng-model="recommend.articleUrl"/>
-                            介绍：<textarea name="description"
-                                         style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
-                                         ng-model="recommend.summary"></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon">标题</span>
+                                <input type="text" class="form-control" ng-model="recommend.title"/>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <input type="text" class="form-control" ng-model="recommend.articleUrl"/>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea name="description" class="form-control"
+                                          style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
+                                          ng-model="recommend.summary"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelEditRecommend()"

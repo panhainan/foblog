@@ -67,12 +67,31 @@
                             <h4 class="modal-title">查看详情</h4>
                         </div>
                         <div class="modal-body">
-                            名称：{{friendlink.name}}<br/>
-                            URL: {{friendlink.website}}<br/>
-                            作者: {{friendlink.webAuthorName}}<br/>
-                            邮箱: {{friendlink.webAuthorEmail}} <br/>
-                            优先级：{{friendlink.priority}} <br/>
-                            介绍：{{friendlink.description}}
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <span class="form-control">{{friendlink.name}}</span>
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <span class="form-control">{{friendlink.website}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">作者</span>
+                                <span class="form-control">{{friendlink.webAuthorName}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">邮箱</span>
+                                <span class="form-control">{{friendlink.webAuthorEmail}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">优先</span>
+                                <span class="form-control">{{friendlink.priority}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea rows="4" readonly style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" class="form-control">{{friendlink.description}}</textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="closeFriendlink()"
@@ -85,12 +104,31 @@
                             <h4 class="modal-title">添加</h4>
                         </div>
                         <div class="modal-body">
-                            名称：<input type="text" class="form-control" ng-model="friendlink.name"/>
-                            URL: <input type="url" class="form-control" ng-model="friendlink.website"/>
-                            作者: <input type="text" class="form-control" ng-model="friendlink.webAuthorName"/>
-                            邮箱: <input type="email" class="form-control" ng-model="friendlink.webAuthorEmail"/>
-                            优先级：<input type="number" maxlength="2" class="form-control" ng-model="friendlink.priority"/>
-                            介绍：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="friendlink.description"></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" ng-model="friendlink.name" class="form-control" placeholder="名称">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <input type="url" ng-model="friendlink.website" class="form-control" placeholder="URL">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">作者</span>
+                                <input type="text" ng-model="friendlink.webAuthorName" class="form-control" placeholder="作者">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">邮箱</span>
+                                <input type="email" ng-model="friendlink.webAuthorEmail" class="form-control" placeholder="邮箱">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">优先</span>
+                                <input type="number" maxlength="2" ng-model="friendlink.priority" class="form-control" placeholder="优先级">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea name="description" class="form-control" placeholder="介绍" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="friendlink.description"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelAddFriendlink()"
@@ -106,12 +144,31 @@
                             <h4 class="modal-title">修改</h4>
                         </div>
                         <div class="modal-body">
-                            名称：<input type="text" class="form-control" ng-model="friendlink.name"/>
-                            URL: <input type="url" class="form-control" ng-model="friendlink.website"/>
-                            作者: <input type="text" class="form-control" ng-model="friendlink.webAuthorName"/>
-                            邮箱: <input type="email" class="form-control" ng-model="friendlink.webAuthorEmail"/>
-                            优先级：<input type="number" maxlength="2" class="form-control" ng-model="friendlink.priority"/>
-                            介绍：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="friendlink.description"></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" ng-model="friendlink.name" class="form-control" placeholder="名称">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <input type="url" ng-model="friendlink.website" class="form-control" placeholder="URL">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">作者</span>
+                                <input type="text" ng-model="friendlink.webAuthorName" class="form-control" placeholder="作者">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">邮箱</span>
+                                <input type="email" ng-model="friendlink.webAuthorEmail" class="form-control" placeholder="邮箱">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">优先</span>
+                                <input type="number" maxlength="2" ng-model="friendlink.priority" class="form-control" placeholder="优先级">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea name="description" class="form-control" placeholder="介绍" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="friendlink.description"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelEditFriendlink()"

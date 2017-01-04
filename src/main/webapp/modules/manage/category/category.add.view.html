@@ -1,10 +1,24 @@
 <div class="modal-header">
-    <h4 class="modal-title">添加类别</h4>
+    <h4 class="modal-title">添加</h4>
 </div>
 <div class="modal-body">
-    名称：<input type="text" class="form-control" ng-model="category.name"/><br/>
-    描述：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="6"
-                 ng-model="category.description"></textarea>
+    <div class="input-group">
+        <span class="input-group-addon">名称</span>
+        <input type="text" class="form-control" ng-model="category.name"/>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">公开</span>
+        <div class="form-control"><label>
+            <input type="checkbox" ng-model="category.status">选中为公开</label>
+        </div>
+    </div><br/>
+    <div class="input-group">
+        <span class="input-group-addon">描述</span>
+                                <textarea name="description" class="form-control"
+                                          style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4"
+                                          ng-model="category.description"></textarea>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelAddCategory()"

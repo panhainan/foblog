@@ -26,7 +26,7 @@
                                     <td>网站名称</td>
                                     <td class="hidden-xs">源码地址</td>
                                     <td>点击量</td>
-                                    <td class="hidden-xs hidden-sm hidden-md">添加时间</td>
+                                    <td class="hidden-xs hidden-sm hidden-md">时间</td>
                                     <td>操作</td>
                                 </tr>
                                 </thead>
@@ -39,7 +39,7 @@
                                     </td>
                                     <td class="hidden-xs">{{project.downUrl}}</td>
                                     <td>{{project.hits}}</td>
-                                    <td class="hidden-xs hidden-sm hidden-md">{{project.pubTime | date :'yyyy-MM-dd'}}</td>
+                                    <td class="hidden-xs hidden-sm hidden-md">{{project.pubTime | date :'yyyy-MM'}}</td>
                                     <td>
                                         <a class="btn btn-xs btn-info" style="margin-right:8px"  ng-click="previewProject(project)" title="点击查看">查看</a>
                                         <a class="btn btn-xs btn-warning" style="margin-right:8px"
@@ -62,12 +62,31 @@
                             <h4 class="modal-title">查看详情</h4>
                         </div>
                         <div class="modal-body">
-                            名称：{{project.name}}<br/>
-                            <a href="{{project.articleUrl}}" target="_blank">文章详情</a><br/>
-                            <a href="{{project.downUrl}}" target="_blank">源码地址</a><br/>
-                            点击量：{{project.hits}} <br/>
-                            开发时间：{{project.pubTime | date : 'yyyy-MM-dd HH:ss'}}<br/>
-                            文章简介：{{project.introduction}}
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <span class="form-control">{{project.name}}</span>
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <span class="form-control">{{project.articleUrl}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">源码</span>
+                                <span class="form-control">{{project.downUrl}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">点击</span>
+                                <span class="form-control">{{project.hits}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">时间</span>
+                                <span class="form-control">{{project.pubTime | date : 'yyyy-MM'}}</span>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea  class="form-control"  style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" readonly ng-model="project.introduction"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="closeProject()"
@@ -80,10 +99,29 @@
                             <h4 class="modal-title">添加</h4>
                         </div>
                         <div class="modal-body">
-                            名称：<input type="text" class="form-control" ng-model="project.name" required/>
-                            URL: <input type="url" class="form-control" ng-model="project.articleUrl" required/>
-                            源码地址: <input type="url" class="form-control" ng-model="project.downUrl" required/>
-                            介绍：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="project.introduction" required></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" ng-model="project.name" class="form-control" placeholder="名称">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">公开</span>
+                                <div class="form-control"><label>
+                                    <input type="checkbox" ng-model="project.status">选中为公开</label>
+                                </div>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <input type="url" ng-model="project.articleUrl" class="form-control" placeholder="URL">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">源码</span>
+                                <input type="text" ng-model="project.downUrl" class="form-control" placeholder="源码地址">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea name="description" class="form-control" placeholder="介绍" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="project.introduction"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelAddProject()"
@@ -99,10 +137,29 @@
                             <h4 class="modal-title">修改</h4>
                         </div>
                         <div class="modal-body">
-                            名称：<input type="text" class="form-control" ng-model="project.name" required/>
-                            URL: <input type="url" class="form-control" ng-model="project.articleUrl" required/>
-                            源码地址: <input type="url" class="form-control" ng-model="project.downUrl" required/>
-                            介绍：<textarea name="description" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" required ng-model="project.introduction"></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" ng-model="project.name" class="form-control" placeholder="名称">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">公开</span>
+                                <div class="form-control"><label>
+                                    <input type="checkbox" ng-model="project.status">选中为公开</label>
+                                </div>
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">URL</span>
+                                <input type="url" ng-model="project.articleUrl" class="form-control" placeholder="URL">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">源码</span>
+                                <input type="text" ng-model="project.downUrl" class="form-control" placeholder="源码地址">
+                            </div><br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">介绍</span>
+                                <textarea name="description" class="form-control" placeholder="介绍" style="border: 1px solid #ccc;width: 100%;resize: none;padding:10px;" rows="4" ng-model="project.introduction"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="cancelEditProject()"

@@ -102,7 +102,6 @@ app.controller("CategoryManageController", function($location,$uibModal, $scope,
 	$scope.list();
 
 });
-
 app.controller("editCategoryArticleCtrl", function($uibModalInstance, $scope,
 		categoryArticles,category) {
 	$scope.categoryArticles = categoryArticles;
@@ -125,6 +124,7 @@ app.controller("editCategoryCtrl",function($uibModalInstance, CategoryManageServ
 		var _category = {
 			id:editCategory.id,
 			name:editCategory.name,
+            status:editCategory.status,
 			authorId:editCategory.authorId,
             description:editCategory.description
 		}

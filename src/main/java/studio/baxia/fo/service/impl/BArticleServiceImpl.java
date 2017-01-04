@@ -171,9 +171,9 @@ public class BArticleServiceImpl implements IBArticleService {
     }
 
     @Override
-    public Map<String, Object> getAllByCategoryName(String categoryName) {
+    public Map<String, Object> getAllByCategoryName(String categoryName,boolean status) {
         // String s = urlStrParamTranscoding(categoryName);
-        Category category = iCategoryDao.selectByName(categoryName);
+        Category category = iCategoryDao.selectByName(categoryName,status);
         Map<String, Object> map = new HashMap<>();
         CategoryVo categoryVo = new CategoryVo();
         map.put("category", categoryVo.categor2Vo(category));

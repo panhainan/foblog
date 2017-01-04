@@ -17,14 +17,14 @@ public class CommonConstant {
     /**
      * 类别不展示
      */
-    public static final boolean CATEGORY_HIDDEN = false;
+    public static final boolean CATEGORY_ALL = false;
     /**
      * 类别展示
      */
     public static final boolean CATEGORY_SHOW = true;
 
-    public static final int PROJECT_PRIVATE = 0;
-    public static final int PROJECT_PUBLIC = 1;
+    public static final boolean PROJECT_ALL = false;
+    public static final boolean PROJECT_PUBLIC = true;
     public static final int USER_TYPE_GUEST = 0;
     public static final int USER_TYPE_AUTHOR = 1;
 

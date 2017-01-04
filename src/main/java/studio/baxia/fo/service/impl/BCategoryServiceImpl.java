@@ -23,7 +23,7 @@ public class BCategoryServiceImpl implements IBCategoryService {
     private IArticleDao iArticleDao;
     @Override
     public Boolean add(Category category) {
-        Category tempCategory = iCategoryDao.selectByName(category.getName());
+        Category tempCategory = iCategoryDao.selectByName(category.getName(),CommonConstant.PROJECT_ALL);
         if(null!=tempCategory){
             return false;
         }
@@ -33,7 +33,7 @@ public class BCategoryServiceImpl implements IBCategoryService {
 
     @Override
     public Boolean edit(Category category) {
-        Category tempCategory = iCategoryDao.selectByName(category.getName());
+        Category tempCategory = iCategoryDao.selectByName(category.getName(),CommonConstant.PROJECT_ALL);
         if(null!=tempCategory && tempCategory.getId()!=category.getId()){
             return false;
         }
@@ -43,12 +43,12 @@ public class BCategoryServiceImpl implements IBCategoryService {
 
     @Override
     public Boolean deleteById(int categoryId) {
-        Category cIdCategory = iCategoryDao.selectById(categoryId);
+        Category cIdCategory = iCategoryDao.selectById(categoryId,CommonConstant.PROJECT_ALL);
         if (cIdCategory.getName().equals(CommonConstant.NEW_NO_NAME_CATEGORY)) {
             return false;
         } else {
             Category cNameCategory = iCategoryDao
-                    .selectByName(CommonConstant.NEW_NO_NAME_CATEGORY);
+                    .selectByName(CommonConstant.NEW_NO_NAME_CATEGORY,CommonConstant.PROJECT_ALL);
             Integer newCategoryId = null;
             if (cNameCategory == null) {
                 Category newCategory = new Category();
@@ -83,14 +83,14 @@ public class BCategoryServiceImpl implements IBCategoryService {
     }
 
     @Override
-    public List<CategoryVo> getAllVoBy(Integer articleStatus,Boolean status) {
+    public List<CategoryVo> getAllVoBy(Integer articleStatus,boolean status) {
         List<CategoryVo> result = iCategoryDao.selectVoBy(articleStatus,status);
         return result;
     }
 
     @Override
-    public Category getById(int categoryId) {
-        Category result = iCategoryDao.selectById(categoryId);
+    public Category getById(int categoryId,boolean status) {
+        Category result = iCategoryDao.selectById(categoryId,status);
         return result;
     }
 

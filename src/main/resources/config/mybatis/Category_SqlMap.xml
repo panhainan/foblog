@@ -12,12 +12,12 @@
         <result property="id" column="id"/>
         <result property="description" column="description"/>
         <result property="name" column="name"/>
-        <result property="counts" column="article_counts" />
+        <result property="counts" column="article_counts"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_category(name,description)
-        VALUES (#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR})
+        INSERT INTO t_category(name,description,status)
+        VALUES (#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{status,jdbcType=TINYINT})
     </insert>
 
     <delete id="delete">
@@ -42,42 +42,57 @@
 
     <update id="update">
         UPDATE t_category
-        SET name=#{name,jdbcType=VARCHAR},description = #{description,jdbcType=VARCHAR}
+        SET
+          name=#{name,jdbcType=VARCHAR},
+          description = #{description,jdbcType=VARCHAR},
+          status=#{status,jdbcType=TINYINT}
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
     <select id="selectById" resultMap="CategoryMap">
         SELECT * FROM t_category
         WHERE id=#{id,jdbcType=INTEGER}
+        <if test="status!=null and status==true">
+            and status = #{status,jdbcType=TINYINT}
+        </if>
     </select>
 
     <select id="selectBy" resultMap="CategoryMap">
         SELECT * FROM t_category
+        <where>
+            <if test="status!=null and status==true">
+                status = #{status,jdbcType=TINYINT}
+            </if>
+        </where>
         ORDER BY  id
     </select>
-    
+
     <select id="selectByName" resultMap="CategoryMap">
     	SELECT * FROM t_category
-        WHERE  name = #{name,jdbcType=VARCHAR}
+        WHERE
+            name = #{name,jdbcType=VARCHAR}
+            <if test="status!=null and status==true">
+              and status = #{status,jdbcType=TINYINT}
+            </if>
         limit 1
     </select>
 
     <select id="selectVoBy" resultMap="CategoryVoMap">
-    	SELECT t1.*, ( 
-				    	select count(*) 
-				    	from  t_article t2 
-				    	where t2.category_ids = t1.id 
-					    	<if test="articleStatus!=null">
-						    		and t2.status = #{articleStatus,jdbcType=INTEGER}
-						    </if>
-				    	) as article_counts 
-			FROM t_category t1
-            <where>
-              <if test="status!=null">
-                t1.status = #{status,jdbcType=TINYINT}
-              </if>
-            </where>
-			ORDER BY article_counts desc
+        SELECT t1.*, (
+        select count(*)
+        from t_article t2
+        where t2.category_ids = t1.id
+            <if test="articleStatus!=null">
+                and t2.status = #{articleStatus,jdbcType=INTEGER}
+            </if>
+        ) as article_counts
+        FROM t_category t1
+        <where>
+            <if test="status!=null and status==true">
+                status = #{status,jdbcType=TINYINT}
+            </if>
+        </where>
+        ORDER BY article_counts desc
     </select>
 
 
