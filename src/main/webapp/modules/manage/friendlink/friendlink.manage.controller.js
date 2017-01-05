@@ -26,6 +26,9 @@ app.controller("FriendlinkManageController", function($uibModal,$scope,Friendlin
         modalInstance.result.then(function(_friendlink) {
             if(_friendlink!=null){
                 FriendlinkManageService.post(_friendlink).then(function(data){
+                    if(data.resultCode==0){
+                        alert(data.resultMsg);
+                    }
                     $scope.list($scope.currentPage, $scope.pageSize);
                 })
             }
@@ -46,6 +49,9 @@ app.controller("FriendlinkManageController", function($uibModal,$scope,Friendlin
         modalInstance.result.then(function(_friendlink) {
             if(_friendlink!=null){
                 FriendlinkManageService.put(_friendlink).then(function(data){
+                    if(data.resultCode==0){
+                        alert(data.resultMsg);
+                    }
                     $scope.list($scope.currentPage, $scope.pageSize);
                 })
             }
