@@ -7,4 +7,7 @@ app.service("SignManageService", function(RequestService) {
     this.delete =function(){
         return RequestService.deleteRequest("/manage/signout",cfg_form);
     }
+    this.getCaptcha =function(){
+        return RequestService.deleteRequest("/manage/getCaptcha",cfg_form);
+    }
 })

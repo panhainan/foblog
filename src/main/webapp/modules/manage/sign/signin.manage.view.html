@@ -15,23 +15,37 @@
 							<div class="panel-body">
 								<br />
 								<div class="form-group">
-									<label class="control-label col-sm-2" for="account">账户:</label>
+									<label class="control-label col-sm-2" for="account">账  户:</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control"
 											ng-model="user.account" name="account" id="account"
 											placeholder="请输入账户名">
 									</div>
 								</div>
-								<br />
 								<div class="form-group">
-									<label class="control-label col-sm-2 " for="pwd">密码:</label>
+									<label class="control-label col-sm-2 " for="pwd">密  码:</label>
 									<div class="col-sm-9">
 										<input type="password" class="form-control"
 											ng-model="user.password" name="password" id="pwd"
 											placeholder="请输入账户密码">
 									</div>
 								</div>
-								<br />
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2 " for="pwd">验证码:</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control"
+                                               ng-model="user.captcha" name="captcha" id="captcha"
+                                               placeholder="请输入验证码">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <img ng-disabled="logining"
+                                             src="/manage/getCaptcha" id="imgValidateCode"
+                                             title="看不清？点击更换！" alt="点击换一张！"/>
+                                    </div>
+                                    <div class="col-sm-1" style="padding-left: 0px;padding-top: 3px">
+                                        <span style="padding:0;cursor: pointer;color:gray" title="换一张" ng-click="refreshCode()" class="btn-lg glyphicon glyphicon-refresh"></span>
+                                    </div>
+                                </div>
 								<div class=" col-sm-offset-2 col-sm-9"
 									style="padding:0px;">
 									<button type="submit" class="btn btn-primary btn-block"

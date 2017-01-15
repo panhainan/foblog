@@ -13,8 +13,16 @@ import studio.baxia.fo.service.IUserService;
 import studio.baxia.fo.util.ExecuteSecurity;
 import studio.baxia.fo.vo.AuthorVo;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Map;
+import java.util.Random;
 
 @Controller("manageController")
 @RequestMapping(value = "")
@@ -52,7 +60,16 @@ public class ManageController {
         boolean isSuccess = true;
         CommonResult commonResult;
         try {
-            resultData = userService.signInCheck(authorVo, request);
+            if(checkCaptcha(authorVo.getCaptcha(),request)){
+                resultData = userService.signInCheck(authorVo, request);
+                if(resultData==null){
+                    isSuccess = false;
+                    message="用户名或密码不正确";
+                }
+            }else{
+                isSuccess = false;
+                message="验证码不正确";
+            }
         } catch (Exception e) {
             message = e.getMessage();
             isSuccess = false;
@@ -62,10 +79,10 @@ public class ManageController {
                         message, resultData);
             } else {
                 commonResult = new CommonResult(CommonConstant.FAIL_CODE,
-                        message, resultData);
+                        message);
             }
-            return commonResult;
         }
+        return commonResult;
     }
 
     @ExecuteSecurity
@@ -97,6 +114,71 @@ public class ManageController {
         }
         return map;
     }
+    /**
+     * 校验验证码是否正确
+     * @param captcha 验证码
+     */
+    private Boolean checkCaptcha(String captcha,
+                                      HttpServletRequest request) {
+        String valKey = (String) request.getSession().getAttribute("valKey");
+        if (valKey!=null && !valKey.equals(captcha)) {
+            return false;
+        }
+        return true;
+    }
+    /**
+     * 获取验证码
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/manage/getCaptcha")
+    @ResponseBody
+    public void getCaptcha(HttpServletRequest request,
+                                      HttpServletResponse response) throws IOException {
+        response.reset();
+        response.setContentType("image/jpeg;charset=UTF-8");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0L);
+        HttpSession session = request.getSession();
+        int width = 90;
+        int height = 33;
+        System.setProperty("java.awt.headless", "true");
+        BufferedImage image = new BufferedImage(width, height, 1);
+        Graphics g = image.getGraphics();
+        Random random = new Random();
+        g.setColor(new Color(255, 255, 255));
+        g.fillRect(0, 0, width, height);
+        g.setColor(new Color(204, 204, 204));
+        g.drawRect(0, 0, width - 1, height - 1);
+        g.setFont(new Font("Consolas",  Font.ITALIC, 19));
+        //绘制干扰线
+        g.setColor(new Color(160,160, 200));// 设置线条的颜色
+        for (int i = 0; i < 20; i++) {
+            int x = random.nextInt(width - 1);
+            int y = random.nextInt(height - 1);
+            int xl = random.nextInt(6) + 1;
+            int yl = random.nextInt(12) + 1;
+            g.drawLine(x, y, x + xl + 40, y + yl + 20);
+        }
+        String sRand = "";
+        for (int i = 0; i < 6; i++) {
+            String rand = String.valueOf(random.nextInt(10));
+            sRand = sRand + rand;
+            g.setColor(new Color(20 + random.nextInt(110), 20 + random
+                    .nextInt(110), 20 + random.nextInt(110)));
+            g.drawString(rand, 10 * i + 15, 22);
+        }
+        session.setAttribute("valKey", sRand);
+        g.dispose();
+        ServletOutputStream outStream = response.getOutputStream();
+        // ImageIO encoder = ImageIO.createJPEGEncoder(outStream);
+        ImageIO.write(image, "JPEG", outStream);
+        // encoder.encode(image);
+        outStream.close();
+    }
+
     @ResponseBody
     @RequestMapping(value = "/manage/getKeys")
     public CommonResult generateKeypair(HttpServletRequest request) {

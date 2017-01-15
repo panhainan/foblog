@@ -9,8 +9,8 @@
             <div class="body-recommend-body">
                 <div class="card" style="" ng-repeat="recommend in recommends">
                     <div>
-                        <h3 style="font-size: 20px;text-indent: 20px">
-                            <a ng-click="hit(recommend.articleUrl,recommend.id)"  target="_blank"
+                        <h3 style="font-size: 20px;text-indent: 28px">
+                            <a style="color:#000;" ng-click="hit(recommend.articleUrl,recommend.id)"  target="_blank"
                                title="{{recommend.title}}">{{recommend.title}}</a>
                     <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
                         <a target="_blank"
@@ -20,7 +20,7 @@
                         </h3>
                     </div>
                     <div style="padding-bottom: 8px;">
-                        <p style="color:#666666;text-indent: 20px">{{recommend.summary}}</p>
+                        <p style="color:#666666;text-indent: 28px">{{recommend.summary}}</p>
 
                         <p style="text-align: right;color:#999999;margin-bottom: 0;font-size: 13px;">
                             <span><span class="glyphicon glyphicon-time" style="padding: 0px;margin-right: 2px;"></span>{{recommend.pubTime | date :'yyyy-MM-dd HH:ss'}}</span>

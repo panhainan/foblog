@@ -1,38 +1,41 @@
-<div class="sidebar-nav"  ng-controller="leftNavController">
-	<nav class="navbar navbar-default navbar-vertical-left"
-		role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand visible-xs" style="color: #fff" href="#/">潘海南的个人网站</a>
-				<button id="nav-btn" type="button" class="navbar-toggle" data-toggle="collapse"  aria-expanded="false" aria-controls="navbar"
-					data-target=".sidebar-navbar-collapse">
-					<span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="navbar-collapse collapse sidebar-navbar-collapse"
-				id="example-navbar-collapse">
-				<ul class="nav-custom" style="z-index: 20">
-					<!--style="list-style: none;padding: 0;text-align: center"-->
-					<li class="hidden-xs border_bottom">
-						<div style="min-height: 180px">
-							<!--thumbnail-->
-							<div style="max-width: 120px;" class="center-block ">
-								<img class="img-responsive center-block " src="images/user.jpg"
-									style="border-radius: 50%;margin-top:30%;" alt="" /><br/>
-								<p style="margin: 18px 0 15px 0">努力、奋斗</p>
-							</div>
-						</div>
-					</li>
-					<li class="border_bottom"><a href="#/">
-                        <span  class="glyphicon glyphicon-home"></span>&emsp;主&emsp;页</a>
+<div class="sidebar-nav" ng-controller="leftNavController">
+    <nav class="navbar navbar-default navbar-vertical-left"
+         role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand visible-xs" style="color: #fff" href="#/">潘海南的个人网站</a>
+                <button id="nav-btn" type="button" class="navbar-toggle" data-toggle="collapse" aria-expanded="false"
+                        aria-controls="navbar"
+                        data-target=".sidebar-navbar-collapse">
+                    <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse sidebar-navbar-collapse"
+                 id="example-navbar-collapse">
+                <ul class="nav-custom" style="z-index: 20">
+                    <!--style="list-style: none;padding: 0;text-align: center"-->
+                    <li class="hidden-xs border_bottom">
+                        <div style="min-height: 180px">
+                            <!--thumbnail-->
+                            <div style="max-width: 120px;" class="center-block ">
+                                <img class="img-responsive center-block " src="images/user.jpg"
+                                     style="border-radius: 50%;margin-top:30%;" alt=""/><br/>
+
+                                <p style="margin: 18px 0 15px 0">努力、奋斗</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="border_bottom"><a href="#/">
+                        <span class="glyphicon glyphicon-home"></span>&emsp;主&emsp;页</a>
                     </li>
                     <li id="blog-ul-parent">
-                        <a ng-click="clickBlogNav()"  class="border_bottom" id="blog_a"
+                        <a ng-click="clickBlogNav()" class="border_bottom" id="blog_a"
                            data-parent="#blog-ul-parent" href="#/blog">
-                            <span  class="glyphicon glyphicon-book"></span>&emsp;博&emsp;客</a>
+                            <span class="glyphicon glyphicon-book"></span>&emsp;博&emsp;客</a>
+
                         <div id="blog-ul" class="collapsing">
-                            <ul  class="border_bottom" ng-model="blogNavStatus" style="z-index:10" >
+                            <ul class="border_bottom" ng-model="blogNavStatus" style="z-index:10">
                                 <li class="border_bottom_black"><a href="#/blog/archive">
                                     &emsp;<span style="font-size: 12px;" class="glyphicon glyphicon-tasks"></span>&emsp;归&nbsp;档</a>
                                 </li>
@@ -46,28 +49,36 @@
                         </div>
                     </li>
                     <li class="border_bottom"><a href="#/project">
-                        <span  class="glyphicon glyphicon-folder-open"></span>&emsp;项&emsp;目</a></li>
+                        <span class="glyphicon glyphicon-folder-open"></span>&emsp;项&emsp;目</a></li>
                     <li class="border_bottom"><a href="#/recommend">
-                        <span  class="glyphicon glyphicon-bookmark"></span>&emsp;荐&emsp;文</a>
+                        <span class="glyphicon glyphicon-bookmark"></span>&emsp;荐&emsp;文</a>
                     </li>
-					<li class="border_bottom"><a href="#/friendlink">
-                        <span  class="glyphicon glyphicon-link"></span>&emsp;友&emsp;链</a></li>
+                    <li class="border_bottom"><a href="#/friendlink">
+                        <span class="glyphicon glyphicon-link"></span>&emsp;友&emsp;链</a></li>
                     <li class="border_bottom"><a href="#/about">
-                        <span  class="glyphicon glyphicon-user"></span>&emsp;关&emsp;于</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+                        <span class="glyphicon glyphicon-user"></span>&emsp;关&emsp;于</a></li>
+                </ul>
+                <div class="links-of-author motion-element">
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/panhainan" target="_blank" style="text-decoration: none" title="GitHub">
+                        <i class="fa fa-fw fa-github"></i>
+                        GitHub
+                    </a>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
 <script type="text/javascript">
-	$(function() {
-		$('#example-navbar-collapse ul li a').on('click', function(e) {
+    $(function () {
+        $('#example-navbar-collapse ul li a').on('click', function (e) {
             console.log(e)
-            if(e.currentTarget.id!="blog_a"){
+            if (e.currentTarget.id != "blog_a") {
                 if (!$("#nav-btn").is(":hidden")) {
                     $("#nav-btn")[0].click();
                 }
             }
-		});
-	})
+        });
+    })
 </script>

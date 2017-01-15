@@ -17,7 +17,7 @@ app.filter("trusted", [ "$sce", function($sce) {
 		return html;
 	}
 } ]);
-app.config(function($routeProvider,$stateProvider) {
+app.config(function($routeProvider) {
 	  
 	$routeProvider.when("/", {
 		templateUrl : "modules/index/index.view.html",
@@ -59,7 +59,7 @@ app.config(function($routeProvider,$stateProvider) {
 		templateUrl : "modules/blog/article/article.detail.view.html",
 		controller : 'ArticleDetailController'
 	}).when("/404",{
-        templateUrl : "modules/common/404.view.html",
+        templateUrl : "modules/common/404.view.html"
     });
 	// 管理
     //管理入口为/manage，需要输入用户名密码登录
@@ -118,6 +118,8 @@ app.config(function($routeProvider,$stateProvider) {
 	$routeProvider.otherwise({
 		redirectTo : '/404'
 	});
+
+
 });
 app.run(function($rootScope, $location, $window) {
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {

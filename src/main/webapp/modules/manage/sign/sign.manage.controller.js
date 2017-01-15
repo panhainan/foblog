@@ -10,19 +10,23 @@ app.controller("SignManageController", function ($scope, $rootScope, SignManageS
         SignManageService.post(author).then(function (data) {
             //console.log(data);
             if (data.resultCode == 1) {
-                if (data.resultData == null) {
-                    alert("用户名或者密码错误！");
-                    $scope.user.account = "";
-                    $scope.user.password = "";
-                } else {
-                    sessionStorage.setItem("token", data.resultData);
-                    $location.path("/manage/info");
-                }
+                sessionStorage.setItem("token", data.resultData);
+                $location.path("/manage/info");
             } else {
-                alert("服务器异常，请稍后再试！");
+                $scope.user.account = null;
+                $scope.user.password = null;
+                $scope.user.captcha = null;
+                $scope.refreshCode();
+                alert(data.resultMsg);
             }
         })
     }
+    $scope.refreshCode = function () {
+        if ($scope.logining) {
+            return false;
+        }
+        $("#imgValidateCode").attr('src', '/manage/getCaptcha?temp=' + Math.random());
+    };
     $scope.signin = function () {
         $.ajax({
             type: 'GET',
@@ -34,11 +38,12 @@ app.controller("SignManageController", function ($scope, $rootScope, SignManageS
                     alert(data.resultMsg)
                     return false;
                 } else {
-                    var keys =genkeys(data.resultData.e, data.resultData.n, data.resultData.maxdigits);
+                    var keys = genkeys(data.resultData.e, data.resultData.n, data.resultData.maxdigits);
                     //console.log(keys)
                     var author = {
                         account: "",
-                        password: ""
+                        password: "",
+                        captcha:$scope.user.captcha
                     }
                     if (keys == null || keys == "") {
                         // 没有加密串，不能登录，需要先获取加密串

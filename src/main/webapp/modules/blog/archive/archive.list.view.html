@@ -18,7 +18,7 @@
                     </div>
                     <ul class="list-group">
                         <li ng-click="selectArchive(monthArchive.name)"
-                            ng-repeat="monthArchive in archive.childArchive"
+                            ng-repeat="monthArchive in archive.childArchive | orderBy:'-name'"
                             class="list-group-item">{{monthArchive.name}}<span
                                 style="font-size: 12px;">（{{monthArchive.counts}}）</span>
                         </li>
