@@ -13,7 +13,7 @@
 					<div class="panel-heading" style="padding-bottom:0;padding-left: 30px;height: 50px;">
 						<h3 class="panel-title font_kaiti_20">
 							文章管理<span style="font-size: 12px">(共{{totalItems}}条记录)</span> <a
-								type="button" href="#/manage/article/new"
+								type="button" href="#!/manage/article/new"
 								class="btn btn-sm btn-primary" style="float: right;color: #fff">新
 								建</a>
 						</h3>
@@ -43,9 +43,9 @@
 											:'yyyy-MM-dd'}}</td>
 										<!-- <td>{{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</td> -->
 										<td>
-											<a class="btn btn-xs btn-info" style="margin-right:10px;" href="#/manage/article/preview/{{article.id}}"
+											<a class="btn btn-xs btn-info" style="margin-right:10px;" href="#!/manage/article/preview/{{article.id}}"
 											>预览</a><a class="btn btn-xs btn-warning" style="margin-right:10px;"
-													href="#/manage/article/edit/{{article.id}}">编辑</a><a class="btn btn-xs btn-danger"
+													href="#!/manage/article/edit/{{article.id}}">编辑</a><a class="btn btn-xs btn-danger"
 													 style="margin-right:10px;" ng-click="setDeleteArticle(article)">删除</a></li>
 										</td>
 									</tr>

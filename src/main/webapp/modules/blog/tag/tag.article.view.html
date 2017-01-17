@@ -1,9 +1,9 @@
 <div class="customContainer">
     <div class="category-body">
         <ol class="breadcrumb">
-            <li><a href="#/">主页</a></li>
-            <li><a href="#/blog">博客</a></li>
-            <li><a href="#/blog/tag">标签</a></li>
+            <li><a href="#!/">主页</a></li>
+            <li><a href="#!/blog">博客</a></li>
+            <li><a href="#!/blog/tag">标签</a></li>
             <li class="active">{{tagName}}  <span ng-if="tagArticles" style="font-size: 12px;">({{tagArticles.length}})</span></li>
         </ol>
         <ng-include src="'modules/common/loading.html'"></ng-include>
@@ -14,11 +14,11 @@
                      class="card">
                     <div>
                         <h3 style="font-size: 20px;text-indent: 28px;">
-                            <a style="color:#000" href="#/blog/article/{{article.title}}"
+                            <a style="color:#000" href="#!/blog/article/{{article.title}}"
                                title="{{article.title}}">{{article.title}}</a>
                             <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
                                 <a
-                                        href="#/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        href="#!/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
                             </span>
                         </h3>
                     </div>

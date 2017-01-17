@@ -16,18 +16,18 @@
                         <div class="col-sm-12 summary">
                             <div class="row" style="font-family: '微软雅黑';color:#9B9B9B;font-size: 13px;padding-top: 5px">
                                 <span class="glyphicon glyphicon-th-list"></span>
-                                <a style="" href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
+                                <a style="" href="#!/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
                                 <span ng-if="article.tagNames"
                                       class="glyphicon glyphicon-tags  hidden-sm hidden-xs"></span>
                             <span ng-repeat="tName in article.tagNames" class="hidden-sm hidden-xs">
-                                <a href="#/blog/tag/{{tName}}">
+                                <a href="#!/blog/tag/{{tName}}">
                                     <span> {{tName}} </span>
                                 </a>
 							</span>
                             <span class="pull-right">
                                 <span class="glyphicon glyphicon-time"></span>
                                 <a style="margin-right:5px" title="归档：{{article.pubTime | date :'yyyy-MM'}}"
-                                   href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
+                                   href="#!/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">
                                     {{article.pubTime | date :'yyyy-MM-dd HH:ss'}}</a>
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span style="margin-right:5px">阅读({{article.hits}})</span>
@@ -42,12 +42,12 @@
                                 <div class="col-md-6" style="padding:0;">
                                     <span style="font-family: '楷体'">类别：</span> <span><a
                                         style="text-decoration: underline;"
-                                        href="#/blog/category/{{article.categoryName}}">{{article.categoryName}}</a></span>
+                                        href="#!/blog/category/{{article.categoryName}}">{{article.categoryName}}</a></span>
                                 </div>
                                 <div class="col-md-6" style="padding:0;">
                                     <span style="font-family: '楷体'">标签：</span> <span
                                         ng-repeat="tName in article.tagNames"> <a
-                                        href="#/blog/tag/{{tName}}"><span
+                                        href="#!/blog/tag/{{tName}}"><span
                                         style="text-decoration: underline;" class="tag">
 												{{tName}} </span></a>
 									</span>
@@ -60,7 +60,7 @@
                                     <p style="text-align:right;font-family: '楷体';margin-bottom: 0px">
                                         发表于 <a style="text-decoration: underline;"
                                                title="归档：{{article.pubTime | date :'yyyy-MM'}}"
-                                               href="#/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">{{article.pubTime
+                                               href="#!/blog/archive/{{article.pubTime | date :'yyyy-MM'}}">{{article.pubTime
                                         | date :'yyyy-MM-dd HH:ss'}}</a>
                                     </p>
                                 </div>
@@ -73,7 +73,7 @@
                             <span style="float: left;">标签：</span><span ng-repeat="tName in article.tagNames"
                                                                        style="float: left">
                                 <span class="glyphicon glyphicon-tag"></span>
-                                <a href="#/blog/tag/{{tName}}">
+                                <a href="#!/blog/tag/{{tName}}">
                                     <span> {{tName}} </span>
                                 </a>&nbsp;
 							</span>
@@ -87,13 +87,13 @@
                 <div class="col-sm-12 pre">
                     <span class="glyphicon glyphicon-arrow-up"></span>
                     <a ng-if="preArticle"
-                       href="#/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
+                       href="#!/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
                     <span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
                 </div>
                 <div class="col-sm-12 next">
                     <span class="glyphicon glyphicon-arrow-down"></span>
                     <a ng-if="nextArticle"
-                       href="#/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
+                       href="#!/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
                     <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
                 </div>
             </div>

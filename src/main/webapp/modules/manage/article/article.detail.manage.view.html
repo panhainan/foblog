@@ -20,7 +20,7 @@
 							</span>
                             <span ng-if="!article.categoryName">未填写</span>
 							<!-- <span><a class="btn btn-xs btn-default" title="点击进入类别管理"
-										href="#/manage/category">管理</a></span> -->
+										href="#!/manage/category">管理</a></span> -->
 						</div>
 						<div class="col-md-7" style="padding:0;">
 							<span style="font-family: '楷体'">标签：</span>
@@ -47,8 +47,8 @@
 				<div class="col-sm-12 pre-next"  >
 					<div
 						style="text-align: right;">
-						<a href="#/manage/article" class="btn btn-default">返回</a> <a
-							href="#/manage/article/edit/{{article.id}}"
+						<a href="#!/manage/article" class="btn btn-default">返回</a> <a
+							href="#!/manage/article/edit/{{article.id}}"
 							class="btn btn-warning">编辑</a>
 						<button ng-if="article.status==0" ng-click="changeToBlog(1)"
 							class="btn btn-success">转为博客</button>

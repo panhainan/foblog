@@ -1,6 +1,8 @@
 package studio.baxia.fo.util;
   
-import java.security.GeneralSecurityException;  
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import java.security.GeneralSecurityException;
 import java.security.KeyPair;  
 import java.security.KeyPairGenerator;  
 import java.security.NoSuchAlgorithmException;  
@@ -11,11 +13,10 @@ import java.security.interfaces.RSAPublicKey;
 
 import javax.crypto.Cipher;  
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-  
+
 public class JCryptionUtil {  
       
-    public static final Provider provider = new BouncyCastleProvider();  
+    public static final Provider provider = new BouncyCastleProvider();
     /** 
      * Constructor 
      */  

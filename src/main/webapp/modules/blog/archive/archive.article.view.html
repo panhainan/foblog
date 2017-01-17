@@ -1,9 +1,9 @@
 <div class="customContainer">
     <div class="archive-body">
         <ol class="breadcrumb">
-            <li><a href="#/">主页</a></li>
-            <li><a href="#/blog">博客</a></li>
-            <li><a href="#/blog/archive">归档</a></li>
+            <li><a href="#!/">主页</a></li>
+            <li><a href="#!/blog">博客</a></li>
+            <li><a href="#!/blog/archive">归档</a></li>
             <li class="active">{{archiveName}}</li>
         </ol>
         <ng-include src="'modules/common/loading.html'"></ng-include>
@@ -11,11 +11,11 @@
             <div class="body-archive-body">
                 <div  ng-repeat="article in archiveArticles" class="card">
                     <h3 style="font-size: 20px;text-indent: 28px">
-                        <a style="color:#000" href="#/blog/article/{{article.title}}"
+                        <a style="color:#000" href="#!/blog/article/{{article.title}}"
                            title="{{article.title}}">{{article.title}}</a>
                         <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
                             <a
-                                    href="#/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    href="#!/blog/article/{{article.title}}">阅读全文<span class="glyphicon glyphicon-chevron-right"></span></a>
                         </span>
                     </h3>
                     <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>

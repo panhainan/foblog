@@ -17,7 +17,7 @@ app.filter("trusted", [ "$sce", function($sce) {
 		return html;
 	}
 } ]);
-app.config(function($routeProvider) {
+app.config(function($routeProvider,$locationProvider) {
 	  
 	$routeProvider.when("/", {
 		templateUrl : "modules/index/index.view.html",
@@ -120,6 +120,8 @@ app.config(function($routeProvider) {
 	});
 
 
+    //$locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
 });
 app.run(function($rootScope, $location, $window) {
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
