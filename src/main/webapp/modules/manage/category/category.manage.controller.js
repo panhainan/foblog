@@ -126,7 +126,8 @@ app.controller("editCategoryCtrl",function($uibModalInstance, CategoryManageServ
 			name:editCategory.name,
             status:editCategory.status,
 			authorId:editCategory.authorId,
-            description:editCategory.description
+            description:editCategory.description,
+            code:editCategory.code
 		}
 		$uibModalInstance.close(_category);
 	};

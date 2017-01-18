@@ -55,6 +55,8 @@ public interface IArticleDao {
 	 */
 	ArticleVo selectVoById(@Param("id") Integer articleId);
 
+    ArticleVo selectVoByCode(@Param("code") String code,
+                             @Param("status") Integer articleStatus);
 	Article selectById(@Param("id") Integer articleId);
 
 	/**

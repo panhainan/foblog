@@ -16,7 +16,7 @@
                         <div class="col-sm-12 summary">
                             <div class="row" style="font-family: '微软雅黑';color:#9B9B9B;font-size: 13px;padding-top: 5px">
                                 <span class="glyphicon glyphicon-th-list"></span>
-                                <a style="" href="#!/blog/category/{{article.categoryName}}">{{article.categoryName}}</a>
+                                <a style="" href="#!/blog/category/{{article.categoryCode}}">{{article.categoryName}}</a>
                                 <span ng-if="article.tagNames"
                                       class="glyphicon glyphicon-tags  hidden-sm hidden-xs"></span>
                             <span ng-repeat="tName in article.tagNames" class="hidden-sm hidden-xs">
@@ -87,13 +87,13 @@
                 <div class="col-sm-12 pre">
                     <span class="glyphicon glyphicon-arrow-up"></span>
                     <a ng-if="preArticle"
-                       href="#!/blog/article/{{preArticle.title}}"><span>上一篇：</span>{{preArticle.title}}</a>
+                       href="#!/blog/article/{{preArticle.code}}"><span>上一篇：</span>{{preArticle.title}}</a>
                     <span ng-if="!preArticle"><span>上一篇：</span>没有了...</span>
                 </div>
                 <div class="col-sm-12 next">
                     <span class="glyphicon glyphicon-arrow-down"></span>
                     <a ng-if="nextArticle"
-                       href="#!/blog/article/{{nextArticle.title}}"><span>下一篇：</span>{{nextArticle.title}}</a>
+                       href="#!/blog/article/{{nextArticle.code}}"><span>下一篇：</span>{{nextArticle.title}}</a>
                     <span ng-if="!nextArticle"><span>下一篇：</span>没有了...</span>
                 </div>
             </div>

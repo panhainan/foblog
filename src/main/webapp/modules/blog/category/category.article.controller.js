@@ -4,8 +4,8 @@ app.controller("CategoryArticleController", function($window, $location,
     $scope.loadingPath=loading_path;
     $scope.loaded = false;
 
-	$scope.getCategoryArticles = function(name) {
-		CategoryService.getArtilces(name).then(function(data) {
+	$scope.getCategoryArticles = function(code) {
+		CategoryService.getArtilces(code).then(function(data) {
 			// console.log(data);
             if(data.resultData.category!=null){
                 $scope.category = data.resultData.category;
@@ -18,9 +18,9 @@ app.controller("CategoryArticleController", function($window, $location,
 	}
 
 	$scope.init = function() {
-		if($routeParams.categoryName!=null){
-			$scope.categoryName = $routeParams.categoryName;
-			$scope.getCategoryArticles($scope.categoryName);
+		if($routeParams.categoryCode!=null){
+			$scope.categoryCode = $routeParams.categoryCode;
+			$scope.getCategoryArticles($scope.categoryCode);
 		}
 		
 	}

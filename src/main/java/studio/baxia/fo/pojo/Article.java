@@ -18,14 +18,25 @@ public class Article {
     private Date pubTime; //发布时间
     private int hits;//点击数
     private int countMessages;
+    private String code;//文章对外编号
 
     @Override
-	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", summary="
-				+ summary + ", content=" + content + ", categoryIds="
-				+ categoryIds + ", tagIds=" + tagIds + ", status=" + status
-				+ ", writeTime=" + writeTime + ", pubTime=" + pubTime + "]";
-	}
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", content='" + content + '\'' +
+                ", categoryIds=" + categoryIds +
+                ", tagIds='" + tagIds + '\'' +
+                ", status=" + status +
+                ", writeTime=" + writeTime +
+                ", pubTime=" + pubTime +
+                ", hits=" + hits +
+                ", countMessages=" + countMessages +
+                ", code='" + code + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -118,5 +129,13 @@ public class Article {
 
     public void setCountMessages(int countMessages) {
         this.countMessages = countMessages;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

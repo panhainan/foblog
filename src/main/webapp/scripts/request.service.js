@@ -5,7 +5,6 @@ app.service("RequestService", function ($http, $q) {
     this.getRequest = function(url,paramsType){
         var deferred = $q.defer();
         $http.get(web_project_name+url,paramsType).success(function (data) {
-            //console.log(data);
             deferred.resolve(data);
         });
         return deferred.promise;
@@ -14,6 +13,8 @@ app.service("RequestService", function ($http, $q) {
         var deferred = $q.defer();
         $http.post(web_project_name+url,params,paramsType).success(function (data) {
             deferred.resolve(data);
+        }).error(function(e){
+            console.info(e)
         });
         return deferred.promise;
     };

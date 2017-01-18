@@ -14,6 +14,7 @@ public class Category extends TreeInfo {
     private String name;//名称
     @NotEmpty(message = "描述不能为空")
     private String description;
+    private String code;
     /**
      * 类别状态
      */
@@ -51,5 +52,13 @@ public class Category extends TreeInfo {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

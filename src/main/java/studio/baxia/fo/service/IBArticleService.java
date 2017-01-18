@@ -47,7 +47,7 @@ public interface IBArticleService {
      * @return
      */
     ArticleVo getVoById(int articleId);
-
+    Map<String, Object> getVoByCode(String code,Integer articleStatus);
     /**
      * 通过标题取得文章
      *
@@ -69,6 +69,7 @@ public interface IBArticleService {
     PageInfoResult<ArticleVo> getAllManageBy(Integer articleStatus, PageConfig pageConfig);
 
     Map<String,Object> getAllByCategoryName(String categoryName,boolean status);
+    Map<String,Object> getAllByCategoryCode(String code, boolean categoryAll);
 
     List<ArticleVo> getAllByTagName(String tagName);
 

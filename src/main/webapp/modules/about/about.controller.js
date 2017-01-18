@@ -4,6 +4,8 @@
 
 app.controller("AboutController", function (AboutService, $scope) {
 	//console.log("AboutController")
+    setScreenAvailHeight();
+    $scope.loadingPath=loading_path;
     $scope.loaded = false;
     var getInfo = function(){
         AboutService.get().then(function(data){

@@ -61,6 +61,7 @@ public interface ICategoryDao {
      * @return
      */
     List<Category> selectBy();
+    Category selectByCode(@Param("code") String categoryCode,@Param("status")Boolean status);
 
     Category selectByName(@Param("name") String categoryName,@Param("status")Boolean status);
 

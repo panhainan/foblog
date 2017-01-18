@@ -5,7 +5,8 @@ import studio.baxia.fo.pojo.Article;
 
 public class ArticleVo extends Article {
 	private String categoryName;
-	private String statusName;
+    private String categoryCode;
+    private String statusName;
 	private String[] tagNames;
 	private Boolean onlyChangeStatus=false;
 	
@@ -44,5 +45,13 @@ public class ArticleVo extends Article {
 	public void setOnlyChangeStatus(Boolean onlyChangeStatus) {
 		this.onlyChangeStatus = onlyChangeStatus;
 	}
+
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
+    }
 
 }

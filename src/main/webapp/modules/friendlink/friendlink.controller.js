@@ -3,9 +3,9 @@
  */
 
 app.controller("FriendlinkController", function (FriendlinkService, $scope) {
-    $scope.loaded = false;
-    $scope.isFriendlinkNav = true;
     setScreenAvailHeight();
+    $scope.loadingPath=loading_path;
+    $scope.loaded = false;
 
     $scope.clickLink = function(id,url){
         FriendlinkService.hits(id).then(function(data){

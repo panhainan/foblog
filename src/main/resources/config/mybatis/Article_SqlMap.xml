@@ -12,6 +12,7 @@
 		<result property="status" column="status" />
 		<result property="writeTime" column="write_time" />
 		<result property="pubTime" column="pub_time" />
+        <result property="code" column="code" />
 	</resultMap>
 	<resultMap id="ArticleVoMap" type="studio.baxia.fo.vo.ArticleVo">
 		<result property="id" column="id" />
@@ -20,18 +21,21 @@
 		<result property="content" column="content" />
 		<result property="categoryIds" column="category_ids" />
 		<result property="categoryName" column="category_name" />
+        <result property="categoryCode" column="category_code"/>
 		<result property="tagIds" column="tag_ids" />
 		<result property="status" column="status" />
 		<result property="writeTime" column="write_time" />
 		<result property="pubTime" column="pub_time" />
+        <result property="code" column="code" />
 	</resultMap>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO
-		t_article(title,summary,content,category_ids,tag_ids,status,write_time,pub_time)
+		t_article(title,code,summary,content,category_ids,tag_ids,status,write_time,pub_time)
 		VALUES
 		(#{title,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
 		#{summary,jdbcType=VARCHAR},
 		#{content,jdbcType=VARCHAR},
 		#{categoryIds,jdbcType=INTEGER},
@@ -111,7 +115,19 @@
 		AND
 		t1.category_ids = t2.id
 	</select>
-
+    <select id="selectVoByCode" resultMap="ArticleVoMap">
+        SELECT t1.*,t2.name as category_name,t2.code as category_code
+        FROM t_article t1
+        LEFT JOIN t_category t2
+        ON
+        t1.category_ids = t2.id
+        WHERE
+        t1.code = #{code,jdbcType=VARCHAR}
+        AND
+        t1.status = #{status,jdbcType=VARCHAR}
+        AND
+        t1.category_ids = t2.id
+    </select>
 	<select id="selectBy" resultMap="ArticleMap">
 		SELECT *
 		FROM t_article
@@ -164,7 +180,7 @@
 	</select>
 
 	<select id="selectVoBy" resultMap="ArticleVoMap">
-		SELECT t1.*,t2.name as category_name
+		SELECT t1.*,t2.name as category_name,t2.code as category_code
 		FROM t_article t1
 		LEFT JOIN
 		t_category t2
@@ -194,7 +210,7 @@
 		</if>
 	</select>
 	<select id="selectNextOrPreVoBy" resultMap="ArticleMap">
-		select t1.id,t1.title
+		select t1.id,t1.title,t1.code
 		from t_article t1
 		<where>
 			<if test="article.status!=null">

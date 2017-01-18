@@ -4,9 +4,9 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
     $scope.loadingPath = loading_path;
     $scope.loaded = false;
     var messageEditor;
-    //console.log($routeParams.articleTitle)
-    $scope.get = function (articleTitle) {
-        ArticleService.get(articleTitle).then(function (data) {
+    //console.log($routeParams.articleCode)
+    $scope.get = function (articleCode) {
+        ArticleService.get(articleCode).then(function (data) {
             //console.log(data);
             if (data.resultCode == 0) {
                 $scope.loaded = true;
@@ -118,6 +118,8 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             }
         })
     }
+    // 获取文章信息
+    $scope.get($routeParams.articleCode);
     /*$scope.getGuestInfoByEmail = function (email) {
         //$("#message-editormd").css("border-color","#ddd");
         console.log(email);
@@ -157,8 +159,7 @@ app.controller("ArticleDetailController", function ($scope, $routeParams,
             }
         });
     }*/
-    // 获取文章信息
-    $scope.get($routeParams.articleTitle);
+
 
 
 });

@@ -34,7 +34,7 @@ app.config(function($routeProvider,$locationProvider) {
 	}).when("/friendlink", {
 		templateUrl : "modules/friendlink/friendlink.view.html",
 		controller : 'FriendlinkController'
-	}).when("/blog", {
+	}).when("/blog?", {
 		templateUrl : "modules/blog/article/article.view.html",
 		controller : 'ArticleController'
 	}).when("/blog/archive", {
@@ -46,7 +46,7 @@ app.config(function($routeProvider,$locationProvider) {
 	}).when("/blog/category", {
 		templateUrl : "modules/blog/category/category.list.view.html",
 		controller : 'CategoryListController'
-	}).when("/blog/category/:categoryName", {
+	}).when("/blog/category/:categoryCode", {
 		templateUrl : "modules/blog/category/category.article.view.html",
 		controller : 'CategoryArticleController'
 	}).when("/blog/tag", {
@@ -55,7 +55,7 @@ app.config(function($routeProvider,$locationProvider) {
 	}).when("/blog/tag/:tagName", {
 		templateUrl : "modules/blog/tag/tag.article.view.html",
 		controller : 'TagArticleController'
-	}).when("/blog/article/:articleTitle", {
+	}).when("/blog/article/:articleCode", {
 		templateUrl : "modules/blog/article/article.detail.view.html",
 		controller : 'ArticleDetailController'
 	}).when("/404",{

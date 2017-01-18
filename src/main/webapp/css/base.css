@@ -170,6 +170,7 @@ table > tbody > tr:nth-of-type(odd) {
 
 .pagination_border_radius_0 {
     border-radius: 0;
+    border: 1px solid #fff;
 }
 
 .no_border_radius {

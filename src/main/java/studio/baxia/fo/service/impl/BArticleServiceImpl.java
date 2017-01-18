@@ -19,6 +19,8 @@ import studio.baxia.fo.vo.ArticleVo;
 import studio.baxia.fo.vo.CategoryVo;
 
 import java.io.UnsupportedEncodingException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -40,6 +42,7 @@ public class BArticleServiceImpl implements IBArticleService {
         if (article.getStatus() == CommonConstant.ACTICLE_STATUS_BLOG) {
             article.setPubTime(new Date());
         }
+        article.setCode(new SimpleDateFormat("SSSMMssddmmHHyy").format(new Date()));
         article.setTagIds(getTagIdsBy(article.getTagNames()));
         article.setWriteTime(new Date());
         Integer result = iArticleDao.insert(article);
@@ -124,6 +127,24 @@ public class BArticleServiceImpl implements IBArticleService {
     }
 
     @Override
+    public Map<String, Object> getVoByCode(String code, Integer articleStatus) {
+        ArticleVo article = iArticleDao.selectVoByCode(code, articleStatus);
+        if (article == null) {
+            return null;
+        }
+        article.setCountMessages(getArticleCountMessages(article.getId()));
+        updateAritcleHits(article.getId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        article.setTagNames(getAllTagNamesBy(article.getTagIds()));
+        Article preArticle = iArticleDao.selectNextOrPreVoBy(article, false);
+        Article nextArticle = iArticleDao.selectNextOrPreVoBy(article, true);
+        map.put("currentArticle", article);
+        map.put("preArticle", preArticle);
+        map.put("nextArticle", nextArticle);
+        return map;
+    }
+
+    @Override
     public Map<String, Object> getVoByTitle(String articleTitle) {
         // String s = urlStrParamTranscoding(articleTitle);
         ArticleVo article = iArticleDao.selectVoByTitle(articleTitle,
@@ -169,7 +190,32 @@ public class BArticleServiceImpl implements IBArticleService {
                 pageConfig, resultCount);
         return pageInfoResult;
     }
-
+    @Override
+    public Map<String, Object> getAllByCategoryCode(String code, boolean status) {
+        Category category = iCategoryDao.selectByCode(code, status);
+        Map<String, Object> map = new HashMap<>();
+        CategoryVo categoryVo = new CategoryVo();
+        map.put("category", categoryVo.categor2Vo(category));
+        if (category != null) {
+            List<ArticleVo> result = iArticleDao.selectVoBy(new Article()
+                    .setStatus(CommonConstant.ACTICLE_STATUS_BLOG)
+                    .setCategoryIds(category.getId()), null);
+            int countMessages=0,hits = 0;
+            for(int i =0,len = result.size();i<len;i++){
+                int messageCount = getArticleCountMessages(result.get(i).getId());
+                result.get(i).setCountMessages(messageCount);
+                hits+=result.get(i).getHits();
+                countMessages+=result.get(i).getCountMessages();
+            }
+            categoryVo.setCountMessages(countMessages);
+            categoryVo.setHits(hits);
+            int counts = result == null ? 0 : result.size();
+            categoryVo.setCounts(counts);
+            map.put("listArticle", result);
+            return map;
+        }
+        return map;
+    }
     @Override
     public Map<String, Object> getAllByCategoryName(String categoryName,boolean status) {
         // String s = urlStrParamTranscoding(categoryName);
@@ -197,6 +243,8 @@ public class BArticleServiceImpl implements IBArticleService {
         }
         return map;
     }
+
+
 
     @Override
     public List<Article> getAllByTagId(int tagId, Integer articleStatus) {

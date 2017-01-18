@@ -29,9 +29,9 @@ public class BCategoryController {
     @Autowired
     private IBArticleService articleService;
     @ResponseBody
-    @RequestMapping(value = "/blog/category/{name:.+}",method = RequestMethod.GET)
-    public CommonResult listCategoryArticle(@PathVariable("name")String name){
-        Map<String,Object> resultData = articleService.getAllByCategoryName(name,CommonConstant.CATEGORY_ALL);
+    @RequestMapping(value = "/blog/category/{code:.+}",method = RequestMethod.GET)
+    public CommonResult listCategoryArticle(@PathVariable("code")String code){
+        Map<String,Object> resultData = articleService.getAllByCategoryCode(code, CommonConstant.CATEGORY_ALL);
         return new CommonResult(CommonConstant.SUCCESS_CODE,"",resultData);
     }
     @ResponseBody

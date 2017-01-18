@@ -6,8 +6,8 @@ app.service("ArticleService", function(RequestService) {
         	"articleStatus":articleStatus
         	}), cfg_form);
     };
-    this.get = function (title) {
-        return RequestService.getRequest('/blog/article/' + title, cfg_form);
+    this.get = function (code) {
+        return RequestService.getRequest('/blog/article/' + code, cfg_form);
     };
 
     

@@ -3,8 +3,9 @@
         <ol class="breadcrumb">
             <li><a href="#!/">主页</a></li>
             <li class="active">
-                <select ng-change="goUrl(selectedValue)"  ng-model="selectedValue" style="border: none;background-color: #F5F5F5">
-                    <option value="/blog" >博客</option>
+                <select ng-change="goUrl(selectedValue)" ng-model="selectedValue"
+                        style="border: none;background-color: #F5F5F5">
+                    <option value="/blog">博客</option>
                     <option value="/blog/archive">归档</option>
                     <option value="/blog/category">分类</option>
                     <option value="/blog/tag">标签</option>
@@ -13,30 +14,33 @@
         </ol>
         <ng-include src="'modules/common/loading.html'"></ng-include>
         <div ng-show="loaded" class="body-blog-body">
-            <div class="card" style="" ng-repeat="article in articles">
-                <div>
-                    <h3 style="font-size: 20px;text-indent: 28px">
-                        <a style="color:#000" href="#!/blog/article/{{article.title}}" title="{{article.title}}">{{article.title}}</a>
+            <div ng-if="error" style="text-align:center;margin-top:40%;font-size: 16px;">{{errorMessage}}</div>
+            <div  ng-if="!error">
+                <div class="card" style="" ng-repeat="article in articles">
+                    <div>
+                        <h3 style="font-size: 20px;text-indent: 28px">
+                            <a style="color:#000" href="#!/blog/article/{{article.code}}" title="{{article.title}}">{{article.title}}</a>
                     <span style="font-size: 12px;padding-top: 5px;" class="pull-right visible-lg">
                         <a
-                                href="#!/blog/article/{{article.title}}">阅读全文<span
+                                href="#!/blog/article/{{article.code}}">阅读全文<span
                                 class="glyphicon glyphicon-chevron-right"></span></a>
                     </span>
-                    </h3>
+                        </h3>
+                    </div>
+                    <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
                 </div>
-                <ng-include src="'modules/common/article.list.summary.view.html'"></ng-include>
-            </div>
-            <div style="text-align: center">
-                <ul uib-pagination total-items="totalItems" max-size="5"
-                    boundary-link-numbers="true" items-per-page="pageSize"
-                    ng-model="currentPage" ng-change="pageChanged()"
-                    class="pagination_border_radius_0"></ul>
+                <div style="text-align: center" ng-if="articles">
+                    <ul uib-pagination total-items="totalItems" max-size="5"
+                        boundary-link-numbers="true" items-per-page="pageSize"
+                        ng-model="currentPage" ng-click="pageChanged(currentPage)"
+                        class="pagination_border_radius_0"></ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <style>
-    select option{
+    select option {
         height: 40px;
     }
 </style>

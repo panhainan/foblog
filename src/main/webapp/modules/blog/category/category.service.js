@@ -3,8 +3,8 @@ app.service("CategoryService",function(RequestService){
     	return RequestService.getRequest('/blog/category', cfg_form);
     };
     
-    this.getArtilces = function (name) {
-    	return RequestService.getRequest('/blog/category/'+name, cfg_form);
+    this.getArtilces = function (code) {
+    	return RequestService.getRequest('/blog/category/'+code, cfg_form);
     };
 
 });

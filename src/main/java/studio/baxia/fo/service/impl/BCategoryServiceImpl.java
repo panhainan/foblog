@@ -33,8 +33,8 @@ public class BCategoryServiceImpl implements IBCategoryService {
 
     @Override
     public Boolean edit(Category category) {
-        Category tempCategory = iCategoryDao.selectByName(category.getName(),CommonConstant.PROJECT_ALL);
-        if(null!=tempCategory && tempCategory.getId()!=category.getId()){
+        Category tempCategory = iCategoryDao.selectById(category.getId(),CommonConstant.PROJECT_ALL);
+        if(null==tempCategory){
             return false;
         }
         Integer result = iCategoryDao.update(category);

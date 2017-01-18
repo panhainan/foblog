@@ -6,6 +6,7 @@
         <result property="id" column="id"/>
         <result property="description" column="description"/>
         <result property="name" column="name"/>
+        <result property="code" column="code"/>
         <result property="status" column="status"/>
     </resultMap>
     <resultMap id="CategoryVoMap" type="studio.baxia.fo.vo.CategoryVo">
@@ -16,8 +17,8 @@
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_category(name,description,status)
-        VALUES (#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{status,jdbcType=TINYINT})
+        INSERT INTO t_category(name,description,status,code)
+        VALUES (#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{status,jdbcType=TINYINT},#{code,jdbcType=VARCHAR})
     </insert>
 
     <delete id="delete">
@@ -45,6 +46,7 @@
         SET
           name=#{name,jdbcType=VARCHAR},
           description = #{description,jdbcType=VARCHAR},
+          code =#{code,jdbcType=VARCHAR},
           status=#{status,jdbcType=TINYINT}
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
@@ -66,7 +68,15 @@
         </where>
         ORDER BY  id
     </select>
-
+    <select id="selectByCode" resultMap="CategoryMap">
+        SELECT * FROM t_category
+        WHERE
+            code = #{code,jdbcType=VARCHAR}
+        <if test="status!=null and status==true">
+            and status = #{status,jdbcType=TINYINT}
+        </if>
+        limit 1
+    </select>
     <select id="selectByName" resultMap="CategoryMap">
     	SELECT * FROM t_category
         WHERE
