@@ -18,6 +18,9 @@ public class MDUtil {
         byte[] encryptDataByte = encodeMD5ToByte(data);
         System.out.println(encryptDataByte);
 
+        String userName = "test";
+        String userPass = "test123";
+
     }
 
     public static byte[] encodeMD5ToByte(String data) throws NoSuchAlgorithmException {
