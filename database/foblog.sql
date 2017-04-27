@@ -16,23 +16,6 @@ Date: 2017-04-27 11:05:30
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `t_admin`
--- ----------------------------
-DROP TABLE IF EXISTS `t_admin`;
-CREATE TABLE `t_admin` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `admin_account` varchar(30) NOT NULL COMMENT '管理员账户',
-  `admin_password` varchar(30) NOT NULL COMMENT '管理员密码',
-  `email` varchar(30) NOT NULL COMMENT '邮箱',
-  `security_question_id` int(10) DEFAULT NULL COMMENT '密保问题id',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_admin
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `t_article`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_article`;
