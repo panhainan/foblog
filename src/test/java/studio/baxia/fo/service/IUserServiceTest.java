@@ -2,8 +2,12 @@ package studio.baxia.fo.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import studio.baxia.fo.BaseTest;
 import studio.baxia.fo.pojo.Authors;
+import studio.baxia.fo.util.MDUtil;
+
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by FirePan on 2016/10/11.
@@ -16,8 +20,14 @@ public class IUserServiceTest extends BaseTest {
     // new Throwable().getStackTrace()[0].getMethodName();
 
     @Test
-    public void testAddAuthors() {
-        Integer result = userService.authorsAdd(new Authors("panhainan","123123",1));
+    @Rollback(value = false)
+    public void testAddAuthors() throws NoSuchAlgorithmException {
+        String userName = "test";
+        String userPass = "test123";
+        String pass = MDUtil.generatePass(userName, userPass);
+        int userStatus = 1;
+        Authors authors = new Authors(userName,pass,userStatus);
+        Integer result = userService.authorsAdd(authors);
         methodName=new Throwable().getStackTrace()[0].getMethodName();
         printResultStr(methodName, null,result);
     }

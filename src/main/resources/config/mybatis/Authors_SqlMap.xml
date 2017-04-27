@@ -39,7 +39,7 @@
 		SELECT *
 		FROM t_authors
 		WHERE
-		account=#{account,jdbcType=INTEGER}
+		account=#{account,jdbcType=VARCHAR}
 	</select>
 
 	<select id="selectByEmail" resultMap="AuthorsMap" useCache="true">

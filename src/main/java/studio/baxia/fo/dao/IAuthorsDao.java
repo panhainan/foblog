@@ -11,6 +11,7 @@ import java.util.List;
 @Repository(value = "iAuthorsDao")
 public interface IAuthorsDao {
     List<Authors> list(@Param("pageIndex")Integer pageIndex ,@Param("pageSize")Integer pageSize);
+
     /**
      * 通过作者id获取作者信息
      * @param authorsId 作者id

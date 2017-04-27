@@ -35,6 +35,8 @@ public class UserServiceImpl implements IUserService {
 		return iAuthorsDao.insert(authors);
 	}
 
+
+
 	@Override
 	public Boolean authorsEditPassword(Integer authorsId,
 			String authorsAccount, String authorsPassword,

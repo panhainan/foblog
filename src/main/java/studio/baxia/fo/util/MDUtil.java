@@ -1,6 +1,5 @@
 package studio.baxia.fo.util;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,18 +9,17 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MDUtil {
 
-    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        String data = "美剧：冰与火之歌";
-        System.out.println("明文：" + data);
-        String encryptData = encodeMD5ToStr(data);
-        System.out.println("密文：" + encryptData);
-        byte[] encryptDataByte = encodeMD5ToByte(data);
-        System.out.println(encryptDataByte);
-
-        String userName = "test";
-        String userPass = "test123";
-
+    /**
+     * 通过用户名和密码明文生成作者的账号加密密码
+     * @param userName
+     * @param userPass
+     * @return 加密密码
+     * @throws NoSuchAlgorithmException
+     */
+    public static String generatePass(String userName,String userPass) throws NoSuchAlgorithmException {
+        return encodeMD5ToStr(userName + userPass);
     }
+
 
     public static byte[] encodeMD5ToByte(String data) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
